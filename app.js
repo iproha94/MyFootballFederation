@@ -1,6 +1,14 @@
 var express = require('express');
+var mongoose = require('mongoose');
 
 var app = express();
+
+var opts = {
+	server: {
+		socketOptions: { keepAlive: 1 }
+	}
+};
+mongoose.connect('mongodb://localhost:27017/football', opts);
 
 app.set('port', process.env.PORT || 8080);
 
