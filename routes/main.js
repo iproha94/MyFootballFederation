@@ -12,7 +12,8 @@ function getArray(arrayObject, name) {
 
 router.get('/', function(req, res, next) {
     if(req.xhr || req.accepts('json,html' )==='json' ){
-        Federation.find({name: req.query.term}, function (err, result) {
+        var reg = new RegExp(req.query.term, 'i');
+        Federation.find({name: reg}, function (err, result) {
             res.status(200);
             res.json(getArray(result, "name"));
         });

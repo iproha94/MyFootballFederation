@@ -1,7 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
-var main = require('./routes/main');
+var mainRoutes = require('./routes/main');
+var federationRoutes = require('./routes/federations');
 var bodyParser = require('body-parser');
 var exphbs   = require('express-handlebars');
 
@@ -17,7 +18,7 @@ var opts = {
 		socketOptions: { keepAlive: 1 }
 	}
 };
-mongoose.connect('mongodb://localhost:27017/football', opts);
+mongoose.connect(credentials.mongo.stringConnection, opts);
 
 app.use(require('cookie-parser')(credentials.cookieSecret));
 
@@ -60,9 +61,9 @@ app.set('port', process.env.PORT || 8080);
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
-app.use('/', main);
+app.use('/', mainRoutes);
+app.use('/create-federation', federationRoutes);
 
 // пользовательская страница 404
 app.use(function(req, res){
