@@ -1,8 +1,16 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
+var main = require('./routes/main');
+var bodyParser = require('body-parser');
+var exphbs   = require('express-handlebars');
 
 var app = express();
+
+app.set('port', process.env.PORT || 8080);
+
+app.engine('handlebars', exphbs({defaultLayout: 'base'}));
+app.set('view engine', 'handlebars');
 
 var opts = {
 	server: {
@@ -11,7 +19,6 @@ var opts = {
 };
 mongoose.connect('mongodb://localhost:27017/football', opts);
 
-//возможно бодипарсер потребуется для кукипарсера, надо проверить
 app.use(require('cookie-parser')(credentials.cookieSecret));
 
 //Обеспечивает поддержку сеансов на основе идентификатора сеанса, хранимого
@@ -50,6 +57,12 @@ auth.init();
 auth.registerRoutes();
 
 app.set('port', process.env.PORT || 8080);
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/', main);
 
 // пользовательская страница 404
 app.use(function(req, res){

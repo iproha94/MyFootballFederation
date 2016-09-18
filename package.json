@@ -22,5 +22,7 @@
     "express-session": "^1.14.1",
     "passport": "^0.3.2",
     "passport-vkontakte": "^0.3.2"
+    "body-parser": "^1.15.2",
+    "express-handlebars": "^3.0.0"
   }
 }
