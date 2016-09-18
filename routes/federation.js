@@ -9,7 +9,7 @@ router.get('/create', function(req, res, next) {
 router.post('/create', function(req, res, next) {
     var federation = new Federation({
         name: req.body.name,
-        creators: null,
+        creators: [req.user._id],
         tournaments: [],
         team_requests: []
     });

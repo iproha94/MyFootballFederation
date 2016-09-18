@@ -23,4 +23,19 @@ router.post('/create', function(req, res, next) {
     });
 });
 
+router.get('/:id', function(req, res, next) {
+    var id = req.param("id");
+    Team.find({_id : id}, function (err, result) {
+        if(err || result.length === 0) {
+            return res.redirect(303, '/404' );
+        }
+        //список турниров и кнопка создания турнира
+
+        res.render("team", {
+            name: result[0].name
+        });
+
+    });
+});
+
 module.exports = router;
