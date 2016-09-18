@@ -1,0 +1,54 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.nav-search{
+    padding-top: 7%;
+    padding-bottom: 7%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.logo-image {
+    height: 48px;
+    vertical-align: middle;
+}
+
+.header-position{
+    position: relative;
+}
+.header_item__margin{
+    margin-bottom: 50px;
+}
+
+.search_item_margin{
+    margin-bottom: 15px;
+}
+
+.fullscreen{
+    height: 100%;
+}
+
+@media (max-width: 952px) , (max-height: 500px){
+    html {
+        height: auto !important;
+    }
+    body {
+        height: auto !important;
+    }
+}
+
+.autocomplete-content.dropdown-content{
+    position: relative;
+}
