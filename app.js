@@ -65,6 +65,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', mainRoutes);
 app.use('/create-federation', federationRoutes);
 
+
+
 // пользовательская страница 404
 app.use(function(req, res){
 	res.type('text/plain');
