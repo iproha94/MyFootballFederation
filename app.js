@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
 var federationRoutes = require('./routes/federations');
+var teamRoutes = require('./routes/team');
 var bodyParser = require('body-parser');
 var exphbs   = require('express-handlebars');
 
@@ -64,8 +65,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', mainRoutes);
 app.use('/create-federation', federationRoutes);
-
-
+app.use('/team', teamRoutes);
 
 // пользовательская страница 404
 app.use(function(req, res){

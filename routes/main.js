@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
+var Team = require('../models/team');
 
 function getArray(arrayObject, name) {
     var result = [];
@@ -23,11 +24,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/account', function(req, res, next) {
-    if (!req.user) {
-        res.render("unauthorized");
-        return;
-    }
-    res.render("account", { username: req.user.name });
+    if (!req.user) return res.render("unauthorized");
+
+    //TODO: исправить на список федераций только этого человека
+    Federation.find(function (err, fResult) {
+        Team.find(function (err, tResult) {
+            res.render("account", { 
+                username: req.user.name,
+                federations:  fResult,
+                teams: tResult
+            });
+        });
+    });
 });
 
 router.get('/unauthorized', function(req, res, next) {

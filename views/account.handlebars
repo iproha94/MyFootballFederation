@@ -1,3 +1,26 @@
-<h1>User Home</h1>
-<h2>Welcome, {{username}}!</h2>
-<p>This is your account home.  Welcome home.</p>
+<h1>Страница пользователя</h1>
+<h2>Ваше имя: {{username}}!</h2>
+
+<ul class="collection with-header">
+	<li class="collection-header"><h4>Федерации, в которых вы состоите</h4></li>
+	
+	{{#each federations}}
+		<li class="collection-item"><div>{{name}}<a href="/federations/{{name}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+	{{else}}
+		Вы не состоите в федерациях :(
+	{{/each}}
+</ul>
+
+<a class="waves-effect waves-light btn" href="/federation/create">Создать федерацию</a>
+
+<ul class="collection with-header">
+	<li class="collection-header"><h4>Команды, в которых вы состоите</h4></li>
+	
+	{{#each teams}}
+		<li class="collection-item"><div>{{name}}<a href="/federations/{{name}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+	{{else}}
+		Вы не состоите в командах :(	
+	{{/each}}
+</ul>
+
+<a class="waves-effect waves-light btn" href="/team/create">Создать команду</a>
