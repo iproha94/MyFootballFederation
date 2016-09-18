@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
-var federationRoutes = require('./routes/federations');
+var federationRoutes = require('./routes/federation');
 var bodyParser = require('body-parser');
 var exphbs   = require('express-handlebars');
 
@@ -63,7 +63,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', mainRoutes);
-app.use('/create-federation', federationRoutes);
+app.use('/federation', federationRoutes);
 
 
 

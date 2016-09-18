@@ -8,7 +8,10 @@
         script.onload = function () {
             $('input.autocomplete').autocomplete({
                 source: location.pathname,
-                method: "POST"
+                method: "POST",
+                select: function (event, ui) {
+                    window.location = '/federation/' + ui.item.value;
+                }
             });
         };
     });
