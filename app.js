@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var credentials = require('./credentials.js');
 
 var app = express();
 
@@ -9,6 +10,44 @@ var opts = {
 	}
 };
 mongoose.connect('mongodb://localhost:27017/football', opts);
+
+//возможно бодипарсер потребуется для кукипарсера, надо проверить
+app.use(require('cookie-parser')(credentials.cookieSecret));
+
+//Обеспечивает поддержку сеансов на основе идентификатора сеанса, хранимого
+// в cookie-файле. По умолчанию используется хранилище в памяти, не подходя-
+// щее для реальных условий эксплуатации, но может быть настроено для при-
+// менения хранилища на основе базы данных (см. главы 9 и 13).
+app.use(require('express-session')({
+    resave: false,
+    saveUninitialized: false,
+    secret: credentials.cookieSecret,
+
+    //это для того, чтобы сеансовое хранилище работало в какой то бд.
+    //если поля store нет - то по умолчанию будет храниться в памяти
+	//store: sessionStore,
+}));
+
+
+var auth = require('./lib/auth.js')(app, {
+	// baseUrl опционален; по умолчанию будет
+	// использоваться localhost, если вы пропустите его;
+	// имеет смысл установить его, если вы не
+	// работаете на своей локальной машине. Например,
+	// если вы используете staging-сервер,
+	// можете установить в переменной окружения BASE_URL
+	// https://staging.meadowlark.com
+	baseUrl: process.env.BASE_URL,
+	providers: credentials.authProviders,
+	successRedirect: '/account',
+	failureRedirect: '/unauthorized',
+});
+
+// auth.init() соединяется в промежуточном ПО Passport:
+auth.init();
+
+// теперь мы можем указать наши маршруты auth:
+auth.registerRoutes();
 
 app.set('port', process.env.PORT || 8080);
 

@@ -1,4 +1,4 @@
-  {
+{
   "name": "mff",
   "version": "1.0.0",
   "description": "Платформа для создания футбольных федераций. <hr> Выпускной проект в Технопарке <hr> Nodejs, MongoDB",
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/iproha94/MyFootballFederation#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "passport": "^0.3.2",
+    "passport-vkontakte": "^0.3.2"
   }
 }
