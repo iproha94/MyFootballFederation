@@ -21,4 +21,16 @@ router.get('/', function(req, res, next) {
     }
 });
 
+router.get('/account', function(req, res, next) {
+    if (!req.user) {
+        res.render("unauthorized");
+        return;
+    }
+    res.render("account", { username: req.user.name });
+});
+
+router.get('/unauthorized', function(req, res, next) {
+    res.render("unauthorized");
+});
+
 module.exports = router;

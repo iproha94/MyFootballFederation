@@ -17,12 +17,13 @@
   },
   "homepage": "https://github.com/iproha94/MyFootballFederation#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
     "express-session": "^1.14.1",
+    "mongoose": "^4.6.0",
     "passport": "^0.3.2",
     "passport-vkontakte": "^0.3.2"
-    "body-parser": "^1.15.2",
-    "express-handlebars": "^3.0.0"
   }
 }
