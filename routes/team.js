@@ -19,7 +19,21 @@ router.post('/create', function(req, res, next) {
     team.save(function (err) {
         if(err) return res.send("Error");
 
+        req.user.teams.push(team._id);
+
         res.send("OK");
+    });
+});
+
+router.get('/:id', function(req, res, next) {
+    var id = req.param("id");
+    Team.findOne({_id : id}, function (err, result) {
+        if(err) return res.redirect(303, '/404' );
+
+        res.render("team", {
+            name: result.name
+        });
+
     });
 });
 

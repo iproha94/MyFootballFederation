@@ -26,9 +26,10 @@ router.get('/', function(req, res, next) {
 router.get('/account', function(req, res, next) {
     if (!req.user) return res.render("unauthorized");
 
-    //TODO: исправить на список федераций только этого человека
-    Federation.find(function (err, fResult) {
-        Team.find(function (err, tResult) {
+
+    Federation.find({creators: req.user._id}, function (err, fResult) {
+        //пробежатсья по массиву айдишников команд у юзера и добавввлять их в резалт
+        Team.find({creators: req.user._id}, function (err, tResult) {
             res.render("account", { 
                 username: req.user.name,
                 federations:  fResult,
