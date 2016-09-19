@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var federationSchema = new Schema({
     name: String,
     creators: [Schema.Types.ObjectId],
-    tournaments: [Schema.Types.ObjectId],
     team_requests: [Schema.Types.ObjectId]
 });
 

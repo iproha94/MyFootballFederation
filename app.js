@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
 var teamRoutes = require('./routes/team');
+var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
 var bodyParser = require('body-parser');
 var exphbs   = require('express-handlebars');
@@ -66,6 +67,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', mainRoutes);
 app.use('/team', teamRoutes);
 app.use('/federation', federationRoutes);
+app.use('/tournament', tournamentRoutes);
 
 // пользовательская страница 404
 app.use(function(req, res){
