@@ -48,7 +48,17 @@
         height: auto !important;
     }
 }
+.ui-autocomplete {
+    position: absolute;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 0px;
+}
 
-.autocomplete-content.dropdown-content{
-    position: relative;
+.ui-menu-item {
+    border: 1px solid #e0e0e0;
+}
+
+.ui-helper-hidden-accessible {
+    display:none;
 }

@@ -11,6 +11,16 @@
                 method: "POST",
                 select: function (event, ui) {
                     window.location = '/federation/' + ui.item.value;
+                },
+                open: function (event, ui) {
+                    $(".ui-menu-item-wrapper").replaceWith(function(index, oldHTML){
+                        return $("<a>").html(oldHTML)
+                            .addClass("collection-item ui-menu-item-wrapper green-text text-darken-1");
+                    });
+                    $(".ui-autocomplete:visible").css({top:"+=5"});
+                },
+                create: function(event, ui) {
+                    $(".ui-autocomplete").addClass("collection z-depth-1");
                 }
             });
         };
