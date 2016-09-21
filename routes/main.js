@@ -24,13 +24,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/account', function(req, res, next) {
-    if (!req.user) return res.render("unauthorized");
-
+    if (!req.isAuthenticated())  {
+        return res.redirect(303, '/unauthorized' );
+    }
 
     Federation.find({creators: req.user._id}, function (err, fResult) {
-        //пробежатсья по массиву айдишников команд у юзера и добавввлять их в резалт
         Team.find({creators: req.user._id}, function (err, tResult) {
-            res.render("account", { 
+            res.render("account", {
                 username: req.user.name,
                 federations:  fResult,
                 teams: tResult

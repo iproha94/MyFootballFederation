@@ -4,10 +4,18 @@ var Tournament = require('../models/tournament');
 var Federation = require('../models/federation');
 
 router.get('/create', function(req, res, next) {
+    if (!req.isAuthenticated())  {
+        return res.redirect(303, '/unauthorized' );
+    }
+
     res.render("create-tournament");
 });
 
 router.post('/create', function(req, res, next) {
+    if (!req.isAuthenticated())  {
+        return res.redirect(303, '/unauthorized' );
+    }
+
     console.log(req.query);
     console.log(req.body);
     Federation.findOne({name: req.query.federation}, function (err, result) {
