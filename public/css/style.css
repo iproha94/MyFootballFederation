@@ -60,5 +60,10 @@
 }
 
 .ui-helper-hidden-accessible {
-    display:none;
+    position: absolute;
 }
+
+.vertical-align-middle {
+    vertical-align: middle!important;
+}
+

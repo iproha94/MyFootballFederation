@@ -12,7 +12,15 @@ var app = express();
 
 app.set('port', process.env.PORT || 8080);
 
-app.engine('handlebars', exphbs({defaultLayout: 'base'}));
+app.engine('handlebars', exphbs({
+	defaultLayout: 'base',
+	helpers: {
+		'default' : function (value, defaultVal) {
+			var out = value || defaultVal;
+			return out;
+		}
+	}
+}));
 app.set('view engine', 'handlebars');
 
 var opts = {
@@ -61,6 +69,11 @@ auth.registerRoutes();
 
 app.set('port', process.env.PORT || 8080);
 
+app.use(function (req, res, next) {
+	res.locals.user = req.user;
+	next();
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -71,17 +84,21 @@ app.use('/tournament', tournamentRoutes);
 
 // пользовательская страница 404
 app.use(function(req, res){
-	res.type('text/plain');
 	res.status(404);
-	res.send('404 — Не найдено');
+	res.render('http-response', {
+		code: 404,
+		message: 'Не найдено'
+	});
 });
 
 // пользовательская страница 500
 app.use(function(err, req, res, next){
 	console.error(err.stack);
-	res.type('text/plain');
 	res.status(500);
-	res.send('500 — Ошибка сервера');
+	res.render('http-response', {
+		code: 500,
+		message: 'Не найдено'
+	});
 });
 
 app.listen(app.get('port'), function(){
