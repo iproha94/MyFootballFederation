@@ -21,22 +21,54 @@
             <img src="/img/logo.png" class="logo-image">
             Football
         </a>
+
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
+            {{#if user}}
+                <li><a href="/account">Профиль</a></li>
+            {{else}}
+                <li>Войти через:&nbsp;&nbsp;</li>
+                <li><a class="" href="/auth/vkontakte/callback"><img src="/img/vk-logo.png" class="login-image"></a></li>
+                <li><a class="" href="#"><img src="/img/google-logo.png" class="login-image"></a></li>
+            {{/if}}
         </ul>
 
         <ul id="slide-out" class="side-nav">
             <li><div class="userView">
-                <img class="background" src="https://hd.unsplash.com/photo-1434648957308-5e6a859697e8">
-                <a href="#!user"><img class="circle" src="https://pp.vk.me/c625322/v625322816/1aa94/xn64lBH6EbM.jpg"></a>
-                <a href="#!name"><span class="white-text name">John Doe</span></a>
+                <img class="background" src="http://unsplash.it/400/200?image=527">
+                <a href="/account">
+                    {{#if user}}
+                        <img class="circle" src="https://pp.vk.me/c625322/v625322816/1aa94/xn64lBH6EbM.jpg">
+                    {{else}}
+                        <img class="circle" src="/img/camera.png">
+                    {{/if}}
+                </a>
+
+                <a href="/account">
+                    <span class="white-text name">
+                        {{#if user}}
+                        {{user.name}}
+                        {{else}}
+                            Аноним
+                        {{/if}}
+                    </span>
+                </a>
                 <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
             </div></li>
-            <li><a href="#!1"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-            <li><a href="#!2">Second Link</a></li>
+
+            {{#if user}}
+                <li><a class="waves-effect" href="/account">Профиль</a></li>
+            {{else}}
+                <li><a class="subheader">Войти через:</a></li>
+                <li><a class="waves-effect" href="/auth/vkontakte/callback"><i class="material-icons">assignment_ind</i>Вконтакте</a></li>
+                <li><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i>Google</a></li>
+            {{/if}}
             <li><div class="divider"></div></li>
-            <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+            <li><a class="subheader">Дополнительно</a></li>
+            {{#if user}}
+                <li><a class="waves-effect" href="#!">Выйти</a></li>
+            {{else}}
+                <li><a class="waves-effect" href="#!">Просто для соблюдения material design</a></li>
+            {{/if}}
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse">
             <i class="material-icons">menu</i>

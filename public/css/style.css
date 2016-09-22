@@ -60,5 +60,10 @@
 }
 
 .ui-helper-hidden-accessible {
-    display:none;
+    position: absolute;
+}
+
+.login-image {
+    height: 25px;
+    vertical-align: middle;
 }

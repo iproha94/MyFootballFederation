@@ -61,6 +61,11 @@ auth.registerRoutes();
 
 app.set('port', process.env.PORT || 8080);
 
+app.use(function (req, res, next) {
+	res.locals.user = req.user;
+	next();
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -6,6 +6,9 @@
         document.body.appendChild(script);
 
         script.onload = function () {
+            $('.js-form-search').submit(function (event) {
+                event.preventDefault();
+            });
             $('input.autocomplete').autocomplete({
                 source: location.pathname,
                 method: "POST",
