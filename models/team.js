@@ -5,8 +5,6 @@ var teamSchema = new Schema({
     name: String,
     creators: [Schema.Types.ObjectId],
     players: [Schema.Types.ObjectId],
-    federations: [Schema.Types.ObjectId],
-    tournaments: [Schema.Types.ObjectId],
     player_requests: [Schema.Types.ObjectId]
 });
 

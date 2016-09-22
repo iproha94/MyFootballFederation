@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var federationSchema = new Schema({
     name: String,
     creators: [Schema.Types.ObjectId],
-    team_requests: [Schema.Types.ObjectId]
 });
 
 var Federation = mongoose.model("Federation", federationSchema);

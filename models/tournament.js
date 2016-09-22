@@ -5,7 +5,6 @@ var tournamentSchema = new Schema({
     name: String,
     federation: Schema.Types.ObjectId,
     teams: [Schema.Types.ObjectId],
-    matches: [Schema.Types.ObjectId],
     team_requests: [Schema.Types.ObjectId]
 });
 
