@@ -9,12 +9,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"  rel="stylesheet">
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/lib/materialize.js"></script>
     <script src="/js/lib/init.js"></script>
+
 </head>
 <body class="fullscreen">
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="/account">Страница профиля</a></li>
+    <li class="divider"></li>
+    <li><a href="/logout">Выйти</a></li>
+</ul>
 <nav class="light-green darken-2 header-position" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo">
@@ -24,50 +31,43 @@
 
         <ul class="right hide-on-med-and-down">
             {{#if user}}
-                <li><a href="/account">Профиль</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Профиль<i class="material-icons right">arrow_drop_down</i></a></li>
             {{else}}
                 <li>Войти через:&nbsp;&nbsp;</li>
-                <li><a class="" href="/auth/vkontakte/callback"><img src="/img/vk-logo.png" class="login-image"></a></li>
-                <li><a class="" href="#"><img src="/img/google-logo.png" class="login-image"></a></li>
+                <li><a class="" href="/auth/vkontakte/callback"><i class="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
+                <li><a class="" href="#"><i class="fa fa-google-plus fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
             {{/if}}
         </ul>
 
         <ul id="slide-out" class="side-nav">
-            <li><div class="userView">
+            <li>
+                <div class="userView">
                 <img class="background" src="http://unsplash.it/400/200?image=527">
                 <a href="/account">
-                    {{#if user}}
-                        <img class="circle" src="https://pp.vk.me/c625322/v625322816/1aa94/xn64lBH6EbM.jpg">
-                    {{else}}
-                        <img class="circle" src="/img/camera.png">
-                    {{/if}}
+                    <img class="circle" src="{{default user.img '/img/camera.png'}}">
                 </a>
-
                 <a href="/account">
                     <span class="white-text name">
-                        {{#if user}}
-                        {{user.name}}
-                        {{else}}
-                            Аноним
-                        {{/if}}
+                        {{default user.name  "Аноним"}}
                     </span>
                 </a>
-                <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-            </div></li>
+                <a href="#!email"><span class="white-text email">{{default user.email "jdandturk@gmail.com"}}</span></a>
+                </div>
+            </li>
 
             {{#if user}}
-                <li><a class="waves-effect" href="/account">Профиль</a></li>
+                <li><a class="waves-effect" href="/account"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</a></li>
             {{else}}
                 <li><a class="subheader">Войти через:</a></li>
-                <li><a class="waves-effect" href="/auth/vkontakte/callback"><i class="material-icons">assignment_ind</i>Вконтакте</a></li>
-                <li><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i>Google</a></li>
+                <li><a class="waves-effect" href="/auth/vkontakte/callback"><i class="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>
+                <li><a class="waves-effect" href="#"><i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>Google</a></li>
             {{/if}}
             <li><div class="divider"></div></li>
             <li><a class="subheader">Дополнительно</a></li>
             {{#if user}}
-                <li><a class="waves-effect" href="#!">Выйти</a></li>
+                <li><a class="waves-effect" href="/logout"><i class="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
             {{else}}
-                <li><a class="waves-effect" href="#!">Просто для соблюдения material design</a></li>
+                <li><a class="waves-effect" href="#!"><i class="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
             {{/if}}
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse">
@@ -84,8 +84,6 @@
             <div class="col l6 s12">
                 <h5 class="white-text">Company Bio</h5>
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
             </div>
             <div class="col l3 s12">
                 <h5 class="white-text">Settings</h5>
@@ -109,8 +107,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            Made by
-            <a class="brown-text text-lighten-3" href="#">Materialize</a>
+            Made with <i class="fa fa-heart-o" aria-hidden="true"></i> in Moscow
         </div>
     </div>
 </footer>

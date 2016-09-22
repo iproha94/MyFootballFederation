@@ -63,7 +63,7 @@
     position: absolute;
 }
 
-.login-image {
-    height: 25px;
-    vertical-align: middle;
+.vertical-align-middle {
+    vertical-align: middle!important;
 }
+

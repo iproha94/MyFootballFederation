@@ -3,8 +3,10 @@
 <div class="row">
 <a class="waves-effect waves-light btn" href="/tournament/create/?federation={{name}}">Создать турнир</a>
 </div>
-<ol>
+
+<div class="collection">
     {{#each tournaments}}
-        <li>{{name}}</li>
+        <a href="#!" class="collection-item">{{name}}</a>
     {{/each}}
-</ol>
+</div>
+
