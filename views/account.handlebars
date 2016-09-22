@@ -10,6 +10,8 @@
 		Вы не состоите в федерациях :(
 	{{/each}}
 
+
+
     <li class="collection-item right">
         <a class="btn-floating btn-large waves-effect waves-light red" href="/federation/create"><i class="material-icons">add</i></a>
     </li>
@@ -24,8 +26,44 @@
 		Вы не состоите в командах :(	
 	{{/each}}
 
+
+    <!--<div class="formContainer">-->
+        <!--<form class="list-team" action="/account" method="POST" >-->
+            <!--<input type="hidden" name="what" value="team">-->
+            <!--<button class="waves-effect waves-light btn" type="submit" >показать</button>-->
+        <!--</form>-->
+    <!--</div>-->
+
+
     <li class="collection-item right">
         <a class="btn-floating btn-large waves-effect waves-light red" href="/team/create"><i class="material-icons">add</i></a>
     </li>
 
 </ul>
+
+<!--<script>-->
+    <!--$(document).ready(function(){-->
+        <!--$('.list-team').on('submit', function(evt){-->
+            <!--evt.preventDefault();-->
+            <!--var action = $(this).attr('action');-->
+            <!--var $container = $(this).closest('.formContainer');-->
+            <!--$container.html('<div class="progress"><div class="indeterminate"></div></div>');-->
+
+            <!--$.ajax({-->
+                <!--url: action,-->
+                <!--type: 'POST',-->
+                <!--data: $(this).serialize(),-->
+                <!--success: function(data){-->
+                    <!--if(data.success){-->
+                        <!--$container.html('<h1>' + data.teams[0].name + '</h1>');-->
+                    <!--} else {-->
+                        <!--$container.html('Вы не состоите в командах');-->
+                    <!--}-->
+                <!--},-->
+                <!--error: function(){-->
+                    <!--$container.html('There was a problem.');-->
+                <!--}-->
+            <!--});-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
