@@ -11,16 +11,12 @@ router.post('/create', function(req, res, next) {
         name: req.body.name,
         creators: [req.user._id],
         players: [],
-        federations: [],
-        tournaments: [],
         player_requests: []
     });
-
+    
     team.save(function (err) {
         if(err) return res.send("Error");
-
-        req.user.teams.push(team._id);
-
+        
         res.send("OK");
     });
 });
@@ -33,7 +29,6 @@ router.get('/:id', function(req, res, next) {
         res.render("team", {
             name: result.name
         });
-
     });
 });
 

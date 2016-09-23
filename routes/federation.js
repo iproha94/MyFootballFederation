@@ -17,28 +17,29 @@ router.post('/create', function(req, res, next) {
 
     var federation = new Federation({
         name: req.body.name,
-        creators: [req.user._id],
-        tournaments: [],
-        team_requests: []
+        creators: [req.user._id]
     });
 
     federation.save(function (err) {
         if(err) {
-            res.send("Error");
+            next(err);
         } else {
-            res.send("OK");
+            res.redirect("/federation/" + federation.name);
         }
     });
 });
 
 router.get('/:name', function(req, res, next) {
-    var name = req.param("name");
+    var name = req.params.name;
     Federation.findOne({name : name}, function (err, federation) {
         if(err || !federation) {
-            return res.redirect(303, '/404' );
+            return next(err);
         }
 
         Tournament.find({federation: federation._id}, function (err, tournaments) {
+            if(err) {
+                return next(err);
+            }
             res.render("federation", {
                 name: name,
                 tournaments: tournaments

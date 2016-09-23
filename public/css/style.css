@@ -67,3 +67,6 @@
     vertical-align: middle!important;
 }
 
+.ui-helper-hidden-accessible {
+    display: none;
+}
