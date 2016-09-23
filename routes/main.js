@@ -37,7 +37,22 @@ router.get('/account', function(req, res, next) {
             });
         });
     });
+
 });
+
+// router.post('/account', function(req, res, next) {
+//     if (req.body.what === 'team' && (req.xhr || req.accepts('json,html')==='json')) {
+//         Team.find({creators: req.user._id}, function (err, result) {
+//             res.send({
+//                 success: true,
+//                 teams: result
+//             });
+//         });
+//
+//     }
+// });
+
+
 
 router.get('/unauthorized', function(req, res, next) {
     res.render("unauthorized");

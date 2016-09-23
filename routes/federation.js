@@ -21,6 +21,7 @@ router.post('/create', function(req, res, next) {
         tournaments: [],
         team_requests: []
     });
+
     federation.save(function (err) {
         if(err) {
             res.send("Error");
