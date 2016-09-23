@@ -1,46 +1,46 @@
-<h1>Страница пользователя</h1>
-<h2>Ваше имя: {{username}}!</h2>
+<div class="container content-margin-top">
+    <div class="center">
+        <h3>Страница пользователя</h3>
+        <h4>Ваше имя: {{username}}!</h4>
+    </div>
 
-<ul class="collection with-header">
-	<li class="collection-header"><h4>Федерации, в которых вы состоите</h4></li>
-	
-	{{#each federations}}
-		<li class="collection-item"><div>{{name}}<a href="/federation/{{name}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-	{{else}}
-		Вы не состоите в федерациях :(
-	{{/each}}
+    <ul class="collection with-header">
+        <li class="collection-header center"><h5>Федерации, в которых вы состоите</h5></li>
 
+        {{#each federations}}
+            <li class="collection-item"><div>{{name}}<a href="/federation/{{name}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        {{else}}
+            Вы не состоите в федерациях :(
+        {{/each}}
 
+        <li class="collection-item right">
+            <a class="btn-floating btn-large waves-effect waves-light red" href="/federation/create"><i class="material-icons">add</i></a>
+        </li>
+    </ul>
 
-    <li class="collection-item right">
-        <a class="btn-floating btn-large waves-effect waves-light red" href="/federation/create"><i class="material-icons">add</i></a>
-    </li>
-</ul>
+    <ul class="collection with-header">
+        <li class="collection-header center"><h5>Команды, в которых вы состоите</h5></li>
 
-<ul class="collection with-header">
-	<li class="collection-header"><h4>Команды, в которых вы состоите</h4></li>
-	
-	{{#each teams}}
-		<li class="collection-item"><div>{{name}}<a href="/team/{{_id}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-	{{else}}
-		Вы не состоите в командах :(	
-	{{/each}}
-
-
-    <!--<div class="formContainer">-->
-        <!--<form class="list-team" action="/account" method="POST" >-->
-            <!--<input type="hidden" name="what" value="team">-->
-            <!--<button class="waves-effect waves-light btn" type="submit" >показать</button>-->
-        <!--</form>-->
-    <!--</div>-->
+        {{#each teams}}
+            <li class="collection-item"><div>{{name}}<a href="/team/{{_id}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        {{else}}
+            Вы не состоите в командах :(
+        {{/each}}
 
 
-    <li class="collection-item right">
-        <a class="btn-floating btn-large waves-effect waves-light red" href="/team/create"><i class="material-icons">add</i></a>
-    </li>
+        <!--<div class="formContainer">-->
+            <!--<form class="list-team" action="/account" method="POST" >-->
+                <!--<input type="hidden" name="what" value="team">-->
+                <!--<button class="waves-effect waves-light btn" type="submit" >показать</button>-->
+            <!--</form>-->
+        <!--</div>-->
 
-</ul>
 
+        <li class="collection-item right">
+            <a class="btn-floating btn-large waves-effect waves-light red" href="/team/create"><i class="material-icons">add</i></a>
+        </li>
+    </ul>
+</div>
 <!--<script>-->
     <!--$(document).ready(function(){-->
         <!--$('.list-team').on('submit', function(evt){-->

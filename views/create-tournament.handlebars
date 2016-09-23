@@ -1,40 +1,38 @@
-<div class="row">
-    <form class="col s12" method="post">
-        <div class="c">
-            <div class="input-field col s12">
+<div class="container content-margin-top">
+    <div class="row">
+        <form method="post">
+            <div class="input-field">
                 <input id="last_name" type="text" class="validate" name="name">
                 <label for="last_name">Название турнира</label>
             </div>
-        </div>
 
-        <div class="row config-select">
-            <label for="last_name">Тип турнира</label>
-            {{#each config}}
-                <p>
-                    <input class='rg' name="group1" type="radio" id="{{type}}" />
-                    <label for={{type}}>{{name}}</label>
-                </p>
-            {{/each}}
-        </div>
+            <div class="config-select">
+                <label for="last_name">Тип турнира</label>
+                {{#each config}}
+                    <p>
+                        <input class='js-type-tournament' name="group1" type="radio" id="{{type}}" />
+                        <label for={{type}}>{{name}}</label>
+                    </p>
+                {{/each}}
+            </div>
 
+            <div class="config-tournament">
+                Выберете тип турнира
+            </div>
 
-        <div class="row config-tournament ">
-            Выберете тип турнира
-        </div>
-
-
-        <button class="btn waves-effect waves-light" type="submit">Submit
-            <i class="material-icons right">send</i>
-        </button>
-    </form>
+            <button class="btn waves-effect waves-light" type="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
 </div>
 
 <script>
     $(document).ready(function(){
-        $(".rg").change(function () {
+        $(".js-type-tournament").change(function () {
             {{#each config}}
                 if ($("#{{type}}").is(':checked')) {
-                    $('.config-tournament').html('<h1>конфиг турнира {{name}}</h1>');
+                    $('.config-tournament').html('конфиг турнира {{name}}');
                 }
             {{/each}}
         });
