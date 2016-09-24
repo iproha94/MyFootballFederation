@@ -41,7 +41,7 @@ router.get('/:name', function(req, res, next) {
                 return next(err);
             }
             res.render("federation", {
-                name: name,
+                federation: federation,
                 tournaments: tournaments
             });
         });

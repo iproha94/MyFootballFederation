@@ -1,6 +1,6 @@
 <div class="container content-margin-top">
     <div class="row center">
-        Страница федерации {{name}}
+        Страница федерации {{federation.name}}
     </div>
     <div class="row">
         <div class="tournament-list_header">
@@ -12,7 +12,10 @@
             {{/each}}
         </div>
     </div>
+    {{#isAccess user federation.creators}}
     <div class="row right-align">
-        <a class="waves-effect waves-light btn" href="/tournament/create/?federation={{name}}">Создать турнир</a>
+        <a class="waves-effect waves-light btn" href="/tournament/create/?federation={{federation.name}}">Создать турнир</a>
     </div>
+    {{/isAccess}}
+
 </div>

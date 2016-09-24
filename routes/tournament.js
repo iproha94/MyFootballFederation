@@ -6,18 +6,16 @@ var Team = require('../models/team');
 var tournamentSetting = require('../lib/tournament');
 
 router.get('/create', function(req, res, next) {
-    if (!req.isAuthenticated())  {
+    if(!req.isAuthenticated()) {
         return res.redirect('/unauthorized' );
     }
-
     res.render("create-tournament", {config: tournamentSetting.config});
 });
 
 router.post('/create', function(req, res, next) {
-    if (!req.isAuthenticated())  {
-        return res.redirect('/unauthorized');
+    if(!req.isAuthenticated()) {
+        return res.redirect('/unauthorized' );
     }
-    
     Federation.findOne({name: req.query.federation}, function (err, federation) {
         var tournament = new Tournament({
             name: req.body.name,

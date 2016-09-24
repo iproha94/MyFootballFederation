@@ -15,9 +15,27 @@ app.set('port', process.env.PORT || 8080);
 app.engine('handlebars', exphbs({
 	defaultLayout: 'base',
 	helpers: {
-		'default' : function (value, defaultVal) {
+		'default': function (value, defaultVal) {
 			var out = value || defaultVal;
 			return out;
+		},
+		isAccess: function (user, value, opts) {//сравнение только ObjectId
+			if(!user) {
+				return opts.inverse(this);
+			}
+			var id = user._id.toString();
+			if(Array.isArray(value)) {
+				for(var item of value) {
+					if(item.toString() == id) {
+						return opts.fn(this);
+					}
+				}
+			}
+			if(id == value.toString()) {
+				return opts.fn(this);
+			}
+
+			return opts.inverse(this);
 		}
 	}
 }));
