@@ -30,10 +30,12 @@ router.get('/account', function(req, res, next) {
 
     Federation.find({creators: req.user._id}, function (err, fResult) {
         Team.find({creators: req.user._id}, function (err, tResult) {
+
             res.render("account", {
-                username: req.user.name,
+                user: req.user,
                 federations:  fResult,
-                teams: tResult
+                teams: tResult,
+                newUser: Date.now() - req.user.created < 3600000
             });
         });
     });

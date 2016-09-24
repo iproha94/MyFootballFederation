@@ -1,7 +1,9 @@
 <div class="container content-margin-top">
     <div class="center">
         <h3>Страница пользователя</h3>
-        <h4>Ваше имя: {{username}}!</h4>
+        <h4>Ваше имя: {{user.name}}!</h4>
+
+        <div class = "greeting-registration"></div>
     </div>
 
     <ul class="collection with-header">
@@ -41,6 +43,13 @@
         </li>
     </ul>
 </div>
+
+<script>
+    if ({{newUser}}) {
+        $('.greeting-registration').html('<h5>Поздравляем с регистрацией</h5>');
+    }
+</script>
+
 <!--<script>-->
     <!--$(document).ready(function(){-->
         <!--$('.list-team').on('submit', function(evt){-->
