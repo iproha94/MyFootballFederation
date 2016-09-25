@@ -1,32 +1,45 @@
 <div class="container content-margin-top">
     <div class="center">
         <h3>Страница пользователя</h3>
-        <h4>Ваше имя: {{user.name}}!</h4>
-
+        {{#if pageUser}}
+            <h4>Имя пользователя: {{pageUser.name}}</h4>
+        {{else}}
+            <h4>Ваше имя: {{user.name}}</h4>
+        {{/if}}
         <div class = "greeting-registration"></div>
     </div>
 
     <ul class="collection with-header">
-        <li class="collection-header center"><h5>Федерации, в которых вы состоите</h5></li>
+        <li class="collection-header center"><h5>Федерации</h5></li>
 
         {{#each federations}}
             <li class="collection-item"><div>{{name}}<a href="/federation/{{name}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
         {{else}}
-            Вы не состоите в федерациях :(
+            {{#unless pageUser}}
+                Вы не состоите в федерациях :(
+            {{else}}
+                Пользователь не состоит в федерациях
+            {{/unless}}
         {{/each}}
 
-        <li class="collection-item right">
-            <a class="btn-floating btn-large waves-effect waves-light red" href="/federation/create"><i class="material-icons">add</i></a>
-        </li>
+        {{#unless pageUser}}
+            <li class="collection-item right">
+                <a class="btn-floating btn-large waves-effect waves-light red" href="/federation/create"><i class="material-icons">add</i></a>
+            </li>
+        {{/unless}}
     </ul>
 
     <ul class="collection with-header">
-        <li class="collection-header center"><h5>Команды, в которых вы состоите</h5></li>
+        <li class="collection-header center"><h5>Команды</h5></li>
 
         {{#each teams}}
             <li class="collection-item"><div>{{name}}<a href="/team/{{_id}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
         {{else}}
-            Вы не состоите в командах :(
+            {{#unless pageUser}}
+                Вы не состоите в командах :(
+            {{else}}
+                Пользователь не состоит в командах
+            {{/unless}}
         {{/each}}
 
 
@@ -37,10 +50,11 @@
             <!--</form>-->
         <!--</div>-->
 
-
-        <li class="collection-item right">
-            <a class="btn-floating btn-large waves-effect waves-light red" href="/team/create"><i class="material-icons">add</i></a>
-        </li>
+        {{#unless pageUser}}
+            <li class="collection-item right">
+                <a class="btn-floating btn-large waves-effect waves-light red" href="/team/create"><i class="material-icons">add</i></a>
+            </li>
+        {{/unless}}
     </ul>
 </div>
 

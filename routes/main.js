@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
 var Team = require('../models/team');
+var User = require('../models/user');
 
 function getArray(arrayObject, name) {
     var result = [];
@@ -25,14 +26,12 @@ router.get('/', function(req, res, next) {
 
 router.get('/account', function(req, res, next) {
     if (!req.isAuthenticated())  {
-        return res.redirect(303, '/unauthorized' );
+        return res.redirect('/unauthorized' );
     }
 
     Federation.find({creators: req.user._id}, function (err, fResult) {
         Team.find({creators: req.user._id}, function (err, tResult) {
-
             res.render("account", {
-                user: req.user,
                 federations:  fResult,
                 teams: tResult,
                 newUser: Date.now() - req.user.created < 3600000
@@ -40,6 +39,28 @@ router.get('/account', function(req, res, next) {
         });
     });
 
+});
+
+router.get('/account/:idUser', function(req, res, next) {
+    var idUser = req.params.idUser;
+    if(req.user && idUser == req.user._id.toString()) {
+        return res.redirect("/account");
+    }
+
+    User.findById(idUser, function (err, user) {
+        if(err || !user) {
+            return next();
+        }
+        Federation.find({creators: idUser}, function (err, fResult) {
+            Team.find({creators: idUser}, function (err, tResult) {
+                res.render("account", {
+                    pageUser: user,
+                    federations: fResult,
+                    teams: tResult
+                });
+            });
+        });
+    });
 });
 
 // router.post('/account', function(req, res, next) {
@@ -53,8 +74,6 @@ router.get('/account', function(req, res, next) {
 //
 //     }
 // });
-
-
 
 router.get('/unauthorized', function(req, res, next) {
     res.render("unauthorized");
