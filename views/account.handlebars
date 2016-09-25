@@ -42,7 +42,6 @@
             {{/unless}}
         {{/each}}
 
-
         <!--<div class="formContainer">-->
             <!--<form class="list-team" action="/account" method="POST" >-->
                 <!--<input type="hidden" name="what" value="team">-->
@@ -56,10 +55,47 @@
             </li>
         {{/unless}}
     </ul>
+
+    {{#if pageUser}}
+        {{#if user}}
+            <!-- Modal Trigger -->
+            <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Добавить как организатора федерации</a>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Список федераций</h4>
+                    <p class="js-modal-body"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
 </div>
 
+{{#if pageUser}}
+    {{#if user}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+        <script class="modal-template" type="text/x-handlebars-template">
+            <form class="js-add-creator-form">
+                <input type="hidden" name="idUser" value="{{pageUser._id}}">
+                <div class="input-field col s12">
+                    <select name="idFederation">
+                        \{{#each this}}
+                            <option value="\{{_id}}">\{{name}}</option>
+                        \{{/each}}
+                    </select>
+                </div>
+            </form>
+        </script>
+        <script src="/js/account.js"></script>
+    {{/if}}
+{{/if}}
+
 <script>
-    if ({{newUser}}) {
+    if ({{default newUser "false"}}) {
         $('.greeting-registration').html('<h5>Поздравляем с регистрацией</h5>');
     }
 </script>

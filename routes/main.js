@@ -3,6 +3,8 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Team = require('../models/team');
 var User = require('../models/user');
+var Mongoose = require('mongoose');
+var ObjectId = Mongoose.ObjectId;
 
 function getArray(arrayObject, name) {
     var result = [];
@@ -43,9 +45,9 @@ router.get('/account', function(req, res, next) {
 
 router.get('/account/:idUser', function(req, res, next) {
     var idUser = req.params.idUser;
-    if(req.user && idUser == req.user._id.toString()) {
-        return res.redirect("/account");
-    }
+    // if(req.user && idUser == req.user._id.toString()) {
+    //     return res.redirect("/account");
+    // }
 
     User.findById(idUser, function (err, user) {
         if(err || !user) {
@@ -62,6 +64,43 @@ router.get('/account/:idUser', function(req, res, next) {
         });
     });
 });
+
+//тут возможна атака csrf 
+router.post('/account/add-creator/', function(req, res, next) {
+    var idUser = req.body.idUser;
+    var idFederation = req.body.idFederation;
+
+    Federation.findById(idFederation, function (err, federation) {
+        var isCreatorsCurrentUser = federation.creators.some(function(item){
+            return item.equals(req.user._id);
+        });
+        if(isCreatorsCurrentUser) {
+            federation.creators.push(idUser);
+            federation.save(function (err) {
+                if(err) {
+                    return res.json({
+                        status: 403
+                    });
+                }
+
+                return res.json({
+                    status: 200
+                });
+            });
+        } else {
+            return res.json({
+                status: 403
+            });
+        }
+    });
+});
+
+router.post('/account/get-creator/', function(req, res, next) {
+    Federation.find({creators: req.user._id}, function (err, federations) {
+        return res.json(federations);
+    });
+});
+
 
 // router.post('/account', function(req, res, next) {
 //     if (req.body.what === 'team' && (req.xhr || req.accepts('json,html')==='json')) {
