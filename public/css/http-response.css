@@ -3,18 +3,7 @@ body{
     flex-flow: column;
 }
 
-.http-response{
+.http-response {
     vertical-align: middle;
     text-align: center;
-}
-.http-response-img{
-    width:100%
-}
-
-.valign-wrapper {
-    height: 100%;
-}
-
-.float-left {
-    float: left;
 }

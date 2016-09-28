@@ -14,7 +14,8 @@
 }
 
 .nav-search{
-    padding-top: 7%;
+    margin-top: -64px;
+    padding-top: calc(7% + 64px);
     padding-bottom: 7%;
     padding-left: 10%;
     padding-right: 10%;
@@ -85,4 +86,13 @@
 .config-tournament {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.nav-search-padding {
+    margin-top: -64px;
+}
+
+.nav-search-background {
+    /* background: url(http://img.wallpaperfolder.com/f/78FCA4876497/brazuca-football.jpg);
+    background-size: 100%; */
 }
