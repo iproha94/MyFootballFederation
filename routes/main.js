@@ -26,6 +26,18 @@ router.get('/', function(req, res, next) {
     }
 });
 
+router.get('/users', function(req, res, next) {
+    if (!req.isAuthenticated())  {
+        return res.redirect('/unauthorized' );
+    }
+
+    User.find({}, function (err, result) {
+        console.log(result);
+        res.render("users", {users: result});
+    });
+
+});
+
 router.get('/account', function(req, res, next) {
     if (!req.isAuthenticated())  {
         return res.redirect('/unauthorized' );
