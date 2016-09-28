@@ -1,9 +1,0 @@
-body{
-    display: flex;
-    flex-flow: column;
-}
-
-.http-response {
-    vertical-align: middle;
-    text-align: center;
-}

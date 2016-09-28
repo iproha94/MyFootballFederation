@@ -38,7 +38,7 @@
 }
 
 .fullscreen{
-    height: 100%;
+    height: 100% !important;
 }
 
 @media (max-width: 952px) , (max-height: 500px){
@@ -96,3 +96,19 @@
     /* background: url(http://img.wallpaperfolder.com/f/78FCA4876497/brazuca-football.jpg);
     background-size: 100%; */
 }
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-flex {
+    flex: 1 0 auto;
+}
+
+.http-response {
+    vertical-align: middle;
+    text-align: center;
+}
+
