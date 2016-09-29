@@ -10,6 +10,8 @@ router.post('/create', function(req, res, next) {
     var team = new Team({
         name: req.body.name,
         creators: [req.user._id],
+        city: req.body.city,
+        motto: req.body.motto,
         players: [],
         player_requests: []
     });

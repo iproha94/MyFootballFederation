@@ -3,6 +3,8 @@ var Schema = mongoose.Schema;
 
 var federationSchema = new Schema({
     name: String,
+    city: String,
+    logo: String,
     creators: [Schema.Types.ObjectId]
 });
 

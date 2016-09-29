@@ -17,6 +17,7 @@ router.post('/create', function(req, res, next) {
 
     var federation = new Federation({
         name: req.body.name,
+        city: req.body.city,
         creators: [req.user._id]
     });
 

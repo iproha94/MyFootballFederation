@@ -19,6 +19,8 @@ router.post('/create', function(req, res, next) {
     Federation.findOne({name: req.query.federation}, function (err, federation) {
         var tournament = new Tournament({
             name: req.body.name,
+            time: req.body.time,
+            countPeriods: req.body.countPeriods,
             federation: federation._id,
             teams: [],
             team_requests: [],
