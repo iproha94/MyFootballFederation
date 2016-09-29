@@ -35,14 +35,16 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $(".js-type-tournament").change(function () {
-            {{#each config}}
-                if ($("#{{type}}").is(':checked')) {
-                    $('.config-tournament').html('конфиг турнира {{name}}');
-                }
-            {{/each}}
+{{#section 'jquery'}}
+    <script>
+        $(document).ready(function(){
+            $(".js-type-tournament").change(function () {
+                {{#each config}}
+                    if ($("#{{type}}").is(':checked')) {
+                        $('.config-tournament').html('конфиг турнира {{name}}');
+                    }
+                {{/each}}
+            });
         });
-    });
-</script>
+    </script>
+{{/section}}

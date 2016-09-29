@@ -19,6 +19,11 @@ app.engine('handlebars', exphbs({
 			var out = value || defaultVal;
 			return out;
 		},
+		section: function(name, options){
+			if(!this._sections) this._sections = {};
+			this._sections[name] = options.fn(this);
+			return null;
+		},
 		isAccess: function (user, value, opts) {//сравнение только ObjectId
 			if(!user) {
 				return opts.inverse(this);

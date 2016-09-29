@@ -75,30 +75,33 @@
     {{/if}}
 </div>
 
-{{#if pageUser}}
-    {{#if user}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-        <script class="modal-template" type="text/x-handlebars-template">
-            <form class="js-add-creator-form">
-                <input type="hidden" name="idUser" value="{{pageUser._id}}">
-                <div class="input-field col s12">
-                    <select name="idFederation">
-                        \{{#each this}}
-                            <option value="\{{_id}}">\{{name}}</option>
-                        \{{/each}}
-                    </select>
-                </div>
-            </form>
-        </script>
-        <script src="/js/account.js"></script>
+{{#section 'jquery'}}
+    {{#if pageUser}}
+        {{#if user}}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+            <script class="modal-template" type="text/x-handlebars-template">
+                <form class="js-add-creator-form">
+                    <input type="hidden" name="idUser" value="{{pageUser._id}}">
+                    <div class="input-field col s12">
+                        <select name="idFederation">
+                            \{{#each this}}
+                                <option value="\{{_id}}">\{{name}}</option>
+                            \{{/each}}
+                        </select>
+                    </div>
+                </form>
+            </script>
+            <script src="/js/account.js"></script>
+        {{/if}}
     {{/if}}
-{{/if}}
 
-<script>
-    if ({{default newUser "false"}}) {
-        $('.greeting-registration').html('<h5>Поздравляем с регистрацией</h5>');
-    }
-</script>
+    <script>
+        if ({{default newUser "false"}}) {
+            $('.greeting-registration').html('<h5>Поздравляем с регистрацией</h5>');
+        }
+    </script>
+{{/section}}
+
 
 <!--<script>-->
     <!--$(document).ready(function(){-->
