@@ -24,6 +24,13 @@ module.exports = function (grunt) {
             app: ['app.js', 'routes/**/*.js', 'models/**/*.js', 'lib/**/*.js'],
             qa: ['Gruntfile.js']
         },
+        sass: {
+            dist: {
+                files: {
+                    'public/css/materialize.css': 'public/sass/materialize.scss'
+                }
+            }
+        },
         concurrent: {
             target: [
                 'jshint',
@@ -41,6 +48,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-sass');
 
     grunt.registerTask('default', ['concurrent']);
 };
