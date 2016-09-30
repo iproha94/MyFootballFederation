@@ -12,12 +12,17 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"  rel="stylesheet">
     {{{_sections.head}}}
 </head>
-<body class="fullscreen">
+<body>
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/account">Страница профиля</a></li>
     <li class="divider"></li>
     <li><a href="/logout">Выйти</a></li>
 </ul>
+
+<ul id='dropdown2' class='dropdown-content'>
+    <li><a href="/users">Пользователи</a></li>
+</ul>
+
 <nav class="light-green darken-2 header-position" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo">
@@ -28,6 +33,7 @@
         <ul class="right hide-on-med-and-down">
             {{#if user}}
                 <li><a class="dropdown-button" data-beloworigin="true" href="#!" data-activates="dropdown1">Профиль<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button" data-beloworigin="true" href="#!" data-activates="dropdown2">Ресурсы<i class="material-icons right">arrow_drop_down</i></a></li>
             {{else}}
                 <li>Войти через:&nbsp;&nbsp;</li>
                 <li><a class="" href="/auth/vkontakte/callback"><i class="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
@@ -61,6 +67,7 @@
             <li><div class="divider"></div></li>
             <li><a class="subheader">Дополнительно</a></li>
             {{#if user}}
+                <li><a class="waves-effect" href="/users"><i class="fa fa-users fa-lg" aria-hidden="true"></i>Пользователи</a></li>
                 <li><a class="waves-effect" href="/logout"><i class="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
             {{else}}
                 <li><a class="waves-effect" href="#!"><i class="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>

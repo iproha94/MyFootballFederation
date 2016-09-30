@@ -57,9 +57,9 @@ router.get('/account', function(req, res, next) {
 
 router.get('/account/:idUser', function(req, res, next) {
     var idUser = req.params.idUser;
-    // if(req.user && idUser == req.user._id.toString()) {
-    //     return res.redirect("/account");
-    // }
+     if(req.user && idUser == req.user._id.toString()) {
+         return res.redirect("/account");
+     }
 
     User.findById(idUser, function (err, user) {
         if(err || !user) {

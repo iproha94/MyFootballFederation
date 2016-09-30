@@ -37,18 +37,11 @@
     margin-bottom: 15px;
 }
 
-.fullscreen{
+
+.fullscreen {
     height: 100%;
 }
 
-@media (max-width: 952px) , (max-height: 500px){
-    html {
-        height: auto !important;
-    }
-    body {
-        height: auto !important;
-    }
-}
 .ui-autocomplete {
     position: absolute;
     cursor: pointer;

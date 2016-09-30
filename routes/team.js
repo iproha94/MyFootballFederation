@@ -19,7 +19,7 @@ router.post('/create', function(req, res, next) {
     team.save(function (err) {
         if(err) return res.send("Error");
         
-        res.send("OK");
+        res.redirect("/team/" + team._id);
     });
 });
 
