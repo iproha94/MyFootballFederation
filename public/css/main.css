@@ -1,0 +1,8 @@
+@media (max-width: 952px) , (max-height: 500px){
+    html {
+        height: auto !important;
+    }
+    body {
+        height: auto !important;
+    }
+}

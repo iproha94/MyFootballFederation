@@ -3,35 +3,37 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>MyFootballFederations</title>
+    <title>iFootball</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"  rel="stylesheet">
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="/js/lib/materialize.js"></script>
-    <script src="/js/lib/init.js"></script>
-
+    {{{_sections.head}}}
 </head>
-<body class="fullscreen">
+<body>
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/account">Страница профиля</a></li>
     <li class="divider"></li>
     <li><a href="/logout">Выйти</a></li>
 </ul>
+
+<ul id='dropdown2' class='dropdown-content'>
+    <li><a href="/users">Пользователи</a></li>
+</ul>
+
 <nav class="light-green darken-2 header-position" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo">
             <img src="/img/logo.png" class="logo-image">
-            MyFootballFederations
+            iFootball
         </a>
 
         <ul class="right hide-on-med-and-down">
             {{#if user}}
                 <li><a class="dropdown-button" data-beloworigin="true" href="#!" data-activates="dropdown1">Профиль<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button" data-beloworigin="true" href="#!" data-activates="dropdown2">Ресурсы<i class="material-icons right">arrow_drop_down</i></a></li>
             {{else}}
                 <li>Войти через:&nbsp;&nbsp;</li>
                 <li><a class="" href="/auth/vkontakte/callback"><i class="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
@@ -44,14 +46,14 @@
                 <div class="userView">
                 <img class="background" src="http://unsplash.it/400/200?image=527">
                 <a href="/account">
-                    <img class="circle" src="{{default user.img '/img/camera.png'}}">
+                    <img class="circle" src="{{default user.image '/img/camera.png'}}">
                 </a>
                 <a href="/account">
                     <span class="white-text name">
                         {{default user.name  "Аноним"}}
                     </span>
                 </a>
-                <a href="#!email"><span class="white-text email">{{default user.email "jdandturk@gmail.com"}}</span></a>
+                <br>
                 </div>
             </li>
 
@@ -65,6 +67,7 @@
             <li><div class="divider"></div></li>
             <li><a class="subheader">Дополнительно</a></li>
             {{#if user}}
+                <li><a class="waves-effect" href="/users"><i class="fa fa-users fa-lg" aria-hidden="true"></i>Пользователи</a></li>
                 <li><a class="waves-effect" href="/logout"><i class="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
             {{else}}
                 <li><a class="waves-effect" href="#!"><i class="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
@@ -81,27 +84,11 @@
 <footer class="page-footer brown lighten-1">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
+            <div class="col s12">
+                <h5 class="white-text">Футбол</h5>
+                <p class="grey-text text-lighten-4">
+                    Спортивная игра двух команд (по одиннадцати игроков в каждой), состоящая в том, что игроки стараются ударами ноги загнать мяч в ворота противника.
+                </p>
             </div>
         </div>
     </div>
@@ -111,6 +98,12 @@
         </div>
     </div>
 </footer>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/lib/materialize.js"></script>
+<script src="/js/lib/init.js"></script>
+{{{_sections.jquery}}}
 <script src="//localhost:35729/livereload.js"></script>
 </body>
 </html>

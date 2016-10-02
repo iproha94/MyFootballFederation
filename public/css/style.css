@@ -14,7 +14,8 @@
 }
 
 .nav-search{
-    padding-top: 7%;
+    margin-top: -64px;
+    padding-top: calc(7% + 64px);
     padding-bottom: 7%;
     padding-left: 10%;
     padding-right: 10%;
@@ -36,18 +37,11 @@
     margin-bottom: 15px;
 }
 
-.fullscreen{
+
+.fullscreen {
     height: 100%;
 }
 
-@media (max-width: 952px) , (max-height: 500px){
-    html {
-        height: auto !important;
-    }
-    body {
-        height: auto !important;
-    }
-}
 .ui-autocomplete {
     position: absolute;
     cursor: pointer;
@@ -85,4 +79,32 @@
 .config-tournament {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.nav-search-padding {
+    margin-top: -64px;
+}
+
+.nav-search-background {
+    /* background: url(http://img.wallpaperfolder.com/f/78FCA4876497/brazuca-football.jpg);
+    background-size: 100%; */
+}
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-flex {
+    flex: 1 0 auto;
+}
+
+.http-response {
+    vertical-align: middle;
+    text-align: center;
+}
+
+footer {
+  flex: 0 0 auto;
 }

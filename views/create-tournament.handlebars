@@ -1,16 +1,24 @@
-<div class="container content-margin-top">
+<div class="container content-margin-top content-flex">
     <div class="row">
         <form method="post">
             <div class="input-field">
-                <input id="last_name" type="text" class="validate" name="name">
-                <label for="last_name">Название турнира</label>
+                <input id="name" type="text" class="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*">
+                <label for="name">Название турнира</label>
+            </div>
+            <div class="input-field">
+                <input id="time" type="text" class="validate" name="time" required pattern="[0-9]*">
+                <label for="time">Длительность матча</label>
+            </div>
+            <div class="input-field">
+                <input id="countPeriods" type="text" class="validate" name="countPeriods" required pattern="[0-9]*">
+                <label for="countPeriods">Количество периодов</label>
             </div>
 
             <div class="config-select">
                 <label for="last_name">Тип турнира</label>
                 {{#each config}}
                     <p>
-                        <input class='js-type-tournament' name="group1" type="radio" id="{{type}}" />
+                        <input class='js-type-tournament' name="group1" type="radio" id="{{type}}"/>
                         <label for={{type}}>{{name}}</label>
                     </p>
                 {{/each}}
@@ -27,14 +35,16 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $(".js-type-tournament").change(function () {
-            {{#each config}}
-                if ($("#{{type}}").is(':checked')) {
-                    $('.config-tournament').html('конфиг турнира {{name}}');
-                }
-            {{/each}}
+{{#section 'jquery'}}
+    <script>
+        $(document).ready(function(){
+            $(".js-type-tournament").change(function () {
+                {{#each config}}
+                    if ($("#{{type}}").is(':checked')) {
+                        $('.config-tournament').html('конфиг турнира {{name}}');
+                    }
+                {{/each}}
+            });
         });
-    });
-</script>
+    </script>
+{{/section}}

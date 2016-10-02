@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
 	authId: String,
     name: String,
-    created: Date
+    created: Date,
+    image: String
 });
 
 var User = mongoose.model("User", userSchema);
