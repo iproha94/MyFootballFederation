@@ -107,4 +107,21 @@ router.get('/:idTournament', function(req, res, next) {
     });
 });
 
+router.post('/add-team', function(req, res, next) {
+    Tournament.findById(req.body.idTournament, function (err, tournament) {
+        tournament.teams.push(req.body.idTeam);
+        tournament.save(function (err) {
+            if(err) {
+                return res.json({
+                    status: 403
+                });
+            }
+            return res.json({
+                status: 200
+            });
+        });
+    });
+});
+
+
 module.exports = router;

@@ -25,7 +25,7 @@ app.engine('handlebars', exphbs({
 			return null;
 		},
 		isAccess: function (user, value, opts) {//сравнение только ObjectId
-			if(!user) {
+			if(!user || !value) {
 				return opts.inverse(this);
 			}
 			var id = user._id.toString();
