@@ -14,5 +14,10 @@
                 <a href="/team/{{_id}}" class="collection-item">{{name}}</a>
             {{/each}}
         </div>
+
+        <!--todo только организатор федерации может-->
+        <div class="row right-align">
+            <a class="waves-effect waves-light btn" href="/tournament/{{tournament._id}}?setstatus=undertake">Начать турнир</a>
+        </div>
     </div>
 </div>

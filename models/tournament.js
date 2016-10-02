@@ -9,7 +9,12 @@ var tournamentSchema = new Schema({
     federation: Schema.Types.ObjectId,
     teams: [Schema.Types.ObjectId],
     team_requests: [Schema.Types.ObjectId],
-    type: Object
+    type: Object,
+    status: {
+        prepare: Boolean,
+        undertake: Boolean,
+        finished: Boolean
+    }
 });
 
 var Tournament = mongoose.model("Tournament", tournamentSchema);
