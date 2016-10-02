@@ -47,11 +47,11 @@ router.get('/:idTournament', function(req, res, next) {
     var idTournament = req.params.idTournament;
 
     Tournament.findById(idTournament, function (err, tournament) {
-        if(err) {
+        if (err) {
             return next(err);
         }
 
-        if (req.query.setstatus == "undertake" ) {
+        if (req.query.setstatus == "undertake" && tournament.status.prepare) {
             tournament.status.prepare = false;
             tournament.status.undertake = true;
 
@@ -88,7 +88,7 @@ router.get('/:idTournament', function(req, res, next) {
                 break;
 
             case tournament.status.undertake:
-                Match.find({_id: tournament._id}, function (err, matches) {
+                Match.find({tournament: tournament._id}, function (err, matches) {
                     return res.render("tournament-undertake", {
                         tournament: tournament,
                         matches: matches
