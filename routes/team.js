@@ -34,4 +34,10 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
+router.post('/get-team', function(req, res, next) {
+    Team.find({creators: req.user._id}, function (err, result) {
+        return res.json(result);
+    });
+});
+
 module.exports = router;
