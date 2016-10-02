@@ -32,7 +32,6 @@ router.get('/users', function(req, res, next) {
     }
 
     User.find({}, function (err, result) {
-        console.log(result);
         res.render("users", {users: result});
     });
 
