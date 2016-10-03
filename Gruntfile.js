@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         shell: {
             server: {
-                command: 'nodemon app.js'
+                command: 'node app.js'
             }
         },
         watch: {
