@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
 var teamRoutes = require('./routes/team');
+var matchRoutes = require('./routes/match');
 var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
 var bodyParser = require('body-parser');
@@ -104,6 +105,8 @@ app.use('/', mainRoutes);
 app.use('/team', teamRoutes);
 app.use('/federation', federationRoutes);
 app.use('/tournament', tournamentRoutes);
+app.use('/match', matchRoutes);
+
 
 // пользовательская страница 404
 app.use(function(req, res){

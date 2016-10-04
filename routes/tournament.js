@@ -61,6 +61,9 @@ router.get('/:idTournament', function(req, res, next) {
                 }
             });
 
+            var callback = function (err) {
+                console.log("add match");
+            };
             for (var i = 0; i < tournament.teams.length; ++i) {
                 for (var j = i + 1; j < tournament.teams.length; ++j) {
                     var match = new Match ({
@@ -69,9 +72,7 @@ router.get('/:idTournament', function(req, res, next) {
                         team2: tournament.teams[j]
                     });
 
-                    match.save(function (err) {
-                        console.log("add match");
-                    })
+                    match.save(callback);
                 }
             }
         }
@@ -97,11 +98,9 @@ router.get('/:idTournament', function(req, res, next) {
 
             case tournament.status.finished:
                 return res.send("3");
-                break;
 
             default:
                 return res.send("Турнир старой версии");
-                break;
 
         }
     });
