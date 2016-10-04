@@ -8,8 +8,17 @@
         </div>
         <div class="collection">
             {{#each tournaments}}
-                <a href="/tournament/{{_id}}" class="collection-item">{{name}} : {{status}}</a>
-
+                <a href="/tournament/{{_id}}" class="collection-item">{{name}}:
+                    {{#if status.prepare}}
+                        идет подача заявок
+                    {{else if status.undertake}}
+                        турнир идет
+                    {{else if status.finished}}
+                        турнир закончен
+                    {{else}}
+                        турнир старой версии
+                    {{/if}}
+                </a>
             {{/each}}
         </div>
     </div>
