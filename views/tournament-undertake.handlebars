@@ -5,13 +5,27 @@
     <div class="row center">
         Тип турнира: {{tournament.type}}
     </div>
+
+    <div class="row">
+        <div class="tournament-list_header">
+            Список команд:
+        </div>
+        <div class="collection">
+            {{#each teams}}
+                <a href="/team/{{_id}}" class="collection-item">{{name}}</a>
+            {{else}}
+                в турнире нет команд
+            {{/each}}
+        </div>
+    </div>
+
     <div class="row">
         <div class="tournament-list_header">
             Список матчей:
         </div>
         <div class="collection">
             {{#each matches}}
-                <a href="/match/{{_id}}" class="collection-item">{{team1}} vs {{team1}}</a>
+                <a href="/match/{{_id}}" class="collection-item">матч № {{@index}}</a>
             {{else}}
                 в турнире нет матчей
             {{/each}}

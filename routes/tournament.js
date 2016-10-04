@@ -89,15 +89,21 @@ router.get('/:idTournament', function(req, res, next) {
 
             case tournament.status.undertake:
                 Match.find({tournament: tournament._id}, function (err, matches) {
-                    return res.render("tournament-undertake", {
-                        tournament: tournament,
-                        matches: matches
+
+                    Team.find({_id: {$in: tournament.teams}}, function (err, teams) {
+                        return res.render("tournament-undertake", {
+                            tournament: tournament,
+                            matches: matches,
+                            teams: teams
+                        });
                     });
+
+
                 });
                 break;
 
             case tournament.status.finished:
-                return res.send("3");
+                return res.send("турнир закончен");
 
             default:
                 return res.send("Турнир старой версии");
