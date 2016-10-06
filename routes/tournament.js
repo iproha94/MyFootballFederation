@@ -106,6 +106,12 @@ router.get('/:idTournament', function(req, res, next) {
     });
 });
 
+router.post('/:idTournament', function(req, res, next) {
+    Tournament.findById(req.params.idTournament, function (err, tournament) {
+        return res.json(tournament);
+    });
+});
+
 router.post('/add-team', function(req, res, next) {
     Tournament.findById(req.body.idTournament, function (err, tournament) {
         tournament.teams.push(req.body.idTeam);

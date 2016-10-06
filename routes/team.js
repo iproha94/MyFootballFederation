@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Team = require('../models/team');
+var Tournament = require('../models/tournament');
 
 router.get('/create', function(req, res, next) {
     res.render("create-team");
@@ -40,4 +41,14 @@ router.post('/get-team', function(req, res, next) {
     });
 });
 
+router.post('/get-team-by-tournament/:idTournament', function(req, res, next) {
+    Tournament.findById(req.params.idTournament, function (err, tournament) {
+        if(err || !tournament) {
+            return next(err);
+        }
+        Team.find({_id: {$in: tournament.teams}}, function (err, teams) {
+            return res.json(teams);
+        });
+    });
+});
 module.exports = router;

@@ -3,14 +3,17 @@ module.exports = function (grunt) {
         shell: {
             server: {
                 command: 'node app.js'
+            },
+            webpack: {
+                command: 'webpack'
             }
         },
         watch: {
             static: {
                 files: [
-                    'public/js/**/*.js',
-                    'templates/**/*.html'
+                    'public/js/**/*.js'
                 ],
+                tasks: ['shell:webpack'],
                 options: {
                     livereload: true
                 }
