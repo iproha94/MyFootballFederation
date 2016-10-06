@@ -5,27 +5,25 @@
                 <input id="name" type="text" class="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*">
                 <label for="name">Название турнира</label>
             </div>
+
             <div class="input-field">
-                <input id="time" type="text" class="validate" name="time" required pattern="[0-9]*">
-                <label for="time">Длительность матча</label>
+                <input id="time" type="text" class="validate" value="7" name="countPlayersOnField" required pattern="[0-9]*">
+                <label for="time">Колличество игроков на поле от команды</label>
             </div>
+
             <div class="input-field">
-                <input id="countPeriods" type="text" class="validate" name="countPeriods" required pattern="[0-9]*">
+                <input id="time" type="text" class="validate" value="16" name="countPlayersInTeam" required pattern="[0-9]*">
+                <label for="time">Колличество заявленных игроков в команде</label>
+            </div>
+
+            <div class="input-field">
+                <input id="time" type="text" class="validate" value="25" name="timePeriod" required pattern="[0-9]*">
+                <label for="time">Длительность периода [мин]</label>
+            </div>
+
+            <div class="input-field">
+                <input id="countPeriods" type="text" value="2" class="validate" name="countPeriods" required pattern="[0-9]*">
                 <label for="countPeriods">Количество периодов</label>
-            </div>
-
-            <div class="config-select">
-                <label for="last_name">Тип турнира</label>
-                {{#each config}}
-                    <p>
-                        <input class='js-type-tournament' name="group1" type="radio" id="{{type}}"/>
-                        <label for={{type}}>{{name}}</label>
-                    </p>
-                {{/each}}
-            </div>
-
-            <div class="config-tournament">
-                Выберете тип турнира
             </div>
 
             <button class="btn waves-effect waves-light" type="submit">Submit
@@ -34,17 +32,3 @@
         </form>
     </div>
 </div>
-
-{{#section 'jquery'}}
-    <script>
-        $(document).ready(function(){
-            $(".js-type-tournament").change(function () {
-                {{#each config}}
-                    if ($("#{{type}}").is(':checked')) {
-                        $('.config-tournament').html('конфиг турнира {{name}}');
-                    }
-                {{/each}}
-            });
-        });
-    </script>
-{{/section}}

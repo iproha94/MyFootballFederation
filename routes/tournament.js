@@ -5,12 +5,13 @@ var Federation = require('../models/federation');
 var Team = require('../models/team');
 var Match = require('../models/match');
 var tournamentSetting = require('../lib/tournament');
+var matchSetting = require('../lib/match');
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
         return res.redirect('/unauthorized' );
     }
-    res.render("create-tournament", {config: tournamentSetting.config});
+    res.render("create-tournament");
 });
 
 router.post('/create', function(req, res, next) {
@@ -18,14 +19,22 @@ router.post('/create', function(req, res, next) {
         return res.redirect('/unauthorized' );
     }
     Federation.findOne({name: req.query.federation}, function (err, federation) {
+
+        var tournamentConfig = tournamentSetting.config;
+        tournamentConfig.countPlayersInTeam = req.body.countPlayersInTeam;
+        tournamentConfig.countPlayersOnField = req.body.countPlayersOnField;
+
+        var matchConfig = matchSetting.config;
+        matchConfig.countPeriods = req.body.countPeriods;
+        matchConfig.timePeriod = req.body.timePeriod;
+
         var tournament = new Tournament({
             name: req.body.name,
-            time: req.body.time,
-            countPeriods: req.body.countPeriods,
             federation: federation._id,
             teams: [],
             team_requests: [],
-            type: null,
+            tournamentConfig: tournamentConfig,
+            matchConfig: matchConfig,
             status: {
                 prepare: true,
                 undertake: false,
@@ -51,7 +60,7 @@ router.get('/:idTournament', function(req, res, next) {
             return next(err);
         }
 
-        if (req.query.setstatus == "undertake" && tournament.status.prepare) {
+        if (req.query.setstatus === "undertake" && tournament.status.prepare) {
             tournament.status.prepare = false;
             tournament.status.undertake = true;
 
