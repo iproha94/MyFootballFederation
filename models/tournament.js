@@ -5,10 +5,11 @@ var tournamentSchema = new Schema({
     name: String,
     logo: String,
     federation: Schema.Types.ObjectId,
-    teams: [Schema.Types.ObjectId],
-    team_requests: [Schema.Types.ObjectId],
+    stages: [Schema.Types.ObjectId],
+    teams_requests: [Schema.Types.ObjectId],
     tournamentConfig: Object,
     matchConfig: Object,
+    rating: Boolean, //влияет ли турнир на рейтинг
     status: {
         prepare: Boolean,
         undertake: Boolean,

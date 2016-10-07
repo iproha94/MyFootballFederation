@@ -3,6 +3,7 @@ var router = express.Router();
 var Tournament = require('../models/tournament');
 var Federation = require('../models/federation');
 var Team = require('../models/team');
+var Stage = require('../models/stage');
 var Match = require('../models/match');
 var tournamentSetting = require('../lib/tournament');
 var matchSetting = require('../lib/match');
@@ -18,6 +19,7 @@ router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
         return res.redirect('/unauthorized' );
     }
+
     Federation.findOne({name: req.query.federation}, function (err, federation) {
 
         var tournamentConfig = tournamentSetting.config;
@@ -73,12 +75,12 @@ router.get('/:idTournament', function(req, res, next) {
             var callback = function (err) {
                 console.log("add match");
             };
-            for (var i = 0; i < tournament.teams.length; ++i) {
-                for (var j = i + 1; j < tournament.teams.length; ++j) {
+            for (var i = 0; i < tournament.teams_requests.length; ++i) {
+                for (var j = i + 1; j < tournament.teams_requests.length; ++j) {
                     var match = new Match ({
                         tournament: idTournament,
-                        team1: tournament.teams[i],
-                        team2: tournament.teams[j]
+                        team1: tournament.teams_requests[i],
+                        team2: tournament.teams_requests[j]
                     });
 
                     match.save(callback);
@@ -86,44 +88,22 @@ router.get('/:idTournament', function(req, res, next) {
             }
         }
 
-        switch (true) {
-            case tournament.status.prepare:
-                Team.find({_id: {$in: tournament.teams}}, function (err, teams) {
-                    return res.render("tournament-prepare", {
-                        tournament: tournament,
-                        teams: teams
-                    });
+        Match.find({tournament: tournament._id}, function (err, matches) {
+            Team.find({_id: {$in: tournament.teams_requests}}, function (err, teams) {
+                return res.render("tournament", {
+                    tournament: tournament,
+                    matches: matches,
+                    teams: teams
                 });
-                break;
+            });
+        });
 
-            case tournament.status.undertake:
-                Match.find({tournament: tournament._id}, function (err, matches) {
-
-                    Team.find({_id: {$in: tournament.teams}}, function (err, teams) {
-                        return res.render("tournament-undertake", {
-                            tournament: tournament,
-                            matches: matches,
-                            teams: teams
-                        });
-                    });
-
-
-                });
-                break;
-
-            case tournament.status.finished:
-                return res.send("турнир закончен");
-
-            default:
-                return res.send("Турнир старой версии");
-
-        }
     });
 });
 
 router.post('/add-team', function(req, res, next) {
     Tournament.findById(req.body.idTournament, function (err, tournament) {
-        tournament.teams.push(req.body.idTeam);
+        tournament.teams_requests.push(req.body.idTeam);
         tournament.save(function (err) {
             if(err) {
                 return res.json({

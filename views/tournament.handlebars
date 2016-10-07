@@ -1,17 +1,27 @@
 <div class="container content-margin-top content-flex">
+
     <div class="row center">
-        Страница турнира {{tournament.name}}
+        <h3>Страница турнира {{tournament.name}}</h3>
     </div>
-    <div class="row center">
-        Тип турнира: {{tournament.type}}
+
+    <div class="container content-margin-top content-flex">
+        <ul class="collection with-header">
+            <li class="collection-header center"><h5>Настройки турнира</h5></li>
+
+            <li class="collection-item">Колличество игроков на поле: {{tournament.tournamentConfig.countPlayersOnField}}</li>
+            <li class="collection-item">Колличество игроков в заявке команды: {{tournament.tournamentConfig.countPlayersInTeam}}</li>
+        </ul>
     </div>
+
     <div class="row">
-        <div class="tournament-list_header">
-            Список команд:
+        <div class="list_header">
+            Список команд в турнире:
         </div>
         <div class="collection">
             {{#each teams}}
                 <a href="/team/{{_id}}" class="collection-item">{{name}}</a>
+            {{else}}
+                в турнире нет команд
             {{/each}}
         </div>
 
@@ -30,13 +40,43 @@
                 </div>
             </div>
         {{/if}}
+    </div>
 
+    <div class="row">
+        <div class="list_header">
+            Список матчей:
+        </div>
+        <div class="collection">
+            {{#each matches}}
+                <a href="/match/{{_id}}" class="collection-item">матч № {{@index}}</a>
+            {{else}}
+                в турнире нет матчей
+            {{/each}}
+        </div>
     </div>
 
     <!--todo только организатор федерации может-->
-    <div class="row right-align">
+    <div class="row">
         <a class="waves-effect waves-light btn" href="/tournament/{{tournament._id}}?setstatus=undertake">Начать турнир</a>
     </div>
+
+    <div class="row">
+        <div class="list_header">
+            Этапы в турнире:
+        </div>
+        <div class="collection">
+            {{#each stages}}
+                <a href="/stage/{{_id}}" class="collection-item">{{name}}</a>
+            {{else}}
+                в турнире нет этапов
+            {{/each}}
+        </div>
+
+        <!--todo только организатор федерации может-->
+        <a class="modal-trigger waves-effect waves-light btn" href="#">Создать этап</a>
+    </div>
+
+
 </div>
 
 {{#section 'jquery'}}
