@@ -18,4 +18,15 @@ var tournamentSchema = new Schema({
 });
 
 var Tournament = mongoose.model("Tournament", tournamentSchema);
+
+Tournament.tournamentConfig = {
+    countPlayersInTeam: 0,
+    countPlayersOnField: 0,
+};
+
+Tournament.matchConfig = {
+    timePeriod: 0,
+    countPeriods: 0,
+};
+
 module.exports = Tournament;

@@ -5,8 +5,6 @@ var Federation = require('../models/federation');
 var Team = require('../models/team');
 var Stage = require('../models/stage');
 var Match = require('../models/match');
-var tournamentSetting = require('../lib/tournament');
-var matchSetting = require('../lib/match');
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -22,27 +20,25 @@ router.post('/create', function(req, res, next) {
 
     Federation.findOne({name: req.query.federation}, function (err, federation) {
 
-        var tournamentConfig = tournamentSetting.config;
-        tournamentConfig.countPlayersInTeam = req.body.countPlayersInTeam;
-        tournamentConfig.countPlayersOnField = req.body.countPlayersOnField;
-
-        var matchConfig = matchSetting.config;
-        matchConfig.countPeriods = req.body.countPeriods;
-        matchConfig.timePeriod = req.body.timePeriod;
-
         var tournament = new Tournament({
             name: req.body.name,
             federation: federation._id,
             teams: [],
             team_requests: [],
-            tournamentConfig: tournamentConfig,
-            matchConfig: matchConfig,
+            tournamentConfig: Tournament.tournamentConfig,
+            matchConfig: Tournament.matchConfig,
             status: {
                 prepare: true,
                 undertake: false,
                 finished: false
             }
         });
+
+        tournament.tournamentConfig.countPlayersOnField = parseInt(req.body.countPlayersOnField);
+        tournament.tournamentConfig.countPlayersInTeam = parseInt(req.body.countPlayersInTeam);
+
+        tournament.matchConfig.timePeriod = parseInt(req.body.timePeriod);
+        tournament.matchConfig.countPeriods = parseInt(req.body.countPeriods);
 
         tournament.save(function (err) {
             if(err) {
