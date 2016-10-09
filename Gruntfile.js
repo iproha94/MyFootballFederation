@@ -1,11 +1,10 @@
+var webpackDevConfig = require('./webpack.config.js');
+
 module.exports = function (grunt) {
     grunt.initConfig({
         shell: {
             server: {
                 command: 'node app.js'
-            },
-            webpack: {
-                command: 'webpack'
             }
         },
         watch: {
@@ -13,7 +12,6 @@ module.exports = function (grunt) {
                 files: [
                     'public/js/**/*.js'
                 ],
-                tasks: ['shell:webpack'],
                 options: {
                     livereload: true
                 }
@@ -38,10 +36,18 @@ module.exports = function (grunt) {
             target: [
                 'jshint',
                 'shell',
-                'watch'
+                'watch',
+                'webpack:watch'
             ],
             options: {
                 logConcurrentOutput: true /* Вывод процесса */
+            }
+        },
+        webpack: {
+            options: webpackDevConfig,
+            watch: {
+                watch: true,
+                keepalive: true
             }
         }
 
@@ -52,6 +58,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-webpack');
+
 
     grunt.registerTask('default', ['concurrent']);
 };

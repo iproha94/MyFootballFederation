@@ -12,3 +12,6 @@ ReactDOM.render(
     </Provider>,
     document.getElementsByClassName("js-content-place")[0]
 );
+
+
+
