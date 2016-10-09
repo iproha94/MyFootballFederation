@@ -1,7 +1,8 @@
 import {GET_TOURNAMENT_INFO} from '../constants/tournament';
 
 export function getTournament() {
-  return (dispatch) => {//юлагодаря Middleware получаем функцию dispatch
+  return (dispatch, getState) => {//благодаря Middleware получаем функцию dispatch
+    console.log(getState,getState());
     $.post(location.pathname, function (result) {
       dispatch({
         type: GET_TOURNAMENT_INFO,

@@ -1,23 +1,10 @@
 import ModalForm from './ModalForm';
+import React from 'react';
 
 export default React.createClass({
     onClickModal: function(event){
         event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/team/get-team/',
-            success: function(data){
-                ReactDOM.render(
-                    <ModalForm options={data}/>,
-                    document.getElementsByClassName("js-modal-body")[0]
-                );
-                $('select').material_select();
-                console.log(data);
-            },
-            error: function () {
-                Materialize.toast("Что то не так", 2000);
-            }
-        });
+        this.props.getTeams();
     },
     onClickModalAction: function(event) {
         $.ajax({
@@ -34,6 +21,7 @@ export default React.createClass({
     },
     componentDidMount: function () {
         $('.modal-trigger').leanModal();
+        $('select').material_select();
     },
     render: function () {
         return (
@@ -44,9 +32,11 @@ export default React.createClass({
                 <div id="modal1" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>{this.props.inputName}</h4>
-                        <p className="js-modal-body"/>
+                        <p className="js-modal-body">
+                            <ModalForm teams={this.props.teams}/>    
+                        </p>
                     </div>
-
+                    
                     <div className="modal-footer">
                         <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
                     </div>

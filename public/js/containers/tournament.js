@@ -3,7 +3,8 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as tournamentActions from '../actions/tournamentActions';
-
+import Teams from '../components/Teams';
+import React from 'react';
 
 var App = React.createClass({
     componentDidMount: function() {
@@ -19,7 +20,7 @@ var App = React.createClass({
                <div className="row center">
                    Тип турнира: {tournament.type}
                </div>
-
+                <Teams/>
 
                <div className="row right-align">
                    <a className="waves-effect waves-light btn" href="/tournament/{{tournament._id}}?setstatus=undertake">Начать турнир</a>
@@ -38,6 +39,7 @@ function mapStateToProps (state) {
     }
 }
 
+
 function mapDispatchToProps(dispatch) {
   return {
     tournamentActions: bindActionCreators(tournamentActions, dispatch)
@@ -46,11 +48,15 @@ function mapDispatchToProps(dispatch) {
 
 
 //<Team teams={teams} getTournament={this.props.tournamentActions.getTournament}/>
-
-//<ModalWindow modalWindow={modalWindow}/>
+// <ModalWindow header={modalWindow.header}
+//              inputName={modalWindow.inputName}
+//              teams={teams}/>
 
 //видимо сюда нужно передавать функцию в которой возращается обьект ис именами свойств кторые нам нужны из store
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 //подключи React компонент к Redux store.
 //+ добавляет в this.props все данные из обекта mapStateToProps
 // и все методы из mapDispatchToProps + метод dispatch
+
+
+//похоже мы можем вызывать connect где угодно и дать возможность обращаться к любым данным и вызывать любые методы в любом из компонентов
