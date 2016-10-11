@@ -15,7 +15,7 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
+        return res.redirect('/unauthorized');
     }
     Federation.findOne({name: req.query.federation}, function (err, federation) {
         var tournament = new Tournament({
@@ -41,6 +41,24 @@ router.post('/create', function(req, res, next) {
         });
     });
 
+});
+
+router.get('/add-team', function(req, res, next) {
+    console.log("add-team");
+    console.log(req.query);
+    Tournament.findById(req.query.idTournament, function (err, tournament) {
+        tournament.teams.push(req.query.idTeam);
+        tournament.save(function (err) {
+            if(err) {
+                return res.json({
+                    status: 403
+                });
+            }
+            return res.json({
+                status: 200
+            });
+        });
+    });
 });
 
 router.get('/:idTournament', function(req, res, next) {
@@ -112,21 +130,6 @@ router.post('/:idTournament', function(req, res, next) {
     });
 });
 
-router.post('/add-team', function(req, res, next) {
-    Tournament.findById(req.body.idTournament, function (err, tournament) {
-        tournament.teams.push(req.body.idTeam);
-        tournament.save(function (err) {
-            if(err) {
-                return res.json({
-                    status: 403
-                });
-            }
-            return res.json({
-                status: 200
-            });
-        });
-    });
-});
 
 
 module.exports = router;

@@ -10,5 +10,4 @@ export default function configureStore(initialState) {
         applyMiddleware(thunk, createLogger())//аналог app.use() express
     );
 }
-
 //единственный путь изменить store - отправить действие dispatch(action)

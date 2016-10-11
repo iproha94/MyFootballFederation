@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         watch: {
             static: {
                 files: [
-                    'public/js/**/*.js'
+                    'public/js/bundle.js'
                 ],
                 options: {
                     livereload: true
@@ -35,9 +35,9 @@ module.exports = function (grunt) {
         concurrent: {
             target: [
                 'jshint',
+                'webpack:watch',
                 'shell',
-                'watch',
-                'webpack:watch'
+                'watch'
             ],
             options: {
                 logConcurrentOutput: true /* Вывод процесса */
@@ -46,6 +46,7 @@ module.exports = function (grunt) {
         webpack: {
             options: webpackDevConfig,
             watch: {
+                failOnError: false,
                 watch: true,
                 keepalive: true
             }

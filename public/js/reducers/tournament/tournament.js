@@ -1,11 +1,11 @@
-import * as consts from '../constants/tournament';
+import * as consts from '../../constants/tournament';
 
 const initialState = {
     name: "unknown",
     type: "unknown"
 };
     
-export default function tournamentState(state = initialState, action) {
+export default function(state = initialState, action) {
 
   switch (action.type) {
       case consts.GET_TOURNAMENT_INFO:

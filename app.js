@@ -101,11 +101,15 @@ app.use(function (req, res, next) {
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', mainRoutes);
-app.use('/team', teamRoutes);
-app.use('/federation', federationRoutes);
-app.use('/tournament', tournamentRoutes);
-app.use('/match', matchRoutes);
+app.use('/api/', mainRoutes);
+app.use('/api/team', teamRoutes);
+app.use('/api/federation', federationRoutes);
+app.use('/api/tournament', tournamentRoutes);
+app.use('/api/match', matchRoutes);
+
+app.get(/.*/, function root(req, res) {
+	res.render("main");
+});
 
 
 // пользовательская страница 404

@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
-import tournament from './tournament';
-import modalWindow from './modalWindow';
-import teams from './teams';
+import tournament from './tournament/tournament';
+import modalWindow from './tournament/modalWindow';
+import teams from './tournament/teams';
+import teamsTournament from './tournament/teamsTournament';
+import user from './account/user';
 
 export default combineReducers({
     tournament,
     modalWindow,
-    teams
+    teams,
+    teamsTournament,
+    user
 });

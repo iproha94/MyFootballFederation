@@ -1,62 +1,50 @@
-//import Team from '../components/Teams';
-//import ModalWindow from '../components/ModalWindow';
-import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as tournamentActions from '../actions/tournamentActions';
-import Teams from '../components/Teams';
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as tournamentActions from '../actions/tournament/TournamentActions';
+import * as teamActions from '../actions/tournament/TeamsActions';
+import Teams from '../components/tournament/Teams';
+import ModalWindow from '../components/tournament/ModalWindow';
 
-var App = React.createClass({
+var TournamentPage = React.createClass({
     componentDidMount: function() {
-        this.props.tournamentActions.getTournament();
+        this.props.tournamentActions.getTournamentPageInfo();
     },
     render: function () {
-        const { tournament, modalWindow, teams} = this.props;
+        const {tournament} = this.props;
         return (
-           <div>
+           <div className="container content-margin-top content-flex js-content-place">
                <div className="row center">
                    Страница турнира {tournament.name}
                </div>
                <div className="row center">
                    Тип турнира: {tournament.type}
                </div>
-                <Teams/>
-
+               <Teams/>
+               <ModalWindow inputName="inputName"
+                            header="header"/>
                <div className="row right-align">
-                   <a className="waves-effect waves-light btn" href="/tournament/{{tournament._id}}?setstatus=undertake">Начать турнир</a>
+                   <a className="waves-effect waves-light btn" href={"/tournament/"+ tournament._id + "?setstatus=undertake"}>Начать турнир</a>
                </div>
            </div>
         )
     }
 });
 
-
-function mapStateToProps (state) {
+export default connect((state)=>{
     return {
         tournament: state.tournament,
         modalWindow: state.modalWindow,
-        teams: state.teams
+        teams: state.teamsTournament
     }
-}
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    tournamentActions: bindActionCreators(tournamentActions, dispatch)
-  }
-}
-
-
-//<Team teams={teams} getTournament={this.props.tournamentActions.getTournament}/>
-// <ModalWindow header={modalWindow.header}
-//              inputName={modalWindow.inputName}
-//              teams={teams}/>
-
-//видимо сюда нужно передавать функцию в которой возращается обьект ис именами свойств кторые нам нужны из store
-export default connect(mapStateToProps, mapDispatchToProps)(App)
-//подключи React компонент к Redux store.
-//+ добавляет в this.props все данные из обекта mapStateToProps
-// и все методы из mapDispatchToProps + метод dispatch
-
-
-//похоже мы можем вызывать connect где угодно и дать возможность обращаться к любым данным и вызывать любые методы в любом из компонентов
+}, (dispatch)=>{
+    return {
+        tournamentActions: bindActionCreators(tournamentActions, dispatch),
+        teamActions: bindActionCreators(teamActions, dispatch)
+    }
+})(TournamentPage);
+//подключаем React компонент к Redux store. =>
+//добавляет в this.props все данные из обекта mapStateToProps
+//и все методы из mapDispatchToProps + метод dispatch
+//таким образом с помощью этого метода можно добавить
+// в любой компонент нужные данные из store

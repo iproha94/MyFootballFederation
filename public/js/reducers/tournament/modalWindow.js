@@ -3,6 +3,6 @@ const initialState = {
     inputName: "InputName"
 };
 
-export default function modalWindowState(state = initialState, action) {
+export default function(state = initialState, action) {
     return state;
 }
