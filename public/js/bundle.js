@@ -76,6 +76,10 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
+	var _account = __webpack_require__(284);
+
+	var _account2 = _interopRequireDefault(_account);
+
 	var _reactRouter = __webpack_require__(223);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -93,6 +97,7 @@
 	            { path: '/', component: _app2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _main2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'tournament', component: _tournament2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'account', component: _account2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
 	        )
 	    )
@@ -22452,9 +22457,13 @@
 
 	var _teamsTournament2 = _interopRequireDefault(_teamsTournament);
 
-	var _user = __webpack_require__(193);
+	var _currentUser = __webpack_require__(193);
 
-	var _user2 = _interopRequireDefault(_user);
+	var _currentUser2 = _interopRequireDefault(_currentUser);
+
+	var _pageUser = __webpack_require__(286);
+
+	var _pageUser2 = _interopRequireDefault(_pageUser);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22463,7 +22472,8 @@
 	    modalWindow: _modalWindow2.default,
 	    teams: _teams2.default,
 	    teamsTournament: _teamsTournament2.default,
-	    user: _user2.default
+	    pageUser: _pageUser2.default,
+	    currentUser: _currentUser2.default
 	});
 
 /***/ },
@@ -22484,18 +22494,14 @@
 
 
 	    switch (action.type) {
-	        case consts.GET_TOURNAMENT_INFO:
+	        case _constants.GET_TOURNAMENT_INFO:
 	            return _extends({}, state, action.payload); //не изменяем объект state, а возвращаем новый
 	        default:
 	            return state;
 	    }
 	};
 
-	var _tournament = __webpack_require__(189);
-
-	var consts = _interopRequireWildcard(_tournament);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _constants = __webpack_require__(189);
 
 	var initialState = {
 	    name: "unknown",
@@ -22515,7 +22521,10 @@
 	var GET_TEAMS_BY_TOURNAMENT = exports.GET_TEAMS_BY_TOURNAMENT = 'GET_TEAMS_BY_TOURNAMENT';
 
 	var GET_TOURNAMENT_INFO = exports.GET_TOURNAMENT_INFO = 'GET_TOURNAMENT_INFO';
-	var ADD_TEAMS_IN_TOURNAMENT = exports.ADD_TEAMS_IN_TOURNAMENT = "ADD_TEAMS_IN_TOURNAMENT";
+	var ADD_TEAMS_IN_TOURNAMENT = exports.ADD_TEAMS_IN_TOURNAMENT = 'ADD_TEAMS_IN_TOURNAMENT';
+
+	var GET_CURRENT_USER = exports.GET_CURRENT_USER = 'GET_CURRENT_USER';
+	var GET_USER_BY_ID = exports.GET_USER_BY_ID = 'GET_USER_BY_ID';
 
 /***/ },
 /* 190 */
@@ -22554,7 +22563,7 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case consts.GET_TEAMS:
+	        case _constants.GET_TEAMS:
 	            var result = [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
 	            result.success = true;
 	            return result; //не изменяем объект state, а возвращаем новый
@@ -22563,11 +22572,7 @@
 	    }
 	};
 
-	var _tournament = __webpack_require__(189);
-
-	var consts = _interopRequireWildcard(_tournament);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _constants = __webpack_require__(189);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -22588,11 +22593,11 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case consts.GET_TEAMS_BY_TOURNAMENT:
+	        case _constants.GET_TEAMS_BY_TOURNAMENT:
 	            var result = [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
 	            result.success = true;
 	            return result; //не изменяем объект state, а возвращаем новый
-	        case consts.ADD_TEAMS_IN_TOURNAMENT:
+	        case _constants.ADD_TEAMS_IN_TOURNAMENT:
 	            var result = [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
 	            return result;
 	        default:
@@ -22600,11 +22605,7 @@
 	    }
 	};
 
-	var _tournament = __webpack_require__(189);
-
-	var consts = _interopRequireWildcard(_tournament);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _constants = __webpack_require__(189);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -22612,7 +22613,7 @@
 
 /***/ },
 /* 193 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -22620,17 +22621,21 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = function () {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case "":
-	            return state;
+	        case _constants.GET_CURRENT_USER:
+	            return _extends({}, state, action.payload);
 	        default:
 	            return state;
 	    }
 	};
+
+	var _constants = __webpack_require__(189);
 
 	var initialState = {
 	    name: "",
@@ -24556,7 +24561,7 @@
 	exports.getTournament = getTournament;
 	exports.getTournamentPageInfo = getTournamentPageInfo;
 
-	var _tournament = __webpack_require__(189);
+	var _constants = __webpack_require__(189);
 
 	var _TeamsActions = __webpack_require__(216);
 
@@ -24565,7 +24570,7 @@
 	    //благодаря Middleware получаем функцию dispatch
 	    return $.when($.post(location.pathname)).then(function (result) {
 	      return dispatch({
-	        type: _tournament.GET_TOURNAMENT_INFO,
+	        type: _constants.GET_TOURNAMENT_INFO,
 	        payload: result //такое наименование - негласное соглашение
 	      });
 	    });
@@ -24594,13 +24599,13 @@
 	exports.getTeamsByTournament = getTeamsByTournament;
 	exports.addTeamsInTournament = addTeamsInTournament;
 
-	var _tournament = __webpack_require__(189);
+	var _constants = __webpack_require__(189);
 
 	function getTeams() {
 	    return function (dispatch) {
 	        $.post('/team/get-team/', function (result) {
 	            dispatch({
-	                type: _tournament.GET_TEAMS,
+	                type: _constants.GET_TEAMS,
 	                payload: result //такое наименование - негласное соглашение
 	            });
 	        });
@@ -24611,7 +24616,7 @@
 	    return function (dispatch, getState) {
 	        $.post('/team/get-team-by-tournament/' + tournamentId, function (result) {
 	            return dispatch({
-	                type: _tournament.GET_TEAMS_BY_TOURNAMENT,
+	                type: _constants.GET_TEAMS_BY_TOURNAMENT,
 	                payload: result //такое наименование - негласное соглашение
 	            });
 	        });
@@ -24624,7 +24629,7 @@
 	            console.log(team._id, _id);
 	            if (team._id == _id) {
 	                return dispatch({
-	                    type: _tournament.ADD_TEAMS_IN_TOURNAMENT,
+	                    type: _constants.ADD_TEAMS_IN_TOURNAMENT,
 	                    payload: _id
 	                });
 	            }
@@ -30878,6 +30883,154 @@
 
 	exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 	module.exports = exports['default'];
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _user = __webpack_require__(285);
+
+	var accountActions = _interopRequireWildcard(_user);
+
+	var _reactRedux = __webpack_require__(201);
+
+	var _redux = __webpack_require__(173);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Component = _react2.default.createClass({
+	    displayName: 'Component',
+
+	    componentDidMount: function componentDidMount() {
+	        //'/account/get-creator/'
+	        //'/account/add-creator/'
+	        this.props.accountActions.getCurrentUser();
+	    },
+	    render: function render() {
+	        var currentUser = this.props.currentUser;
+	        var pageUser = this.props.pageUser;
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'container content-margin-top content-flex' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'center' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        null,
+	                        '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F'
+	                    ),
+	                    _react2.default.createElement(
+	                        'h4',
+	                        null,
+	                        pageUser.name ? "Имя пользователя: " + pageUser.name : "Ваше имя: " + currentUser.name
+	                    ),
+	                    _react2.default.createElement(
+	                        'h5',
+	                        null,
+	                        currentUser.newUser ? "Поздравляем с регистрацией" : ""
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	// import Federations from '../components/account/fedetations';
+	// import Teams from '../components/account/teams';
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        currentUser: state.currentUser,
+	        pageUser: state.pageUser
+	    };
+	}, function (dispatch) {
+	    return {
+	        accountActions: (0, _redux.bindActionCreators)(accountActions, dispatch)
+	    };
+	})(Component);
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getCurrentUser = getCurrentUser;
+	exports.getUserById = getUserById;
+
+	var _constants = __webpack_require__(189);
+
+	function getCurrentUser() {
+	    return function (dispatch, getState) {
+	        console.log("getCurrentUser");
+	        return $.when($.get("/api/get-current-user")).then(function (result) {
+	            console.log("dispatch");
+	            return dispatch({
+	                type: _constants.GET_CURRENT_USER,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
+	function getUserById(_id) {
+	    return function (dispatch, getState) {
+	        return $.when($.get("/get-user/" + _id)).then(function (result) {
+	            return dispatch({
+	                type: _constants.GET_USER_BY_ID,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _constants.GET_USER_BY_ID:
+	            return _extends({}, state, action.payload);
+	        default:
+	            return state;
+	    }
+	};
+
+	var _constants = __webpack_require__(189);
+
+	var initialState = {
+	    name: "",
+	    _id: ""
+	};
 
 /***/ }
 /******/ ]);

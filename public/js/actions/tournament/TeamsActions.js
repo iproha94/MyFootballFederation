@@ -1,5 +1,5 @@
-import {GET_TEAMS,ADD_TEAMS_IN_TOURNAMENT} from '../../constants/tournament';
-import {GET_TEAMS_BY_TOURNAMENT} from '../../constants/tournament';
+import {GET_TEAMS,ADD_TEAMS_IN_TOURNAMENT} from '../../constants';
+import {GET_TEAMS_BY_TOURNAMENT} from '../../constants';
 
 export function getTeams() {
     return (dispatch) => {

@@ -1,13 +1,14 @@
+import {GET_USER_BY_ID}  from '../../constants'
+
 const initialState = {
     name: "",
-    _id: "",
-    newUser: false
+    _id: ""
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case "":
-            return state;
+        case GET_USER_BY_ID:
+            return {...state, ...action.payload};
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import {GET_TOURNAMENT_INFO} from '../../constants/tournament';
+import {GET_TOURNAMENT_INFO} from '../../constants';
 import {getTeamsByTournament} from './TeamsActions';
 
 export function getTournament() {

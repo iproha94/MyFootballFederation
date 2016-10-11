@@ -1,10 +1,10 @@
-import * as consts from "../../constants/tournament";
+import {GET_TEAMS} from "../../constants";
 
 const initialState = [];
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case consts.GET_TEAMS:
+        case GET_TEAMS:
             var result = [...state, ...action.payload];
             result.success = true;
             return result;//не изменяем объект state, а возвращаем новый
