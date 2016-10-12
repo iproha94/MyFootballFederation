@@ -3,16 +3,12 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
 
-router.get('/create', function(req, res, next) {
-    if (!req.isAuthenticated())  {
-        return res.redirect(303, '/unauthorized' );
-    }
-    res.render("create-federation");
-});
-
 router.post('/create', function(req, res, next) {
     if (!req.isAuthenticated())  {
-        return res.redirect(303, '/unauthorized' );
+        res.status(403);
+        return res.json({
+            message: "Нет доступа"
+        });
     }
 
     var federation = new Federation({
@@ -25,7 +21,9 @@ router.post('/create', function(req, res, next) {
         if(err) {
             next(err);
         } else {
-            res.redirect("/federation/" + federation.name);
+            res.json({
+                name: federation.name
+            });
         }
     });
 });

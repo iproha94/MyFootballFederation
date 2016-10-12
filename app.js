@@ -115,7 +115,7 @@ app.get(/.*/, function root(req, res) {
 // пользовательская страница 404
 app.use(function(req, res){
 	res.status(404);
-	res.render('http-response', {
+	res.json({
 		code: 404,
 		message: 'Не найдено'
 	});
@@ -125,7 +125,7 @@ app.use(function(req, res){
 app.use(function(err, req, res, next){
 	console.error(err.stack);
 	res.status(500);
-	res.render('http-response', {
+	res.json({
 		code: 500,
 		message: 'Не найдено'
 	});

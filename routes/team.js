@@ -3,10 +3,6 @@ var router = express.Router();
 var Team = require('../models/team');
 var Tournament = require('../models/tournament');
 
-router.get('/create', function(req, res, next) {
-    res.render("create-team");
-});
-
 router.post('/create', function(req, res, next) {
     var team = new Team({
         name: req.body.name,
@@ -18,9 +14,16 @@ router.post('/create', function(req, res, next) {
     });
     
     team.save(function (err) {
-        if(err) return res.send("Error");
-        
-        res.redirect("/team/" + team._id);
+        if(err) {
+            res.status(500);
+            return res.json({
+                message: "что-то не так"
+            });
+        }
+
+        res.json({
+            _id: team._id
+        });
     });
 });
 
