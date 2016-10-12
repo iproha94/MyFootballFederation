@@ -27,11 +27,7 @@ router.post('/create', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     var id = req.param("id");
     Team.findOne({_id : id}, function (err, result) {
-        if(err) return res.redirect(303, '/404' );
-
-        res.render("team", {
-            name: result.name
-        });
+        res.json(result);
     });
 });
 

@@ -1,5 +1,5 @@
 import {GET_TOURNAMENT_INFO} from '../../constants';
-import {getTeamsByTournament} from './TeamsActions';
+import {getTeamsByTournament} from '../team/teams';
 
 export function getTournament() {
   return (dispatch, getState) => {//благодаря Middleware получаем функцию dispatch

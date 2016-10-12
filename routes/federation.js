@@ -30,6 +30,12 @@ router.post('/create', function(req, res, next) {
     });
 });
 
+router.get('/get', function (req, res, next) {
+    Federation.find({creators: req.user._id}, function (err, result) {
+        res.json(result);
+    });
+});
+
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
     Federation.findOne({name : name}, function (err, federation) {

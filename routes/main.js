@@ -37,14 +37,9 @@ router.get('/get-user/:idUser', function(req, res, next) {
 });
 
 router.get('/users', function(req, res, next) {
-    if (!req.isAuthenticated())  {
-        return res.redirect('/unauthorized' );
-    }
-
     User.find({}, function (err, result) {
-        res.render("users", {users: result});
+        res.json(result);
     });
-
 });
 
 router.get('/account', function(req, res, next) {

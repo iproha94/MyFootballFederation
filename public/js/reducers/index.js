@@ -5,6 +5,9 @@ import teams from './tournament/teams';
 import teamsTournament from './tournament/teamsTournament';
 import currentUser from './account/currentUser';
 import pageUser from './account/pageUser';
+import federations from './account/federations';
+import usersList from './usersList/usersList';
+import team from './team/team';
 
 export default combineReducers({
     tournament,
@@ -12,5 +15,8 @@ export default combineReducers({
     teams,
     teamsTournament,
     pageUser,
-    currentUser
+    currentUser,
+    federations,
+    usersList,
+    team
 });

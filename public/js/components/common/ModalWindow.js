@@ -1,31 +1,23 @@
 import ModalForm from './ModalForm';
 import React from 'react';
-import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as teamsActions from '../../actions/team/teams';
 
-var ModalWindow = React.createClass({
+export default React.createClass({
     componentDidMount: function(){
         $('.modal-trigger').leanModal();
-        this.props.teamsActions.getTeams();
     },
     onClickModalAction: function(event) {
-        console.log(event._targetInst);
-        var dataForm = $(".js-modal-form").serialize();
-        console.log(dataForm);
         $.ajax({
-            data: dataForm,
-            url: '/tournament/add-team',
+            data: $(".js-modal-form").serialize(),
+            url: this.props.urlSend,
             success: function(data){
                 console.log(data);
-                Materialize.toast("Команда успешно добавлена", 2000);
+                Materialize.toast("Операция прошла успешно", 2000);
             },
-            error: function (jqXHR,textStatus,errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR,textStatus,errorThrown);
                 Materialize.toast("Что то не так", 2000);
             }
         });
-        this.props.teamsActions.addTeamsInTournament(this.props.data.id);
     },
     render: function () {
         return (
@@ -36,7 +28,9 @@ var ModalWindow = React.createClass({
                 <div id="modal1" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>{this.props.inputName}</h4>
-                        <ModalForm/>
+                        <ModalForm valueArray={this.props.valueArray}
+                                   nameHiddenInput={this.props.nameHiddenInput}
+                                   valueHiddenInput={this.props.valueHiddenInput}/>
                     </div>
 
                     <div className="modal-footer">
@@ -48,12 +42,3 @@ var ModalWindow = React.createClass({
     }
 });
 
-export default connect((state)=>{
-    return {
-        teams: state.teams
-    }
-}, (dispatch)=>{
-    return {
-        teamsActions: bindActionCreators(teamsActions, dispatch)
-    }
-})(ModalWindow);

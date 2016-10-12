@@ -1,6 +1,4 @@
-import * as teamsActions from '../../actions/tournament/TeamsActions';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import React from 'react';
 
 var Teams = React.createClass({
@@ -26,7 +24,6 @@ var Teams = React.createClass({
 
 export default connect((state)=>{
     return {
-        tournament: state.tournament,
         teams: state.teamsTournament
     }
 })(Teams);

@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as tournamentActions from '../actions/tournament/TournamentActions';
-import * as teamActions from '../actions/tournament/TeamsActions';
+import * as tournamentActions from '../actions/tournament/tournament';
+import * as teamActions from '../actions/team/teams';
 import Teams from '../components/tournament/Teams';
 import ModalWindow from '../components/tournament/ModalWindow';
 
