@@ -7,45 +7,10 @@ var matchRoutes = require('./routes/match');
 var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
 var bodyParser = require('body-parser');
-var exphbs   = require('express-handlebars');
 
 var app = express();
 
 app.set('port', process.env.PORT || 8080);
-
-app.engine('handlebars', exphbs({
-	defaultLayout: 'base',
-	helpers: {
-		'default': function (value, defaultVal) {
-			var out = value || defaultVal;
-			return out;
-		},
-		section: function(name, options){
-			if(!this._sections) this._sections = {};
-			this._sections[name] = options.fn(this);
-			return null;
-		},
-		isAccess: function (user, value, opts) {//сравнение только ObjectId
-			if(!user || !value) {
-				return opts.inverse(this);
-			}
-			var id = user._id.toString();
-			if(Array.isArray(value)) {
-				for(var item of value) {
-					if(item.toString() == id) {
-						return opts.fn(this);
-					}
-				}
-			}
-			if(id == value.toString()) {
-				return opts.fn(this);
-			}
-
-			return opts.inverse(this);
-		}
-	}
-}));
-app.set('view engine', 'handlebars');
 
 var opts = {
 	server: {
@@ -82,7 +47,7 @@ var auth = require('./lib/auth.js')(app, {
 	baseUrl: process.env.BASE_URL,
 	providers: credentials.authProviders,
 	successRedirect: '/account',
-	failureRedirect: '/unauthorized',
+	failureRedirect: '/unauthorized'
 });
 
 // auth.init() соединяется в промежуточном ПО Passport:
@@ -107,10 +72,10 @@ app.use('/api/federation', federationRoutes);
 app.use('/api/tournament', tournamentRoutes);
 app.use('/api/match', matchRoutes);
 
-app.get(/.*/, function root(req, res) {
-	res.render("main");
-});
 
+app.get(/.*/, function root(req, res) {
+	res.sendFile(__dirname  + '/public/index.html');
+});
 
 // пользовательская страница 404
 app.use(function(req, res){

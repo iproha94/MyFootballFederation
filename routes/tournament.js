@@ -124,6 +124,14 @@ router.get('/:idTournament', function(req, res, next) {
     });
 });
 
+router.get('/get-matches/:idTournament', function(req, res, next) {
+    Match.find({tournament: req.params.idTournament}, function (err, matches) {
+        return res.json({
+            matches: matches
+        });
+    });
+});
+
 router.post('/:idTournament', function(req, res, next) {
     Tournament.findById(req.params.idTournament, function (err, tournament) {
         return res.json(tournament);

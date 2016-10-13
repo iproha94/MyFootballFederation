@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import * as accountActions from '../actions/user/user';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Nav from '../components/common/Nav';
 
 var App = React.createClass({
     componentDidMount: function () {
@@ -11,6 +12,7 @@ var App = React.createClass({
     render: function () {
         return (
             <div>
+                <Nav/>
                 {this.props.children}
             </div>
         );

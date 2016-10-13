@@ -10,6 +10,7 @@ import team from './team/team';
 import tournamentList from './federation/tournamentList';
 import federation from './federation/federation';
 import match from './match/match';
+import matchList from './tournament/matches';
 
 export default combineReducers({
     tournament,
@@ -22,5 +23,6 @@ export default combineReducers({
     team,
     federation,
     tournamentList,
-    match
+    match,
+    matchList
 });

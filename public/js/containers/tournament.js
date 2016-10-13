@@ -5,6 +5,7 @@ import * as tournamentActions from '../actions/tournament/tournament';
 import * as teamActions from '../actions/team/teams';
 import Teams from '../components/tournament/Teams';
 import ModalWindow from '../components/tournament/ModalWindow';
+import Matches from '../components/tournament/Matches';
 
 var TournamentPage = React.createClass({
     componentDidMount: function() {
@@ -12,20 +13,28 @@ var TournamentPage = React.createClass({
     },
     render: function () {
         const {tournament} = this.props;
+        var content = (
+            <div>
+                <Teams/>
+                <ModalWindow inputName="inputName"
+                             header="header"/>
+                <div className="row right-align">
+                    <a className="waves-effect waves-light btn" href={"/tournament/"+ tournament._id + "?setstatus=undertake"}>Начать турнир</a>
+                </div>
+            </div>
+        );
+        if(this.props.matches.length == 0) {
+            content = <Matches/>
+        }
         return (
-           <div className="container content-margin-top content-flex js-content-place">
+        <div className="container content-margin-top content-flex js-content-place">
                <div className="row center">
                    Страница турнира {tournament.name}
                </div>
                <div className="row center">
                    Тип турнира: {tournament.type}
                </div>
-               <Teams/>
-               <ModalWindow inputName="inputName"
-                            header="header"/>
-               <div className="row right-align">
-                   <a className="waves-effect waves-light btn" href={"/tournament/"+ tournament._id + "?setstatus=undertake"}>Начать турнир</a>
-               </div>
+                {content}
            </div>
         )
     }
@@ -35,7 +44,8 @@ export default connect((state)=>{
     return {
         tournament: state.tournament,
         modalWindow: state.modalWindow,
-        teams: state.teamsTournament
+        teams: state.teamsTournament,
+        matches: state.matchList
     }
 }, (dispatch)=>{
     return {
