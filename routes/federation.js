@@ -36,21 +36,33 @@ router.get('/get', function (req, res, next) {
 
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
-    Federation.findOne({name : name}, function (err, federation) {
-        if(err || !federation) {
-            return next(err);
+    Federation.findOne({name : name}, function (err, result) {
+        if(err || !result) {
+            res.status(500);
+            return res.json({
+                message: "error"
+            });
         }
 
+        res.json(result);
+    });
+});
+
+router.get('/get-tournaments/:name', function(req, res, next) {
+    Federation.findOne({name : req.params.name}, function (err, federation) {
         Tournament.find({federation: federation._id}, function (err, tournaments) {
             if(err) {
-                return next(err);
+                res.status(500);
+                return res.json({
+                    message: "error"
+                });
             }
-            res.render("federation", {
-                federation: federation,
-                tournaments: tournaments
-            });
+
+            res.json(tournaments);
         });
     });
 });
+
+
 
 module.exports = router;

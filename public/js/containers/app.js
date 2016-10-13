@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
+import * as accountActions from '../actions/user/user';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-
-export default React.createClass({
+var App = React.createClass({
+    componentDidMount: function () {
+        this.props.accountActions.getCurrentUser();
+    },
     render: function () {
         return (
             <div>
@@ -11,3 +16,13 @@ export default React.createClass({
         );
     }
 });
+
+export default connect((state)=>{
+    return {
+        currentUser: state.currentUser
+    }
+}, (dispatch)=>{
+    return {
+        accountActions: bindActionCreators(accountActions, dispatch)
+    }
+})(App);

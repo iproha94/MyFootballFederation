@@ -11,6 +11,7 @@ import Account from './containers/account';
 import UsersList from './containers/usersList';
 import CreateFederation from './containers/createFederation';
 import CreateTeam from './containers/createTeam';
+import Federation from './containers/federation';
 import CreateTournament from './containers/createTournament';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
                 <Route path='federation/create' component={CreateFederation} />
+                <Route path='federation/:federationName' component={Federation} />
                 <Route path='team/create' component={CreateTeam} />
                 <Route path='tournament/create' component={CreateTournament} />
                 <Route path='tournament' component={Tournament} />
