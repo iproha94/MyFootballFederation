@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
 var teamRoutes = require('./routes/team');
+var stageRoutes = require('./routes/stage');
 var matchRoutes = require('./routes/match');
 var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
@@ -103,6 +104,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', mainRoutes);
 app.use('/team', teamRoutes);
+app.use('/stage', stageRoutes);
 app.use('/federation', federationRoutes);
 app.use('/tournament', tournamentRoutes);
 app.use('/match', matchRoutes);

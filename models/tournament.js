@@ -10,11 +10,6 @@ var tournamentSchema = new Schema({
     tournamentConfig: Object,
     matchConfig: Object,
     rating: Boolean, //влияет ли турнир на рейтинг
-    status: {
-        prepare: Boolean,
-        undertake: Boolean,
-        finished: Boolean
-    }
 });
 
 var Tournament = mongoose.model("Tournament", tournamentSchema);

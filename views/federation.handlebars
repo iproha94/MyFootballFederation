@@ -1,24 +1,23 @@
 <div class="container content-margin-top content-flex">
     <div class="row center">
-        Страница федерации {{federation.name}}
+        <h3>Страница федерации {{federation.name}}</h3>
     </div>
+
+    <div class="container content-margin-top content-flex">
+        <ul class="collection with-header">
+            <li class="collection-header center"><h5>Параметры федерации</h5></li>
+
+            <li class="collection-item">Город: {{federation.city}}</li>
+        </ul>
+    </div>
+
     <div class="row">
         <div class="tournament-list_header">
             Список турниров:
         </div>
         <div class="collection">
             {{#each tournaments}}
-                <a href="/tournament/{{_id}}" class="collection-item">{{name}}:
-                    {{#if status.prepare}}
-                        идет подача заявок
-                    {{else if status.undertake}}
-                        турнир идет
-                    {{else if status.finished}}
-                        турнир закончен
-                    {{else}}
-                        турнир старой версии
-                    {{/if}}
-                </a>
+                <a href="/tournament/{{_id}}" class="collection-item">{{name}}</a>
             {{/each}}
         </div>
     </div>

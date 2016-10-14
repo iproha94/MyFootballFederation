@@ -27,7 +27,11 @@ $(document).ready(function(){
             data: $(".js-modal-form").serialize(),
             url: 'add-team/',
             success: function(data){
-                Materialize.toast("Команда успешно добавлена", 2000);
+                if (data.status == 200) {
+                    Materialize.toast("Команда успешно добавлена", 2000);
+                } else if (data.status == 403){
+                    Materialize.toast("Команда уже есть", 2000);
+                }
             },
             error: function () {
                 Materialize.toast("Что то не так", 2000);
