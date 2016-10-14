@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
-import * as accountActions from '../actions/user/user';
+import * as accountActions from '../actions/user';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Nav from '../components/common/Nav';

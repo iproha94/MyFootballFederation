@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default React.createClass({
     componentDidMount: function () {
         var script = document.createElement("script");
         script.src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js";
         document.body.appendChild(script);
+        var self = this;
         script.onload = function () {
             $('.js-form-search').submit(function (event) {
                     event.preventDefault();
@@ -13,7 +15,7 @@ export default React.createClass({
                 source: '/api/',
                 method: "POST",
                 select: function (event, ui) {
-                    window.location = '/federation/' + ui.item.value;
+                    self.props.history.push('/federation/' + ui.item.value);
                 },
                 open: function (event, ui) {
                     $(".ui-menu-item-wrapper").replaceWith(function(index, oldHTML){
@@ -55,7 +57,7 @@ export default React.createClass({
                        Или можете создать свою свою федерацию:
                    </h6>
                    <div className="center-align">
-                       <a href="/federation/create" className="waves-effect waves-light btn-large light-green darken-2">Создать свою федерацию</a>
+                       <Link to="/federation/create" className="waves-effect waves-light btn-large light-green darken-2">Создать свою федерацию</Link>
                    </div>
 
                </div>

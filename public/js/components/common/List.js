@@ -1,24 +1,21 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default React.createClass({
     render: function () {
-        var list = this.props.list.map(function (item) {
+        var list = this.props.list.map((item) => {
             return (
-                <li className="collection-item" key={item._id}>
-                    <div>{item.name}
-                        <a href="/account/{{_id}}" className="secondary-content">
-                            <i className="material-icons">send</i>
-                        </a>
-                    </div>
-                </li>
+                <Link key={item._id} to={this.props.url + (item[this.props.urlParam] || item._id)} className="collection-item">
+                    {item.name}
+                </Link>
             )
         });
         return (
             <div className="container content-margin-top content-flex">
-                <ul className="collection with-header">
-                    <li className="collection-header center"><h5>{this.props.header}</h5></li>
-                    {list}
-                </ul>
+                <h5 className="center">{this.props.header}</h5>
+                <div className="collection">
+                    {list.length ? list : this.props.defaultMessage}
+                </div>
             </div>
         )
     }

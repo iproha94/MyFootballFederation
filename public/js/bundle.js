@@ -62,53 +62,53 @@
 
 	var _reactRouter = __webpack_require__(221);
 
-	var _tournament = __webpack_require__(282);
+	var _Tournament = __webpack_require__(282);
 
-	var _tournament2 = _interopRequireDefault(_tournament);
+	var _Tournament2 = _interopRequireDefault(_Tournament);
 
-	var _main = __webpack_require__(290);
+	var _Main = __webpack_require__(288);
 
-	var _main2 = _interopRequireDefault(_main);
+	var _Main2 = _interopRequireDefault(_Main);
 
-	var _team = __webpack_require__(291);
+	var _Team = __webpack_require__(289);
 
-	var _team2 = _interopRequireDefault(_team);
+	var _Team2 = _interopRequireDefault(_Team);
 
-	var _notFound = __webpack_require__(292);
+	var _NotFound = __webpack_require__(290);
 
-	var _notFound2 = _interopRequireDefault(_notFound);
+	var _NotFound2 = _interopRequireDefault(_NotFound);
 
-	var _app = __webpack_require__(293);
+	var _App = __webpack_require__(291);
 
-	var _app2 = _interopRequireDefault(_app);
+	var _App2 = _interopRequireDefault(_App);
 
-	var _account = __webpack_require__(296);
+	var _Account = __webpack_require__(294);
 
-	var _account2 = _interopRequireDefault(_account);
+	var _Account2 = _interopRequireDefault(_Account);
 
-	var _usersList = __webpack_require__(302);
+	var _UsersList = __webpack_require__(296);
 
-	var _usersList2 = _interopRequireDefault(_usersList);
+	var _UsersList2 = _interopRequireDefault(_UsersList);
 
-	var _createFederation = __webpack_require__(305);
+	var _CreateFederation = __webpack_require__(297);
 
-	var _createFederation2 = _interopRequireDefault(_createFederation);
+	var _CreateFederation2 = _interopRequireDefault(_CreateFederation);
 
-	var _createTeam = __webpack_require__(306);
+	var _CreateTeam = __webpack_require__(298);
 
-	var _createTeam2 = _interopRequireDefault(_createTeam);
+	var _CreateTeam2 = _interopRequireDefault(_CreateTeam);
 
-	var _federation = __webpack_require__(307);
+	var _Federation = __webpack_require__(299);
 
-	var _federation2 = _interopRequireDefault(_federation);
+	var _Federation2 = _interopRequireDefault(_Federation);
 
-	var _createTournament = __webpack_require__(308);
+	var _CreateTournament = __webpack_require__(300);
 
-	var _createTournament2 = _interopRequireDefault(_createTournament);
+	var _CreateTournament2 = _interopRequireDefault(_CreateTournament);
 
-	var _match = __webpack_require__(309);
+	var _Match = __webpack_require__(301);
 
-	var _match2 = _interopRequireDefault(_match);
+	var _Match2 = _interopRequireDefault(_Match);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -122,19 +122,18 @@
 	        { history: _reactRouter.browserHistory },
 	        _react2.default.createElement(
 	            _reactRouter.Route,
-	            { path: '/', component: _app2.default },
-	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _main2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'users', component: _usersList2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'federation/create', component: _createFederation2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'match/:idMatch', component: _match2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'federation/:federationName', component: _federation2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'team/create', component: _createTeam2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'tournament/create', component: _createTournament2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'tournament', component: _tournament2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'account', component: _account2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'account/:idUser', component: _account2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'team/:idTeam', component: _team2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
+	            { path: '/', component: _App2.default },
+	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _Main2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'users', component: _UsersList2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'team/create', component: _CreateTeam2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'tournament/create', component: _CreateTournament2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'federation/create', component: _CreateFederation2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'team/:idTeam', component: _Team2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'match/:idMatch', component: _Match2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'account/:idUser', component: _Account2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'tournament/:idTournament', component: _Tournament2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'federation/:federationName', component: _Federation2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NotFound2.default })
 	        )
 	    )
 	), document.getElementById("root"));
@@ -22559,7 +22558,7 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case _constants.GET_TOURNAMENT_INFO:
+	        case _constants.GET_TOURNAMENT:
 	            return _extends({}, state, action.payload);
 	        default:
 	            return state;
@@ -22586,7 +22585,7 @@
 	var GET_TEAMS_BY_TOURNAMENT = exports.GET_TEAMS_BY_TOURNAMENT = 'GET_TEAMS_BY_TOURNAMENT';
 	var GET_TEAM_INFO = exports.GET_TEAM_INFO = 'GET_TEAM_INFO';
 
-	var GET_TOURNAMENT_INFO = exports.GET_TOURNAMENT_INFO = 'GET_TOURNAMENT_INFO';
+	var GET_TOURNAMENT = exports.GET_TOURNAMENT = 'GET_TOURNAMENT';
 	var ADD_TEAMS_IN_TOURNAMENT = exports.ADD_TEAMS_IN_TOURNAMENT = 'ADD_TEAMS_IN_TOURNAMENT';
 
 	var GET_CURRENT_USER = exports.GET_CURRENT_USER = 'GET_CURRENT_USER';
@@ -30582,21 +30581,17 @@
 
 	var tournamentActions = _interopRequireWildcard(_tournament);
 
-	var _teams = __webpack_require__(284);
+	var _team = __webpack_require__(284);
 
-	var teamActions = _interopRequireWildcard(_teams);
+	var teamActions = _interopRequireWildcard(_team);
 
-	var _Teams = __webpack_require__(285);
+	var _List = __webpack_require__(285);
 
-	var _Teams2 = _interopRequireDefault(_Teams);
+	var _List2 = _interopRequireDefault(_List);
 
 	var _ModalWindow = __webpack_require__(286);
 
 	var _ModalWindow2 = _interopRequireDefault(_ModalWindow);
-
-	var _Matches = __webpack_require__(288);
-
-	var _Matches2 = _interopRequireDefault(_Matches);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30606,7 +30601,10 @@
 	    displayName: 'TournamentPage',
 
 	    componentDidMount: function componentDidMount() {
-	        this.props.tournamentActions.getTournamentPageInfo();
+	        var _id = this.props.params.idTournament;
+	        this.props.tournamentActions.getTournament(_id);
+	        this.props.teamActions.getTeamsByTournament(_id);
+	        this.props.teamActions.getTeams();
 	    },
 	    render: function render() {
 	        var tournament = this.props.tournament;
@@ -30614,9 +30612,16 @@
 	        var content = _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(_Teams2.default, null),
-	            _react2.default.createElement(_ModalWindow2.default, { inputName: 'inputName',
-	                header: 'header' }),
+	            _react2.default.createElement(_List2.default, { header: '\u0423\u0447\u0430\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0435 \u043A\u043E\u043C\u0430\u043D\u0434\u044B',
+	                url: '/team/',
+	                defaultMessage: '\u041D\u0435 \u043E\u0434\u043D\u0430 \u043A\u043E\u043C\u0430\u043D\u0434\u0430 \u043D\u0435 \u0443\u0447\u0430\u0441\u0442\u0432\u0443\u0435\u0442',
+	                list: this.props.teams }),
+	            _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/tournament/add-team',
+	                buttonName: '\u041F\u043E\u0434\u0430\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443 \u043E\u0442 \u043B\u0438\u0446\u0430 \u043A\u043E\u043C\u0430\u043D\u0434\u044B',
+	                header: '\u0421\u043F\u0438\u0441\u043E\u043A \u043A\u043E\u043C\u0430\u043D\u0434',
+	                nameHiddenInput: 'idTournament',
+	                valueArray: this.props.teamsCurrentUser,
+	                valueHiddenInput: tournament._id }),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'row right-align' },
@@ -30627,9 +30632,15 @@
 	                )
 	            )
 	        );
-	        if (this.props.matches.length == 0) {
-	            content = _react2.default.createElement(_Matches2.default, null);
+	        //тут нужно проверять какую то галочку о том что матч начался
+	        //но я не знаю какую
+	        if (this.props.matches.length != 0) {
+	            content = _react2.default.createElement(_List2.default, { header: '\u0421\u043F\u0438\u0441\u043E\u043A \u043C\u0430\u0442\u0447\u0435\u0439',
+	                url: '/match/',
+	                defaultMessage: '\u041C\u0430\u0442\u0447\u0435\u0439 \u043D\u0435\u0442',
+	                list: this.props.matches });
 	        }
+
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'container content-margin-top content-flex js-content-place' },
@@ -30655,6 +30666,7 @@
 	        tournament: state.tournament,
 	        modalWindow: state.modalWindow,
 	        teams: state.teamsTournament,
+	        teamsCurrentUser: state.teams,
 	        matches: state.matchList
 	    };
 	}, function (dispatch) {
@@ -30679,29 +30691,19 @@
 	  value: true
 	});
 	exports.getTournament = getTournament;
-	exports.getTournamentPageInfo = getTournamentPageInfo;
 
 	var _constants = __webpack_require__(189);
 
-	var _teams = __webpack_require__(284);
+	var _index = __webpack_require__(284);
 
-	function getTournament() {
+	function getTournament(_id) {
 	  return function (dispatch, getState) {
 	    //благодаря Middleware получаем функцию dispatch
-	    return $.when($.post(location.pathname)).then(function (result) {
+	    return $.when($.post('/api/tournament/' + _id)).then(function (result) {
 	      return dispatch({
-	        type: _constants.GET_TOURNAMENT_INFO,
+	        type: _constants.GET_TOURNAMENT,
 	        payload: result //такое наименование - негласное соглашение
 	      });
-	    });
-	  };
-	}
-	//спросить у кого нибуть как он выполняет действия зависящие друг от друга
-	function getTournamentPageInfo() {
-	  return function (dispatch, getState) {
-	    dispatch(getTournament()).then(function () {
-	      var _id = getState().tournament._id;
-	      dispatch((0, _teams.getTeamsByTournament)(_id));
 	    });
 	  };
 	}
@@ -30779,48 +30781,43 @@
 	    value: true
 	});
 
-	var _reactRedux = __webpack_require__(208);
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(221);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Teams = _react2.default.createClass({
-	    displayName: 'Teams',
+	exports.default = _react2.default.createClass({
+	    displayName: 'List',
 
 	    render: function render() {
-	        var teams = this.props.teams.map(function (item) {
+	        var _this = this;
+
+	        var list = this.props.list.map(function (item) {
 	            return _react2.default.createElement(
-	                'a',
-	                { href: "/team/" + item._id, className: 'collection-item' },
+	                _reactRouter.Link,
+	                { key: item._id, to: _this.props.url + (item[_this.props.urlParam] || item._id), className: 'collection-item' },
 	                item.name
 	            );
 	        });
-
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'row' },
+	            { className: 'container content-margin-top content-flex' },
 	            _react2.default.createElement(
-	                'div',
-	                { className: 'tournament-list_header' },
-	                '\u0421\u043F\u0438\u0441\u043E\u043A \u043A\u043E\u043C\u0430\u043D\u0434:'
+	                'h5',
+	                { className: 'center' },
+	                this.props.header
 	            ),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'collection' },
-	                teams
+	                list.length ? list : this.props.defaultMessage
 	            )
 	        );
 	    }
 	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        teams: state.teamsTournament
-	    };
-	})(Teams);
 
 /***/ },
 /* 286 */
@@ -30840,42 +30837,30 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(208);
-
-	var _redux = __webpack_require__(173);
-
-	var _teams = __webpack_require__(284);
-
-	var teamsActions = _interopRequireWildcard(_teams);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ModalWindow = _react2.default.createClass({
+	exports.default = _react2.default.createClass({
 	    displayName: 'ModalWindow',
 
 	    componentDidMount: function componentDidMount() {
 	        $('.modal-trigger').leanModal();
-	        this.props.teamsActions.getTeams();
 	    },
 	    onClickModalAction: function onClickModalAction(event) {
-	        console.log(event._targetInst);
-	        var dataForm = $(".js-modal-form").serialize();
-	        console.log(dataForm);
 	        $.ajax({
-	            data: dataForm,
-	            url: '/tournament/add-team',
+	            data: $(".js-modal-form").serialize(),
+	            url: this.props.urlSend,
 	            success: function success(data) {
 	                console.log(data);
-	                Materialize.toast("Команда успешно добавлена", 2000);
+	                Materialize.toast("Операция прошла успешно", 2000);
 	            },
 	            error: function error(jqXHR, textStatus, errorThrown) {
 	                console.log(jqXHR, textStatus, errorThrown);
 	                Materialize.toast("Что то не так", 2000);
 	            }
 	        });
-	        this.props.teamsActions.addTeamsInTournament(this.props.data.id);
+	    },
+	    onclickf: function onclickf() {
+	        $('select').material_select();
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -30883,9 +30868,9 @@
 	            null,
 	            _react2.default.createElement(
 	                'a',
-	                { className: 'modal-trigger waves-effect waves-light btn',
+	                { onClick: this.onclickf, className: 'modal-trigger waves-effect waves-light btn',
 	                    href: '#modal1' },
-	                this.props.header
+	                this.props.buttonName
 	            ),
 	            _react2.default.createElement(
 	                'div',
@@ -30896,9 +30881,11 @@
 	                    _react2.default.createElement(
 	                        'h4',
 	                        null,
-	                        this.props.inputName
+	                        this.props.header
 	                    ),
-	                    _react2.default.createElement(_ModalForm2.default, null)
+	                    _react2.default.createElement(_ModalForm2.default, { valueArray: this.props.valueArray,
+	                        nameHiddenInput: this.props.nameHiddenInput,
+	                        valueHiddenInput: this.props.valueHiddenInput })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -30914,186 +30901,8 @@
 	    }
 	});
 
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        teams: state.teams
-	    };
-	}, function (dispatch) {
-	    return {
-	        teamsActions: (0, _redux.bindActionCreators)(teamsActions, dispatch)
-	    };
-	})(ModalWindow);
-
 /***/ },
 /* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(208);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ModalForm = _react2.default.createClass({
-	    displayName: 'ModalForm',
-
-	    componentWillUpdate: function componentWillUpdate() {
-	        $('select').material_select();
-	    },
-	    render: function render() {
-	        var options = this.props.teams.map(function (item) {
-	            return _react2.default.createElement(
-	                'option',
-	                { key: item._id, value: item._id },
-	                item.name
-	            );
-	        });
-
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'form',
-	                { className: 'js-modal-form' },
-	                _react2.default.createElement('input', { type: 'hidden', name: 'idTournament', value: this.props.tournament._id }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-field col s12' },
-	                    _react2.default.createElement(
-	                        'select',
-	                        { name: 'idTeam' },
-	                        options
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        tournament: state.tournament,
-	        teams: state.teams
-	    };
-	})(ModalForm);
-
-/***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(208);
-
-	var _redux = __webpack_require__(173);
-
-	var _match = __webpack_require__(289);
-
-	var matchActions = _interopRequireWildcard(_match);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Component = _react2.default.createClass({
-	    displayName: 'Component',
-
-	    componentDidMount: function componentDidMount() {
-	        this.props.matchActions.getMatchesInTournament();
-	    },
-	    render: function render() {
-	        var content = this.props.matches.map(function (item) {
-	            return _react2.default.createElement(
-	                'a',
-	                { href: '/match/{{_id}}', className: 'collection-item' },
-	                item.team1,
-	                ' vs ',
-	                item.team2
-	            );
-	        });
-	        if (!content) {
-	            content = "В турнире нет матчей";
-	        }
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'row' },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'tournament-list_header' },
-	                '\u0421\u043F\u0438\u0441\u043E\u043A \u043C\u0430\u0442\u0447\u0435\u0439:'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'collection' },
-	                content
-	            )
-	        );
-	    }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        matches: state.matchList
-	    };
-	}, function (dispatch) {
-	    return {
-	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch)
-	    };
-	})(Component);
-
-/***/ },
-/* 289 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getMatch = getMatch;
-	exports.getMatchesInTournament = getMatchesInTournament;
-
-	var _constants = __webpack_require__(189);
-
-	function getMatch(_id) {
-	    return function (dispatch, getState) {
-	        return $.when($.get("/api/match/" + _id)).then(function (result) {
-	            return dispatch({
-	                type: _constants.GET_MATCH,
-	                payload: result
-	            });
-	        });
-	    };
-	}
-	function getMatchesInTournament(_id) {
-	    return function (dispatch, getState) {
-	        return $.when($.get("/api/tournament/get-matches/:" + _id)).then(function (result) {
-	            return dispatch({
-	                type: _constants.GET_MATCHES_IN_TOURNAMENT,
-	                payload: result
-	            });
-	        });
-	    };
-	}
-
-/***/ },
-/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31109,12 +30918,64 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: "main",
+	    displayName: "ModalForm",
+
+	    render: function render() {
+	        var options = this.props.valueArray.map(function (item) {
+	            return _react2.default.createElement(
+	                "option",
+	                { key: item._id, value: item._id },
+	                item.name
+	            );
+	        });
+
+	        return _react2.default.createElement(
+	            "div",
+	            null,
+	            _react2.default.createElement(
+	                "form",
+	                { className: "js-modal-form" },
+	                _react2.default.createElement("input", { type: "hidden", name: this.props.nameHiddenInput, value: this.props.valueHiddenInput }),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "input-field col s12" },
+	                    _react2.default.createElement(
+	                        "select",
+	                        { name: "idSend" },
+	                        options
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(221);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	    displayName: 'Main',
 
 	    componentDidMount: function componentDidMount() {
 	        var script = document.createElement("script");
 	        script.src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js";
 	        document.body.appendChild(script);
+	        var self = this;
 	        script.onload = function () {
 	            $('.js-form-search').submit(function (event) {
 	                event.preventDefault();
@@ -31123,7 +30984,7 @@
 	                source: '/api/',
 	                method: "POST",
 	                select: function select(event, ui) {
-	                    window.location = '/federation/' + ui.item.value;
+	                    self.props.history.push('/federation/' + ui.item.value);
 	                },
 	                open: function open(event, ui) {
 	                    $(".ui-menu-item-wrapper").replaceWith(function (index, oldHTML) {
@@ -31139,51 +31000,51 @@
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
-	            _react2.default.createElement("link", { href: "/css/main.css", type: "text/css", rel: "stylesheet", media: "screen,projection" }),
+	            _react2.default.createElement('link', { href: '/css/main.css', type: 'text/css', rel: 'stylesheet', media: 'screen,projection' }),
 	            _react2.default.createElement(
-	                "div",
-	                { className: "nav-search light-green darken-1 content-flex fullscreen nav-search-background" },
+	                'div',
+	                { className: 'nav-search light-green darken-1 content-flex fullscreen nav-search-background' },
 	                _react2.default.createElement(
-	                    "h4",
-	                    { className: "center white-text header_item__margin" },
-	                    "\u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0444\u0443\u0442\u0431\u043E\u043B\u044C\u043D\u044B\u0445 \u0442\u0443\u0440\u043D\u0438\u0440\u043E\u0432"
+	                    'h4',
+	                    { className: 'center white-text header_item__margin' },
+	                    '\u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u0444\u0443\u0442\u0431\u043E\u043B\u044C\u043D\u044B\u0445 \u0442\u0443\u0440\u043D\u0438\u0440\u043E\u0432'
 	                ),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "header_item__margin" },
+	                    'div',
+	                    { className: 'header_item__margin' },
 	                    _react2.default.createElement(
-	                        "h6",
-	                        { className: "center white-text search_item_margin" },
-	                        "\u041C\u043E\u0436\u0435\u0442\u0435 \u0432\u043E\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043F\u043E\u0438\u0441\u043A\u043E\u043C \u0447\u0442\u043E \u0431\u044B \u043D\u0430\u0439\u0442\u0438 \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E:"
+	                        'h6',
+	                        { className: 'center white-text search_item_margin' },
+	                        '\u041C\u043E\u0436\u0435\u0442\u0435 \u0432\u043E\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043F\u043E\u0438\u0441\u043A\u043E\u043C \u0447\u0442\u043E \u0431\u044B \u043D\u0430\u0439\u0442\u0438 \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E:'
 	                    ),
 	                    _react2.default.createElement(
-	                        "nav",
-	                        { className: "light-green darken-2" },
+	                        'nav',
+	                        { className: 'light-green darken-2' },
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "nav-wrapper" },
+	                            'div',
+	                            { className: 'nav-wrapper' },
 	                            _react2.default.createElement(
-	                                "form",
-	                                { className: "js-form-search" },
+	                                'form',
+	                                { className: 'js-form-search' },
 	                                _react2.default.createElement(
-	                                    "div",
-	                                    { className: "input-field" },
-	                                    _react2.default.createElement("input", { id: "search", type: "search", className: "autocomplete", autocomplete: "off", required: true }),
+	                                    'div',
+	                                    { className: 'input-field' },
+	                                    _react2.default.createElement('input', { id: 'search', type: 'search', className: 'autocomplete', autocomplete: 'off', required: true }),
 	                                    _react2.default.createElement(
-	                                        "label",
-	                                        { "for": "search" },
+	                                        'label',
+	                                        { 'for': 'search' },
 	                                        _react2.default.createElement(
-	                                            "i",
-	                                            { className: "material-icons" },
-	                                            "search"
+	                                            'i',
+	                                            { className: 'material-icons' },
+	                                            'search'
 	                                        )
 	                                    ),
 	                                    _react2.default.createElement(
-	                                        "i",
-	                                        { className: "material-icons" },
-	                                        "close"
+	                                        'i',
+	                                        { className: 'material-icons' },
+	                                        'close'
 	                                    )
 	                                )
 	                            )
@@ -31191,42 +31052,42 @@
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "h6",
-	                    { className: "center white-text search_item_margin" },
-	                    "\u0418\u043B\u0438 \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u044E \u0441\u0432\u043E\u044E \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E:"
+	                    'h6',
+	                    { className: 'center white-text search_item_margin' },
+	                    '\u0418\u043B\u0438 \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u044E \u0441\u0432\u043E\u044E \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E:'
 	                ),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "center-align" },
+	                    'div',
+	                    { className: 'center-align' },
 	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "/federation/create", className: "waves-effect waves-light btn-large light-green darken-2" },
-	                        "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u044E \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E"
+	                        _reactRouter.Link,
+	                        { to: '/federation/create', className: 'waves-effect waves-light btn-large light-green darken-2' },
+	                        '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u044E \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044E'
 	                    )
 	                )
 	            ),
 	            _react2.default.createElement(
-	                "div",
-	                { className: "container" },
+	                'div',
+	                { className: 'container' },
 	                _react2.default.createElement(
-	                    "p",
+	                    'p',
 	                    null,
-	                    "\u0424\u0443\u0442\u0431\u043E\u0301\u043B (\u043E\u0442 \u0430\u043D\u0433\u043B. foot \u2014 \u0441\u0442\u0443\u043F\u043D\u044F, ball \u2014 \u043C\u044F\u0447) \u2014 \u043A\u043E\u043C\u0430\u043D\u0434\u043D\u044B\u0439 \u0432\u0438\u0434 \u0441\u043F\u043E\u0440\u0442\u0430, \u0432 \u043A\u043E\u0442\u043E\u0440\u043E\u043C \u0446\u0435\u043B\u044C\u044E \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u0430\u0431\u0438\u0442\u044C \u043C\u044F\u0447 \u0432 \u0432\u043E\u0440\u043E\u0442\u0430 \u0441\u043E\u043F\u0435\u0440\u043D\u0438\u043A\u0430 \u043D\u043E\u0433\u0430\u043C\u0438 \u0438\u043B\u0438 \u0434\u0440\u0443\u0433\u0438\u043C\u0438 \u0447\u0430\u0441\u0442\u044F\u043C\u0438 \u0442\u0435\u043B\u0430 (\u043A\u0440\u043E\u043C\u0435 \u0440\u0443\u043A) \u0431\u043E\u043B\u044C\u0448\u0435\u0435 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0440\u0430\u0437, \u0447\u0435\u043C \u043A\u043E\u043C\u0430\u043D\u0434\u0430 \u0441\u043E\u043F\u0435\u0440\u043D\u0438\u043A\u0430. \u0412 \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0441\u0430\u043C\u044B\u0439 \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u044B\u0439 \u0438 \u043C\u0430\u0441\u0441\u043E\u0432\u044B\u0439 \u0432\u0438\u0434 \u0441\u043F\u043E\u0440\u0442\u0430 \u0432 \u043C\u0438\u0440\u0435."
+	                    '\u0424\u0443\u0442\u0431\u043E\u0301\u043B (\u043E\u0442 \u0430\u043D\u0433\u043B. foot \u2014 \u0441\u0442\u0443\u043F\u043D\u044F, ball \u2014 \u043C\u044F\u0447) \u2014 \u043A\u043E\u043C\u0430\u043D\u0434\u043D\u044B\u0439 \u0432\u0438\u0434 \u0441\u043F\u043E\u0440\u0442\u0430, \u0432 \u043A\u043E\u0442\u043E\u0440\u043E\u043C \u0446\u0435\u043B\u044C\u044E \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u0430\u0431\u0438\u0442\u044C \u043C\u044F\u0447 \u0432 \u0432\u043E\u0440\u043E\u0442\u0430 \u0441\u043E\u043F\u0435\u0440\u043D\u0438\u043A\u0430 \u043D\u043E\u0433\u0430\u043C\u0438 \u0438\u043B\u0438 \u0434\u0440\u0443\u0433\u0438\u043C\u0438 \u0447\u0430\u0441\u0442\u044F\u043C\u0438 \u0442\u0435\u043B\u0430 (\u043A\u0440\u043E\u043C\u0435 \u0440\u0443\u043A) \u0431\u043E\u043B\u044C\u0448\u0435\u0435 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0440\u0430\u0437, \u0447\u0435\u043C \u043A\u043E\u043C\u0430\u043D\u0434\u0430 \u0441\u043E\u043F\u0435\u0440\u043D\u0438\u043A\u0430. \u0412 \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0441\u0430\u043C\u044B\u0439 \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u044B\u0439 \u0438 \u043C\u0430\u0441\u0441\u043E\u0432\u044B\u0439 \u0432\u0438\u0434 \u0441\u043F\u043E\u0440\u0442\u0430 \u0432 \u043C\u0438\u0440\u0435.'
 	                ),
 	                _react2.default.createElement(
-	                    "p",
+	                    'p',
 	                    null,
-	                    "\u0424\u0418\u0424\u0410 \u0438 \u041C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u043E\u043B\u0438\u043C\u043F\u0438\u0439\u0441\u043A\u0438\u0439 \u043A\u043E\u043C\u0438\u0442\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u043C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B. \u041F\u043E\u043B\u043D\u043E\u0435 \u0430\u043D\u0433\u043B\u043E\u044F\u0437\u044B\u0447\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B, \xABassociation football\xBB (\xAB\u0444\u0443\u0442\u0431\u043E\u043B \u043F\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u0430\u043C \u0410\u0441\u0441\u043E\u0446\u0438\u0430\u0446\u0438\u0438\xBB), \u0431\u044B\u043B\u043E \u0432\u044B\u0431\u0440\u0430\u043D\u043E \u043F\u043E\u0441\u043B\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u0439 \u0424\u0443\u0442\u0431\u043E\u043B\u044C\u043D\u043E\u0439 \u0430\u0441\u0441\u043E\u0446\u0438\u0430\u0446\u0438\u0438 \u0432 1863 \u0433\u043E\u0434\u0443, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043B\u0438\u0447\u0430\u0442\u044C \u044D\u0442\u0443 \u0438\u0433\u0440\u0443 \u043E\u0442 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u0430\u0437\u043D\u043E\u0432\u0438\u0434\u043D\u043E\u0441\u0442\u0435\u0439 \u0444\u0443\u0442\u0431\u043E\u043B\u0430, \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0445 \u0432 \u0442\u043E \u0432\u0440\u0435\u043C\u044F, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 \u0440\u0435\u0433\u0431\u0438-\u0444\u0443\u0442\u0431\u043E\u043B (\xABrugby football\xBB, \xAB\u0444\u0443\u0442\u0431\u043E\u043B \u043F\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u0430\u043C \u0428\u043A\u043E\u043B\u044B \u0420\u0430\u0433\u0431\u0438\xBB), \u0433\u0434\u0435 \u0431\u044B\u043B\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0430 \u0438\u0433\u0440\u0430 \u0440\u0443\u043A\u0430\u043C\u0438. \u0421\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C \u0434\u043B\u0438\u043D\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0432\u0430\u0440\u0438\u0430\u043D\u0442\u043E\u0432 \u0438\u0433\u0440\u044B \u0441\u0442\u0430\u043B\u0438 \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F \u0432 \u043F\u043E\u0432\u0441\u0435\u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u0440\u0435\u0447\u0438 \u0438 \u043F\u0435\u0447\u0430\u0442\u0438. \u0421\u043D\u0430\u0447\u0430\u043B\u0430 \u0432 \u0410\u043D\u0433\u043B\u0438\u0438 \u0431\u044B\u043B\u043E \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u043E \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \xABassoc.\xBB, \u0437\u0430\u0442\u0435\u043C \u0432 1880-\u0445 \u0433\u043E\u0434\u0430\u0445 \u043E\u0442 \u043D\u0435\u0433\u043E \u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043B\u0441\u044F \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB (\u0430\u043D\u0433\u043B. soccer) \u043F\u0443\u0442\u0451\u043C \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043A \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u0438\u044E \xAB-soc-\xBB \u0441\u0443\u0444\u0444\u0438\u043A\u0441\u0430 \xAB-er\xBB \u043D\u0430 \u043E\u043A\u0441\u0444\u043E\u0440\u0434\u0441\u043A\u0438\u0439 \u043C\u0430\u043D\u0435\u0440[en] (\u043F\u043E \u0430\u043D\u0430\u043B\u043E\u0433\u0438\u0438 \u0440\u0435\u0433\u0431\u0438-\u0444\u0443\u0442\u0431\u043E\u043B \u0441\u043E\u043A\u0440\u0430\u0449\u0451\u043D\u043D\u043E \u043D\u0430\u0437\u044B\u0432\u0430\u043B\u0441\u044F \xAB\u0440\u0430\u0433\u0433\u0435\u0440\xBB (\u0430\u043D\u0433\u043B. rugger))[4]. \u0412 \u043F\u0435\u0440\u0438\u043E\u0434\u0438\u043A\u0435 \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u043F\u043E \u043A\u0440\u0430\u0439\u043D\u0435\u0439 \u043C\u0435\u0440\u0435 \u0441 1892 \u0433\u043E\u0434\u0430[5]."
+	                    '\u0424\u0418\u0424\u0410 \u0438 \u041C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u043E\u043B\u0438\u043C\u043F\u0438\u0439\u0441\u043A\u0438\u0439 \u043A\u043E\u043C\u0438\u0442\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442 \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u043C\u0435\u0436\u0434\u0443\u043D\u0430\u0440\u043E\u0434\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B. \u041F\u043E\u043B\u043D\u043E\u0435 \u0430\u043D\u0433\u043B\u043E\u044F\u0437\u044B\u0447\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B, \xABassociation football\xBB (\xAB\u0444\u0443\u0442\u0431\u043E\u043B \u043F\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u0430\u043C \u0410\u0441\u0441\u043E\u0446\u0438\u0430\u0446\u0438\u0438\xBB), \u0431\u044B\u043B\u043E \u0432\u044B\u0431\u0440\u0430\u043D\u043E \u043F\u043E\u0441\u043B\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u0439 \u0424\u0443\u0442\u0431\u043E\u043B\u044C\u043D\u043E\u0439 \u0430\u0441\u0441\u043E\u0446\u0438\u0430\u0446\u0438\u0438 \u0432 1863 \u0433\u043E\u0434\u0443, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043B\u0438\u0447\u0430\u0442\u044C \u044D\u0442\u0443 \u0438\u0433\u0440\u0443 \u043E\u0442 \u0434\u0440\u0443\u0433\u0438\u0445 \u0440\u0430\u0437\u043D\u043E\u0432\u0438\u0434\u043D\u043E\u0441\u0442\u0435\u0439 \u0444\u0443\u0442\u0431\u043E\u043B\u0430, \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0445 \u0432 \u0442\u043E \u0432\u0440\u0435\u043C\u044F, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 \u0440\u0435\u0433\u0431\u0438-\u0444\u0443\u0442\u0431\u043E\u043B (\xABrugby football\xBB, \xAB\u0444\u0443\u0442\u0431\u043E\u043B \u043F\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u0430\u043C \u0428\u043A\u043E\u043B\u044B \u0420\u0430\u0433\u0431\u0438\xBB), \u0433\u0434\u0435 \u0431\u044B\u043B\u0430 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0430 \u0438\u0433\u0440\u0430 \u0440\u0443\u043A\u0430\u043C\u0438. \u0421\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C \u0434\u043B\u0438\u043D\u043D\u044B\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0432\u0430\u0440\u0438\u0430\u043D\u0442\u043E\u0432 \u0438\u0433\u0440\u044B \u0441\u0442\u0430\u043B\u0438 \u0441\u043E\u043A\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F \u0432 \u043F\u043E\u0432\u0441\u0435\u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u0440\u0435\u0447\u0438 \u0438 \u043F\u0435\u0447\u0430\u0442\u0438. \u0421\u043D\u0430\u0447\u0430\u043B\u0430 \u0432 \u0410\u043D\u0433\u043B\u0438\u0438 \u0431\u044B\u043B\u043E \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u043E \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \xABassoc.\xBB, \u0437\u0430\u0442\u0435\u043C \u0432 1880-\u0445 \u0433\u043E\u0434\u0430\u0445 \u043E\u0442 \u043D\u0435\u0433\u043E \u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043B\u0441\u044F \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB (\u0430\u043D\u0433\u043B. soccer) \u043F\u0443\u0442\u0451\u043C \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043A \u0441\u043E\u043A\u0440\u0430\u0449\u0435\u043D\u0438\u044E \xAB-soc-\xBB \u0441\u0443\u0444\u0444\u0438\u043A\u0441\u0430 \xAB-er\xBB \u043D\u0430 \u043E\u043A\u0441\u0444\u043E\u0440\u0434\u0441\u043A\u0438\u0439 \u043C\u0430\u043D\u0435\u0440[en] (\u043F\u043E \u0430\u043D\u0430\u043B\u043E\u0433\u0438\u0438 \u0440\u0435\u0433\u0431\u0438-\u0444\u0443\u0442\u0431\u043E\u043B \u0441\u043E\u043A\u0440\u0430\u0449\u0451\u043D\u043D\u043E \u043D\u0430\u0437\u044B\u0432\u0430\u043B\u0441\u044F \xAB\u0440\u0430\u0433\u0433\u0435\u0440\xBB (\u0430\u043D\u0433\u043B. rugger))[4]. \u0412 \u043F\u0435\u0440\u0438\u043E\u0434\u0438\u043A\u0435 \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u043F\u043E \u043A\u0440\u0430\u0439\u043D\u0435\u0439 \u043C\u0435\u0440\u0435 \u0441 1892 \u0433\u043E\u0434\u0430[5].'
 	                ),
 	                _react2.default.createElement(
-	                    "p",
+	                    'p',
 	                    null,
-	                    "\u0412 \u043D\u0430\u0448\u0438 \u0434\u043D\u0438 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u043E \u0432 \u0440\u044F\u0434\u0435 \u0430\u043D\u0433\u043B\u043E\u044F\u0437\u044B\u0447\u043D\u044B\u0445 \u0441\u0442\u0440\u0430\u043D, \u0433\u0434\u0435 \u0438\u0441\u0442\u043E\u0440\u0438\u0447\u0435\u0441\u043A\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u044E\u0442 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u043E\u0441\u0442\u044C\u044E \u0434\u0440\u0443\u0433\u0438\u0435 \u0440\u0430\u0437\u043D\u043E\u0432\u0438\u0434\u043D\u043E\u0441\u0442\u0438 \u0444\u0443\u0442\u0431\u043E\u043B\u0430. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0432 \u0410\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u0438 \u0438 \u041D\u043E\u0432\u043E\u0439 \u0417\u0435\u043B\u0430\u043D\u0434\u0438\u0438 \u0444\u0443\u0442\u0431\u043E\u043B\u043E\u043C \u0438\u0441\u0442\u043E\u0440\u0438\u0447\u0435\u0441\u043A\u0438 \u043D\u0430\u0437\u044B\u0432\u0430\u044E\u0442 \u0430\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u0439\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B \u0438\u043B\u0438 \u0440\u0435\u0433\u0431\u0438\u043B\u0438\u0433. \u0412 \u0418\u0440\u043B\u0430\u043D\u0434\u0438\u0438 \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB \u043E\u0442\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u043A \u0433\u044D\u043B\u044C\u0441\u043A\u043E\u043C\u0443 \u0444\u0443\u0442\u0431\u043E\u043B\u0443, \u043F\u043E\u044D\u0442\u043E\u043C\u0443 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0443\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u0442\u0441\u044F \u0432 \u043F\u0440\u0435\u0441\u0441\u0435[6][7]. \u0412 \u042E\u0410\u0420 \u0438\u0433\u0440\u0430 \u0432 \u0431\u043E\u043B\u044C\u0448\u0438\u043D\u0441\u0442\u0432\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430 \u043A\u0430\u043A \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB, \u0447\u0442\u043E \u0432\u044B\u0440\u0430\u0437\u0438\u043B\u043E\u0441\u044C \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438 \u0447\u0435\u043C\u043F\u0438\u043E\u043D\u0430\u0442\u0430 \u042E\u0410\u0420, \xAB\u041F\u0440\u0435\u043C\u044C\u0435\u0440 \u0441\u043E\u043A\u043A\u0435\u0440 \u043B\u0438\u0433\u0430\xBB, \u0438 \u0441\u0442\u0430\u0434\u0438\u043E\u043D\u0430 \xAB\u0421\u043E\u043A\u043A\u0435\u0440 \u0421\u0438\u0442\u0438\xBB, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u043C \u043F\u0440\u043E\u0445\u043E\u0434\u0438\u043B \u0444\u0438\u043D\u0430\u043B \u0427\u041C-2010. \u0412 \u0421\u0428\u0410 \u0438 \u041A\u0430\u043D\u0430\u0434\u0435 \u0443\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u0442\u0441\u044F \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB, \u0442\u0430\u043A \u043A\u0430\u043A \u0444\u0443\u0442\u0431\u043E\u043B\u043E\u043C \u043D\u0430\u0437\u044B\u0432\u0430\u044E\u0442 \u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B \u0438 \u043A\u0430\u043D\u0430\u0434\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B. \u0412 \u0410\u043D\u0433\u043B\u0438\u0438 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0443\u0441\u0442\u0430\u0440\u0435\u043B\u043E \u0438 \u043D\u043E\u0432\u044B\u0435 \u043F\u043E\u043A\u043E\u043B\u0435\u043D\u0438\u044F \u0431\u043E\u043B\u0435\u043B\u044C\u0449\u0438\u043A\u043E\u0432 \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u0447\u0438\u0442\u0430\u044E\u0442 \u0435\u0433\u043E \u043F\u0440\u0435\u043D\u0435\u0431\u0440\u0435\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C."
+	                    '\u0412 \u043D\u0430\u0448\u0438 \u0434\u043D\u0438 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u043E \u0432 \u0440\u044F\u0434\u0435 \u0430\u043D\u0433\u043B\u043E\u044F\u0437\u044B\u0447\u043D\u044B\u0445 \u0441\u0442\u0440\u0430\u043D, \u0433\u0434\u0435 \u0438\u0441\u0442\u043E\u0440\u0438\u0447\u0435\u0441\u043A\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u044E\u0442 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u043E\u0441\u0442\u044C\u044E \u0434\u0440\u0443\u0433\u0438\u0435 \u0440\u0430\u0437\u043D\u043E\u0432\u0438\u0434\u043D\u043E\u0441\u0442\u0438 \u0444\u0443\u0442\u0431\u043E\u043B\u0430. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0432 \u0410\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u0438 \u0438 \u041D\u043E\u0432\u043E\u0439 \u0417\u0435\u043B\u0430\u043D\u0434\u0438\u0438 \u0444\u0443\u0442\u0431\u043E\u043B\u043E\u043C \u0438\u0441\u0442\u043E\u0440\u0438\u0447\u0435\u0441\u043A\u0438 \u043D\u0430\u0437\u044B\u0432\u0430\u044E\u0442 \u0430\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u0439\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B \u0438\u043B\u0438 \u0440\u0435\u0433\u0431\u0438\u043B\u0438\u0433. \u0412 \u0418\u0440\u043B\u0430\u043D\u0434\u0438\u0438 \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB \u043E\u0442\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u043A \u0433\u044D\u043B\u044C\u0441\u043A\u043E\u043C\u0443 \u0444\u0443\u0442\u0431\u043E\u043B\u0443, \u043F\u043E\u044D\u0442\u043E\u043C\u0443 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0443\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u0442\u0441\u044F \u0432 \u043F\u0440\u0435\u0441\u0441\u0435[6][7]. \u0412 \u042E\u0410\u0420 \u0438\u0433\u0440\u0430 \u0432 \u0431\u043E\u043B\u044C\u0448\u0438\u043D\u0441\u0442\u0432\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430 \u043A\u0430\u043A \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB, \u0447\u0442\u043E \u0432\u044B\u0440\u0430\u0437\u0438\u043B\u043E\u0441\u044C \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438 \u0447\u0435\u043C\u043F\u0438\u043E\u043D\u0430\u0442\u0430 \u042E\u0410\u0420, \xAB\u041F\u0440\u0435\u043C\u044C\u0435\u0440 \u0441\u043E\u043A\u043A\u0435\u0440 \u043B\u0438\u0433\u0430\xBB, \u0438 \u0441\u0442\u0430\u0434\u0438\u043E\u043D\u0430 \xAB\u0421\u043E\u043A\u043A\u0435\u0440 \u0421\u0438\u0442\u0438\xBB, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u043C \u043F\u0440\u043E\u0445\u043E\u0434\u0438\u043B \u0444\u0438\u043D\u0430\u043B \u0427\u041C-2010. \u0412 \u0421\u0428\u0410 \u0438 \u041A\u0430\u043D\u0430\u0434\u0435 \u0443\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u0442\u0441\u044F \u0442\u0435\u0440\u043C\u0438\u043D \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB, \u0442\u0430\u043A \u043A\u0430\u043A \u0444\u0443\u0442\u0431\u043E\u043B\u043E\u043C \u043D\u0430\u0437\u044B\u0432\u0430\u044E\u0442 \u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B \u0438 \u043A\u0430\u043D\u0430\u0434\u0441\u043A\u0438\u0439 \u0444\u0443\u0442\u0431\u043E\u043B. \u0412 \u0410\u043D\u0433\u043B\u0438\u0438 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \xAB\u0441\u043E\u043A\u043A\u0435\u0440\xBB \u0443\u0441\u0442\u0430\u0440\u0435\u043B\u043E \u0438 \u043D\u043E\u0432\u044B\u0435 \u043F\u043E\u043A\u043E\u043B\u0435\u043D\u0438\u044F \u0431\u043E\u043B\u0435\u043B\u044C\u0449\u0438\u043A\u043E\u0432 \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u0447\u0438\u0442\u0430\u044E\u0442 \u0435\u0433\u043E \u043F\u0440\u0435\u043D\u0435\u0431\u0440\u0435\u0436\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C.'
 	                ),
 	                _react2.default.createElement(
-	                    "p",
+	                    'p',
 	                    null,
-	                    "\u0412 \u0434\u0440\u0443\u0433\u0438\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F: \u043B\u0438\u0431\u043E \u0437\u0430\u0438\u043C\u0441\u0442\u0432\u043E\u0432\u0430\u043D\u0438\u0435\u043C \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u0433\u043E \u0441\u043B\u043E\u0432\u0430 football, \u043A\u0430\u043A \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C \u044F\u0437\u044B\u043A\u0435 \u2014 \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB, \u0432 \u043F\u043E\u0440\u0442\u0443\u0433\u0430\u043B\u044C\u0441\u043A\u043E\u043C \u2014 futebol; \u043B\u0438\u0431\u043E \u043A\u0430\u043B\u044C\u043A\u043E\u0439 \u0441\u043B\u043E\u0432\u0430 football, \u043A\u0430\u043A \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 \u0432 \u043D\u0435\u043C\u0435\u0446\u043A\u043E\u043C \u2014 Fu\xDFball, \u0433\u0440\u0435\u0447\u0435\u0441\u043A\u043E\u043C \u2014 \u03C0\u03BF\u03B4\u03CC\u03C3\u03C6\u03B1\u03B9\u03C1\u03BF, \u0444\u0438\u043D\u0441\u043A\u043E\u043C \u2014 jalkapallo, \u0438\u0432\u0440\u0438\u0442\u0435 \u2014 \u05DB\u05D3\u05D5\u05E8\u05D2\u05DC, \u043A\u0430\u0440\u0435\u043B\u044C\u0441\u043A\u043E\u043C \u2014 jalgami\xE4\u010D\u010Dy \u0438 \u0430\u0434\u044B\u0433\u0435\u0439\u0441\u043A\u043E\u043C \u2014 \u043B\u044A\u044D\u043F\u044D\u0435\u0443; \u043B\u0438\u0431\u043E \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u043D\u044B\u043C\u0438 \u043E\u0442 \u0441\u043B\u043E\u0432 \xAB\u043F\u0438\u043D\u0430\u0442\u044C\xBB, \xAB\u043D\u043E\u0433\u0430\xBB \u0438 \u0442. \u043F., \u043A\u0430\u043A \u0432 \u0438\u0442\u0430\u043B\u044C\u044F\u043D\u0441\u043A\u043E\u043C \u2014 calcio, \u0445\u043E\u0440\u0432\u0430\u0442\u0441\u043A\u043E\u043C \u2014 nogomet."
+	                    '\u0412 \u0434\u0440\u0443\u0433\u0438\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438\u0433\u0440\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F: \u043B\u0438\u0431\u043E \u0437\u0430\u0438\u043C\u0441\u0442\u0432\u043E\u0432\u0430\u043D\u0438\u0435\u043C \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u0433\u043E \u0441\u043B\u043E\u0432\u0430 football, \u043A\u0430\u043A \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C \u044F\u0437\u044B\u043A\u0435 \u2014 \xAB\u0444\u0443\u0442\u0431\u043E\u043B\xBB, \u0432 \u043F\u043E\u0440\u0442\u0443\u0433\u0430\u043B\u044C\u0441\u043A\u043E\u043C \u2014 futebol; \u043B\u0438\u0431\u043E \u043A\u0430\u043B\u044C\u043A\u043E\u0439 \u0441\u043B\u043E\u0432\u0430 football, \u043A\u0430\u043A \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 \u0432 \u043D\u0435\u043C\u0435\u0446\u043A\u043E\u043C \u2014 Fu\xDFball, \u0433\u0440\u0435\u0447\u0435\u0441\u043A\u043E\u043C \u2014 \u03C0\u03BF\u03B4\u03CC\u03C3\u03C6\u03B1\u03B9\u03C1\u03BF, \u0444\u0438\u043D\u0441\u043A\u043E\u043C \u2014 jalkapallo, \u0438\u0432\u0440\u0438\u0442\u0435 \u2014 \u05DB\u05D3\u05D5\u05E8\u05D2\u05DC, \u043A\u0430\u0440\u0435\u043B\u044C\u0441\u043A\u043E\u043C \u2014 jalgami\xE4\u010D\u010Dy \u0438 \u0430\u0434\u044B\u0433\u0435\u0439\u0441\u043A\u043E\u043C \u2014 \u043B\u044A\u044D\u043F\u044D\u0435\u0443; \u043B\u0438\u0431\u043E \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u043D\u044B\u043C\u0438 \u043E\u0442 \u0441\u043B\u043E\u0432 \xAB\u043F\u0438\u043D\u0430\u0442\u044C\xBB, \xAB\u043D\u043E\u0433\u0430\xBB \u0438 \u0442. \u043F., \u043A\u0430\u043A \u0432 \u0438\u0442\u0430\u043B\u044C\u044F\u043D\u0441\u043A\u043E\u043C \u2014 calcio, \u0445\u043E\u0440\u0432\u0430\u0442\u0441\u043A\u043E\u043C \u2014 nogomet.'
 	                )
 	            )
 	        );
@@ -31234,7 +31095,7 @@
 	});
 
 /***/ },
-/* 291 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31251,9 +31112,9 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _teams = __webpack_require__(284);
+	var _team = __webpack_require__(284);
 
-	var teamActions = _interopRequireWildcard(_teams);
+	var teamActions = _interopRequireWildcard(_team);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31286,7 +31147,7 @@
 	})(Component);
 
 /***/ },
-/* 292 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31302,7 +31163,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: "notFound",
+	    displayName: "NotFound",
 
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -31323,7 +31184,7 @@
 	});
 
 /***/ },
-/* 293 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31336,9 +31197,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(221);
-
-	var _user = __webpack_require__(294);
+	var _user = __webpack_require__(292);
 
 	var accountActions = _interopRequireWildcard(_user);
 
@@ -31346,7 +31205,7 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _Nav = __webpack_require__(295);
+	var _Nav = __webpack_require__(293);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -31381,7 +31240,7 @@
 	})(App);
 
 /***/ },
-/* 294 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31391,6 +31250,7 @@
 	});
 	exports.getUserById = getUserById;
 	exports.getCurrentUser = getCurrentUser;
+	exports.getAllUser = getAllUser;
 
 	var _constants = __webpack_require__(189);
 
@@ -31418,8 +31278,19 @@
 	    };
 	}
 
+	function getAllUser() {
+	    return function (dispatch) {
+	        $.get('/api/users', function (result) {
+	            dispatch({
+	                type: _constants.GET_ALL_USER,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
 /***/ },
-/* 295 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31434,11 +31305,24 @@
 
 	var _reactRedux = __webpack_require__(208);
 
+	var _reactRouter = __webpack_require__(221);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Component = _react2.default.createClass({
 	    displayName: 'Component',
 
+	    componentDidUpdate: function componentDidUpdate() {
+	        $('.dropdown-button').dropdown({
+	            inDuration: 300,
+	            outDuration: 225,
+	            constrain_width: false, // Does not change width of dropdown to that of the activator
+	            hover: true, // Activate on hover
+	            gutter: 0, // Spacing from edge
+	            belowOrigin: false, // Displays dropdown below the button
+	            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+	        });
+	    },
 	    render: function render() {
 	        var user = this.props.currentUser;
 	        var isAuthenticated = !!user._id;
@@ -31452,8 +31336,8 @@
 	                    'li',
 	                    null,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: '/account' },
+	                        _reactRouter.Link,
+	                        { to: "/account/" + this.props.currentUser._id },
 	                        '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u043E\u0444\u0438\u043B\u044F'
 	                    )
 	                ),
@@ -31475,8 +31359,8 @@
 	                    'li',
 	                    null,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: '/users' },
+	                        _reactRouter.Link,
+	                        { to: '/users' },
 	                        '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'
 	                    )
 	                )
@@ -31485,8 +31369,8 @@
 	                'div',
 	                { className: 'nav-wrapper container' },
 	                _react2.default.createElement(
-	                    'a',
-	                    { id: 'logo-container', href: '/', className: 'brand-logo' },
+	                    _reactRouter.Link,
+	                    { id: 'logo-container', to: '/', className: 'brand-logo' },
 	                    _react2.default.createElement('img', { src: '/img/logo.png', className: 'logo-image' }),
 	                    'iFootball'
 	                ),
@@ -31528,7 +31412,7 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'a',
-	                            { className: '', href: '/auth/vkontakte/callback' },
+	                            { className: '', href: "/auth/vkontakte?redirect=" + location.pathname },
 	                            _react2.default.createElement('i', { className: 'fa fa-vk fa-lg vertical-align-middle', 'aria-hidden': 'true' })
 	                        )
 	                    ), _react2.default.createElement(
@@ -31552,13 +31436,13 @@
 	                            { className: 'userView' },
 	                            _react2.default.createElement('img', { className: 'background', src: 'http://unsplash.it/400/200?image=527' }),
 	                            _react2.default.createElement(
-	                                'a',
-	                                { href: '/account' },
+	                                _reactRouter.Link,
+	                                { to: "/account/" + this.props.currentUser._id },
 	                                _react2.default.createElement('img', { className: 'circle', src: '{{default user.image \'/img/camera.png\'}}' })
 	                            ),
 	                            _react2.default.createElement(
-	                                'a',
-	                                { href: '/account' },
+	                                _reactRouter.Link,
+	                                { to: "/account/" + this.props.currentUser._id },
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'white-text name' },
@@ -31572,8 +31456,8 @@
 	                        'li',
 	                        null,
 	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'waves-effect', href: '/account' },
+	                            _reactRouter.Link,
+	                            { className: 'waves-effect', to: "/account/" + this.props.currentUser._id },
 	                            _react2.default.createElement('i', { className: 'fa fa-futbol-o fa-lg', 'aria-hidden': 'true' }),
 	                            '\u041F\u0440\u043E\u0444\u0438\u043B\u044C'
 	                        )
@@ -31590,7 +31474,7 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'a',
-	                            { className: 'waves-effect', href: '/auth/vkontakte/callback' },
+	                            { className: 'waves-effect', href: "/auth/vkontakte/callback?redirect=" + location.pathname },
 	                            _react2.default.createElement('i', { className: 'fa fa-vk fa-lg', 'aria-hidden': 'true' }),
 	                            '\u0412\u043A\u043E\u043D\u0442\u0430\u043A\u0442\u0435'
 	                        )
@@ -31622,8 +31506,8 @@
 	                        'li',
 	                        null,
 	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'waves-effect', href: '/users' },
+	                            _reactRouter.Link,
+	                            { className: 'waves-effect', to: '/users' },
 	                            _react2.default.createElement('i', { className: 'fa fa-users fa-lg', 'aria-hidden': 'true' }),
 	                            '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438'
 	                        )
@@ -31631,8 +31515,8 @@
 	                        'li',
 	                        null,
 	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'waves-effect', href: '/logout' },
+	                            _reactRouter.Link,
+	                            { className: 'waves-effect', to: '/logout' },
 	                            _react2.default.createElement('i', { className: 'fa fa-bed fa-lg', 'aria-hidden': 'true' }),
 	                            '\u0412\u044B\u0439\u0442\u0438'
 	                        )
@@ -31668,7 +31552,7 @@
 	})(Component);
 
 /***/ },
-/* 296 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31681,15 +31565,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _fedetations = __webpack_require__(297);
-
-	var _fedetations2 = _interopRequireDefault(_fedetations);
-
-	var _teams = __webpack_require__(299);
-
-	var _teams2 = _interopRequireDefault(_teams);
-
-	var _user = __webpack_require__(294);
+	var _user = __webpack_require__(292);
 
 	var accountActions = _interopRequireWildcard(_user);
 
@@ -31697,9 +31573,23 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _ModalWindow = __webpack_require__(300);
+	var _ModalWindow = __webpack_require__(286);
 
 	var _ModalWindow2 = _interopRequireDefault(_ModalWindow);
+
+	var _federation = __webpack_require__(295);
+
+	var federationsActions = _interopRequireWildcard(_federation);
+
+	var _team = __webpack_require__(284);
+
+	var teamsActions = _interopRequireWildcard(_team);
+
+	var _List = __webpack_require__(285);
+
+	var _List2 = _interopRequireDefault(_List);
+
+	var _reactRouter = __webpack_require__(221);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31710,24 +31600,14 @@
 
 	    componentDidMount: function componentDidMount() {
 	        //'/account/get-creator/'
-	        if (this.props.params.idUser) {
-	            this.props.accountActions.getUserById(this.props.params.idUser);
-	        }
-	        this.props.accountActions.getCurrentUser();
+	        this.props.accountActions.getUserById(this.props.params.idUser);
+	        this.props.teamsActions.getTeams();
+	        this.props.federationsActions.getFederations();
 	    },
 	    render: function render() {
 	        var currentUser = this.props.currentUser;
-	        var pageUser = this.props.pageUser;
-
-	        var ModalWin = '';
-	        if (this.props.pageUser.name) {
-	            ModalWin = _react2.default.createElement(_ModalWindow2.default, { urlSend: '/account/add-creator/',
-	                header: 'hello',
-	                inputName: 'idUser',
-	                nameHiddenInput: 'idUser',
-	                valueArray: this.props.federations,
-	                valueHiddenInput: this.props.pageUser._id });
-	        }
+	        var user = this.props.pageUser;
+	        var isOwnPage = currentUser._id == user._id;
 	        return _react2.default.createElement(
 	            'div',
 	            null,
@@ -31745,16 +31625,42 @@
 	                    _react2.default.createElement(
 	                        'h4',
 	                        null,
-	                        pageUser.name ? "Имя пользователя: " + pageUser.name : "Ваше имя: " + currentUser.name
+	                        isOwnPage ? "Имя пользователя: " + user.name : "Ваше имя: " + currentUser.name
 	                    ),
 	                    _react2.default.createElement(
 	                        'h5',
 	                        null,
-	                        pageUser.name && currentUser.newUser ? "Поздравляем с регистрацией" : ""
+	                        isOwnPage && currentUser.newUser ? "Поздравляем с регистрацией" : ""
 	                    ),
-	                    _react2.default.createElement(_teams2.default, null),
-	                    _react2.default.createElement(_fedetations2.default, null),
-	                    ModalWin
+	                    _react2.default.createElement(_List2.default, { header: '\u041A\u043E\u043C\u0430\u043D\u0434\u044B',
+	                        url: '/team/',
+	                        defaultMessage: '\u041A\u043E\u043C\u0430\u043D\u0434 \u043D\u0435\u0442',
+	                        list: this.props.teams }),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/team/create', className: 'waves-effect waves-light btn' },
+	                        'button'
+	                    ),
+	                    _react2.default.createElement(_List2.default, { header: '\u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438',
+	                        url: '/federation/',
+	                        defaultMessage: '\u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0439 \u043D\u0435\u0442',
+	                        urlParam: 'name',
+	                        list: this.props.federations }),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/federation/create', className: 'waves-effect waves-light btn' },
+	                        'button'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row content-margin-top' },
+	                        !isOwnPage ? "" : _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/account/add-creator/',
+	                            buttonName: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0432 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0442\u043E\u0440\u044B',
+	                            header: '\u0421\u043F\u0438\u0441\u043E\u043A \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0439',
+	                            nameHiddenInput: 'idUser',
+	                            valueArray: this.props.federations,
+	                            valueHiddenInput: user._id })
+	                    )
 	                )
 	            )
 	        );
@@ -31765,115 +31671,19 @@
 	    return {
 	        currentUser: state.currentUser,
 	        pageUser: state.pageUser,
-	        federations: state.federations
+	        federations: state.federations,
+	        teams: state.teams
 	    };
 	}, function (dispatch) {
 	    return {
-	        accountActions: (0, _redux.bindActionCreators)(accountActions, dispatch)
+	        accountActions: (0, _redux.bindActionCreators)(accountActions, dispatch),
+	        teamsActions: (0, _redux.bindActionCreators)(teamsActions, dispatch),
+	        federationsActions: (0, _redux.bindActionCreators)(federationsActions, dispatch)
 	    };
 	})(Component);
 
 /***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _federations = __webpack_require__(298);
-
-	var federationsActions = _interopRequireWildcard(_federations);
-
-	var _reactRedux = __webpack_require__(208);
-
-	var _redux = __webpack_require__(173);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Federations = _react2.default.createClass({
-	    displayName: 'Federations',
-
-	    componentDidMount: function componentDidMount() {
-	        this.props.federationsActions.getFederations();
-	    },
-	    render: function render() {
-	        var federations = this.props.federations.map(function (item) {
-	            return _react2.default.createElement(
-	                'li',
-	                { className: 'collection-item', key: item._id },
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    item.name,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: "/team/" + item._id, className: 'secondary-content' },
-	                        _react2.default.createElement(
-	                            'i',
-	                            { className: 'material-icons' },
-	                            'send'
-	                        )
-	                    )
-	                )
-	            );
-	        });
-
-	        if (!this.props.pageUser.name) {
-	            var buttonCreateFederation = _react2.default.createElement(
-	                'li',
-	                { className: 'collection-item right' },
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'btn-floating btn-large waves-effect waves-light red', href: '/federation/create' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons' },
-	                        'add'
-	                    )
-	                )
-	            );
-	        }
-
-	        return _react2.default.createElement(
-	            'ul',
-	            { className: 'collection with-header' },
-	            _react2.default.createElement(
-	                'li',
-	                { className: 'collection-header center' },
-	                _react2.default.createElement(
-	                    'h5',
-	                    null,
-	                    '\u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0438'
-	                )
-	            ),
-	            federations.length ? federations : "Пользователь не состоит в федерациях",
-	            buttonCreateFederation
-	        );
-	    }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        federations: state.federations,
-	        pageUser: state.pageUser
-	    };
-	}, function (dispatch) {
-	    return {
-	        federationsActions: (0, _redux.bindActionCreators)(federationsActions, dispatch)
-	    };
-	})(Federations);
-
-/***/ },
-/* 298 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31921,237 +31731,7 @@
 	}
 
 /***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _teams = __webpack_require__(284);
-
-	var teamsActions = _interopRequireWildcard(_teams);
-
-	var _reactRedux = __webpack_require__(208);
-
-	var _redux = __webpack_require__(173);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	var Teams = _react2.default.createClass({
-	    displayName: 'Teams',
-
-	    componentDidMount: function componentDidMount() {
-	        this.props.teamsActions.getTeams();
-	    },
-	    render: function render() {
-	        var teams = this.props.teams.map(function (item) {
-	            return _react2.default.createElement(
-	                'li',
-	                { className: 'collection-item', key: item._id },
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    item.name,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: "/team/" + item._id, className: 'secondary-content' },
-	                        _react2.default.createElement(
-	                            'i',
-	                            { className: 'material-icons' },
-	                            'send'
-	                        )
-	                    )
-	                )
-	            );
-	        });
-
-	        if (!this.props.pageUser.name) {
-	            var buttonCreateTeam = _react2.default.createElement(
-	                'li',
-	                { className: 'collection-item right' },
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'btn-floating btn-large waves-effect waves-light red', href: '/team/create' },
-	                    _react2.default.createElement(
-	                        'i',
-	                        { className: 'material-icons' },
-	                        'add'
-	                    )
-	                )
-	            );
-	        }
-
-	        return _react2.default.createElement(
-	            'ul',
-	            { className: 'collection with-header' },
-	            _react2.default.createElement(
-	                'li',
-	                { className: 'collection-header center' },
-	                _react2.default.createElement(
-	                    'h5',
-	                    null,
-	                    '\u041A\u043E\u043C\u0430\u043D\u0434\u044B'
-	                )
-	            ),
-	            teams.length ? teams : "Пользователь не состоит в командах",
-	            buttonCreateTeam
-	        );
-	    }
-	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        teams: state.teams,
-	        pageUser: state.pageUser
-	    };
-	}, function (dispatch) {
-	    return {
-	        teamsActions: (0, _redux.bindActionCreators)(teamsActions, dispatch)
-	    };
-	})(Teams);
-
-/***/ },
-/* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _ModalForm = __webpack_require__(301);
-
-	var _ModalForm2 = _interopRequireDefault(_ModalForm);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	    displayName: 'ModalWindow',
-
-	    componentDidMount: function componentDidMount() {
-	        $('.modal-trigger').leanModal();
-	    },
-	    onClickModalAction: function onClickModalAction(event) {
-	        $.ajax({
-	            data: $(".js-modal-form").serialize(),
-	            url: this.props.urlSend,
-	            success: function success(data) {
-	                console.log(data);
-	                Materialize.toast("Операция прошла успешно", 2000);
-	            },
-	            error: function error(jqXHR, textStatus, errorThrown) {
-	                console.log(jqXHR, textStatus, errorThrown);
-	                Materialize.toast("Что то не так", 2000);
-	            }
-	        });
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'a',
-	                { className: 'modal-trigger waves-effect waves-light btn',
-	                    href: '#modal1' },
-	                this.props.header
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { id: 'modal1', className: 'modal modal-fixed-footer' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-content' },
-	                    _react2.default.createElement(
-	                        'h4',
-	                        null,
-	                        this.props.inputName
-	                    ),
-	                    _react2.default.createElement(_ModalForm2.default, { valueArray: this.props.valueArray,
-	                        nameHiddenInput: this.props.nameHiddenInput,
-	                        valueHiddenInput: this.props.valueHiddenInput })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-footer' },
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: '#!', onClick: this.onClickModalAction, className: 'modal-action modal-close waves-effect waves-green btn-flat ' },
-	                        '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C'
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	    displayName: 'ModalForm',
-
-	    componentWillUpdate: function componentWillUpdate() {
-	        $('select').material_select();
-	    },
-	    render: function render() {
-	        var options = this.props.valueArray.map(function (item) {
-	            return _react2.default.createElement(
-	                'option',
-	                { key: item._id, value: item._id },
-	                item.name
-	            );
-	        });
-
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'form',
-	                { className: 'js-modal-form' },
-	                _react2.default.createElement('input', { type: 'hidden', name: this.props.nameHiddenInput, value: this.props.valueHiddenInput }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'input-field col s12' },
-	                    _react2.default.createElement(
-	                        'select',
-	                        { name: 'idTeam' },
-	                        options
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-/***/ },
-/* 302 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32168,26 +31748,28 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _List = __webpack_require__(303);
+	var _List = __webpack_require__(285);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _users = __webpack_require__(304);
+	var _user = __webpack_require__(292);
 
-	var usersActions = _interopRequireWildcard(_users);
+	var usersActions = _interopRequireWildcard(_user);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var UsersListPage = _react2.default.createClass({
-	    displayName: 'UsersListPage',
+	var Component = _react2.default.createClass({
+	    displayName: 'Component',
 
 	    componentDidMount: function componentDidMount() {
 	        this.props.usersActions.getAllUser();
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(_List2.default, { header: '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438',
+	            url: '/account/',
+	            defaultMessage: '\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u043D\u0435\u0442',
 	            list: this.props.usersList });
 	    }
 	});
@@ -32200,95 +31782,10 @@
 	    return {
 	        usersActions: (0, _redux.bindActionCreators)(usersActions, dispatch)
 	    };
-	})(UsersListPage);
+	})(Component);
 
 /***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	    displayName: "List",
-
-	    render: function render() {
-	        var list = this.props.list.map(function (item) {
-	            return _react2.default.createElement(
-	                "li",
-	                { className: "collection-item", key: item._id },
-	                _react2.default.createElement(
-	                    "div",
-	                    null,
-	                    item.name,
-	                    _react2.default.createElement(
-	                        "a",
-	                        { href: "/account/{{_id}}", className: "secondary-content" },
-	                        _react2.default.createElement(
-	                            "i",
-	                            { className: "material-icons" },
-	                            "send"
-	                        )
-	                    )
-	                )
-	            );
-	        });
-	        return _react2.default.createElement(
-	            "div",
-	            { className: "container content-margin-top content-flex" },
-	            _react2.default.createElement(
-	                "ul",
-	                { className: "collection with-header" },
-	                _react2.default.createElement(
-	                    "li",
-	                    { className: "collection-header center" },
-	                    _react2.default.createElement(
-	                        "h5",
-	                        null,
-	                        this.props.header
-	                    )
-	                ),
-	                list
-	            )
-	        );
-	    }
-	});
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getAllUser = getAllUser;
-
-	var _constants = __webpack_require__(189);
-
-	function getAllUser() {
-	    return function (dispatch) {
-	        $.get('/api/users', function (result) {
-	            dispatch({
-	                type: _constants.GET_ALL_USER,
-	                payload: result
-	            });
-	        });
-	    };
-	}
-
-/***/ },
-/* 305 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32304,7 +31801,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: 'createFederation',
+	    displayName: 'CreateFederation',
 
 	    handleSubmit: function handleSubmit(event) {
 	        var _this = this;
@@ -32379,7 +31876,7 @@
 	});
 
 /***/ },
-/* 306 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32395,7 +31892,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: 'createTeam',
+	    displayName: 'CreateTeam',
 
 	    handleSubmit: function handleSubmit(event) {
 	        var _this = this;
@@ -32484,7 +31981,7 @@
 	});
 
 /***/ },
-/* 307 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32501,9 +31998,15 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _federations = __webpack_require__(298);
+	var _federation = __webpack_require__(295);
 
-	var federationActions = _interopRequireWildcard(_federations);
+	var federationActions = _interopRequireWildcard(_federation);
+
+	var _List = __webpack_require__(285);
+
+	var _List2 = _interopRequireDefault(_List);
+
+	var _reactRouter = __webpack_require__(221);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32517,30 +32020,23 @@
 	        this.props.federationActions.getTournamentsInFederation(this.props.params.federationName);
 	    },
 	    render: function render() {
-	        var tournaments = this.props.tournamentList.map(function (item) {
-	            return _react2.default.createElement(
-	                'a',
-	                { href: "/tournament/" + item._id, className: 'collection-item' },
-	                item.name,
-	                ' : '
-	            );
-	            //{item.status} - с сервера не приходит, и react
-	        });
-	        var buttonCreateTournament = _react2.default.createElement(
-	            'div',
-	            { className: 'row right-align' },
-	            _react2.default.createElement(
-	                'a',
-	                { className: 'waves-effect waves-light btn', href: '/tournament/create/?federation={{federation.name}}' },
-	                '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0442\u0443\u0440\u043D\u0438\u0440'
-	            )
-	        );
-	        console.log(this.props.federation.creators);
-	        console.log('asdfa', this.props.currentUser._id);
-	        if (!this.props.federation.creators.includes(this.props.currentUser._id)) {
-	            buttonCreateTournament = "";
-	        }
 	        var federation = this.props.federation;
+
+	        if (!federation.creators.includes(this.props.currentUser._id)) {
+	            var buttonCreateTournament = "";
+	        } else {
+	            var buttonCreateTournament = _react2.default.createElement(
+	                'div',
+	                { className: 'row right-align' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { className: 'waves-effect waves-light btn',
+	                        to: "/tournament/create/?federation=" + federation.name },
+	                    '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0442\u0443\u0440\u043D\u0438\u0440'
+	                )
+	            );
+	        }
+
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'container content-margin-top content-flex' },
@@ -32553,16 +32049,10 @@
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'row' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'tournament-list_header' },
-	                    '\u0421\u043F\u0438\u0441\u043E\u043A \u0442\u0443\u0440\u043D\u0438\u0440\u043E\u0432:'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'collection' },
-	                    tournaments
-	                )
+	                _react2.default.createElement(_List2.default, { header: '\u0422\u0443\u0440\u043D\u0438\u0440\u044B:',
+	                    url: '/tournament/',
+	                    defaultMessage: '\u0422\u0443\u0440\u043D\u0438\u0440\u043E\u0432 \u043D\u0435\u0442',
+	                    list: this.props.tournamentList })
 	            ),
 	            buttonCreateTournament
 	        );
@@ -32582,7 +32072,7 @@
 	})(Component);
 
 /***/ },
-/* 308 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32598,7 +32088,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: 'createTournament',
+	    displayName: 'CreateTournament',
 
 	    componentDidMount: function componentDidMount() {
 	        $(".js-type-tournament").change(function () {
@@ -32616,7 +32106,7 @@
 	        $.ajax({
 	            method: 'POST',
 	            data: $(".js-form").serialize(),
-	            url: "/api/team/create",
+	            url: "/api" + location.pathname + location.search,
 	            success: function success(data) {
 	                Materialize.toast("Операция прошла успешно", 2000);
 	                _this.props.history.push('/tournament/' + data._id);
@@ -32644,44 +32134,60 @@
 	                { className: 'row' },
 	                _react2.default.createElement(
 	                    'form',
-	                    { method: 'post' },
+	                    { method: 'post', onSubmit: this.handleSubmit },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-field' },
-	                        _react2.default.createElement('input', { id: 'name', type: 'text', className: 'validate', name: 'name', required: true, pattern: '[a-zA-Z][a-zA-Z0-9\\s]*' }),
+	                        { className: 'row' },
 	                        _react2.default.createElement(
-	                            'label',
-	                            { 'for': 'name' },
-	                            '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0443\u0440\u043D\u0438\u0440\u0430'
+	                            'div',
+	                            { className: 'input-field col s12' },
+	                            _react2.default.createElement('input', { id: 'name', type: 'text', className: 'validate', name: 'name', required: true, pattern: '[a-zA-Z][a-zA-Z0-9\\s]*' }),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { 'for': 'name' },
+	                                '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0443\u0440\u043D\u0438\u0440\u0430'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-field' },
-	                        _react2.default.createElement('input', { id: 'time', type: 'text', className: 'validate', name: 'time', required: true, pattern: '[0-9]*' }),
+	                        { className: 'row' },
 	                        _react2.default.createElement(
-	                            'label',
-	                            { 'for': 'time' },
-	                            '\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043C\u0430\u0442\u0447\u0430'
+	                            'div',
+	                            { className: 'input-field col s12' },
+	                            _react2.default.createElement('input', { id: 'time', type: 'text', className: 'validate', name: 'time', required: true, pattern: '[0-9]*' }),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { 'for': 'time' },
+	                                '\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u043C\u0430\u0442\u0447\u0430'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-field' },
-	                        _react2.default.createElement('input', { id: 'countPeriods', type: 'text', className: 'validate', name: 'countPeriods', required: true, pattern: '[0-9]*' }),
+	                        { className: 'row' },
 	                        _react2.default.createElement(
-	                            'label',
-	                            { 'for': 'countPeriods' },
-	                            '\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043F\u0435\u0440\u0438\u043E\u0434\u043E\u0432'
+	                            'div',
+	                            { className: 'input-field col s12' },
+	                            _react2.default.createElement('input', { id: 'countPeriods', type: 'text', className: 'validate', name: 'countPeriods', required: true, pattern: '[0-9]*' }),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { 'for': 'countPeriods' },
+	                                '\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043F\u0435\u0440\u0438\u043E\u0434\u043E\u0432'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'config-select' },
+	                        { className: 'row' },
 	                        _react2.default.createElement(
-	                            'label',
-	                            { 'for': 'last_name' },
-	                            '\u0422\u0438\u043F \u0442\u0443\u0440\u043D\u0438\u0440\u0430'
+	                            'div',
+	                            { className: 'config-select col s12' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { 'for': 'last_name' },
+	                                '\u0422\u0438\u043F \u0442\u0443\u0440\u043D\u0438\u0440\u0430'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -32706,7 +32212,7 @@
 	});
 
 /***/ },
-/* 309 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32723,7 +32229,7 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _match = __webpack_require__(289);
+	var _match = __webpack_require__(302);
 
 	var matchActions = _interopRequireWildcard(_match);
 
@@ -32758,6 +32264,41 @@
 	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch)
 	    };
 	})(Component);
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getMatch = getMatch;
+	exports.getMatchesInTournament = getMatchesInTournament;
+
+	var _constants = __webpack_require__(189);
+
+	function getMatch(_id) {
+	    return function (dispatch, getState) {
+	        return $.when($.get("/api/match/" + _id)).then(function (result) {
+	            return dispatch({
+	                type: _constants.GET_MATCH,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+	function getMatchesInTournament(_id) {
+	    return function (dispatch, getState) {
+	        return $.when($.get("/api/tournament/get-matches/:" + _id)).then(function (result) {
+	            return dispatch({
+	                type: _constants.GET_MATCHES_IN_TOURNAMENT,
+	                payload: result
+	            });
+	        });
+	    };
+	}
 
 /***/ }
 /******/ ]);

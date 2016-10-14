@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as teamActions from '../actions/team/teams';
+import * as teamActions from '../actions/team';
 
 var Component = React.createClass({
     componentDidMount: function() {

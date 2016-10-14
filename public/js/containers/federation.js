@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as federationActions from '../actions/federation/federations';
+import * as federationActions from '../actions/federation';
+import List from '../components/common/List';
+import {Link} from 'react-router';
 
 var Component = React.createClass({
     componentDidMount: function () {
@@ -11,35 +13,30 @@ var Component = React.createClass({
             .getTournamentsInFederation(this.props.params.federationName);
     },
     render: function () {
-        var tournaments = this.props.tournamentList.map(function (item) {
-           return (
-               <a href={"/tournament/" + item._id} className="collection-item">{item.name} : </a>
-           )
-            //{item.status} - с сервера не приходит, и react
-        });
-        var buttonCreateTournament = (
-            <div className="row right-align">
-                <a className="waves-effect waves-light btn" href="/tournament/create/?federation={{federation.name}}">Создать турнир</a>
-            </div>
-        );
-        console.log(this.props.federation.creators);
-        console.log('asdfa',this.props.currentUser._id);
-        if(!this.props.federation.creators.includes(this.props.currentUser._id)) {
-            buttonCreateTournament = "";
-        }
         var federation = this.props.federation;
+
+        if(!federation.creators.includes(this.props.currentUser._id)) {
+            var buttonCreateTournament = "";
+        } else {
+            var buttonCreateTournament =
+                <div className="row right-align">
+                    <Link className="waves-effect waves-light btn"
+                       to={"/tournament/create/?federation=" + federation.name}>
+                        Создать турнир
+                    </Link>
+                </div>
+        }
+
         return (
             <div className="container content-margin-top content-flex">
                 <div className="row center">
                     Страница федерации {federation.name}
                 </div>
                 <div className="row">
-                    <div className="tournament-list_header">
-                        Список турниров:
-                    </div>
-                    <div className="collection">
-                        {tournaments}
-                    </div>
+                    <List header="Турниры:"
+                          url="/tournament/"
+                          defaultMessage="Турниров нет"
+                          list={this.props.tournamentList}/>
                 </div>
                 {buttonCreateTournament}
             </div>

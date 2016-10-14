@@ -15,8 +15,12 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized');
+        res.statusCode(403);
+        return res.json({
+            message: "Пошел к черту"
+        });
     }
+
     Federation.findOne({name: req.query.federation}, function (err, federation) {
         var tournament = new Tournament({
             name: req.body.name,
@@ -37,17 +41,18 @@ router.post('/create', function(req, res, next) {
             if(err) {
                 return next(err);
             }
-            res.redirect("/tournament/" + tournament._id);
+            res.json({
+                message: "OK",
+                _id: tournament._id
+            });
         });
     });
 
 });
 
 router.get('/add-team', function(req, res, next) {
-    console.log("add-team");
-    console.log(req.query);
     Tournament.findById(req.query.idTournament, function (err, tournament) {
-        tournament.teams.push(req.query.idTeam);
+        tournament.teams.push(req.query.idSend);
         tournament.save(function (err) {
             if(err) {
                 return res.json({

@@ -19,15 +19,18 @@ export default React.createClass({
             }
         });
     },
+    onclickf: function () {
+        $('select').material_select();
+    },
     render: function () {
         return (
             <div>
-                <a className="modal-trigger waves-effect waves-light btn"
-                   href="#modal1">{this.props.header}</a>
+                <a onClick={this.onclickf} className="modal-trigger waves-effect waves-light btn"
+                   href="#modal1">{this.props.buttonName}</a>
 
                 <div id="modal1" className="modal modal-fixed-footer">
                     <div className="modal-content">
-                        <h4>{this.props.inputName}</h4>
+                        <h4>{this.props.header}</h4>
                         <ModalForm valueArray={this.props.valueArray}
                                    nameHiddenInput={this.props.nameHiddenInput}
                                    valueHiddenInput={this.props.valueHiddenInput}/>

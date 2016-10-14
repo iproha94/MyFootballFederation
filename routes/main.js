@@ -82,10 +82,10 @@ router.get('/account/:idUser', function(req, res, next) {
 });
 
 //тут возможна атака csrf 
-router.post('/account/add-creator/', function(req, res, next) {
-    var idUser = req.body.idUser;
-    var idFederation = req.body.idFederation;
-
+router.get('/account/add-creator/', function(req, res, next) {
+    var idUser = req.query.idUser;
+    var idFederation = req.query.idSend;
+    console.log(idUser, idFederation);
     Federation.findById(idFederation, function (err, federation) {
         var isCreatorsCurrentUser = federation.creators.some(function(item){
             return item.equals(req.user._id);

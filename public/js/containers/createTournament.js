@@ -15,7 +15,7 @@ export default React.createClass({
         $.ajax({
             method: 'POST',
             data: $(".js-form").serialize(),
-            url: "/api/team/create",
+            url: "/api" + location.pathname + location.search,
             success: (data) => {
                 Materialize.toast("Операция прошла успешно", 2000);
                 this.props.history.push('/tournament/' + data._id);
@@ -38,22 +38,31 @@ export default React.createClass({
         return (
             <div className="container content-margin-top content-flex">
                 <div className="row">
-                    <form method="post">
-                        <div className="input-field">
-                            <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
-                                <label for="name">Название турнира</label>
+                    <form method="post" onSubmit={this.handleSubmit}>
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                    <label for="name">Название турнира</label>
+                            </div>
                         </div>
-                        <div className="input-field">
-                            <input id="time" type="text" className="validate" name="time" required pattern="[0-9]*"/>
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input id="time" type="text" className="validate" name="time" required pattern="[0-9]*"/>
                                 <label for="time">Длительность матча</label>
+                            </div>
                         </div>
-                        <div className="input-field">
-                            <input id="countPeriods" type="text" className="validate" name="countPeriods" required pattern="[0-9]*"/>
-                                <label for="countPeriods">Количество периодов</label>
+                        
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input id="countPeriods" type="text" className="validate" name="countPeriods" required pattern="[0-9]*"/>
+                                    <label for="countPeriods">Количество периодов</label>
+                            </div>
                         </div>
 
-                        <div className="config-select">
-                            <label for="last_name">Тип турнира</label>
+                        <div className="row">
+                            <div className="config-select col s12">
+                                <label for="last_name">Тип турнира</label>
+                            </div>
                         </div>
 
                         <div className="config-tournament">

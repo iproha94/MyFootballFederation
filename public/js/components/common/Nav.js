@@ -1,27 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
 var Component = React.createClass({
+    componentDidUpdate: function() {
+        $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrain_width: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            }
+        );
+    },
     render: function () {
         var user = this.props.currentUser;
         var isAuthenticated = !!user._id;
         return (
             <nav className="light-green darken-2 header-position" role="navigation">
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><a href="/account">Страница профиля</a></li>
+                    <li><Link to={"/account/" + this.props.currentUser._id}>Страница профиля</Link></li>
                     <li className="divider"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
 
                 <ul id='dropdown2' className='dropdown-content'>
-                    <li><a href="/users">Пользователи</a></li>
+                    <li><Link to="/users">Пользователи</Link></li>
                 </ul>
 
                 <div className="nav-wrapper container">
-                    <a id="logo-container" href="/" className="brand-logo">
+                    <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
                             iFootball
-                    </a>
+                    </Link>
 
                     <ul className="right hide-on-med-and-down">
                         {isAuthenticated ?
@@ -32,7 +45,7 @@ var Component = React.createClass({
                             :
                             [
                                 <li>Войти через:&nbsp;&nbsp;</li>,
-                                <li><a className="" href="/auth/vkontakte/callback"><i className="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>,
+                                <li><a className="" href={"/auth/vkontakte?redirect=" + location.pathname}><i className="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>,
                                 <li><a className="" href="#"><i className="fa fa-google-plus fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
                             ]}
                     </ul>
@@ -41,31 +54,31 @@ var Component = React.createClass({
                         <li>
                             <div className="userView">
                                 <img className="background" src="http://unsplash.it/400/200?image=527"/>
-                                    <a href="/account">
+                                    <Link to={"/account/" + this.props.currentUser._id}>
                                         <img className="circle" src="{{default user.image '/img/camera.png'}}"/>
-                                    </a>
-                                    <a href="/account">
+                                    </Link>
+                                    <Link to={"/account/" + this.props.currentUser._id}>
                     <span className="white-text name">
                         {isAuthenticated ? user.name : "Аноним"}
                     </span>
-                                    </a>
+                                    </Link>
                                     <br/>
                             </div>
                         </li>
 
                         {isAuthenticated ?
-                            (<li><a className="waves-effect" href="/account"><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</a></li>)
+                            (<li><Link className="waves-effect" to={"/account/" + this.props.currentUser._id}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>)
                         :
                             [
                             <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect" href="/auth/vkontakte/callback"><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
+                            <li><a className="waves-effect" href={"/auth/vkontakte/callback?redirect=" + location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
                             <li><a className="waves-effect" href="#"><i className="fa fa-google-plus fa-lg" aria-hidden="true"></i>Google</a></li>,
                         ]}
                         <li><div className="divider"></div></li>
                         <li><a className="subheader">Дополнительно</a></li>
                         {isAuthenticated ? [
-                        <li><a className="waves-effect" href="/users"><i className="fa fa-users fa-lg" aria-hidden="true"></i>Пользователи</a></li>,
-                        <li><a className="waves-effect" href="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
+                        <li><Link className="waves-effect" to="/users"><i className="fa fa-users fa-lg" aria-hidden="true"></i>Пользователи</Link></li>,
+                        <li><Link className="waves-effect" to="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</Link></li>
 
                         ] :(
                         <li><a className="waves-effect" href="#!"><i className="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
@@ -76,7 +89,7 @@ var Component = React.createClass({
                         <i className="material-icons">menu</i>
                     </a>
                 </div>
-            </nav> 
+            </nav>
         )
     }
 });
@@ -86,3 +99,4 @@ export default connect((state)=>{
         currentUser: state.currentUser
     }
 })(Component);
+

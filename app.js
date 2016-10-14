@@ -84,7 +84,7 @@ app.use(function(req, res){
 		code: 404,
 		message: 'Не найдено'
 	});
-});
+}); 
 
 // пользовательская страница 500
 app.use(function(err, req, res, next){
