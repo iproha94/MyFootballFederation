@@ -95,7 +95,7 @@ router.get('/:idTournament', function(req, res, next) {
 });
 
 router.get('/get-stage/:idTournament', function (req, res, next) {
-    Stage.find({tournament: req.query.idTournament}, function (err, stages) {
+    Stage.find({tournament: req.params.idTournament}, function (err, stages) {
         res.json(stages);
     });
 });

@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./credentials.js');
 var mainRoutes = require('./routes/main');
+var refereeRoutes = require('./routes/referee');
 var teamRoutes = require('./routes/team');
 var stageRoutes = require('./routes/stage');
 var matchRoutes = require('./routes/match');
@@ -69,6 +70,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use('/api/', mainRoutes);
+app.use('/api-referee', refereeRoutes);
 app.use('/api/stage', stageRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/federation', federationRoutes);
