@@ -3,19 +3,25 @@ var Schema = mongoose.Schema;
 
 var tournamentSchema = new Schema({
     name: String,
-    time: Number,
-    countPeriods: Number,
     logo: String,
     federation: Schema.Types.ObjectId,
-    teams: [Schema.Types.ObjectId],
-    team_requests: [Schema.Types.ObjectId],
-    type: Object,
-    status: {
-        prepare: Boolean,
-        undertake: Boolean,
-        finished: Boolean
-    }
+    stages: [Schema.Types.ObjectId],
+    teams_requests: [Schema.Types.ObjectId],
+    tournamentConfig: Object,
+    matchConfig: Object,
+    rating: Boolean, //влияет ли турнир на рейтинг
 });
 
 var Tournament = mongoose.model("Tournament", tournamentSchema);
+
+Tournament.tournamentConfig = {
+    countPlayersInTeam: 0,
+    countPlayersOnField: 0,
+};
+
+Tournament.matchConfig = {
+    timePeriod: 0,
+    countPeriods: 0,
+};
+
 module.exports = Tournament;

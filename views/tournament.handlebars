@@ -1,0 +1,83 @@
+<div class="container content-margin-top content-flex">
+
+    <div class="row center">
+        <h3>Страница турнира {{tournament.name}}</h3>
+    </div>
+
+    <div class="container content-margin-top content-flex">
+        <ul class="collection with-header">
+            <li class="collection-header center"><h5>Параметры турнира</h5></li>
+
+            <li class="collection-item">Колличество игроков на поле: {{tournament.tournamentConfig.countPlayersOnField}}</li>
+            <li class="collection-item">Колличество игроков в заявке команды: {{tournament.tournamentConfig.countPlayersInTeam}}</li>
+        </ul>
+    </div>
+
+
+    <div class="row">
+        <div class="list_header">
+            Список этапов:
+        </div>
+        <div class="collection">
+            {{#each stages}}
+                <a href="/stage/{{_id}}" class="collection-item">этап № {{@index}}</a>
+            {{else}}
+                в турнире нет этапов
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="row right-align">
+        <a class="waves-effect waves-light btn" href="/stage/create/?tournament={{tournament._id}}">Создать этап</a>
+    </div>
+
+    <div class="row">
+        <div class="list_header">
+            Список заявок команд:
+        </div>
+        <div class="collection">
+            {{#each teams}}
+                <a href="/team/{{_id}}" class="collection-item">{{name}}</a>
+            {{else}}
+                заявок от команд нет
+            {{/each}}
+        </div>
+
+        {{#if user}}
+            <!-- Modal Trigger -->
+            <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Подать заявку на участие</a>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Список ваших команд</h4>
+                    <p class="js-modal-body"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+
+</div>
+
+{{#section 'jquery'}}
+    {{#if user}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+        <script class="modal-template" type="text/x-handlebars-template">
+            <form class="js-modal-form">
+                <input type="hidden" name="idTournament" value="{{tournament._id}}">
+                <div class="input-field col s12">
+                    <select name="idTeam">
+                        \{{#each this}}
+                        <option value="\{{_id}}">\{{name}}</option>
+                        \{{/each}}
+                    </select>
+                </div>
+            </form>
+        </script>
+        <script src="/js/tournament.js"></script>
+    {{/if}}
+{{/section}}
+
