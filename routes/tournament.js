@@ -4,6 +4,8 @@ var Tournament = require('../models/tournament');
 var Federation = require('../models/federation');
 var Stage = require('../models/stage');
 var Team = require('../models/team');
+var Match = require('../models/match');
+
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -14,7 +16,10 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
+        res.statusCode(403);
+        return res.json({
+            message: "Пошел к черту"
+        });
     }
 
     Federation.findOne({name: req.query.federation}, function (err, federation) {
@@ -38,10 +43,29 @@ router.post('/create', function(req, res, next) {
             if(err) {
                 return next(err);
             }
-            res.redirect("/tournament/" + tournament._id);
+            res.json({
+                message: "OK",
+                _id: tournament._id
+            });
         });
     });
 
+});
+
+router.get('/add-team', function(req, res, next) {
+    Tournament.findById(req.query.idTournament, function (err, tournament) {
+        tournament.teams_requests.push(req.query.idSend);
+        tournament.save(function (err) {
+            if(err) {
+                return res.json({
+                    status: 403
+                });
+            }
+            return res.json({
+                status: 200
+            });
+        });
+    });
 });
 
 router.get('/:idTournament', function(req, res, next) {
@@ -70,6 +94,12 @@ router.get('/:idTournament', function(req, res, next) {
     });
 });
 
+router.get('/get-stage/:idTournament', function (req, res, next) {
+    Stage.find({tournament: req.query.idTournament}, function (err, stages) {
+        res.json(stages);
+    });
+});
+
 router.post('/add-team', function(req, res, next) {
     Tournament.findById(req.body.idTournament, function (err, tournament) {
         if (tournament.teams_requests.indexOf(req.body.idTeam) != -1) {
@@ -81,7 +111,7 @@ router.post('/add-team', function(req, res, next) {
 
         tournament.teams_requests.push(req.body.idTeam);
         tournament.save(function (err) {
-            if(err) {
+            if (err) {
                 return res.json({
                     status: 403
                 });
@@ -95,4 +125,19 @@ router.post('/add-team', function(req, res, next) {
     });
 });
 
+router.get('/get-matches/:idTournament', function(req, res, next) {
+    Match.find({tournament: req.params.idTournament}, function (err, matches) {
+        return res.json({
+            matches: matches
+        });
+    });
+});
+
+
+router.post('/:idTournament', function(req, res, next) {
+    Tournament.findById(req.params.idTournament, function (err, tournament) {
+        return res.json(tournament);
+    });
+});
+            
 module.exports = router;

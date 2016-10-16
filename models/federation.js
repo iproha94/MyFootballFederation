@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var federationSchema = new Schema({
-    name: String,
+    name:  { type : String , unique : true},
     city: String,
     logo: String,
     creators: [Schema.Types.ObjectId],

@@ -3,16 +3,12 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
 
-router.get('/create', function(req, res, next) {
-    if (!req.isAuthenticated())  {
-        return res.redirect(303, '/unauthorized' );
-    }
-    res.render("create-federation");
-});
-
 router.post('/create', function(req, res, next) {
     if (!req.isAuthenticated())  {
-        return res.redirect(303, '/unauthorized' );
+        res.status(403);
+        return res.json({
+            message: "Нет доступа"
+        });
     }
 
     var federation = new Federation({
@@ -25,28 +21,48 @@ router.post('/create', function(req, res, next) {
         if(err) {
             next(err);
         } else {
-            res.redirect("/federation/" + federation.name);
+            res.json({
+                name: federation.name
+            });
         }
+    });
+});
+
+router.get('/get', function (req, res, next) {
+    Federation.find({creators: req.user._id}, function (err, result) {
+        res.json(result);
     });
 });
 
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
-    Federation.findOne({name : name}, function (err, federation) {
-        if(err || !federation) {
-            return next(err);
+    Federation.findOne({name : name}, function (err, result) {
+        if(err || !result) {
+            res.status(500);
+            return res.json({
+                message: "error"
+            });
         }
 
+        res.json(result);
+    });
+});
+
+router.get('/get-tournaments/:name', function(req, res, next) {
+    Federation.findOne({name : req.params.name}, function (err, federation) {
         Tournament.find({federation: federation._id}, function (err, tournaments) {
             if(err) {
-                return next(err);
+                res.status(500);
+                return res.json({
+                    message: "error"
+                });
             }
-            res.render("federation", {
-                federation: federation,
-                tournaments: tournaments
-            });
+
+            res.json(tournaments);
         });
     });
 });
+
+
 
 module.exports = router;

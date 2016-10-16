@@ -36,6 +36,8 @@ router.post('/create', function(req, res, next) {
 
 });
 
+
+
 router.get('/:idStage', function(req, res, next) {
     var idStage = req.params.idStage;
 

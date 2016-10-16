@@ -11,7 +11,7 @@ router.get('/:idMatch', function(req, res, next) {
         
         Team.findById(match.team1, function (err, team1) {
             Team.findById(match.team2, function (err, team2) {
-                res.render("match", {
+                res.json({
                     match: match,
                     team1: team1,
                     team2: team2

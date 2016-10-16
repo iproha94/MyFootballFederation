@@ -1,28 +1,21 @@
+var webpackDevConfig = require('./webpack.config.js');
+
 module.exports = function (grunt) {
     grunt.initConfig({
         shell: {
             server: {
-                command: 'nodemon app.js'
+                command: 'node app.js'
             }
         },
         watch: {
             static: {
                 files: [
-                    'public/js/**/*.js',
-                    'templates/**/*.html'
+                    'public/js/bundle.js'
                 ],
                 options: {
                     livereload: true
                 }
             }
-        },
-        jshint: {
-            options: {
-                "esversion": 6,
-                "node":true
-            },
-            app: ['app.js', 'routes/**/*.js', 'models/**/*.js', 'lib/**/*.js'],
-            qa: ['Gruntfile.js']
         },
         sass: {
             dist: {
@@ -33,12 +26,20 @@ module.exports = function (grunt) {
         },
         concurrent: {
             target: [
-                'jshint',
+                'webpack:watch',
                 'shell',
                 'watch'
             ],
             options: {
                 logConcurrentOutput: true /* Вывод процесса */
+            }
+        },
+        webpack: {
+            options: webpackDevConfig,
+            watch: {
+                failOnError: false,
+                watch: true,
+                keepalive: true
             }
         }
 
@@ -47,8 +48,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-webpack');
+
 
     grunt.registerTask('default', ['concurrent']);
 };
