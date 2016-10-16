@@ -72,6 +72,7 @@ router.get('/:idStage/start', function(req, res, next) {
                         console.log("ошибка сохранения матча");
                         return next(err);
                     }
+
                     stage.matches.push(match._id);
 
                     stage.save(function (err) {
