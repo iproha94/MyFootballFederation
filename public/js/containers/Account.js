@@ -16,6 +16,9 @@ var Component = React.createClass({
         this.props.teamsActions.getTeams();
         this.props.federationsActions.getFederations();
     },
+    onSuccessAddUser: function () {
+        this.props.federationsActions.getFederations();
+    },
     render: function () {
         var currentUser = this.props.currentUser;
         var user = this.props.pageUser;
@@ -45,7 +48,7 @@ var Component = React.createClass({
                         <Link to="/federation/create" className="waves-effect waves-light btn">button</Link>
 
                         <Chart/>
-
+                        
                         <div className="row content-margin-top">
                             {isOwnPage ? ""
                                 :
@@ -54,7 +57,7 @@ var Component = React.createClass({
                                              header="Список федераций"
                                              nameHiddenInput="idUser"
                                              valueArray={this.props.federations}
-                                             valueHiddenInput={user._id}/>
+                                             valueHiddenInput={user._id} onSuccess={this.onSuccessAddUser}/>
                             }
                         </div>
                     </div>

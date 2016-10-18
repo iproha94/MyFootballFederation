@@ -1,9 +1,9 @@
 import {
     GET_MATCH,
-    GET_MATCHES_IN_TOURNAMENT,
     ADD_MESSAGE_IN_CHAT,
     GET_MATCHES_IN_STAGE
 } from '../../constants';
+
 
 export function getMatch(_id) {
     return (dispatch, getState) => {

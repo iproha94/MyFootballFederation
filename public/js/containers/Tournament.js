@@ -9,12 +9,17 @@ import {Link} from 'react-router';
 import ModalWindow from '../components/common/ModalWindow';
 
 var TournamentPage = React.createClass({
+    idTournament: null,
     componentDidMount: function() {
         var _id = this.props.params.idTournament;
+        this.idTournament = _id;
         this.props.tournamentActions.getTournament(_id);
         this.props.teamActions.getTeamsByTournament(_id);
         this.props.teamActions.getTeams();
         this.props.stagesActions.getStages(_id);
+    },
+    onSuccessAddTeam: function () {
+        this.props.teamActions.getTeamsByTournament(this.idTournament);
     },
     render: function () {
         const {tournament} = this.props;
@@ -29,7 +34,8 @@ var TournamentPage = React.createClass({
                       url="/stage/"
                       defaultMessage="В турнире нет этапов"
                       list={this.props.stages}/>
-                
+
+
                 <div className="row right-align">
                     <Link className="waves-effect waves-light btn"
                           to={"/stage/create/?tournament=" + this.props.tournament._id}>
@@ -42,7 +48,8 @@ var TournamentPage = React.createClass({
                              header="Список команд"
                              nameHiddenInput="idTournament"
                              valueArray={this.props.teamsCurrentUser}
-                             valueHiddenInput={tournament._id}/>
+                             valueHiddenInput={tournament._id}
+                             onSuccess={this.onSuccessAddTeam}/>
                 
                 <div className="row right-align">
                     <Link className="waves-effect waves-light btn"

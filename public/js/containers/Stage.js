@@ -1,12 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as tournamentActions from '../actions/tournament';
 import * as stageActions from '../actions/stage';
 import * as matchActions from '../actions/match';
 import List from '../components/common/List';
 import {Link} from 'react-router';
-import ModalWindow from '../components/common/ModalWindow';
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -35,7 +33,6 @@ var Component = React.createClass({
                     <a className="waves-effect waves-light btn" href="{{stage._id}}\start">Начать со всеми заявившимися командами</a>
                 </div>
 
-
                 <List header="Список матчей:"
                       url="/match/"
                       defaultMessage="В этапе нет матчей"
@@ -54,7 +51,6 @@ export default connect((state)=>{
 }, (dispatch)=>{
     return {
         stageActions: bindActionCreators(stageActions, dispatch),
-        matchAction: bindActionCreators(matchActions, dispatch),
-
+        matchActions: bindActionCreators(matchActions, dispatch)
     }
 })(Component);

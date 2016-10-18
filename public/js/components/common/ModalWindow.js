@@ -9,9 +9,10 @@ export default React.createClass({
         $.ajax({
             data: $(".js-modal-form").serialize(),
             url: this.props.urlSend,
-            success: function(data){
+            success: (data) => {
                 console.log(data);
                 Materialize.toast("Операция прошла успешно", 2000);
+                this.props.onSuccess();
                 //TODO
                 // if (data.status == 200) {
                 //     Materialize.toast("Команда успешно добавлена", 2000);
@@ -19,7 +20,7 @@ export default React.createClass({
                 //     Materialize.toast("Команда уже есть", 2000);
                 // }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
                 Materialize.toast("Что то не так", 2000);
             }

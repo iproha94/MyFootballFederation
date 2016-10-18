@@ -55,7 +55,7 @@ var Component = React.createClass({
 
     },
     render: function () {
-        var messages = this.props.match.matchObject//нужно что то умнее придумать
+        var messages = this.props.match.match//нужно что то умнее придумать
             .chat.slice(0).reverse().map(function (item, index) {
             return (
                 <li className="collection-item avatar" key={index}>

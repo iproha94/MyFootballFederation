@@ -7,7 +7,7 @@ const initialState = {
     team2: {
         name: ""
     },
-    matchObject: {
+    match: {
         _id: "",
         chat: []
     }
@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
             return {...state, ...action.payload};
         case ADD_MESSAGE_IN_CHAT:
             var newState = {...state};
-            newState.matchObject.chat.push(action.payload);
+            newState.match.chat.push(action.payload);
             return newState;
         default:
             return state;
