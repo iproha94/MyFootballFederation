@@ -95,7 +95,7 @@ router.get('/:idTournament', function(req, res, next) {
 });
 
 router.get('/get-stage/:idTournament', function (req, res, next) {
-    Stage.find({tournament: req.query.idTournament}, function (err, stages) {
+    Stage.find({tournament: req.params.idTournament}, function (err, stages) {
         res.json(stages);
     });
 });
@@ -121,14 +121,6 @@ router.post('/add-team', function(req, res, next) {
             return res.json({
                 status: 200
             });
-        });
-    });
-});
-
-router.get('/get-matches/:idTournament', function(req, res, next) {
-    Match.find({tournament: req.params.idTournament}, function (err, matches) {
-        return res.json({
-            matches: matches
         });
     });
 });

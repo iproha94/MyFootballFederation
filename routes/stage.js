@@ -30,10 +30,19 @@ router.post('/create', function(req, res, next) {
             if(err) {
                 return next(err);
             }
-            res.redirect("/stage/" + stage._id);
+            res.json({
+                _id: stage._id
+            })
         });
     });
 
+});
+
+
+router.get('/get-matches/:idStage', function(req, res, next) {
+    Match.find({stage: req.params.idStage}, function (err, matches) {
+        return res.json(matches);
+    });
 });
 
 
@@ -42,16 +51,10 @@ router.get('/:idStage', function(req, res, next) {
     var idStage = req.params.idStage;
 
     Stage.findById(idStage, function (err, stage) {
-        Match.find({_id: {$in: stage.matches}}, function (err, matches) {
-            if (err) {
-                return next(err);
-            }
 
-            return res.render("stage", {
-                stage: stage,
-                matches: matches
-            });
-        });
+
+            return res.json(stage);
+
     });
 });
 

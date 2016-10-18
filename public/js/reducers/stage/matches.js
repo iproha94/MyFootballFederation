@@ -1,10 +1,10 @@
-import {GET_MATCHES_IN_TOURNAMENT} from '../../constants';
+import {GET_MATCHES_IN_STAGE} from '../../constants';
 
 const initialState = [];
 
 export default function(state = initialState, action){
     switch (action.type) {
-        case GET_MATCHES_IN_TOURNAMENT:
+        case GET_MATCHES_IN_STAGE:
             return [ ...state, ...action.payload];
         default:
             return state;

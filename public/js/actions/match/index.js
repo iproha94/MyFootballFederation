@@ -1,4 +1,9 @@
-import {GET_MATCH, GET_MATCHES_IN_TOURNAMENT, ADD_MESSAGE_IN_CHAT} from '../../constants';
+import {
+    GET_MATCH,
+    GET_MATCHES_IN_TOURNAMENT,
+    ADD_MESSAGE_IN_CHAT,
+    GET_MATCHES_IN_STAGE
+} from '../../constants';
 
 export function getMatch(_id) {
     return (dispatch, getState) => {
@@ -10,11 +15,11 @@ export function getMatch(_id) {
         });
     };
 }
-export function getMatchesInTournament(_id) {
+export function getMatchesInStage(_id) {
     return (dispatch, getState) => {
-        return $.when($.get("/api/tournament/get-matches/:" + _id)).then(function (result) {
+        return $.when($.get("/api/stage/get-matches/:" + _id)).then(function (result) {
             return dispatch({
-                type: GET_MATCHES_IN_TOURNAMENT,
+                type: GET_MATCHES_IN_STAGE,
                 payload: result
             });
         });

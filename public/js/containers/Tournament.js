@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as tournamentActions from '../actions/tournament';
-import * as stagesActions from '../actions/stages';
+import * as stageActions from '../actions/stage';
 import * as teamActions from '../actions/team';
 import List from '../components/common/List';
 import {Link} from 'react-router';
@@ -58,7 +58,7 @@ var TournamentPage = React.createClass({
                         defaultMessage="Матчей нет"
                         list={this.props.matches}/>
         }
-        
+
         return (
             <div className="container content-margin-top content-flex js-content-place">
                <div className="row center">
@@ -86,7 +86,7 @@ export default connect((state)=>{
     return {
         tournamentActions: bindActionCreators(tournamentActions, dispatch),
         teamActions: bindActionCreators(teamActions, dispatch),
-        stagesActions: bindActionCreators(stagesActions, dispatch)
+        stagesActions: bindActionCreators(stageActions, dispatch)
     }
 })(TournamentPage);
 //подключаем React компонент к Redux store. =>
