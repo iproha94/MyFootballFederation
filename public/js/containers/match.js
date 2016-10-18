@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchActions from '../actions/match';
+import Chat from '../components/match/Chat';
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -10,9 +11,13 @@ var Component = React.createClass({
     render: function () {
         return (
             <div className="container content-margin-top content-flex">
-                Страница матча {this.props.match.team1.name} 
-                - {this.props.match.team2.name}
+                <p>
+                    Страница матча {this.props.match.team1.name}
+                        - {this.props.match.team2.name}
+                </p>
+                <Chat idMatch={this.props.params.idMatch}/>
             </div>
+
         )
     }
 });

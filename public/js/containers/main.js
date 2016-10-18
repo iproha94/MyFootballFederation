@@ -61,8 +61,6 @@ export default React.createClass({
                    </div>
 
                </div>
-
-
                <div className="container">
                    <p>
                        Футбо́л (от англ. foot — ступня, ball — мяч) —

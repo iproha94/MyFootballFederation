@@ -1,6 +1,6 @@
 var assert = require('chai').assert;
 var test = require('selenium-webdriver/testing');
-var data = require('../../credentials');
+var data = require('../../cfg/credentials');
 var webdriver = require('selenium-webdriver'),
     By = webdriver.By,
     ActionSequence = webdriver.ActionSequence;

@@ -7,6 +7,7 @@ import * as federationsActions from '../actions/federation';
 import * as teamsActions from '../actions/team';
 import List from '../components/common/List';
 import {Link} from 'react-router';
+import Chart from '../components/common/Chart';
 
 var Component = React.createClass({
     componentDidMount: function () {
@@ -43,8 +44,10 @@ var Component = React.createClass({
                               list={this.props.federations}/>
                         <Link to="/federation/create" className="waves-effect waves-light btn">button</Link>
 
+                        <Chart/>
+
                         <div className="row content-margin-top">
-                            {!isOwnPage ? ""
+                            {isOwnPage ? ""
                                 :
                                 <ModalWindow urlSend="/api/account/add-creator/"
                                              buttonName="Добавить пользователя в организаторы"

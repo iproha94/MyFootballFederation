@@ -1,4 +1,4 @@
-import {GET_MATCH, GET_MATCHES_IN_TOURNAMENT} from '../../constants';
+import {GET_MATCH, GET_MATCHES_IN_TOURNAMENT, ADD_MESSAGE_IN_CHAT} from '../../constants';
 
 export function getMatch(_id) {
     return (dispatch, getState) => {
@@ -17,6 +17,15 @@ export function getMatchesInTournament(_id) {
                 type: GET_MATCHES_IN_TOURNAMENT,
                 payload: result
             });
+        });
+    };
+}
+
+export function addMessageInChat(object) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: ADD_MESSAGE_IN_CHAT,
+            payload: object
         });
     };
 }

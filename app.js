@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var credentials = require('./credentials.js');
+var credentials = require('./cfg/credentials.js');
 var mainRoutes = require('./routes/main');
 var teamRoutes = require('./routes/team');
 var stageRoutes = require('./routes/stage');
@@ -26,15 +26,19 @@ app.use(require('cookie-parser')(credentials.cookieSecret));
 // в cookie-файле. По умолчанию используется хранилище в памяти, не подходя-
 // щее для реальных условий эксплуатации, но может быть настроено для при-
 // менения хранилища на основе базы данных (см. главы 9 и 13).
-app.use(require('express-session')({
-    resave: false,
-    saveUninitialized: false,
-    secret: credentials.cookieSecret,
 
-    //это для того, чтобы сеансовое хранилище работало в какой то бд.
-    //если поля store нет - то по умолчанию будет храниться в памяти
+var sessionParser = require('express-session')({
+	resave: false,
+	saveUninitialized: false,
+	secret: credentials.cookieSecret,
+
+	//это для того, чтобы сеансовое хранилище работало в какой то бд.
+	//если поля store нет - то по умолчанию будет храниться в памяти
 	//store: sessionStore,
-}));
+});
+
+app.use(sessionParser);
+exports.sessionParser = sessionParser;
 
 
 var auth = require('./lib/auth.js')(app, {
@@ -56,8 +60,6 @@ auth.init();
 
 // теперь мы можем указать наши маршруты auth:
 auth.registerRoutes();
-
-app.set('port', process.env.PORT || 8080);
 
 app.use(function (req, res, next) {
 	res.locals.user = req.user;
@@ -100,7 +102,14 @@ app.use(function(err, req, res, next){
 	});
 });
 
-app.listen(app.get('port'), function(){
+
+var server = require('http').createServer();
+
+var startChat = require('./chat');
+startChat(server);
+
+server.on('request', app);
+server.listen(app.get('port'), function () {
 	console.log( 'Express запущен на http://localhost:' +
-	app.get('port') + '; нажмите Ctrl+C для завершения.' );
-});
+		app.get('port') + '; нажмите Ctrl+C для завершения.' );
+});		

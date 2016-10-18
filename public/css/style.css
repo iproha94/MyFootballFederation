@@ -108,3 +108,7 @@ body {
 footer {
   flex: 0 0 auto;
 }
+
+.chat-padding{
+    padding: 15px;
+}

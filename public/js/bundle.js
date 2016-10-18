@@ -86,27 +86,27 @@
 
 	var _Account2 = _interopRequireDefault(_Account);
 
-	var _UsersList = __webpack_require__(298);
+	var _UsersList = __webpack_require__(299);
 
 	var _UsersList2 = _interopRequireDefault(_UsersList);
 
-	var _CreateFederation = __webpack_require__(299);
+	var _CreateFederation = __webpack_require__(300);
 
 	var _CreateFederation2 = _interopRequireDefault(_CreateFederation);
 
-	var _CreateTeam = __webpack_require__(300);
+	var _CreateTeam = __webpack_require__(301);
 
 	var _CreateTeam2 = _interopRequireDefault(_CreateTeam);
 
-	var _Federation = __webpack_require__(301);
+	var _Federation = __webpack_require__(302);
 
 	var _Federation2 = _interopRequireDefault(_Federation);
 
-	var _CreateTournament = __webpack_require__(302);
+	var _CreateTournament = __webpack_require__(303);
 
 	var _CreateTournament2 = _interopRequireDefault(_CreateTournament);
 
-	var _Match = __webpack_require__(303);
+	var _Match = __webpack_require__(304);
 
 	var _Match2 = _interopRequireDefault(_Match);
 
@@ -22606,6 +22606,8 @@
 
 	var GET_STAGES = exports.GET_STAGES = 'GET_STAGES';
 
+	var ADD_MESSAGE_IN_CHAT = exports.ADD_MESSAGE_IN_CHAT = 'ADD_MESSAGE_IN_CHAT';
+
 /***/ },
 /* 190 */
 /***/ function(module, exports, __webpack_require__) {
@@ -22899,6 +22901,10 @@
 	    switch (action.type) {
 	        case _constants.GET_MATCH:
 	            return _extends({}, state, action.payload);
+	        case _constants.ADD_MESSAGE_IN_CHAT:
+	            var newState = _extends({}, state);
+	            newState.matchObject.chat.push(action.payload);
+	            return newState;
 	        default:
 	            return state;
 	    }
@@ -22912,6 +22918,10 @@
 	    },
 	    team2: {
 	        name: ""
+	    },
+	    matchObject: {
+	        _id: "",
+	        chat: []
 	    }
 	};
 
@@ -31681,6 +31691,10 @@
 
 	var _reactRouter = __webpack_require__(222);
 
+	var _Chart = __webpack_require__(298);
+
+	var _Chart2 = _interopRequireDefault(_Chart);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31741,10 +31755,11 @@
 	                        { to: '/federation/create', className: 'waves-effect waves-light btn' },
 	                        'button'
 	                    ),
+	                    _react2.default.createElement(_Chart2.default, null),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'row content-margin-top' },
-	                        !isOwnPage ? "" : _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/account/add-creator/',
+	                        isOwnPage ? "" : _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/account/add-creator/',
 	                            buttonName: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0432 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0442\u043E\u0440\u044B',
 	                            header: '\u0421\u043F\u0438\u0441\u043E\u043A \u0444\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u0439',
 	                            nameHiddenInput: 'idUser',
@@ -31834,6 +31849,47 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	    displayName: 'Chart',
+
+	    componentDidMount: function componentDidMount() {
+	        google.charts.load('current', { 'packages': ['corechart'] });
+	        google.charts.setOnLoadCallback(drawChart);
+
+	        function drawChart() {
+	            var data = google.visualization.arrayToDataTable([['Год', 'Голы', 'Красные карточки'], ['2013', 1000, 400], ['2014', 1170, 460], ['2015', 660, 1120], ['2016', 1030, 540]]);
+
+	            var options = {
+	                title: 'Статистика игрока',
+	                hAxis: { title: 'Год', titleTextStyle: { color: '#333' } },
+	                vAxis: { minValue: 0 }
+	            };
+
+	            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+	            chart.draw(data, options);
+	        }
+	    },
+	    render: function render() {
+	        return _react2.default.createElement('div', { id: 'chart_div' });
+	    }
+	});
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactRedux = __webpack_require__(209);
 
 	var _redux = __webpack_require__(173);
@@ -31875,7 +31931,7 @@
 	})(Component);
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31966,7 +32022,7 @@
 	});
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32071,7 +32127,7 @@
 	});
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32185,7 +32241,7 @@
 	})(Component);
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32315,7 +32371,7 @@
 	});
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32332,9 +32388,13 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _match = __webpack_require__(304);
+	var _match = __webpack_require__(305);
 
 	var matchActions = _interopRequireWildcard(_match);
+
+	var _Chat = __webpack_require__(306);
+
+	var _Chat2 = _interopRequireDefault(_Chat);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32350,10 +32410,15 @@
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'container content-margin-top content-flex' },
-	            '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043C\u0430\u0442\u0447\u0430 ',
-	            this.props.match.team1.name,
-	            '- ',
-	            this.props.match.team2.name
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                '\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043C\u0430\u0442\u0447\u0430 ',
+	                this.props.match.team1.name,
+	                '- ',
+	                this.props.match.team2.name
+	            ),
+	            _react2.default.createElement(_Chat2.default, { idMatch: this.props.params.idMatch })
 	        );
 	    }
 	});
@@ -32369,7 +32434,7 @@
 	})(Component);
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32379,6 +32444,7 @@
 	});
 	exports.getMatch = getMatch;
 	exports.getMatchesInTournament = getMatchesInTournament;
+	exports.addMessageInChat = addMessageInChat;
 
 	var _constants = __webpack_require__(189);
 
@@ -32402,6 +32468,190 @@
 	        });
 	    };
 	}
+
+	function addMessageInChat(object) {
+	    return function (dispatch, getState) {
+	        return dispatch({
+	            type: _constants.ADD_MESSAGE_IN_CHAT,
+	            payload: object
+	        });
+	    };
+	}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _match = __webpack_require__(305);
+
+	var matchActions = _interopRequireWildcard(_match);
+
+	var _reactRedux = __webpack_require__(209);
+
+	var _redux = __webpack_require__(173);
+
+	var _reactRouter = __webpack_require__(222);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var chatUrl = __webpack_require__(307).chatUrl;
+
+
+	function getCurrentTime() {
+	    if (!Date.prototype.today || !Date.prototype.timeNow) {
+	        // For todays date;
+	        Date.prototype.today = function () {
+	            return (this.getDate() < 10 ? "0" : "") + this.getDate() + "." + (this.getMonth() + 1 < 10 ? "0" : "") + (this.getMonth() + 1) + "." + this.getFullYear();
+	        };
+
+	        // For the time now
+	        Date.prototype.timeNow = function () {
+	            return (this.getHours() < 10 ? "0" : "") + this.getHours() + ":" + (this.getMinutes() < 10 ? "0" : "") + this.getMinutes() + ":" + (this.getSeconds() < 10 ? "0" : "") + this.getSeconds();
+	        };
+	    }
+
+	    var newDate = new Date();
+	    return newDate.timeNow() + " " + newDate.today();
+	}
+
+	var Component = _react2.default.createClass({
+	    displayName: 'Component',
+
+	    onsubmit: function onsubmit(event) {
+	        event.preventDefault();
+	        var outgoingMessage = event.target.message.value;
+
+	        this.ws.send(JSON.stringify({
+	            type: "message",
+	            message: outgoingMessage,
+	            time: getCurrentTime()
+	        }));
+
+	        event.target.reset();
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+
+	        // создать подключение
+	        this.ws = new WebSocket(chatUrl);
+
+	        // обработчик входящих сообщений
+	        this.ws.onmessage = function (event) {
+	            var incomingMessage = JSON.parse(event.data);
+	            _this.props.matchActions.addMessageInChat(incomingMessage);
+	        };
+
+	        setTimeout(function () {
+	            _this.ws.send(JSON.stringify({
+	                type: "start",
+	                idMatch: _this.props.idMatch
+	            }));
+	        }, 100);
+	    },
+	    render: function render() {
+	        var messages = this.props.match.matchObject //нужно что то умнее придумать
+	        .chat.slice(0).reverse().map(function (item, index) {
+	            return _react2.default.createElement(
+	                'li',
+	                { className: 'collection-item avatar', key: index },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/account/' + item.user._id },
+	                    _react2.default.createElement('img', { src: item.user.image, alt: '', className: 'circle' })
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'title' },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/account/' + item.user._id },
+	                        item.user.name
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    item.message
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'secondary-content' },
+	                    item.time
+	                )
+	            );
+	        });
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'card' },
+	            _react2.default.createElement(
+	                'form',
+	                { name: 'publish', className: 'chat-padding', onSubmit: this.onsubmit },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-field col s12' },
+	                        _react2.default.createElement('input', { id: 'email', type: 'text', name: 'message', className: 'validate' }),
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'email' },
+	                            '\u0412\u0430\u0448\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn waves-effect waves-light', type: 'submit', name: 'action' },
+	                    '\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C',
+	                    _react2.default.createElement(
+	                        'i',
+	                        { className: 'material-icons right' },
+	                        'send'
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'ul',
+	                { className: 'collection' },
+	                messages
+	            )
+	        );
+	    }
+	});
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        match: state.match,
+	        currentUser: state.currentUser
+	    };
+	}, function (dispatch) {
+	    return {
+	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch)
+	    };
+	})(Component);
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+	  chatUrl: "ws://localhost:8080"
+	};
 
 /***/ }
 /******/ ]);

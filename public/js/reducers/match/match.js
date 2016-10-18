@@ -1,4 +1,4 @@
-import {GET_MATCH}  from '../../constants';
+import {GET_MATCH, ADD_MESSAGE_IN_CHAT}  from '../../constants';
 
 const initialState = {
     team1: {
@@ -6,6 +6,10 @@ const initialState = {
     },
     team2: {
         name: ""
+    },
+    matchObject: {
+        _id: "",
+        chat: []
     }
 };
 
@@ -13,6 +17,10 @@ export default function(state = initialState, action) {
     switch (action.type) {
         case GET_MATCH:
             return {...state, ...action.payload};
+        case ADD_MESSAGE_IN_CHAT:
+            var newState = {...state};
+            newState.matchObject.chat.push(action.payload);
+            return newState;
         default:
             return state;
     }
