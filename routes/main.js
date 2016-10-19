@@ -30,6 +30,20 @@ router.get('/get-current-user', function(req, res, next) {
     res.json(req.user);
 });
 
+router.get('/is-authenticated', function(req, res, next) {
+    console.log(req.isAuthenticated());
+    if(!req.isAuthenticated()) {
+        return res.json({
+            status: 500
+        });
+        
+    }
+    
+    res.json({
+        status: 200
+    });
+});
+
 router.get('/get-user/:idUser', function(req, res, next) {
     User.findById(req.params.idUser, function (err, result) {
         res.json(result);

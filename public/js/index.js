@@ -18,8 +18,32 @@ import Federation from './containers/Federation';
 import CreateTournament from './containers/CreateTournament';
 import Match from './containers/Match';
 import CreateStage from './containers/CreateStage';
+import Forbidden from './containers/Forbidden';
 
 const store = configureStore();
+
+function requireAuth(store) {
+    return (nextState, replace, callback) => {
+        var currentUser = store.getState().currentUser;
+        if(!currentUser._id) {
+            fetch("/api/is-authenticated", {
+                credentials: 'include'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status == 500) {
+                        replace("/forbidden");
+                    }
+                    callback();
+                })
+                .catch(error => {
+                    callback(error);
+                });
+        } else {
+            callback();
+        }
+    };
+}
 
 ReactDOM.render(
     <Provider store={store}>
@@ -27,10 +51,11 @@ ReactDOM.render(
             <Route path='/' component={App}>
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
-                <Route path='team/create' component={CreateTeam} />
-                <Route path='tournament/create' component={CreateTournament} />
-                <Route path='federation/create' component={CreateFederation} />
-                <Route path='stage/create' component={CreateStage} />
+                <Route path='forbidden' component={Forbidden} />
+                <Route path='team/create' component={CreateTeam} onEnter={requireAuth(store)}/>
+                <Route path='tournament/create' component={CreateTournament} onEnter={requireAuth(store)}/>
+                <Route path='federation/create' component={CreateFederation} onEnter={requireAuth(store)}/>
+                <Route path='stage/create' component={CreateStage} onEnter={requireAuth(store)}/>
                 <Route path='team/:idTeam' component={Team} />
                 <Route path='match/:idMatch' component={Match} />
                 <Route path='account/:idUser' component={Account} />
