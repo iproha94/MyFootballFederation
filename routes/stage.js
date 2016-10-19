@@ -40,7 +40,9 @@ router.post('/create', function(req, res, next) {
 
 
 router.get('/get-matches/:idStage', function(req, res, next) {
+    console.log(req.params.idStage);
     Match.find({stage: req.params.idStage}, function (err, matches) {
+        console.log(matches);
         return res.json(matches);
     });
 });
@@ -51,10 +53,7 @@ router.get('/:idStage', function(req, res, next) {
     var idStage = req.params.idStage;
 
     Stage.findById(idStage, function (err, stage) {
-
-
-            return res.json(stage);
-
+        return res.json(stage);
     });
 });
 
@@ -77,6 +76,7 @@ router.get('/:idStage/start', function(req, res, next) {
                         console.log("ошибка сохранения матча");
                         return next(err);
                     }
+                    
 
                     stage.matches.push(match._id);
 
@@ -90,7 +90,9 @@ router.get('/:idStage/start', function(req, res, next) {
                 })
             });
 
-            return res.redirect('/stage/' + idStage);
+            return res.json({
+                "status": "OK"
+            });
         });
     });
 });

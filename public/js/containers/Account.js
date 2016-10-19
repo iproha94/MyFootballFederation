@@ -22,9 +22,9 @@ var Component = React.createClass({
     render: function () {
         var currentUser = this.props.currentUser;
         var user = this.props.pageUser;
-        var isOwnPage = (currentUser._id == user._id);
+        var isOwnPage = !(currentUser._id == user._id);
         return (
-            <div>
+                <div>
                 <div className="container content-margin-top content-flex">
                     <div className="center">
                         <h3>Страница пользователя</h3>
@@ -38,14 +38,14 @@ var Component = React.createClass({
                               url="/team/"
                               defaultMessage="Команд нет"
                               list={this.props.teams}/>
-                        <Link to="/team/create" className="waves-effect waves-light btn">button</Link>
+                        <Link to="/team/create" className="waves-effect waves-light btn">Создать команду</Link>
 
                         <List header="Федерации"
                               url="/federation/"
                               defaultMessage="Федераций нет"
                               urlParam="name"
                               list={this.props.federations}/>
-                        <Link to="/federation/create" className="waves-effect waves-light btn">button</Link>
+                        <Link to="/federation/create" className="waves-effect waves-light btn">Создать федерацию</Link>
 
                         <Chart/>
                         

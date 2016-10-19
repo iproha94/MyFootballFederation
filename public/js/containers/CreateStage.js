@@ -5,7 +5,7 @@ export default React.createClass({
         event.preventDefault();
         $.ajax({
             method: 'POST',
-            data: $(".js-form").serialize(),
+            data: $(event.target).serialize(),
             url: "/api" + location.pathname + location.search,
             success: (data) => {
                 Materialize.toast("Операция прошла успешно", 2000);
@@ -21,13 +21,16 @@ export default React.createClass({
         return (
             <div className="container content-margin-top content-flex">
                 <div className="row">
-                    <form className="js-form" method="post" onSubmit={this.handleSubmit}>
-                        <div className="input-field">
-                            <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*" />
-                                <label for="name">Название этапа</label>
+                    <form method="post" onSubmit={this.handleSubmit}>
+                        
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*" />
+                                    <label for="name">Название этапа</label>
+                            </div>
                         </div>
-
-                        <button className="btn waves-effect waves-light" type="submit">Submit
+                            
+                            <button className="btn waves-effect waves-light" type="submit">Submit
                             <i className="material-icons right">send</i>
                         </button>
                     </form>

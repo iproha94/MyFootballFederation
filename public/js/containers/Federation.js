@@ -41,12 +41,10 @@ var Component = React.createClass({
                     </ul>
                 </div>
                 
-                <div className="row">
-                    <List header="Турниры:"
-                          url="/tournament/"
-                          defaultMessage="Турниров нет"
-                          list={this.props.tournamentList}/>
-                </div>
+                <List header="Турниры:"
+                      url="/tournament/"
+                      defaultMessage="Турниров нет"
+                      list={this.props.tournamentList}/>
                 {buttonCreateTournament}
             </div>
         );

@@ -16,7 +16,7 @@ router.get('/create', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
-        res.statusCode(403);
+        res.status(403);
         return res.json({
             message: "Пошел к черту"
         });

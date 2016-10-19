@@ -11,6 +11,21 @@ var Component = React.createClass({
         this.props.stageActions.getStage(this.props.params.idStage);
         this.props.matchActions.getMatchesInStage(this.props.params.idStage);
     },
+    onStart: function (event) {
+        console.log("start");
+
+        $.ajax({
+            url: "/api" + location.pathname + "/start",
+            success: (data) => {
+                Materialize.toast("Операция прошла успешно", 2000);
+                this.props.matchActions.getMatchesInStage(this.props.params.idStage);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
+        });
+    },
     render: function () {
         const stage = this.props.stage;
 
@@ -30,7 +45,7 @@ var Component = React.createClass({
                 </div>
 
                 <div className="row right-align">
-                    <a className="waves-effect waves-light btn" href="{{stage._id}}\start">Начать со всеми заявившимися командами</a>
+                    <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">Начать со всеми заявившимися командами</a>
                 </div>
 
                 <List header="Список матчей:"
