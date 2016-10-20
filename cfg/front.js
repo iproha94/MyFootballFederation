@@ -1,3 +1,3 @@
 module.exports = {
-  chatUrl: "ws://172.16.50.254:8080"
+  chatUrl: "ws://185.143.172.172:8080"
 };
