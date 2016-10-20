@@ -41,7 +41,7 @@ router.get('/:idUser/get-my-matches', function(req, res, next) {
             }]
         },
         team2: {
-            name: "Real-Madrid",
+            name: "Real",
             logo: "http://unsplash.it/100/100?image=10",
             idTeam: 11,
             players: [{
@@ -58,6 +58,58 @@ router.get('/:idUser/get-my-matches', function(req, res, next) {
                 idUser: 112,
                 name: "Zinedin Zidane",
                 image: "http://unsplash.it/100/100?image=13",
+                number: 7
+            }]
+        }
+    }, {
+        idUser: idUser,
+        idMatch: 2,
+        federation: "federation_name_2",
+        tournament: "tournament_name_2",
+        stage: "stage_name_2",
+        matchConfig: {
+            timePeriod: 2,
+            countPeriods: 3,
+        },
+        team1: {
+            name: "CSKA",
+            logo: "http://unsplash.it/100/100?image=21",
+            idTeam: 12,
+            players: [{
+                idUser: 121,
+                name: "Jo",
+                image: "http://unsplash.it/100/100?image=22",
+                number: 10
+            }, {
+                idUser: 122,
+                name: "Musa",
+                image: "http://unsplash.it/100/100?image=23",
+                number: 11
+            }, {
+                idUser: 123,
+                name: "Dumbia",
+                image: "http://unsplash.it/100/100?image=24",
+                number: 37
+            }]
+        },
+        team2: {
+            name: "Manchester United",
+            logo: "http://unsplash.it/100/100?image=30",
+            idTeam: 13,
+            players: [{
+                idUser: 130,
+                name: "Ibra",
+                image: "http://unsplash.it/100/100?image=31",
+                number: 3
+            }, {
+                idUser: 131,
+                name: "De Hea",
+                image: "http://unsplash.it/100/100?image=32",
+                number: 8
+            }, {
+                idUser: 132,
+                name: "Mourinio",
+                image: "http://unsplash.it/100/100?image=33",
                 number: 7
             }]
         }
