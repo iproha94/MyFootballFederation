@@ -2,12 +2,13 @@ import {
     GET_FEDERATIONS,
     GET_FEDERATION_INFO,
     GET_TOURNAMENTS_IN_FEDERATION,
+    GET_FEDERATIONS_USER,
     ROUTING
 } from '../../constants';
 
-export function getFederations() {
+export function getFederationsCurrentUser() {
     return (dispatch, getState) => {
-        return $.when($.get("/api/federation/get")).then(function (result) {
+        return $.when($.get("/api/federation/get-by-creator")).then(function (result) {
             return dispatch({
                 type: GET_FEDERATIONS,
                 payload: result
@@ -15,6 +16,18 @@ export function getFederations() {
         });
     };
 }
+
+export function getFederationsUser(id) {
+    return (dispatch, getState) => {
+        return $.when($.get("/api/federation/get-by-creator?idUser=" + id)).then(function (result) {
+            return dispatch({
+                type: GET_FEDERATIONS_USER,
+                payload: result
+            });
+        });
+    };
+}
+
 
 export function getFederationInfo(name) {
     return (dispatch, getState) => {

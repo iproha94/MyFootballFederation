@@ -27,7 +27,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/get-current-user', function(req, res, next) {
-    res.json(req.user);
+    Federation.find({creators: req.user._id}, function (err, fResult) {
+        Team.find({creators: req.user._id}, function (err, tResult) {
+            res.json({
+                user: req.user,
+                federations: fResult,
+                teams: tResult,
+                newUser: Date.now() - req.user.created < 3600000
+            });
+        });
+    });
 });
 
 router.get('/is-authenticated', function(req, res, next) {
@@ -44,11 +53,6 @@ router.get('/is-authenticated', function(req, res, next) {
     });
 });
 
-router.get('/get-user/:idUser', function(req, res, next) {
-    User.findById(req.params.idUser, function (err, result) {
-        res.json(result);
-    });
-});
 
 router.get('/users', function(req, res, next) {
     User.find({}, function (err, result) {
@@ -56,37 +60,16 @@ router.get('/users', function(req, res, next) {
     });
 });
 
-router.get('/account', function(req, res, next) {
-    if (!req.isAuthenticated())  {
-        return res.redirect('/unauthorized' );
-    }
-
-    Federation.find({creators: req.user._id}, function (err, fResult) {
-        Team.find({creators: req.user._id}, function (err, tResult) {
-            res.render("account", {
-                federations:  fResult,
-                teams: tResult,
-                newUser: Date.now() - req.user.created < 3600000
-            });
-        });
-    });
-
-});
-
-router.get('/account/:idUser', function(req, res, next) {
+router.get('/get-user/:idUser', function(req, res, next) {
     var idUser = req.params.idUser;
-     if(req.user && idUser == req.user._id.toString()) {
-         return res.redirect("/account");
-     }
-
     User.findById(idUser, function (err, user) {
         if(err || !user) {
             return next();
         }
         Federation.find({creators: idUser}, function (err, fResult) {
             Team.find({creators: idUser}, function (err, tResult) {
-                res.render("account", {
-                    pageUser: user,
+                res.json({
+                    user: user,
                     federations: fResult,
                     teams: tResult
                 });

@@ -1,31 +1,24 @@
 import {
-    GET_CURRENT_USER,
-    GET_FEDERATIONS,
-    GET_TEAMS
-}  from '../../constants';
+    GET_USER_BY_ID,
+    GET_FEDERATIONS_USER
+}  from '../constants';
 
 const initialState = {
     name: "",
     _id: "",
     teams: [],
-    federations: [],
-    newUser: false
+    federations: []
 };
-
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case GET_CURRENT_USER:
+        case GET_USER_BY_ID:
             var newState = {...action.payload, ...action.payload.user};
             delete newState.user;
             return newState;
-        case GET_FEDERATIONS:
+        case GET_FEDERATIONS_USER:
             var newState = {...state};
             newState.federations = [...action.payload];
-            return newState;
-        case GET_TEAMS:
-            var newState = {...state};
-            newState.teams = [...action.payload];
             return newState;
         default:
             return state;

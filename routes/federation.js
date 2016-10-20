@@ -28,8 +28,10 @@ router.post('/create', function(req, res, next) {
     });
 });
 
-router.get('/get', function (req, res, next) {
-    Federation.find({creators: req.user._id}, function (err, result) {
+router.get('/get-by-creator', function (req, res, next) {
+    console.log(req.query.idUser, req.user._id);
+    var creator = req.query.idUser || req.user._id;
+    Federation.find({creators: creator}, function (err, result) {
         res.json(result);
     });
 });
