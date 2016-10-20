@@ -1,3 +1,3 @@
 module.exports = {
-  chatUrl: "ws://localhost:8080"
+  chatUrl: "ws://172.16.50.254:8080"
 };

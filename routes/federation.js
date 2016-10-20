@@ -38,9 +38,8 @@ router.get('/:name', function(req, res, next) {
     var name = req.params.name;
     Federation.findOne({name : name}, function (err, result) {
         if(err || !result) {
-            res.status(500);
             return res.json({
-                message: "error"
+                status: 404
             });
         }
 
@@ -50,14 +49,12 @@ router.get('/:name', function(req, res, next) {
 
 router.get('/get-tournaments/:name', function(req, res, next) {
     Federation.findOne({name : req.params.name}, function (err, federation) {
+        if(err || !federation) {
+            return res.json({
+                status: 404
+            });
+        }
         Tournament.find({federation: federation._id}, function (err, tournaments) {
-            if(err) {
-                res.status(500);
-                return res.json({
-                    message: "error"
-                });
-            }
-
             res.json(tournaments);
         });
     });
