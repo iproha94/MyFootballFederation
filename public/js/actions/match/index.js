@@ -17,7 +17,7 @@ export function getMatch(_id) {
 }
 export function getMatchesInStage(_id) {
     return (dispatch, getState) => {
-        return $.when($.get("/api/stage/get-matches/:" + _id)).then(function (result) {
+        return $.when($.get("/api/stage/get-matches/" + _id)).then(function (result) {
             return dispatch({
                 type: GET_MATCHES_IN_STAGE,
                 payload: result

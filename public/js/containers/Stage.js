@@ -52,7 +52,6 @@ var Component = React.createClass({
                       url="/match/"
                       defaultMessage="В этапе нет матчей"
                       list={this.props.matches}/>
-
             </div>
         );
     }

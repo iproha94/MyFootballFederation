@@ -50,11 +50,6 @@ var TournamentPage = React.createClass({
                              valueArray={this.props.teamsCurrentUser}
                              valueHiddenInput={tournament._id}
                              onSuccess={this.onSuccessAddTeam}/>
-                
-                <div className="row right-align">
-                    <Link className="waves-effect waves-light btn"
-                          to={"/tournament/"+ tournament._id + "?setstatus=undertake"}>Начать турнир</Link>
-                </div>
             </div>
         );
         //тут нужно проверять какую то галочку о том что матч начался

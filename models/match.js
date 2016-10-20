@@ -3,8 +3,10 @@ var Schema = mongoose.Schema;
 
 var matchSchema = new Schema({
     _tour: Number,
+    name: String,
     team1: Schema.Types.ObjectId,
     team2: Schema.Types.ObjectId,
+    stage: Schema.Types.ObjectId,
     chat: [{
         user: Object,
         message: String,

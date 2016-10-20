@@ -40,9 +40,7 @@ router.post('/create', function(req, res, next) {
 
 
 router.get('/get-matches/:idStage', function(req, res, next) {
-    console.log(req.params.idStage);
     Match.find({stage: req.params.idStage}, function (err, matches) {
-        console.log(matches);
         return res.json(matches);
     });
 });
@@ -71,27 +69,22 @@ router.get('/:idStage/start', function(req, res, next) {
             console.log(matches);
 
             matches.forEach(function (match, index, array) {
+                match.stage = idStage;
+                match.name = match.team1 + " vs " + match.team2;
+
                 match.save(function (err) {
                     if(err) {
                         console.log("ошибка сохранения матча");
                         return next(err);
                     }
-                    
 
-                    stage.matches.push(match._id);
-
-                    stage.save(function (err) {
-                        if(err) {
-                            console.log("ошибка сохранения этапа после добавления матчей");
-                            return next(err);
-                        }
-                    });
-
-                })
-            });
-
-            return res.json({
-                "status": "OK"
+                    if (index == matches.length - 1) {
+                        console.log("все мачти добавлены");
+                        return res.json({
+                            "status": "OK"
+                        });
+                    }
+                });
             });
         });
     });

@@ -7,7 +7,6 @@ var stageSchema = new Schema({
     name: String,
     tournament: Schema.Types.ObjectId,
     teams: [Schema.Types.ObjectId],
-    matches: [Schema.Types.ObjectId],
     type: Object,
 });
 
