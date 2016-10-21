@@ -9,7 +9,8 @@ const initialState = {
     _id: "",
     teams: [],
     federations: [],
-    newUser: false
+    newUser: false,
+    image: '/img/camera.png'
 };
 
 

@@ -114,11 +114,11 @@
 
 	var _Match2 = _interopRequireDefault(_Match);
 
-	var _CreateStage = __webpack_require__(310);
+	var _CreateStage = __webpack_require__(309);
 
 	var _CreateStage2 = _interopRequireDefault(_CreateStage);
 
-	var _Forbidden = __webpack_require__(311);
+	var _Forbidden = __webpack_require__(310);
 
 	var _Forbidden2 = _interopRequireDefault(_Forbidden);
 
@@ -22758,7 +22758,8 @@
 	    _id: "",
 	    teams: [],
 	    federations: [],
-	    newUser: false
+	    newUser: false,
+	    image: '/img/camera.png'
 	};
 
 /***/ },
@@ -31834,7 +31835,7 @@
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
 	                                { to: "/account/" + this.props.currentUser._id },
-	                                _react2.default.createElement('img', { className: 'circle', src: '{{default user.image \'/img/camera.png\'}}' })
+	                                _react2.default.createElement('img', { className: 'circle', src: this.props.currentUser.image })
 	                            ),
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
@@ -31870,7 +31871,7 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'a',
-	                            { className: 'waves-effect', href: "/auth/vkontakte/callback?redirect=" + location.pathname },
+	                            { className: 'waves-effect', href: "/auth/vkontakte?redirect=" + location.pathname },
 	                            _react2.default.createElement('i', { className: 'fa fa-vk fa-lg', 'aria-hidden': 'true' }),
 	                            '\u0412\u043A\u043E\u043D\u0442\u0430\u043A\u0442\u0435'
 	                        )
@@ -31911,8 +31912,8 @@
 	                        'li',
 	                        null,
 	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { className: 'waves-effect', to: '/logout' },
+	                            'a',
+	                            { className: 'waves-effect', href: '/logout' },
 	                            _react2.default.createElement('i', { className: 'fa fa-bed fa-lg', 'aria-hidden': 'true' }),
 	                            '\u0412\u044B\u0439\u0442\u0438'
 	                        )
@@ -32921,7 +32922,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var chatUrl = __webpack_require__(309).chatUrl;
+	var chatUrl = __webpack_require__(311).chatUrl;
 
 
 	function getCurrentTime() {
@@ -33062,16 +33063,6 @@
 
 /***/ },
 /* 309 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = {
-	  chatUrl: "ws://185.143.172.172:8080"
-	};
-
-/***/ },
-/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33148,7 +33139,7 @@
 	});
 
 /***/ },
-/* 311 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33178,6 +33169,16 @@
 	        );
 	    }
 	});
+
+/***/ },
+/* 311 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+	    chatUrl: "ws://localhost:8080"
+	};
 
 /***/ }
 /******/ ]);
