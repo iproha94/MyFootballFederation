@@ -114,11 +114,11 @@
 
 	var _Match2 = _interopRequireDefault(_Match);
 
-	var _CreateStage = __webpack_require__(309);
+	var _CreateStage = __webpack_require__(310);
 
 	var _CreateStage2 = _interopRequireDefault(_CreateStage);
 
-	var _Forbidden = __webpack_require__(310);
+	var _Forbidden = __webpack_require__(311);
 
 	var _Forbidden2 = _interopRequireDefault(_Forbidden);
 
@@ -30780,6 +30780,7 @@
 	    render: function render() {
 	        var tournament = this.props.tournament;
 
+	        var isAuth = !!this.props.currentUser._id;
 	        var content = _react2.default.createElement(
 	            'div',
 	            null,
@@ -30801,7 +30802,7 @@
 	                    '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u044D\u0442\u0430\u043F'
 	                )
 	            ),
-	            _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/tournament/add-team',
+	            !isAuth ? "" : _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api/tournament/add-team',
 	                buttonName: '\u041F\u043E\u0434\u0430\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443 \u043E\u0442 \u043B\u0438\u0446\u0430 \u043A\u043E\u043C\u0430\u043D\u0434\u044B',
 	                header: '\u0421\u043F\u0438\u0441\u043E\u043A \u043A\u043E\u043C\u0430\u043D\u0434',
 	                nameHiddenInput: 'idTournament',
@@ -30845,7 +30846,8 @@
 	        teams: state.teamsTournament,
 	        teamsCurrentUser: state.teams,
 	        matches: state.matchList,
-	        stages: state.stages
+	        stages: state.stages,
+	        currentUser: state.currentUser
 	    };
 	}, function (dispatch) {
 	    return {
@@ -32207,78 +32209,7 @@
 	        }
 	    },
 	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'card' },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'row' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'col s12' },
-	                    _react2.default.createElement(
-	                        'ul',
-	                        { className: 'tabs' },
-	                        _react2.default.createElement(
-	                            'li',
-	                            { className: 'tab col s3' },
-	                            _react2.default.createElement(
-	                                'a',
-	                                { href: '#test1' },
-	                                'Test 1'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'li',
-	                            { className: 'tab col s3' },
-	                            _react2.default.createElement(
-	                                'a',
-	                                { className: 'active', href: '#test2' },
-	                                'Test 2'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'li',
-	                            { className: 'tab col s3' },
-	                            _react2.default.createElement(
-	                                'a',
-	                                { href: '#test3' },
-	                                'Test 3'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'li',
-	                            { className: 'tab col s3' },
-	                            _react2.default.createElement(
-	                                'a',
-	                                { href: '#test4' },
-	                                'Test 4'
-	                            )
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'test1', className: 'col s12' },
-	                    _react2.default.createElement('div', { id: 'chart_div' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'test2', className: 'col s12' },
-	                    'Test 2'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'test3', className: 'col s12' },
-	                    'Test 3'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'test4', className: 'col s12' },
-	                    'Test 4'
-	                )
-	            )
-	        );
+	        return _react2.default.createElement('div', { id: 'chart_div' });
 	    }
 	});
 
@@ -32922,7 +32853,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var chatUrl = __webpack_require__(311).chatUrl;
+	var chatUrl = __webpack_require__(309).chatUrl;
 
 
 	function getCurrentTime() {
@@ -33063,6 +32994,16 @@
 
 /***/ },
 /* 309 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = {
+	    chatUrl: "ws://localhost:8080"
+	};
+
+/***/ },
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33139,7 +33080,7 @@
 	});
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33169,16 +33110,6 @@
 	        );
 	    }
 	});
-
-/***/ },
-/* 311 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	module.exports = {
-	    chatUrl: "ws://localhost:8080"
-	};
 
 /***/ }
 /******/ ]);

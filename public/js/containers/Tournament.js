@@ -23,6 +23,7 @@ var TournamentPage = React.createClass({
     },
     render: function () {
         const {tournament} = this.props;
+        var isAuth = !!this.props.currentUser._id;
         var content = (
             <div>
                 <List header="Список заявок команд:"
@@ -43,13 +44,15 @@ var TournamentPage = React.createClass({
                     </Link>
                 </div>
 
-                <ModalWindow urlSend="/api/tournament/add-team"
-                             buttonName="Подать заявку от лица команды"
-                             header="Список команд"
-                             nameHiddenInput="idTournament"
-                             valueArray={this.props.teamsCurrentUser}
-                             valueHiddenInput={tournament._id}
-                             onSuccess={this.onSuccessAddTeam}/>
+                {!isAuth ? "" :
+                    <ModalWindow urlSend="/api/tournament/add-team"
+                                 buttonName="Подать заявку от лица команды"
+                                 header="Список команд"
+                                 nameHiddenInput="idTournament"
+                                 valueArray={this.props.teamsCurrentUser}
+                                 valueHiddenInput={tournament._id}
+                                 onSuccess={this.onSuccessAddTeam}/>
+                }
             </div>
         );
         //тут нужно проверять какую то галочку о том что матч начался
@@ -82,7 +85,8 @@ export default connect((state)=>{
         teams: state.teamsTournament,
         teamsCurrentUser: state.teams,
         matches: state.matchList,
-        stages: state.stages
+        stages: state.stages,
+        currentUser: state.currentUser
     }
 }, (dispatch)=>{
     return {
