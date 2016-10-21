@@ -55,8 +55,9 @@ var Component = React.createClass({
                             <div className="userView">
                                 <img className="background" src="http://unsplash.it/400/200?image=527"/>
                                     <Link to={"/account/" + this.props.currentUser._id}>
-                                        <img className="circle" src="{{default user.image '/img/camera.png'}}"/>
+                                        <img className="circle" src={this.props.currentUser.image}/>
                                     </Link>
+
                                     <Link to={"/account/" + this.props.currentUser._id}>
                     <span className="white-text name">
                         {isAuthenticated ? user.name : "Аноним"}
@@ -71,14 +72,14 @@ var Component = React.createClass({
                         :
                             [
                             <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect" href={"/auth/vkontakte/callback?redirect=" + location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
+                            <li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
                             <li><a className="waves-effect" href="#"><i className="fa fa-google-plus fa-lg" aria-hidden="true"></i>Google</a></li>,
                         ]}
                         <li><div className="divider"></div></li>
                         <li><a className="subheader">Дополнительно</a></li>
                         {isAuthenticated ? [
                         <li><Link className="waves-effect" to="/users"><i className="fa fa-users fa-lg" aria-hidden="true"></i>Пользователи</Link></li>,
-                        <li><Link className="waves-effect" to="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</Link></li>
+                        <li><a className="waves-effect" href="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
 
                         ] :(
                         <li><a className="waves-effect" href="#!"><i className="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
