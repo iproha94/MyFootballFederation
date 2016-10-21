@@ -135,10 +135,30 @@ router.get('/:idMatch/get-info', function(req, res, next) {
     });
 });
 
-router.post('/:idMatch/set-info', function(req, res, next) {
+router.get('/:idMatch/:number/:data/set-info', function(req, res, next) {
+    // let idMatch = req.params.idMatch;
+    // let number = req.body.number;
+    // let data = req.body.data;
+    //
+    // Match.findById(idMatch, function (err, match) {
+    //     match.events.push({
+    //         number: number,
+    //         data: data,
+    //     });
+    //
+    //     console.log(req.body);
+    //
+    //     match.save(function (err) {
+    //         return res.json({
+    //             status: "OK",
+    //             code: 200
+    //         });
+    //     });
+    // });
+
     let idMatch = req.params.idMatch;
-    let number = req.body.number;
-    let data = req.body.data;
+    let number = req.params.number;
+    let data = req.params.data;
 
     Match.findById(idMatch, function (err, match) {
         match.events.push({
