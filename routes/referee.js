@@ -5,58 +5,6 @@ var User = require('../models/user');
 var Match = require('../models/match');
 var Team = require('../models/team');
 
-var matchPattern = {
-    idMatch: 1,
-    federation: "federation_name_",
-    tournament: "tournament_name_",
-    stage: "stage_name_",
-    matchConfig: {
-        timePeriod: 1,
-        countPeriods: 2,
-    },
-    team1: {
-        name: "",
-        logo: "http://unsplash.it/100/100?image=1",
-        idTeam: 1,
-        players: [{
-            idUser: 11,
-            name: "player11",
-            image: "http://unsplash.it/100/100?image=11",
-            number: 11
-        }, {
-            idUser: 12,
-            name: "player12",
-            image: "http://unsplash.it/100/100?image=12",
-            number: 12
-        }, {
-            idUser: 13,
-            name: "player13",
-            image: "http://unsplash.it/100/100?image=13",
-            number: 13
-        }]
-    },
-    team2: {
-        name: "",
-        logo: "http://unsplash.it/100/100?image=2",
-        idTeam: 2,
-        players: [{
-            idUser: 21,
-            name: "player21",
-            image: "http://unsplash.it/100/100?image=21",
-            number: 21
-        }, {
-            idUser: 22,
-            name: "player22",
-            image: "http://unsplash.it/100/100?image=22",
-            number: 22
-        }, {
-            idUser: 23,
-            name: "player23",
-            image: "http://unsplash.it/100/100?image=23",
-            number: 23
-        }]
-    }
-};
 
 router.get('/:idUser/get-my-matches', function(req, res, next) {
     let idUser = "vkontakte:" + req.params.idUser;
@@ -70,7 +18,58 @@ router.get('/:idUser/get-my-matches', function(req, res, next) {
             let myMatches = [];
 
             matches.forEach(function (match, index, array) {
-                let newMatch = matchPattern;
+                let newMatch = {
+                    idMatch: 1,
+                    federation: "federation_name_",
+                    tournament: "tournament_name_",
+                    stage: "stage_name_",
+                    matchConfig: {
+                        timePeriod: 1,
+                        countPeriods: 2,
+                    },
+                    team1: {
+                        name: "",
+                        logo: "http://unsplash.it/100/100?image=1",
+                        idTeam: 1,
+                        players: [{
+                            idUser: 11,
+                            name: "player11",
+                            image: "http://unsplash.it/100/100?image=11",
+                            number: 11
+                        }, {
+                            idUser: 12,
+                            name: "player12",
+                            image: "http://unsplash.it/100/100?image=12",
+                            number: 12
+                        }, {
+                            idUser: 13,
+                            name: "player13",
+                            image: "http://unsplash.it/100/100?image=13",
+                            number: 13
+                        }]
+                    },
+                    team2: {
+                        name: "",
+                        logo: "http://unsplash.it/100/100?image=2",
+                        idTeam: 2,
+                        players: [{
+                            idUser: 21,
+                            name: "player21",
+                            image: "http://unsplash.it/100/100?image=21",
+                            number: 21
+                        }, {
+                            idUser: 22,
+                            name: "player22",
+                            image: "http://unsplash.it/100/100?image=22",
+                            number: 22
+                        }, {
+                            idUser: 23,
+                            name: "player23",
+                            image: "http://unsplash.it/100/100?image=23",
+                            number: 23
+                        }]
+                    }
+                };
 
                 newMatch.idMatch = match._id;
 
@@ -136,10 +135,10 @@ router.get('/:idMatch/get-info', function(req, res, next) {
     });
 });
 
-router.get('/:idMatch/set-info', function(req, res, next) {
+router.post('/:idMatch/set-info', function(req, res, next) {
     let idMatch = req.params.idMatch;
-    let number = req.query.number;
-    let data = req.query.data;
+    let number = req.body.number;
+    let data = req.body.data;
 
     Match.findById(idMatch, function (err, match) {
         match.events.push({
