@@ -2,3 +2,4 @@ node_modules
 credentials.js
 .idea
 bundle.js
+front.js

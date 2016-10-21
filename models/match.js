@@ -7,6 +7,10 @@ var matchSchema = new Schema({
     team1: Schema.Types.ObjectId,
     team2: Schema.Types.ObjectId,
     stage: Schema.Types.ObjectId,
+    events: [{
+        number: Number,
+        data: String,
+    }],
     chat: [{
         user: Object,
         message: String,
