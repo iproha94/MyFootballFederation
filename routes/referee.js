@@ -136,8 +136,6 @@ router.get('/:idMatch/get-info', function(req, res, next) {
 });
 
 router.post('/:idMatch/set-info', function(req, res, next) {
-    console.log(req);
-
     let idMatch = req.params.idMatch;
     let number = req.body.number;
     let data = req.body.data;
@@ -148,13 +146,16 @@ router.post('/:idMatch/set-info', function(req, res, next) {
             data: data,
         });
 
-        match.save((err) => {
+        console.log(match);
+
+        match.save(function (err) {
             return res.json({
                 status: "OK",
                 code: 200
             });
         });
     });
+
 });
 
 router.get('/add-referee', function(req, res, next) {
