@@ -136,6 +136,8 @@ router.get('/:idMatch/get-info', function(req, res, next) {
 });
 
 router.post('/:idMatch/set-info', function(req, res, next) {
+    console.log(req);
+
     let idMatch = req.params.idMatch;
     let number = req.body.number;
     let data = req.body.data;
