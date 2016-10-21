@@ -54,7 +54,9 @@ var Component = React.createClass({
         }, 100);
 
     },
+    
     render: function () {
+        console.log(this.props.match);
         var messages = this.props.match.match//нужно что то умнее придумать
             .chat.slice(0).reverse().map(function (item, index) {
             return (

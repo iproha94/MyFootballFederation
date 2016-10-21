@@ -3,6 +3,7 @@ import {
     GET_FEDERATION_INFO,
     GET_TOURNAMENTS_IN_FEDERATION,
     GET_FEDERATIONS_USER,
+    GET_FEDERATION_BY_MATCH,
     ROUTING
 } from '../../constants';
 
@@ -27,6 +28,18 @@ export function getFederationsUser(id) {
         });
     };
 }
+
+export function getFederationByMatch(idMatch) {
+    return (dispatch, getState) => {
+        return $.when($.post("/api/federation/get-by-match?idMatch=" + idMatch)).then(function (result) {
+            return dispatch({
+                type: GET_FEDERATION_BY_MATCH,
+                payload: result
+            });
+        });
+    };
+}
+
 
 
 export function getFederationInfo(name) {

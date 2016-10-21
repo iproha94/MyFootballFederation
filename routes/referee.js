@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
+var User = require('../models/user');
 
 router.get('/:idUser/get-my-matches', function(req, res, next) {
     // Federation.find({creators: req.user._id}, function (err, federations) {
@@ -86,6 +87,17 @@ router.get('/:idMatch/set-info', function(req, res, next) {
     return res.json({
         status: "OK",
         code: 200
+    });
+});
+
+router.get('/add-referee', function(req, res, next) {
+    console.log("add-referee", req.query);
+    User.findById(req.query.idSend, function (err, user) {
+        user.matchesToReferee.push(req.query.idMatch);
+        user.save((err) => {
+            console.log(user);
+            res.json({status: 200});
+        });
     });
 });
 

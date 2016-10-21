@@ -42,7 +42,7 @@ export default React.createClass({
                                    nameHiddenInput={this.props.nameHiddenInput}
                                    valueHiddenInput={this.props.valueHiddenInput}/>
                     </div>
-
+    
                     <div className="modal-footer">
                         <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
                     </div>

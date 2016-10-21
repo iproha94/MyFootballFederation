@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
+var Stage = require('../models/stage');
+var Match = require('../models/match');
 
 router.post('/create', function(req, res, next) {
     if (!req.isAuthenticated())  {
@@ -58,6 +60,30 @@ router.get('/get-tournaments/:name', function(req, res, next) {
         }
         Tournament.find({federation: federation._id}, function (err, tournaments) {
             res.json(tournaments);
+        });
+    });
+});
+
+//TODO - надо как то более по умному сделать
+router.post('/get-by-match', function(req, res, next) {
+    if(!req.user) {
+        return res.json({
+            isFederationCreator: false
+        });
+    }
+    Match.findById(req.query.idMatch, function (err, match) {
+        Stage.findById(match.stage, function (err, stage) {
+            Tournament.findById(stage.tournament, function (err, tournament) {
+                Federation.findById(tournament.federation, function (err, federation) {
+                    var isFederationCreator = false;
+                    if(federation.creators.some((item)=>item == req.user._id.toString())) {
+                        isFederationCreator = true;
+                    }
+                    res.json({
+                        isFederationCreator: isFederationCreator
+                    });
+                });
+            });
         });
     });
 });

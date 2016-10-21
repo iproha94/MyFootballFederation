@@ -22639,6 +22639,7 @@
 	var GET_FEDERATIONS = exports.GET_FEDERATIONS = 'GET_FEDERATIONS';
 	var GET_FEDERATIONS_USER = exports.GET_FEDERATIONS_USER = 'GET_FEDERATIONS_USER';
 	var GET_FEDERATION_INFO = exports.GET_FEDERATION_INFO = 'GET_FEDERATION_INFO';
+	var GET_FEDERATION_BY_MATCH = exports.GET_FEDERATION_BY_MATCH = 'GET_FEDERATION_BY_MATCH';
 	var GET_TOURNAMENTS_IN_FEDERATION = exports.GET_TOURNAMENTS_IN_FEDERATION = 'GET_TOURNAMENTS_IN_FEDERATION';
 
 	var GET_MATCH = exports.GET_MATCH = 'GET_MATCH';
@@ -22939,10 +22940,17 @@
 
 	    switch (action.type) {
 	        case _constants.GET_MATCH:
-	            return _extends({}, action.payload);
+	            var newState = _extends({}, action.payload);
+	            newState.federation = { _id: "" };
+	            return newState;
 	        case _constants.ADD_MESSAGE_IN_CHAT:
 	            var newState = _extends({}, state);
 	            newState.match.chat.push(action.payload);
+	            return newState;
+	        case _constants.GET_FEDERATION_BY_MATCH:
+	            //TODO - переименовать
+	            var newState = _extends({}, state);
+	            newState.isFederationCreator = action.payload.isFederationCreator;
 	            return newState;
 	        default:
 	            return state;
@@ -22961,7 +22969,12 @@
 	    match: {
 	        _id: "",
 	        chat: []
-	    }
+	    },
+	    refereeList: [],
+	    federation: {
+	        _id: ''
+	    },
+	    isFederationCreator: false
 	};
 
 /***/ },
@@ -31997,7 +32010,6 @@
 	        var user = this.props.pageUser;
 	        var isAuth = !!currentUser._id;
 	        var isOwnPage = currentUser._id == user._id;
-
 	        return _react2.default.createElement(
 	            'div',
 	            null,
@@ -32081,6 +32093,7 @@
 	});
 	exports.getFederationsCurrentUser = getFederationsCurrentUser;
 	exports.getFederationsUser = getFederationsUser;
+	exports.getFederationByMatch = getFederationByMatch;
 	exports.getFederationInfo = getFederationInfo;
 	exports.getTournamentsInFederation = getTournamentsInFederation;
 
@@ -32102,6 +32115,17 @@
 	        return $.when($.get("/api/federation/get-by-creator?idUser=" + id)).then(function (result) {
 	            return dispatch({
 	                type: _constants.GET_FEDERATIONS_USER,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
+	function getFederationByMatch(idMatch) {
+	    return function (dispatch, getState) {
+	        return $.when($.post("/api/federation/get-by-match?idMatch=" + idMatch)).then(function (result) {
+	            return dispatch({
+	                type: _constants.GET_FEDERATION_BY_MATCH,
 	                payload: result
 	            });
 	        });
@@ -32789,9 +32813,25 @@
 
 	var matchActions = _interopRequireWildcard(_match);
 
+	var _federation = __webpack_require__(300);
+
+	var federationActions = _interopRequireWildcard(_federation);
+
 	var _Chat = __webpack_require__(308);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
+
+	var _user = __webpack_require__(297);
+
+	var usersActions = _interopRequireWildcard(_user);
+
+	var _List = __webpack_require__(288);
+
+	var _List2 = _interopRequireDefault(_List);
+
+	var _ModalWindow = __webpack_require__(289);
+
+	var _ModalWindow2 = _interopRequireDefault(_ModalWindow);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32801,6 +32841,11 @@
 	    displayName: 'Component',
 
 	    componentDidMount: function componentDidMount() {
+	        this.props.matchActions.getMatch(this.props.params.idMatch);
+	        this.props.federationActions.getFederationByMatch(this.props.params.idMatch);
+	        this.props.usersActions.getAllUser();
+	    },
+	    onSuccessAddReferee: function onSuccessAddReferee() {
 	        this.props.matchActions.getMatch(this.props.params.idMatch);
 	    },
 	    render: function render() {
@@ -32815,6 +32860,21 @@
 	                '- ',
 	                this.props.match.team2.name
 	            ),
+	            _react2.default.createElement(_List2.default, { header: '\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0443\u0434\u0435\u0439',
+	                url: '/account/',
+	                defaultMessage: '\u0421\u0443\u0434\u044C\u044F \u043D\u0435 \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D',
+	                list: this.props.match.refereeList }),
+	            !this.props.match.isFederationCreator ? "" : _react2.default.createElement(
+	                'div',
+	                { className: 'container' },
+	                _react2.default.createElement(_ModalWindow2.default, { urlSend: '/api-referee/add-referee',
+	                    buttonName: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0443\u0434\u044C\u044E',
+	                    header: '\u0421\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
+	                    nameHiddenInput: 'idMatch',
+	                    valueArray: this.props.usersList,
+	                    valueHiddenInput: this.props.match.match._id,
+	                    onSuccess: this.onSuccessAddReferee })
+	            ),
 	            _react2.default.createElement(_Chat2.default, { idMatch: this.props.params.idMatch })
 	        );
 	    }
@@ -32822,11 +32882,14 @@
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	    return {
-	        match: state.match
+	        match: state.match,
+	        usersList: state.usersList
 	    };
 	}, function (dispatch) {
 	    return {
-	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch)
+	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch),
+	        usersActions: (0, _redux.bindActionCreators)(usersActions, dispatch),
+	        federationActions: (0, _redux.bindActionCreators)(federationActions, dispatch)
 	    };
 	})(Component);
 
@@ -32912,7 +32975,9 @@
 	            }));
 	        }, 100);
 	    },
+
 	    render: function render() {
+	        console.log(this.props.match);
 	        var messages = this.props.match.match //нужно что то умнее придумать
 	        .chat.slice(0).reverse().map(function (item, index) {
 	            return _react2.default.createElement(
