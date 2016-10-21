@@ -146,7 +146,7 @@ router.post('/:idMatch/set-info', function(req, res, next) {
             data: data,
         });
 
-        console.log(match);
+        console.log(req.body);
 
         match.save(function (err) {
             return res.json({
