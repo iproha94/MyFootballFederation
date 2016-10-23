@@ -18,7 +18,7 @@ var Component = React.createClass({
     onSuccessAddReferee: function () {
         this.props.matchActions.getMatch(this.props.params.idMatch);
     },
-    render: function () {
+    render: function () {//какого то хрена team1 и team2 - это idшники
         return (
             <div className="container content-margin-top content-flex">
                 <p>
@@ -38,7 +38,7 @@ var Component = React.createClass({
                                      header="Список пользователей"
                                      nameHiddenInput="idMatch"
                                      valueArray={this.props.usersList}
-                                     valueHiddenInput={this.props.match.match._id}
+                                     valueHiddenInput={this.props.match._id}
                                      onSuccess={this.onSuccessAddReferee}/>
                     </div>
                 }

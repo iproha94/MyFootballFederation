@@ -22941,12 +22941,13 @@
 
 	    switch (action.type) {
 	        case _constants.GET_MATCH:
-	            var newState = _extends({}, action.payload);
+	            var newState = _extends({}, action.payload, action.payload.match);
+	            delete newState.match;
 	            newState.federation = { _id: "" };
 	            return newState;
 	        case _constants.ADD_MESSAGE_IN_CHAT:
 	            var newState = _extends({}, state);
-	            newState.match.chat.push(action.payload);
+	            newState.chat.push(action.payload);
 	            return newState;
 	        case _constants.GET_FEDERATION_BY_MATCH:
 	            //TODO - переименовать
@@ -22967,10 +22968,8 @@
 	    team2: {
 	        name: ""
 	    },
-	    match: {
-	        _id: "",
-	        chat: []
-	    },
+	    _id: "",
+	    chat: [],
 	    refereeList: [],
 	    federation: {
 	        _id: ''
@@ -32781,6 +32780,7 @@
 	        this.props.matchActions.getMatch(this.props.params.idMatch);
 	    },
 	    render: function render() {
+	        //какого то хрена team1 и team2 - это idшники
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'container content-margin-top content-flex' },
@@ -32804,7 +32804,7 @@
 	                    header: '\u0421\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439',
 	                    nameHiddenInput: 'idMatch',
 	                    valueArray: this.props.usersList,
-	                    valueHiddenInput: this.props.match.match._id,
+	                    valueHiddenInput: this.props.match._id,
 	                    onSuccess: this.onSuccessAddReferee })
 	            ),
 	            _react2.default.createElement(_Chat2.default, { idMatch: this.props.params.idMatch })
@@ -32888,9 +32888,10 @@
 
 	        event.target.reset();
 	    },
-	    componentDidMount: function componentDidMount() {
+	    startChat: function startChat() {
 	        var _this = this;
 
+	        //TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
 	        // создать подключение
 	        this.ws = new WebSocket(chatUrl);
 
@@ -32900,17 +32901,38 @@
 	            _this.props.matchActions.addMessageInChat(incomingMessage);
 	        };
 
-	        setTimeout(function () {
+	        this.ws.onopen = function () {
+	            console.log("onopen");
 	            _this.ws.send(JSON.stringify({
 	                type: "start",
 	                idMatch: _this.props.idMatch
 	            }));
-	        }, 100);
-	    },
+	        };
 
+	        this.ws.onclose = function (event) {
+	            if (event.wasClean) {
+	                console.log('Соединение закрыто чисто');
+	            } else {
+	                console.log('Обрыв соединения'); // например, "убит" процесс сервера
+	                setTimeout(function () {
+	                    _this.startChat();
+	                    //TODO надо запросить у сервера только список комментов(пока соединение было разорвано могло наприходить сообщений)
+	                    _this.props.matchActions.getMatch(_this.props.match.match.id);
+	                }, 5000); //5 секунд
+	            }
+	            console.log('Код: ' + event.code + ' причина: ' + event.reason);
+	        };
+
+	        this.ws.onerror = function (error) {
+	            console.log("Ошибка " + error.message);
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.startChat();
+	    },
 	    render: function render() {
 	        console.log(this.props.match);
-	        var messages = this.props.match.match //нужно что то умнее придумать
+	        var messages = this.props.match //нужно что то умнее придумать
 	        .chat.slice(0).reverse().map(function (item, index) {
 	            return _react2.default.createElement(
 	                'li',

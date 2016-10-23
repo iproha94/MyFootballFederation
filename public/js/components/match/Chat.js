@@ -36,7 +36,7 @@ var Component = React.createClass({
 
         event.target.reset();
     },
-    componentDidMount: function() {
+    startChat : function () {//TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
         // создать подключение
         this.ws = new WebSocket(chatUrl);
 
@@ -46,18 +46,38 @@ var Component = React.createClass({
             this.props.matchActions.addMessageInChat(incomingMessage);
         };
 
-        setTimeout(()=>{
+        this.ws.onopen = () => {
+            console.log("onopen");
             this.ws.send(JSON.stringify({
                 type: "start",
                 idMatch: this.props.idMatch
             }));
-        }, 100);
+        };
 
+        this.ws.onclose = (event) => {
+            if (event.wasClean) {
+                console.log('Соединение закрыто чисто');
+            } else {
+                console.log('Обрыв соединения'); // например, "убит" процесс сервера
+                setTimeout(() => {
+                    this.startChat();
+                    //TODO надо запросить у сервера только список комментов(пока соединение было разорвано могло наприходить сообщений)
+                    this.props.matchActions.getMatch(this.props.match.match.id);
+                }, 5000);//5 секунд
+            }
+            console.log('Код: ' + event.code + ' причина: ' + event.reason);
+        };
+
+        this.ws.onerror = function(error) {
+            console.log("Ошибка " + error.message);
+        };
     },
-    
+    componentDidMount: function() {
+        this.startChat();
+    },
     render: function () {
         console.log(this.props.match);
-        var messages = this.props.match.match//нужно что то умнее придумать
+        var messages = this.props.match//нужно что то умнее придумать
             .chat.slice(0).reverse().map(function (item, index) {
             return (
                 <li className="collection-item avatar" key={index}>
