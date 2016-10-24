@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import tournament from './tournament/tournament';
-import teams from './tournament/teams';
 import teamsTournament from './tournament/teamsTournament';
 import currentUser from './common/currentUser';
 import pageUser from './pageUser';
@@ -17,7 +16,6 @@ import stage from './stage/stage';
 
 export default combineReducers({
     tournament,
-    teams,
     teamsTournament,
     pageUser,
     currentUser,

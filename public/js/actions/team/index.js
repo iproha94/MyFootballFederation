@@ -14,18 +14,6 @@ export function getTeamInfo(_id) {
     };
 }
 
-
-export function getTeams() {
-    return (dispatch) => {
-        $.post('/api/team/get-team/', function (result) {
-            dispatch({
-                type: GET_TEAMS,
-                payload: result//такое наименование - негласное соглашение
-            });
-        });
-    };
-}
-
 export function getTeamsByTournament(tournamentId) {
     return (dispatch, getState) => {
         $.post(`/api/team/get-team-by-tournament/${tournamentId}`, function (result) {

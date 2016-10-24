@@ -1,4 +1,3 @@
-export const GET_TEAMS = 'GET_TEAMS';
 export const GET_TEAMS_BY_TOURNAMENT = 'GET_TEAMS_BY_TOURNAMENT';
 export const GET_TEAM_INFO = 'GET_TEAM_INFO';
 

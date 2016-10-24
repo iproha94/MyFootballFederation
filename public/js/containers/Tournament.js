@@ -12,25 +12,31 @@ var TournamentPage = React.createClass({
     idTournament: null,
     componentDidMount: function() {
         var _id = this.props.params.idTournament;
-        this.idTournament = _id;
         this.props.tournamentActions.getTournament(_id);
         this.props.teamActions.getTeamsByTournament(_id);
-        this.props.teamActions.getTeams();
         this.props.stagesActions.getStages(_id);
     },
     onSuccessAddTeam: function () {
-        this.props.teamActions.getTeamsByTournament(this.idTournament);
+        this.props.teamActions
+            .getTeamsByTournament(this.props.params.idTournament);
     },
     render: function () {
         const {tournament} = this.props;
         var isAuth = !!this.props.currentUser._id;
-        var content = (
-            <div>
+        return (
+            <div className="container content-margin-top content-flex js-content-place">
+               <div className="row center">
+                   Страница турнира {tournament.name}
+               </div>
+               <div className="row center">
+                   Тип турнира: {tournament.type}
+               </div>
+
                 <List header="Список заявок команд:"
                       url="/team/"
                       defaultMessage="Заявок от команд нет"
                       list={this.props.teams}/>
-                
+
                 <List header="Список этапов:"
                       url="/stage/"
                       defaultMessage="В турнире нет этапов"
@@ -44,35 +50,16 @@ var TournamentPage = React.createClass({
                     </Link>
                 </div>
 
-                {!isAuth ? "" :
+                {!isAuth ? null :
                     <ModalWindow urlSend="/api/tournament/add-team"
                                  buttonName="Подать заявку от лица команды"
                                  header="Список команд"
                                  nameHiddenInput="idTournament"
-                                 valueArray={this.props.teamsCurrentUser}
+                                 valueArray={this.props.currentUser.teams}
                                  valueHiddenInput={tournament._id}
                                  onSuccess={this.onSuccessAddTeam}/>
                 }
-            </div>
-        );
-        //тут нужно проверять какую то галочку о том что матч начался
-        //но я не знаю какую
-        if(this.props.matches.length != 0) {
-            content = <List header="Список матчей"
-                        url="/match/"
-                        defaultMessage="Матчей нет"
-                        list={this.props.matches}/>
-        }
-
-        return (
-            <div className="container content-margin-top content-flex js-content-place">
-               <div className="row center">
-                   Страница турнира {tournament.name}
-               </div>
-               <div className="row center">
-                   Тип турнира: {tournament.type}
-               </div>
-                {content}
+                
            </div>
         )
     }
@@ -81,10 +68,7 @@ var TournamentPage = React.createClass({
 export default connect((state)=>{
     return {
         tournament: state.tournament,
-        modalWindow: state.modalWindow,
         teams: state.teamsTournament,
-        teamsCurrentUser: state.teams,
-        matches: state.matchList,
         stages: state.stages,
         currentUser: state.currentUser
     }
