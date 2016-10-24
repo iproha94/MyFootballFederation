@@ -1,7 +1,7 @@
 import {
     GET_USER_BY_ID,
     GET_FEDERATIONS_USER
-}  from '../constants';
+}  from '../../constants';
 
 const initialState = {
     name: "",

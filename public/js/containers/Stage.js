@@ -60,7 +60,7 @@ var Component = React.createClass({
 export default connect((state)=>{
     return {
         stage: state.stage,
-        matches: state.matchList
+        matches: state.stage.matches
     }
 }, (dispatch)=>{
     return {

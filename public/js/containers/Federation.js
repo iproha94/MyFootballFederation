@@ -44,7 +44,7 @@ var Component = React.createClass({
                 <List header="Турниры:"
                       url="/tournament/"
                       defaultMessage="Турниров нет"
-                      list={this.props.tournamentList}/>
+                      list={this.props.tournaments}/>
                 {buttonCreateTournament}
             </div>
         );
@@ -54,7 +54,7 @@ var Component = React.createClass({
 export default connect((state)=>{
     return {
         federation: state.federation,
-        tournamentList: state.tournamentList,
+        tournaments: state.federation.tournaments,
         currentUser: state.currentUser
     }
 }, (dispatch)=>{

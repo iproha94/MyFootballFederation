@@ -1,4 +1,6 @@
-import {GET_TEAM_INFO}  from '../../constants';
+import {
+    GET_TEAM_INFO
+}  from '../../constants';
 
 const initialState = {
     name: "",

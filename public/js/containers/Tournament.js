@@ -68,8 +68,8 @@ var TournamentPage = React.createClass({
 export default connect((state)=>{
     return {
         tournament: state.tournament,
-        teams: state.teamsTournament,
-        stages: state.stages,
+        teams: state.tournament.teams,
+        stages: state.tournament.stages,
         currentUser: state.currentUser
     }
 }, (dispatch)=>{

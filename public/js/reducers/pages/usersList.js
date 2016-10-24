@@ -1,4 +1,6 @@
-import {GET_ALL_USER} from '../../constants';
+import {
+    GET_ALL_USER
+} from '../../constants';
 
 const initialState = [];
 
