@@ -32843,7 +32843,8 @@
 	"use strict";
 
 	module.exports = {
-	    chatUrl: "wss://localhost:8080"
+	    //chatUrl: "wss://localhost:8080"
+	    chatUrl: "ws://localhost:8080"
 	};
 
 /***/ },

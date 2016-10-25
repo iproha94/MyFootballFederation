@@ -104,12 +104,13 @@ app.use(function(err, req, res, next){
 	});
 });
 
-var fs = require('fs');
-var options = {
-	key: fs.readFileSync('./cfg/ssl/private.key'),
-	cert: fs.readFileSync('./cfg/ssl/public.crt')
-};
-var server = require('https').createServer(options);
+// var fs = require('fs');
+// var options = {
+// 	key: fs.readFileSync('./cfg/ssl/private.key'),
+// 	cert: fs.readFileSync('./cfg/ssl/public.crt')
+// };
+// var server = require('https').createServer(options);
+var server = require('http').createServer();
 
 var startChat = require('./chat');
 startChat(server);
