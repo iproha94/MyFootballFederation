@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchActions from '../actions/match';
-import * as federationActions from '../actions/federation';
 import Chat from '../components/match/Chat';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
@@ -12,7 +11,6 @@ import ModalWindow from '../components/common/ModalWindow';
 var Component = React.createClass({
     componentDidMount: function() {
         this.props.matchActions.getMatch(this.props.params.idMatch);
-        this.props.federationActions.getFederationByMatch(this.props.params.idMatch);
         this.props.usersActions.getAllUser();
     },
     onSuccessAddReferee: function () {
@@ -57,7 +55,6 @@ export default connect((state)=>{
 }, (dispatch)=>{
     return {
         matchActions: bindActionCreators(matchActions, dispatch),
-        usersActions: bindActionCreators(usersActions, dispatch),
-        federationActions: bindActionCreators(federationActions, dispatch)
+        usersActions: bindActionCreators(usersActions, dispatch)
     }
 })(Component);

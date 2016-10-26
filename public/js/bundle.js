@@ -22625,7 +22625,6 @@
 	var GET_FEDERATIONS = exports.GET_FEDERATIONS = 'GET_FEDERATIONS';
 	var GET_FEDERATIONS_USER = exports.GET_FEDERATIONS_USER = 'GET_FEDERATIONS_USER';
 	var GET_FEDERATION_INFO = exports.GET_FEDERATION_INFO = 'GET_FEDERATION_INFO';
-	var GET_FEDERATION_BY_MATCH = exports.GET_FEDERATION_BY_MATCH = 'GET_FEDERATION_BY_MATCH';
 	var GET_TOURNAMENTS_IN_FEDERATION = exports.GET_TOURNAMENTS_IN_FEDERATION = 'GET_TOURNAMENTS_IN_FEDERATION';
 
 	var GET_MATCH = exports.GET_MATCH = 'GET_MATCH';
@@ -22845,16 +22844,10 @@
 	        case _constants.GET_MATCH:
 	            var newState = _extends({}, action.payload, action.payload.match);
 	            delete newState.match;
-	            newState.federation = { _id: "" };
 	            return newState;
 	        case _constants.ADD_MESSAGE_IN_CHAT:
 	            var newState = _extends({}, state);
 	            newState.chat.push(action.payload);
-	            return newState;
-	        case _constants.GET_FEDERATION_BY_MATCH:
-	            //TODO - переименовать
-	            var newState = _extends({}, state);
-	            newState.isFederationCreator = action.payload.isFederationCreator;
 	            return newState;
 	        default:
 	            return state;
@@ -30592,11 +30585,11 @@
 
 	var tournamentActions = _interopRequireWildcard(_tournament);
 
-	var _stage = __webpack_require__(282);
+	var _stage = __webpack_require__(281);
 
 	var stageActions = _interopRequireWildcard(_stage);
 
-	var _team = __webpack_require__(281);
+	var _team = __webpack_require__(282);
 
 	var teamActions = _interopRequireWildcard(_team);
 
@@ -30702,28 +30695,81 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.getTournament = getTournament;
 
 	var _constants = __webpack_require__(189);
 
-	var _index = __webpack_require__(281);
-
 	function getTournament(_id) {
-	  return function (dispatch, getState) {
-	    //благодаря Middleware получаем функцию dispatch
-	    return $.when($.post('/api/tournament/' + _id)).then(function (result) {
-	      return dispatch({
-	        type: _constants.GET_TOURNAMENT,
-	        payload: result //такое наименование - негласное соглашение
-	      });
-	    });
-	  };
+	    return function (dispatch, getState) {
+	        //благодаря Middleware получаем функцию dispatch
+	        $.get('/api/tournament/' + _id, function (result) {
+	            if (result.status == 404) {
+	                return dispatch({
+	                    type: _constants.ROUTING,
+	                    payload: {
+	                        nextUrl: "/404"
+	                    }
+	                });
+	            }
+
+	            dispatch({
+	                type: _constants.GET_TOURNAMENT,
+	                payload: result //такое наименование - негласное соглашение
+	            });
+	        });
+	    };
 	}
 
 /***/ },
 /* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getStages = getStages;
+	exports.getStage = getStage;
+
+	var _constants = __webpack_require__(189);
+
+	function getStages(idTournament) {
+	    return function (dispatch, getState) {
+	        return $.when($.get("/api/tournament/get-stage/" + idTournament)).then(function (result) {
+	            return dispatch({
+	                type: _constants.GET_STAGES,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
+	function getStage(idStage) {
+	    return function (dispatch, getState) {
+	        $.get("/api/stage/" + idStage, function (result) {
+	            if (result.status == 404) {
+	                return dispatch({
+	                    type: _constants.ROUTING,
+	                    payload: {
+	                        nextUrl: "/404"
+	                    }
+
+	                });
+	            }
+
+	            dispatch({
+	                type: _constants.GET_STAGE_INFO,
+	                payload: result
+	            });
+	        });
+	    };
+	}
+
+/***/ },
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30738,8 +30784,18 @@
 	var _constants = __webpack_require__(189);
 
 	function getTeamInfo(_id) {
-	    return function (dispatch) {
+	    return function (dispatch, getState) {
 	        $.get('/api/team/' + _id, function (result) {
+	            if (result.status == 404) {
+	                return dispatch({
+	                    type: _constants.ROUTING,
+	                    payload: {
+	                        nextUrl: "/404"
+	                    }
+
+	                });
+	            }
+
 	            dispatch({
 	                type: _constants.GET_TEAM_INFO,
 	                payload: result
@@ -30770,42 +30826,6 @@
 	                });
 	            }
 	        }
-	    };
-	}
-
-/***/ },
-/* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.getStages = getStages;
-	exports.getStage = getStage;
-
-	var _constants = __webpack_require__(189);
-
-	function getStages(idTournament) {
-	    return function (dispatch, getState) {
-	        return $.when($.get("/api/tournament/get-stage/" + idTournament)).then(function (result) {
-	            return dispatch({
-	                type: _constants.GET_STAGES,
-	                payload: result
-	            });
-	        });
-	    };
-	}
-
-	function getStage(idStage) {
-	    return function (dispatch, getState) {
-	        return $.when($.get("/api/stage/" + idStage)).then(function (result) {
-	            return dispatch({
-	                type: _constants.GET_STAGE_INFO,
-	                payload: result
-	            });
-	        });
 	    };
 	}
 
@@ -30906,7 +30926,7 @@
 	            }
 	        });
 	    },
-	    onclickf: function onclickf() {
+	    onClickStart: function onClickStart() {
 	        $('select').material_select();
 	    },
 	    render: function render() {
@@ -30915,7 +30935,7 @@
 	            null,
 	            _react2.default.createElement(
 	                'a',
-	                { onClick: this.onclickf, className: 'modal-trigger waves-effect waves-light btn',
+	                { onClick: this.onClickStart, className: 'modal-trigger waves-effect waves-light btn',
 	                    href: '#modal1' },
 	                this.props.buttonName
 	            ),
@@ -30952,7 +30972,7 @@
 /* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -30965,30 +30985,33 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: "ModalForm",
+	    displayName: 'ModalForm',
 
+	    onChange: function onChange() {
+	        $('select').material_select();
+	    },
 	    render: function render() {
 	        var options = this.props.valueArray.map(function (item) {
 	            return _react2.default.createElement(
-	                "option",
+	                'option',
 	                { key: item._id, value: item._id },
 	                item.name
 	            );
 	        });
 
 	        return _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
 	            _react2.default.createElement(
-	                "form",
-	                { className: "js-modal-form" },
-	                _react2.default.createElement("input", { type: "hidden", name: this.props.nameHiddenInput, value: this.props.valueHiddenInput }),
+	                'form',
+	                { className: 'js-modal-form', onChange: this.onChange },
+	                _react2.default.createElement('input', { type: 'hidden', name: this.props.nameHiddenInput, value: this.props.valueHiddenInput }),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "input-field col s12" },
+	                    'div',
+	                    { className: 'input-field col s12' },
 	                    _react2.default.createElement(
-	                        "select",
-	                        { name: "idSend" },
+	                        'select',
+	                        { name: 'idSend' },
 	                        options
 	                    )
 	                )
@@ -31159,7 +31182,7 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _stage = __webpack_require__(282);
+	var _stage = __webpack_require__(281);
 
 	var stageActions = _interopRequireWildcard(_stage);
 
@@ -31286,8 +31309,18 @@
 
 	function getMatch(_id) {
 	    return function (dispatch, getState) {
-	        return $.when($.get("/api/match/" + _id)).then(function (result) {
-	            return dispatch({
+	        $.get("/api/match/" + _id, function (result) {
+	            if (result.status == 404) {
+	                return dispatch({
+	                    type: _constants.ROUTING,
+	                    payload: {
+	                        nextUrl: "/404"
+	                    }
+
+	                });
+	            }
+
+	            dispatch({
 	                type: _constants.GET_MATCH,
 	                payload: result
 	            });
@@ -31332,7 +31365,7 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _team = __webpack_require__(281);
+	var _team = __webpack_require__(282);
 
 	var teamActions = _interopRequireWildcard(_team);
 
@@ -31463,7 +31496,7 @@
 /* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -31475,11 +31508,18 @@
 	var _constants = __webpack_require__(189);
 
 	function getUserById(_id) {
-	    console.log(_id);
 	    return function (dispatch, getState) {
-	        return $.when($.get("/api/get-user/" + _id)).then(function (result) {
-	            console.log("getUserById");
-	            return dispatch({
+	        $.get("/api/get-user/" + _id, function (result) {
+	            if (result.status == 404) {
+	                return dispatch({
+	                    type: _constants.ROUTING,
+	                    payload: {
+	                        nextUrl: "/404"
+	                    }
+	                });
+	            }
+
+	            dispatch({
 	                type: _constants.GET_USER_BY_ID,
 	                payload: result
 	            });
@@ -31654,7 +31694,7 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'userView' },
-	                            _react2.default.createElement('img', { className: 'background', src: 'http://unsplash.it/400/200?image=527' }),
+	                            _react2.default.createElement('img', { className: 'background', src: '/img/side-nav.jpg' }),
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
 	                                { to: "/account/" + this.props.currentUser._id },
@@ -31917,7 +31957,6 @@
 	});
 	exports.getFederationsCurrentUser = getFederationsCurrentUser;
 	exports.getFederationsUser = getFederationsUser;
-	exports.getFederationByMatch = getFederationByMatch;
 	exports.getFederationInfo = getFederationInfo;
 	exports.getTournamentsInFederation = getTournamentsInFederation;
 
@@ -31945,25 +31984,12 @@
 	    };
 	}
 
-	function getFederationByMatch(idMatch) {
-	    return function (dispatch, getState) {
-	        return $.when($.post("/api/federation/get-by-match?idMatch=" + idMatch)).then(function (result) {
-	            return dispatch({
-	                type: _constants.GET_FEDERATION_BY_MATCH,
-	                payload: result
-	            });
-	        });
-	    };
-	}
-
 	function getFederationInfo(name) {
 	    return function (dispatch, getState) {
 	        fetch("/api/federation/" + name, { credentials: 'include' }).then(function (response) {
 	            return response.json();
 	        }).then(function (result) {
-	            console.log(result);
 	            if (result.status == 404) {
-	                console.log(404);
 	                return dispatch({
 	                    type: _constants.ROUTING,
 	                    payload: {
@@ -32566,10 +32592,6 @@
 
 	var matchActions = _interopRequireWildcard(_match);
 
-	var _federation = __webpack_require__(295);
-
-	var federationActions = _interopRequireWildcard(_federation);
-
 	var _Chat = __webpack_require__(303);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
@@ -32595,7 +32617,6 @@
 
 	    componentDidMount: function componentDidMount() {
 	        this.props.matchActions.getMatch(this.props.params.idMatch);
-	        this.props.federationActions.getFederationByMatch(this.props.params.idMatch);
 	        this.props.usersActions.getAllUser();
 	    },
 	    onSuccessAddReferee: function onSuccessAddReferee() {
@@ -32642,8 +32663,7 @@
 	}, function (dispatch) {
 	    return {
 	        matchActions: (0, _redux.bindActionCreators)(matchActions, dispatch),
-	        usersActions: (0, _redux.bindActionCreators)(usersActions, dispatch),
-	        federationActions: (0, _redux.bindActionCreators)(federationActions, dispatch)
+	        usersActions: (0, _redux.bindActionCreators)(usersActions, dispatch)
 	    };
 	})(Component);
 

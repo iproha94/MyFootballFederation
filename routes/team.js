@@ -30,6 +30,9 @@ router.post('/create', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     var id = req.param("id");
     Team.findOne({_id : id}, function (err, result) {
+        if(err || !result) {
+            return next();
+        }
         res.json(result);
     });
 });

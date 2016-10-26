@@ -1,14 +1,25 @@
 import {
     GET_MATCH,
     ADD_MESSAGE_IN_CHAT,
-    GET_MATCHES_IN_STAGE
+    GET_MATCHES_IN_STAGE,
+    ROUTING
 } from '../../constants';
 
 
 export function getMatch(_id) {
     return (dispatch, getState) => {
-        return $.when($.get("/api/match/" + _id)).then(function (result) {
-            return dispatch({
+        $.get("/api/match/" + _id, function (result) {
+            if(result.status == 404) {
+                return dispatch({
+                    type: ROUTING,
+                    payload: {
+                        nextUrl: "/404"
+                    }
+
+                });
+            }
+
+            dispatch({
                 type: GET_MATCH,
                 payload: result
             });

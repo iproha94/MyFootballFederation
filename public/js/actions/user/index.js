@@ -1,14 +1,24 @@
-import {GET_USER_BY_ID} from '../../constants';
-import {GET_CURRENT_USER} from '../../constants';
-import {GET_ALL_USER} from '../../constants';
+import {
+    GET_USER_BY_ID,
+    GET_CURRENT_USER,
+    GET_ALL_USER,
+    ROUTING
+} from '../../constants';
 
 
 export function getUserById(_id) {
-    console.log(_id);
     return (dispatch, getState) => {
-        return $.when($.get("/api/get-user/" + _id)).then(function (result) {
-            console.log("getUserById");
-            return dispatch({
+        $.get("/api/get-user/" + _id, function (result) {
+            if(result.status == 404) {
+                return dispatch({
+                    type: ROUTING,
+                    payload: {
+                        nextUrl: "/404"
+                    }
+                });
+            }
+
+            dispatch({
                 type: GET_USER_BY_ID,
                 payload: result
             });

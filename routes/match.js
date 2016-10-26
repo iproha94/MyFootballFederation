@@ -6,8 +6,8 @@ var User = require('../models/user');
 
 router.get('/:idMatch', function(req, res, next) {
     Match.findById(req.params.idMatch, function (err, match) {
-        if(err) {
-            return next(err);
+        if(err || !match) {
+            return next();
         }
         
         Team.findById(match.team1, function (err, team1) {
@@ -17,7 +17,8 @@ router.get('/:idMatch', function(req, res, next) {
                         refereeList: users,
                         match: match,
                         team1: team1,
-                        team2: team2
+                        team2: team2,
+                        isFederationCreator: true//можно ли назначить судью
                     });
                 });
             });

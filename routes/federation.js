@@ -42,9 +42,7 @@ router.get('/:name', function(req, res, next) {
     var name = req.params.name;
     Federation.findOne({name : name}, function (err, result) {
         if(err || !result) {
-            return res.json({
-                status: 404
-            });
+            return next();
         }
 
         res.json(result);
@@ -63,31 +61,6 @@ router.get('/get-tournaments/:name', function(req, res, next) {
         });
     });
 });
-
-//TODO - надо как то более по умному сделать
-router.post('/get-by-match', function(req, res, next) {
-    if(!req.user) {
-        return res.json({
-            isFederationCreator: false
-        });
-    }
-    Match.findById(req.query.idMatch, function (err, match) {
-        Stage.findById(match.stage, function (err, stage) {
-            Tournament.findById(stage.tournament, function (err, tournament) {
-                Federation.findById(tournament.federation, function (err, federation) {
-                    var isFederationCreator = false;
-                    if(federation.creators.some((item)=>item == req.user._id.toString())) {
-                        isFederationCreator = true;
-                    }
-                    res.json({
-                        isFederationCreator: isFederationCreator
-                    });
-                });
-            });
-        });
-    });
-});
-
 
 
 module.exports = router;

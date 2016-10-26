@@ -79,30 +79,28 @@ app.use('/api/federation', federationRoutes);
 app.use('/api/tournament', tournamentRoutes);
 app.use('/api/match', matchRoutes);
 
+// пользовательская страница 404
+app.use(/^\/api\/.*$/, function(req, res){
+	res.json({
+		status: 404,
+		message: 'Не найдено'
+	});
+});
 
+// пользовательская страница 500
+app.use(/^\/api\/.*$/, function(err, req, res, next){
+	console.error(err.stack);
+	res.status(500);
+	res.json({
+		status: 500,
+		message: 'Не найдено'
+	});
+});
 
 app.get(/.*/, function root(req, res) {
 	res.sendFile(__dirname  + '/public/index.html');
 });
 
-// пользовательская страница 404
-app.use(function(req, res){
-	res.status(404);
-	res.json({
-		code: 404,
-		message: 'Не найдено'
-	});
-}); 
-
-// пользовательская страница 500
-app.use(function(err, req, res, next){
-	console.error(err.stack);
-	res.status(500);
-	res.json({
-		code: 500,
-		message: 'Не найдено'
-	});
-});
 
 // var fs = require('fs');
 // var options = {

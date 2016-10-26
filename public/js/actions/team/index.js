@@ -1,11 +1,24 @@
-import {GET_TEAMS,ADD_TEAMS_IN_TOURNAMENT} from '../../constants';
-import {GET_TEAMS_BY_TOURNAMENT} from '../../constants';
-import {GET_TEAM_INFO} from '../../constants';
+import {
+    ADD_TEAMS_IN_TOURNAMENT,
+    GET_TEAMS_BY_TOURNAMENT, 
+    GET_TEAM_INFO,
+    ROUTING
+} from '../../constants';
 
 
 export function getTeamInfo(_id) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         $.get('/api/team/' + _id, function (result) {
+            if(result.status == 404) {
+                return dispatch({
+                    type: ROUTING,
+                    payload: {
+                        nextUrl: "/404"
+                    }
+
+                });
+            }
+
             dispatch({
                 type: GET_TEAM_INFO,
                 payload: result

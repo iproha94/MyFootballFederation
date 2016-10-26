@@ -53,7 +53,7 @@ var Component = React.createClass({
                     <ul id="slide-out" className="side-nav">
                         <li>
                             <div className="userView">
-                                <img className="background" src="http://unsplash.it/400/200?image=527"/>
+                                <img className="background" src="/img/side-nav.jpg"/>
                                     <Link to={"/account/" + this.props.currentUser._id}>
                                         <img className="circle" src={this.props.currentUser.image}/>
                                     </Link>

@@ -26,13 +26,13 @@ export default React.createClass({
             }
         });
     },
-    onclickf: function () {
+    onClickStart: function () {
         $('select').material_select();
     },
     render: function () {
         return (
             <div>
-                <a onClick={this.onclickf} className="modal-trigger waves-effect waves-light btn"
+                <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn"
                    href="#modal1">{this.props.buttonName}</a>
 
                 <div id="modal1" className="modal modal-fixed-footer">

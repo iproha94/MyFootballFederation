@@ -51,6 +51,9 @@ router.get('/:idStage', function(req, res, next) {
     var idStage = req.params.idStage;
 
     Stage.findById(idStage, function (err, stage) {
+        if(err || !stage) {
+            return next();
+        }
         return res.json(stage);
     });
 });

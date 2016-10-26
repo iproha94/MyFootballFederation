@@ -68,31 +68,6 @@ router.get('/add-team', function(req, res, next) {
     });
 });
 
-router.get('/:idTournament', function(req, res, next) {
-    if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
-    }
-
-    var idTournament = req.params.idTournament;
-
-    Tournament.findById(idTournament, function (err, tournament) {
-        if (err) {
-            return next(err);
-        }
-
-        Stage.find({tournament: tournament._id}, function (err, stages) {
-            Team.find({_id: {$in: tournament.teams_requests}}, function (err, teams) {
-                return res.render("tournament", {
-                    tournament: tournament,
-                    stages: stages,
-                    teams: teams
-                });
-            });
-
-        });
-
-    });
-});
 
 router.get('/get-stage/:idTournament', function (req, res, next) {
     Stage.find({tournament: req.params.idTournament}, function (err, stages) {
@@ -126,8 +101,11 @@ router.post('/add-team', function(req, res, next) {
 });
 
 
-router.post('/:idTournament', function(req, res, next) {
+router.get('/:idTournament', function(req, res, next) {
     Tournament.findById(req.params.idTournament, function (err, tournament) {
+        if(err || !tournament) {
+            return next();
+        }
         return res.json(tournament);
     });
 });
