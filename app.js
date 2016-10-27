@@ -101,14 +101,19 @@ app.get(/.*/, function root(req, res) {
 	res.sendFile(__dirname  + '/public/index.html');
 });
 
+var server;
 
-// var fs = require('fs');
-// var options = {
-// 	key: fs.readFileSync('./cfg/ssl/private.key'),
-// 	cert: fs.readFileSync('./cfg/ssl/public.crt')
-// };
-// var server = require('https').createServer(options);
-var server = require('http').createServer();
+if (app.get('port') == 443) {
+	let fs = require('fs');
+	let options = {
+		key: fs.readFileSync('./cfg/ssl/private.key'),
+		cert: fs.readFileSync('./cfg/ssl/public.crt')
+	};
+
+	server = require('https').createServer(options);
+} else {
+	server = require('http').createServer();
+}
 
 var startChat = require('./chat');
 startChat(server);

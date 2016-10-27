@@ -27,6 +27,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/get-current-user', function(req, res, next) {
+    if (!req.user) {
+        return res.json({});
+    }
+
     Federation.find({creators: req.user._id}, function (err, fResult) {
         Team.find({creators: req.user._id}, function (err, tResult) {
             res.json({
