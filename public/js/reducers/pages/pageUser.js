@@ -13,9 +13,7 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_USER_BY_ID:
-            var newState = {...action.payload, ...action.payload.user};
-            delete newState.user;
-            return newState;
+            return {...state, ...action.payload};
         case GET_FEDERATIONS_USER:
             var newState = {...state};
             newState.federations = [...action.payload];

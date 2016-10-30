@@ -13,13 +13,13 @@ router.get('/:idMatch', function(req, res, next) {
         Team.findById(match.team1, function (err, team1) {
             Team.findById(match.team2, function (err, team2) {
                 User.find({matchesToReferee: match._id}, function (err, users) {
-                    res.json({
+                    var result = Object.assign(match.toObject(), {
                         refereeList: users,
-                        match: match,
                         team1: team1,
                         team2: team2,
                         isFederationCreator: true//можно ли назначить судью
                     });
+                    res.json(result);
                 });
             });
         });

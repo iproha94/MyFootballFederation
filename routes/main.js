@@ -33,12 +33,12 @@ router.get('/get-current-user', function(req, res, next) {
 
     Federation.find({creators: req.user._id}, function (err, fResult) {
         Team.find({creators: req.user._id}, function (err, tResult) {
-            res.json({
-                user: req.user,
+            var result = Object.assign(req.user.toObject(), {
                 federations: fResult,
                 teams: tResult,
                 newUser: Date.now() - req.user.created < 3600000
             });
+            res.json(result);
         });
     });
 });
@@ -72,11 +72,11 @@ router.get('/get-user/:idUser', function(req, res, next) {
         }
         Federation.find({creators: idUser}, function (err, fResult) {
             Team.find({creators: idUser}, function (err, tResult) {
-                res.json({
-                    user: user,
+                var result = Object.assign(user.toObject(), {
                     federations: fResult,
                     teams: tResult
                 });
+                res.json(result);
             });
         });
     });

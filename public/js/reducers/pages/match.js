@@ -22,9 +22,7 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_MATCH:
-            var newState = {...action.payload, ...action.payload.match};
-            delete newState.match;
-            return newState;
+            return {...state, ...action.payload};
         case ADD_MESSAGE_IN_CHAT:
             var newState = {...state};
             newState.chat.push(action.payload);
