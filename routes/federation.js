@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
-var Stage = require('../models/stage');
 var Match = require('../models/match');
 
 router.post('/create', function(req, res, next) {
@@ -62,5 +61,17 @@ router.get('/get-tournaments/:name', function(req, res, next) {
     });
 });
 
+router.get('/get-running-match/:name', function(req, res, next) {
+    Federation.findOne({name : req.params.name}, function (err, federation) {
+        if(err || !federation) {
+            return res.json({
+                status: 404
+            });
+        }
+        Tournament.find({federation: federation._id}, function (err, federation) {
+
+        });
+    });
+});
 
 module.exports = router;

@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchActions from '../actions/match';
-import Chat from '../components/match/Chat';
+//import Chat from '../components/match/Chat';
+import Events from '../components/match/Events';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
 import ModalWindow from '../components/common/ModalWindow';
@@ -40,10 +41,11 @@ var Component = React.createClass({
                                      onSuccess={this.onSuccessAddReferee}/>
                     </div>
                 }
-                <Chat idMatch={this.props.params.idMatch}/>
+                <Events/>
             </div>
 
         )
+        //<Chat idMatch={this.props.params.idMatch}/>
     }
 });
 
