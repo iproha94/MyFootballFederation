@@ -27,7 +27,6 @@ router.post('/create', function(req, res, next) {
         var tournament = new Tournament({
             name: req.body.name,
             federation: federation._id,
-            teams: [],
             team_requests: [],
             tournamentConfig: Tournament.tournamentConfig,
             matchConfig: Tournament.matchConfig,
