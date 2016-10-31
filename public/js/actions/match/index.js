@@ -1,6 +1,5 @@
 import {
     GET_MATCH,
-    ADD_MESSAGE_IN_CHAT,
     GET_MATCHES_IN_STAGE,
     ADD_EVENT_IN_LOG,
     ROUTING
@@ -36,15 +35,6 @@ export function getMatchesInStage(_id) {
                 type: GET_MATCHES_IN_STAGE,
                 payload: result
             });
-        });
-    };
-}
-
-export function addMessageInChat(object) {
-    return (dispatch, getState) => {
-        return dispatch({
-            type: ADD_MESSAGE_IN_CHAT,
-            payload: object
         });
     };
 }

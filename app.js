@@ -115,8 +115,6 @@ if (app.get('port') == 443) {
 
 module.exports = server;
 
-// var startChat = require('./chat');
-// startChat(server);
 //импортируется ниже эксорта сервера
 var refereeRoutes = require('./routes/referee');
 app.use('/api-referee', refereeRoutes);

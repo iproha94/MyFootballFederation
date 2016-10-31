@@ -16,7 +16,7 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <div className="card">
+            <div className="card vk-chat">
                 <div id="vk_comments"></div>
             </div>
         )

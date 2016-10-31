@@ -112,3 +112,7 @@ footer {
 .chat-padding{
     padding: 15px;
 }
+
+.vk-chat{
+    border-radius: 4px;
+}

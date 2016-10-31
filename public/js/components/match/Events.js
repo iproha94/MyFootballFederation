@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import eventsData from './helpers/eventsData';
 import * as matchActions from '../../actions/match';
 import {bindActionCreators} from 'redux';
-var chatUrl = require("../../../../cfg/front").chatUrl;
+var wsUrl = require("../../../../cfg/front").wsUrl;
 
 var Component = React.createClass({
     createWS : function () {//TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
         // создать подключение
-        this.ws = new WebSocket(chatUrl);
+        this.ws = new WebSocket(wsUrl);
 
         // обработчик входящих сообщений
         this.ws.onmessage = (event) => {

@@ -17,7 +17,7 @@ var Component = React.createClass({
     onSuccessAddReferee: function () {
         this.props.matchActions.getMatch(this.props.params.idMatch);
     },
-    render: function () {//какого то хрена team1 и team2 - это idшники
+    render: function () {
         return (
             <div className="container content-margin-top content-flex">
                 <p>

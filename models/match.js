@@ -10,11 +10,6 @@ var matchSchema = new Schema({
     events: [{
         number: Number,
         data: String,
-    }],
-    chat: [{
-        user: Object,
-        message: String,
-        time: String
     }]
     //todo добавить 2 массива игроков от каждой комнды
 });

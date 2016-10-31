@@ -20,6 +20,4 @@ export const ADD_EVENT_IN_LOG = 'ADD_EVENT_IN_LOG';
 export const GET_STAGES = 'GET_STAGES';
 export const GET_STAGE_INFO = 'GET_STAGE_INFO';
 
-export const ADD_MESSAGE_IN_CHAT = 'ADD_MESSAGE_IN_CHAT';
-
 export const ROUTING = 'ROUTING';
