@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchActions from '../actions/match';
-//import Chat from '../components/match/Chat';
+import Chat from '../components/match/Chat';
 import Events from '../components/match/Events';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
@@ -42,10 +42,10 @@ var Component = React.createClass({
                     </div>
                 }
                 <Events/>
+                <Chat/>
             </div>
 
         )
-        //<Chat idMatch={this.props.params.idMatch}/>
     }
 });
 
