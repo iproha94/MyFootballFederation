@@ -11,7 +11,7 @@ var App = React.createClass({
     render: function () {
         return (
             <div>
-                <Nav/>
+                <Nav location={this.props.location}/>
                 {this.props.children}
             </div>
         );
