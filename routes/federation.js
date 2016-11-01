@@ -47,13 +47,20 @@ router.get('/:name', function(req, res, next) {
         if(err || !federation) {
             return next();
         }
-        var isAdmin = federation.creators.some(
-            (item) => item.toString() == idUser
-        );
-        var result = Object.assign(federation.toObject(),{
-            isAdmin: isAdmin
+        
+        Match.find({
+            federation: federation._id,
+            status: "running"//TODO - незнаю чему должен равняться этот флажок
+        }, function (err, runningMatches) {
+            var isAdmin = federation.creators.some(
+                (item) => item.toString() == idUser
+            );
+            var result = Object.assign(federation.toObject(),{
+                isAdmin: isAdmin,
+                runningMatches: runningMatches
+            });
+            return res.json(result);
         });
-        return res.json(result);
     });
 });
 
@@ -66,19 +73,6 @@ router.get('/get-tournaments/:name', function(req, res, next) {
         }
         Tournament.find({federation: federation._id}, function (err, tournaments) {
             res.json(tournaments);
-        });
-    });
-});
-
-router.get('/get-running-match/:name', function(req, res, next) {
-    Federation.findOne({name : req.params.name}, function (err, federation) {
-        if(err || !federation) {
-            return res.json({
-                status: 404
-            });
-        }
-        Tournament.find({federation: federation._id}, function (err, federation) {
-
         });
     });
 });
