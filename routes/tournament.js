@@ -101,11 +101,23 @@ router.post('/add-team', function(req, res, next) {
 
 
 router.get('/:idTournament', function(req, res, next) {
+    var idUser = null;
+    if(req.user){
+        idUser = req.user._id;
+    }
     Tournament.findById(req.params.idTournament, function (err, tournament) {
         if(err || !tournament) {
             return next();
         }
-        return res.json(tournament);
+        Federation.findById(tournament.federation, function (err, federation) {
+            var isAdmin = federation.creators.some(
+                (item) => item.toString() == idUser
+            );
+            var result = Object.assign(tournament.toObject(),{
+                isAdmin: isAdmin
+            });
+            return res.json(result);
+        });
     });
 });
             

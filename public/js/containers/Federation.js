@@ -14,19 +14,6 @@ var Component = React.createClass({
     },
     render: function () {
         var federation = this.props.federation;
-
-        if(!federation.creators.includes(this.props.currentUser._id)) {
-            var buttonCreateTournament = "";
-        } else {
-            var buttonCreateTournament =
-                <div className="row right-align">
-                    <Link className="waves-effect waves-light btn"
-                       to={"/tournament/create/?federation=" + federation.name}>
-                        Создать турнир
-                    </Link>
-                </div>
-        }
-
         return (
             <div className="container content-margin-top content-flex">
                 <div className="row center">
@@ -45,7 +32,14 @@ var Component = React.createClass({
                       url="/tournament/"
                       defaultMessage="Турниров нет"
                       list={this.props.tournaments}/>
-                {buttonCreateTournament}
+                {!this.props.federation.isAdmin ? null :
+                    <div className="row right-align">
+                        <Link className="waves-effect waves-light btn"
+                              to={"/tournament/create/?federation=" + federation.name}>
+                            Создать турнир
+                        </Link>
+                    </div>
+                }
             </div>
         );
     }

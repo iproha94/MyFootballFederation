@@ -7,7 +7,8 @@ const initialState = {
     name: "",
     type: {},
     _id: "",
-    matches: []
+    matches: [],
+    isAdmin: false
 };
 
 export default function(state = initialState, action) {

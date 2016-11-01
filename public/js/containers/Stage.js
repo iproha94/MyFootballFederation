@@ -43,10 +43,12 @@ var Component = React.createClass({
                         <li className="collection-item">Тип: {stage.type.name}</li>
                     </ul>
                 </div>
-
-                <div className="row right-align">
-                    <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">Начать со всеми заявившимися командами</a>
-                </div>
+                {!this.props.stage.isAdmin ? null :
+                    <div className="row right-align">
+                        <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">Начать со всеми
+                            заявившимися командами</a>
+                    </div>
+                }
 
                 <List header="Список матчей:"
                       url="/match/"

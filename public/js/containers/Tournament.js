@@ -42,13 +42,14 @@ var TournamentPage = React.createClass({
                       defaultMessage="В турнире нет этапов"
                       list={this.props.stages}/>
 
-
-                <div className="row right-align">
-                    <Link className="waves-effect waves-light btn"
-                          to={"/stage/create/?tournament=" + this.props.tournament._id}>
-                        Создать этап
-                    </Link>
-                </div>
+                {!this.props.tournament.isAdmin ? null :
+                    <div className="row right-align">
+                        <Link className="waves-effect waves-light btn"
+                              to={"/stage/create/?tournament=" + this.props.tournament._id}>
+                            Создать этап
+                        </Link>
+                    </div>
+                }
 
                 {!isAuth ? null :
                     <ModalWindow urlSend="/api/tournament/add-team"

@@ -8,6 +8,7 @@ var stageSchema = new Schema({
     tournament: Schema.Types.ObjectId,
     teams: [Schema.Types.ObjectId],
     type: Object,
+    federation: Schema.Types.ObjectId
 });
 
 var Stage = mongoose.model("Stage", stageSchema);

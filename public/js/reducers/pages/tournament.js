@@ -8,7 +8,8 @@ const initialState = {
     name: null,
     type: null,
     stages: [],
-    teams: []
+    teams: [],
+    isAdmin: false
 };
     
 export default function(state = initialState, action) {

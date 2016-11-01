@@ -10,7 +10,8 @@ var matchSchema = new Schema({
     events: [{
         number: Number,
         data: String,
-    }]
+    }],
+    federation: Schema.Types.ObjectId
     //todo добавить 2 массива игроков от каждой комнды
 });
 

@@ -30,7 +30,7 @@ var Component = React.createClass({
                       defaultMessage="Судья не назначен"
                       list={this.props.match.refereeList}/>
 
-                {!this.props.match.isFederationCreator ? "" :
+                {!this.props.match.isAdmin ? null :
                     <div className="container">
                         <ModalWindow urlSend='/api-referee/add-referee'
                                      buttonName="Добавить судью"

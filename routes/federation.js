@@ -39,12 +39,21 @@ router.get('/get-by-creator', function (req, res, next) {
 
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
-    Federation.findOne({name : name}, function (err, result) {
-        if(err || !result) {
+    var idUser = null;
+    if(req.user){
+        idUser = req.user._id;
+    }
+    Federation.findOne({name : name}, function (err, federation) {
+        if(err || !federation) {
             return next();
         }
-
-        res.json(result);
+        var isAdmin = federation.creators.some(
+            (item) => item.toString() == idUser
+        );
+        var result = Object.assign(federation.toObject(),{
+            isAdmin: isAdmin
+        });
+        return res.json(result);
     });
 });
 

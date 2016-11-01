@@ -8,7 +8,8 @@ const initialState = {
     name: null,
     _id: null,
     city: null,
-    tournaments: []
+    tournaments: [],
+    isAdmin: false
 };
 
 //реализация при которой если один из запросов пройдет не успешно

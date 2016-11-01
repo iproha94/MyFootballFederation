@@ -16,7 +16,7 @@ const initialState = {
         _id: ''
     },
     events: [],
-    isFederationCreator: false
+    isAdmin: false
 };
 
 export default function(state = initialState, action) {
