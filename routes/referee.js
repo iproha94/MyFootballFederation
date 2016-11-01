@@ -17,7 +17,7 @@ wss.on('connection', function connection(ws) {
 
 router.get('/:idUser/get-my-matches', function(req, res, next) {
     let idUser = "vkontakte:" + req.params.idUser;
-
+    
     User.findOne({authId: idUser}, function (err, user) {
         if (user == null) {
             return res.json([]);
