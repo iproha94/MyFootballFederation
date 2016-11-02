@@ -1,15 +1,6 @@
 import React from 'react';
 
 export default React.createClass({
-    componentDidMount: function () {
-        $(".js-type-tournament").change(function () {
-            // {{#each config}}
-            // if ($("#{{type}}").is(':checked')) {
-            //     $('.config-tournament').html('конфиг турнира {{name}}');
-            // }
-            // {{/each}}
-        });
-    },
     handleSubmit: function (event) {
         event.preventDefault();
         $.ajax({
@@ -48,29 +39,29 @@ export default React.createClass({
 
                         <div className="row">
                             <div className="input-field  col s12">
-                                <input id="time" type="text" className="validate" value="7" name="countPlayersOnField" required pattern="[0-9]*"/>
-                                <label for="time">Колличество игроков на поле от команды</label>
+                                <input id="time" type="text" className="validate" defaultValue="7" name="countPlayersOnField" required pattern="[0-9]*"/>
+                                <label className="active" for="time">Колличество игроков на поле от команды</label>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="input-field  col s12">
-                                <input id="time" type="text" className="validate" value="16" name="countPlayersInTeam" required pattern="[0-9]*"/>
-                                <label for="time">Колличество заявленных игроков в команде</label>
+                                <input id="time" type="text" className="validate" defaultValue="16" name="countPlayersInTeam" required pattern="[0-9]*"/>
+                                <label className="active" for="time">Колличество заявленных игроков в команде</label>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="input-field  col s12">
-                                <input id="time" type="text" className="validate" value="25" name="timePeriod" required pattern="[0-9]*"/>
-                                <label for="time">Длительность периода [мин]</label>
+                                <input id="time" type="text" className="validate" defaultValue="25" name="timePeriod" required pattern="[0-9]*"/>
+                                <label className="active" for="time">Длительность периода [мин]</label>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="input-field  col s12">
-                                <input id="countPeriods" type="text" value="2" className="validate" name="countPeriods" required pattern="[0-9]*"/>
-                                <label for="countPeriods">Количество периодов</label>
+                                <input id="countPeriods" type="text" defaultValue="2" className="validate" name="countPeriods" required pattern="[0-9]*"/>
+                                <label className="active" for="countPeriods">Количество периодов</label>
                             </div>
                         </div>
 

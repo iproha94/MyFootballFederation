@@ -37,6 +37,11 @@ var Component = React.createClass({
     componentDidMount: function() {
         this.createWS();
     },
+    componentWillUnmount: function () {
+        if(this.ws){
+            this.ws.close();
+        }
+    },
     render: function () {
         var events = this.props.events.map(function (item, index) {
                 return (
