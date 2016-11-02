@@ -32,19 +32,10 @@ router.post('/create', function(req, res, next) {
             if(err) {
                 return next(err);
             }
-            res.json({
+            return res.json({
                 _id: stage._id
             })
         });
-    });
-
-    stage.save(function (err) {
-        if(err) {
-            return next(err);
-        }
-        res.json({
-            _id: stage._id
-        })
     });
 });
 
