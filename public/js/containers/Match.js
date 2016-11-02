@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchActions from '../actions/match';
 import Chat from '../components/match/Chat';
+import Events from '../components/match/Events';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
 import ModalWindow from '../components/common/ModalWindow';
@@ -16,7 +17,7 @@ var Component = React.createClass({
     onSuccessAddReferee: function () {
         this.props.matchActions.getMatch(this.props.params.idMatch);
     },
-    render: function () {//какого то хрена team1 и team2 - это idшники
+    render: function () {
         return (
             <div className="container content-margin-top content-flex">
                 <p>
@@ -29,7 +30,7 @@ var Component = React.createClass({
                       defaultMessage="Судья не назначен"
                       list={this.props.match.refereeList}/>
 
-                {!this.props.match.isFederationCreator ? "" :
+                {!this.props.match.isAdmin ? null :
                     <div className="container">
                         <ModalWindow urlSend='/api-referee/add-referee'
                                      buttonName="Добавить судью"
@@ -40,7 +41,8 @@ var Component = React.createClass({
                                      onSuccess={this.onSuccessAddReferee}/>
                     </div>
                 }
-                <Chat idMatch={this.props.params.idMatch}/>
+                <Events/>
+                <Chat/>
             </div>
 
         )

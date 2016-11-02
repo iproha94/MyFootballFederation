@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./cfg/credentials.js');
 var mainRoutes = require('./routes/main');
-var refereeRoutes = require('./routes/referee');
 var teamRoutes = require('./routes/team');
 var stageRoutes = require('./routes/stage');
 var matchRoutes = require('./routes/match');
@@ -72,8 +71,27 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.use('/api/', mainRoutes);
+var server;
+
+if (app.get('port') == 443) {
+	let fs = require('fs');
+
+	let options = {
+		key: fs.readFileSync('./cfg/ssl/private.key'),
+		cert: fs.readFileSync('./cfg/ssl/public.crt')
+	};
+	server = require('https').createServer(options);
+
+} else {
+	server = require('http').createServer();
+}
+
+module.exports = server;
+
+//импортируется ниже эксорта сервера
+var refereeRoutes = require('./routes/referee');
 app.use('/api-referee', refereeRoutes);
+app.use('/api/', mainRoutes);
 app.use('/api/stage', stageRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/federation', federationRoutes);
@@ -103,25 +121,10 @@ app.get(/.*/, function root(req, res) {
 	res.sendFile(__dirname  + '/public/index.html');
 });
 
-var server;
-
-if (app.get('port') == 443) {
-	let fs = require('fs');
-	let options = {
-		key: fs.readFileSync('./cfg/ssl/private.key'),
-		cert: fs.readFileSync('./cfg/ssl/public.crt')
-	};
-
-	server = require('https').createServer(options);
-} else {
-	server = require('http').createServer();
-}
-
-var startChat = require('./chat');
-startChat(server);
 
 server.on('request', app);
 server.listen(app.get('port'), function () {
 	console.log( 'Express запущен на http://localhost:' +
 		app.get('port') + '; нажмите Ctrl+C для завершения.' );
-});		
+});
+

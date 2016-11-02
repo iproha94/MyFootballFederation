@@ -7,13 +7,14 @@ const initialState = {
     name: "",
     type: {},
     _id: "",
-    matches: []
+    matches: [],
+    isAdmin: false
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_STAGE_INFO:
-            return {...initialState, ...action.payload};
+            return {...state, ...action.payload};
         case GET_MATCHES_IN_STAGE:
             var newState = {...state};
             newState.matches = [...action.payload];

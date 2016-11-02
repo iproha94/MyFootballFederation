@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var Federation = require('../models/federation');
 var User = require('../models/user');
 var Match = require('../models/match');
-var Team = require('../models/team');
+var WebSocketServer = require('ws').Server;
+var server = require('../app');
+
+var wss = new WebSocketServer({ server: server });
+var clients = new Set();
+wss.on('connection', function connection(ws) {
+    clients.add(ws);
+    ws.on('close', function() {
+        clients.delete(ws);
+    });
+});
 
 
 router.get('/:idUser/get-my-matches', function(req, res, next) {
@@ -159,6 +168,13 @@ router.get('/:idMatch/:number/:data/set-info', function(req, res, next) {
     let idMatch = req.params.idMatch;
     let number = req.params.number;
     let data = req.params.data;
+
+    clients.forEach((ws) => {
+        ws.send(JSON.parse({
+            number: number,
+            data: data
+        }));
+    });
 
     Match.findById(idMatch, function (err, match) {
         match.events.push({

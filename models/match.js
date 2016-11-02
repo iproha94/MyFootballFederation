@@ -11,11 +11,7 @@ var matchSchema = new Schema({
         number: Number,
         data: String,
     }],
-    chat: [{
-        user: Object,
-        message: String,
-        time: String
-    }]
+    federation: Schema.Types.ObjectId
     //todo добавить 2 массива игроков от каждой комнды
 });
 

@@ -3,6 +3,7 @@ var router = express.Router();
 var Tournament = require('../models/tournament');
 var Stage = require('../models/stage');
 var Match = require('../models/match');
+var Federation = require('../models/federation');
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -16,12 +17,25 @@ router.post('/create', function(req, res, next) {
         return res.redirect('/unauthorized' );
     }
 
-    var stage = new Stage({
-        name: req.body.name,
-        tournament: req.query.tournament,
-        teams: [],
-        matches: [],
-        type: Stage.types.liga,
+    Tournament.findOne({_id: req.query.tournament}, function (err, tournament) {
+
+        var stage = new Stage({
+            name: req.body.name,
+            tournament: tournament._id,
+            teams: [],
+            matches: [],
+            type: Stage.types.liga,
+            federation: tournament.federation
+        });
+
+        stage.save(function (err) {
+            if(err) {
+                return next(err);
+            }
+            res.json({
+                _id: stage._id
+            })
+        });
     });
 
     stage.save(function (err) {
@@ -41,16 +55,25 @@ router.get('/get-matches/:idStage', function(req, res, next) {
     });
 });
 
-
-
 router.get('/:idStage', function(req, res, next) {
     var idStage = req.params.idStage;
-
+    var idUser = null;
+    if(req.user){
+        idUser = req.user._id;
+    }
     Stage.findById(idStage, function (err, stage) {
         if(err || !stage) {
             return next();
         }
-        return res.json(stage);
+        Federation.findById(stage.federation, function (err, federation) {
+            var isAdmin = federation.creators.some(
+                (item) => item.toString() == idUser
+            );
+            var result = Object.assign(stage.toObject(),{
+                isAdmin: isAdmin
+            });
+            return res.json(result);
+        });
     });
 });
 
@@ -70,6 +93,7 @@ router.get('/:idStage/start', function(req, res, next) {
             matches.forEach(function (match, index, array) {
                 match.stage = idStage;
                 match.name = match.team1 + " vs " + match.team2;
+                match.federation = stage.federation;
 
                 match.save(function (err) {
                     if(err) {

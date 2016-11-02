@@ -1,6 +1,6 @@
 import {
     GET_MATCH, 
-    ADD_MESSAGE_IN_CHAT,
+    ADD_EVENT_IN_LOG
 }  from '../../constants';
 
 const initialState = {
@@ -11,23 +11,21 @@ const initialState = {
         name: ""
     },
     _id: "",
-    chat: [],
     refereeList: [],
     federation: {
         _id: ''
     },
-    isFederationCreator: false
+    events: [],
+    isAdmin: false
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_MATCH:
-            var newState = {...action.payload, ...action.payload.match};
-            delete newState.match;
-            return newState;
-        case ADD_MESSAGE_IN_CHAT:
+            return {...state, ...action.payload};
+        case ADD_EVENT_IN_LOG:
             var newState = {...state};
-            newState.chat.push(action.payload);
+            newState.events.push(action.payload);
             return newState;
         default:
             return state;

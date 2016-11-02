@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
-var Stage = require('../models/stage');
 var Match = require('../models/match');
 
 router.post('/create', function(req, res, next) {
@@ -40,12 +39,28 @@ router.get('/get-by-creator', function (req, res, next) {
 
 router.get('/:name', function(req, res, next) {
     var name = req.params.name;
-    Federation.findOne({name : name}, function (err, result) {
-        if(err || !result) {
+    var idUser = null;
+    if(req.user){
+        idUser = req.user._id;
+    }
+    Federation.findOne({name : name}, function (err, federation) {
+        if(err || !federation) {
             return next();
         }
-
-        res.json(result);
+        
+        Match.find({
+            federation: federation._id,
+            status: "running"//TODO - незнаю чему должен равняться этот флажок
+        }, function (err, runningMatches) {
+            var isAdmin = federation.creators.some(
+                (item) => item.toString() == idUser
+            );
+            var result = Object.assign(federation.toObject(),{
+                isAdmin: isAdmin,
+                runningMatches: runningMatches
+            });
+            return res.json(result);
+        });
     });
 });
 
@@ -61,6 +76,5 @@ router.get('/get-tournaments/:name', function(req, res, next) {
         });
     });
 });
-
 
 module.exports = router;

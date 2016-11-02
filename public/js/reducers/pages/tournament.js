@@ -8,13 +8,14 @@ const initialState = {
     name: null,
     type: null,
     stages: [],
-    teams: []
+    teams: [],
+    isAdmin: false
 };
     
 export default function(state = initialState, action) {
   switch (action.type) {
       case GET_TOURNAMENT:
-          return {...initialState, ...action.payload};
+          return {...state, ...action.payload};
       case GET_STAGES:
           var newState = {...state};
           newState.stages = [...action.payload];

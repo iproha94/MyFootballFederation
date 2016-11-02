@@ -45,7 +45,7 @@ var Component = React.createClass({
                             :
                             [
                                 <li>Войти через:&nbsp;&nbsp;</li>,
-                                <li><a className="" href={"/auth/vkontakte?redirect=" + location.pathname}><i className="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>,
+                                <li><a className="" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}><i className="fa fa-vk fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>,
                                 <li><a className="" href="#"><i className="fa fa-google-plus fa-lg vertical-align-middle" aria-hidden="true"></i></a></li>
                             ]}
                     </ul>
@@ -72,7 +72,7 @@ var Component = React.createClass({
                         :
                             [
                             <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
+                            <li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>,
                             <li><a className="waves-effect" href="#"><i className="fa fa-google-plus fa-lg" aria-hidden="true"></i>Google</a></li>,
                         ]}
                         <li><div className="divider"></div></li>
