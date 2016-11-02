@@ -2,15 +2,28 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as teamActions from '../actions/team';
+import ListVusers from '../components/common/ListVusers';
+import {Link} from 'react-router';
+
 
 var Component = React.createClass({
     componentDidMount: function() {
         this.props.teamActions.getTeamInfo(this.props.params.idTeam);
     },
     render: function () {
+        var isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
+
         return (
-            <div className="container content-margin-top content-flex">
-                Страница команды {this.props.team.name}
+            <div>
+                <div className="container content-margin-top content-flex">
+                    Страница команды {this.props.team.name}
+                </div>
+
+                <ListVusers header="Виртуальные пользователи"
+                      url="/vuser/"
+                      defaultMessage="Никого нет"
+                      list={this.props.team.vplayers}/>
+                {isOwnTeam ? <Link to={"/vuser/create?team=" + this.props.team._id} class="waves-effect waves-light btn">Добавить виртуального пользователя</Link> : ""}
             </div>
         )
     }
@@ -18,6 +31,7 @@ var Component = React.createClass({
 
 export default connect((state)=>{
     return {
+        currentUser: state.currentUser,
         team: state.team
     }
 }, (dispatch)=>{

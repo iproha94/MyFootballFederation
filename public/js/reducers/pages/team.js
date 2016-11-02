@@ -4,7 +4,9 @@ import {
 
 const initialState = {
     name: "",
-    _id: ""
+    _id: "",
+    vplayers: [],
+    creators: []
 };
 
 export default function(state = initialState, action) {

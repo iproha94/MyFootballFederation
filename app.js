@@ -6,6 +6,7 @@ var refereeRoutes = require('./routes/referee');
 var teamRoutes = require('./routes/team');
 var stageRoutes = require('./routes/stage');
 var matchRoutes = require('./routes/match');
+var vuserRoutes = require('./routes/vuser');
 var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
 var bodyParser = require('body-parser');
@@ -78,6 +79,7 @@ app.use('/api/team', teamRoutes);
 app.use('/api/federation', federationRoutes);
 app.use('/api/tournament', tournamentRoutes);
 app.use('/api/match', matchRoutes);
+app.use('/api/vuser', vuserRoutes);
 
 // пользовательская страница 404
 app.use(/^\/api\/.*$/, function(req, res){

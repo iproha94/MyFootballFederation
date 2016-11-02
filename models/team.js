@@ -8,7 +8,7 @@ var teamSchema = new Schema({
     logo: String,
     creators: [Schema.Types.ObjectId],
     players: [Schema.Types.ObjectId],
-    player_requests: [Schema.Types.ObjectId]
+    vplayers: [Schema.Types.ObjectId]
 });
 
 var Team = mongoose.model("Team", teamSchema);

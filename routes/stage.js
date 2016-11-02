@@ -16,26 +16,22 @@ router.post('/create', function(req, res, next) {
         return res.redirect('/unauthorized' );
     }
 
-    Tournament.findOne({_id: req.query.tournament}, function (err, tournament) {
-
-        var stage = new Stage({
-            name: req.body.name,
-            tournament: tournament._id,
-            teams: [],
-            matches: [],
-            type: Stage.types.liga,
-        });
-
-        stage.save(function (err) {
-            if(err) {
-                return next(err);
-            }
-            res.json({
-                _id: stage._id
-            })
-        });
+    var stage = new Stage({
+        name: req.body.name,
+        tournament: req.query.tournament,
+        teams: [],
+        matches: [],
+        type: Stage.types.liga,
     });
 
+    stage.save(function (err) {
+        if(err) {
+            return next(err);
+        }
+        res.json({
+            _id: stage._id
+        })
+    });
 });
 
 
