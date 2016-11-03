@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/iproha94/MyFootballFederation#readme",
   "dependencies": {
+    "async": "^2.1.2",
     "babel-runtime": "^6.11.6",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
