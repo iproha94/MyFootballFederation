@@ -7,9 +7,13 @@ var matchSchema = new Schema({
     team1: Schema.Types.ObjectId,
     team2: Schema.Types.ObjectId,
     stage: Schema.Types.ObjectId,
+    status: Number,
     events: [{
-        number: Number,
-        data: String,
+        idTeam: Schema.Types.ObjectId,
+        idPlayer: Schema.Types.ObjectId,
+        idEvent: Number,
+        minute: Number,
+        idAction: Number,
     }],
     federation: Schema.Types.ObjectId
     //todo добавить 2 массива игроков от каждой комнды

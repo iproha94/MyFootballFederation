@@ -50,7 +50,7 @@ router.get('/:name', function(req, res, next) {
         
         Match.find({
             federation: federation._id,
-            status: "running"//TODO - незнаю чему должен равняться этот флажок
+            status: 1,
         }, function (err, runningMatches) {
             var isAdmin = federation.creators.some(
                 (item) => item.toString() == idUser

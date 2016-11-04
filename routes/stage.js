@@ -4,6 +4,9 @@ var Tournament = require('../models/tournament');
 var Stage = require('../models/stage');
 var Match = require('../models/match');
 var Federation = require('../models/federation');
+var Team = require('../models/team');
+var async = require('async');
+
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -79,25 +82,31 @@ router.get('/:idStage/start', function(req, res, next) {
         Tournament.findById(stage.tournament, function (err, tournament) {
             let matches = Stage.types.liga.createMatches(tournament.teams_requests, 1);
 
-            console.log(matches);
-
-            matches.forEach(function (match, index, array) {
+            async.every(matches, function (match, callback) {
                 match.stage = idStage;
-                match.name = match.team1 + " vs " + match.team2;
                 match.federation = stage.federation;
+                match.status = 0;
 
-                match.save(function (err) {
-                    if(err) {
-                        console.log("ошибка сохранения матча");
-                        return next(err);
-                    }
+                Team.findById(match.team1, function (err, team1) {
+                    Team.findById(match.team2, function (err, team2) {
+                        match.name = team1.name + " vs " + team2.name;
 
-                    if (index == matches.length - 1) {
-                        console.log("все мачти добавлены");
-                        return res.json({
-                            "status": "OK"
+                        match.save(function (err) {
+                            if(err) callback();
+
+                            callback(null, !err)
                         });
-                    }
+                    });
+                })
+            }, function (err, result) {
+                if (!result) {
+                    return res.json({
+                        "status": "ERROR"
+                    });
+                }
+
+                return res.json({
+                    "status": "OK"
                 });
             });
         });

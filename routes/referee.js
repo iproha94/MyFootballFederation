@@ -115,54 +115,64 @@ router.get('/:idMatch/get-info', function(req, res, next) {
     });
 });
 
-router.get('/set-info', function(req, res, next) {
-    // let idMatch = req.params.idMatch;
-    // let number = req.body.number;
-    // let data = req.body.data;
-    //
-    // Match.findById(idMatch, function (err, match) {
-    //     match.events.push({
-    //         number: number,
-    //         data: data,
-    //     });
-    //
-    //     console.log(req.body);
-    //
-    //     match.save(function (err) {
-    //         return res.json({
-    //             status: "OK",
-    //             code: 200
-    //         });
-    //     });
-    // });
-
+router.post('/set-info', function(req, res, next) {
     let idMatch = req.body.idMatch;
-    let number = req.params.number;
-    let data = req.params.data;
+    let idEvent = req.body.idEvent;
 
-    clients.forEach((ws) => {
-        ws.send(JSON.parse({
-            number: number,
-            data: data
-        }));
-    });
+    let event = {
+        idEvent: idEvent,
+        idAction: req.body.idAction
+    };
 
     Match.findById(idMatch, function (err, match) {
-        match.events.push({
-            number: number,
-            data: data,
-        });
+        if (err) {
+            return res.json({
+                status: "NOT FOUND",
+                code: 404
+            });
+        }
 
-        console.log(req.body);
+        switch (idEvent) {
+            case 0:
+                match.status = 1;
+                break;
+            case 1:
+                match.status = 2;
+                break;
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                event.idTeam = req.body.idTeam;
+                event.idPlayer = req.body.idPlayer;
+                event.minute = req.body.minute;
+                break;
+
+        }
+
+        match.events.push(event);
+
+        // clients.forEach((ws) => {
+        //     ws.send(JSON.parse({
+        //         number: number,
+        //         data: data
+        //     }));
+        // });
 
         match.save(function (err) {
+            if (err) {
+                return res.json({
+                    status: "ERROR",
+                    code: 500
+                });
+            }
+
             return res.json({
                 status: "OK",
                 code: 200
             });
         });
     });
-
 });
 
 router.get('/add-referee', function(req, res, next) {
