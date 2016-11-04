@@ -5,6 +5,7 @@ var Match = require('../models/match');
 var Stage = require('../models/stage');
 var Tournament = require('../models/tournament');
 var Team = require('../models/team');
+var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 var WebSocketServer = require('ws').Server;
 var server = require('../app');
@@ -57,22 +58,12 @@ router.post('/get-my-matches', function(req, res, next) {
                                         team1: {
                                             idTeam: team1._id,
                                             name: team1.name,
-                                            players: team1.vplayers.map(id => {
-                                                return {
-                                                    idUser: id,
-                                                    name: "player",
-                                                }
-                                            })
+                                            players: team1.vplayers
                                         },
                                         team2: {
                                             idTeam: team2._id,
                                             name: team2.name,
-                                            players: team2.vplayers.map(id => {
-                                                return {
-                                                    idUser: id,
-                                                    name: "player",
-                                                }
-                                            })
+                                            players: team2.vplayers
                                         },
                                     });
                                 });
@@ -84,7 +75,33 @@ router.post('/get-my-matches', function(req, res, next) {
                 if (err)
                     return res.json([]);
 
-                return res.json(matchesArr);
+                async.map(matchesArr, function (match, done) {
+                    Vuser.find({_id: {$in: match.team1.players}}, function (err, vusers) {
+                        if (err) done(err);
+
+                        match.team1.players = vusers.map(vuser => {
+                            return {
+                                id: vuser._id,
+                                name: vuser.name
+                            }
+                        });
+
+                        Vuser.find({_id: {$in: match.team2.players}}, function (err, vusers) {
+                            if (err) done(err);
+
+                            match.team2.players = vusers.map(vuser => {
+                                return {
+                                    id: vuser._id,
+                                    name: vuser.name
+                                }
+                            });
+
+                            done(null, match);
+                        });
+                    });
+                }, function (err, arr) {
+                    return res.json(arr);
+                });
             });
         });
     });
