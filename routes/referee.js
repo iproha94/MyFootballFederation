@@ -80,7 +80,7 @@ router.post('/get-my-matches', function(req, res, next) {
 
                         match.team1.players = vusers.map(vuser => {
                             return {
-                                id: vuser._id,
+                                idUser: vuser._id,
                                 name: vuser.name
                             }
                         });
