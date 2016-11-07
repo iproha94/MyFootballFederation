@@ -24,7 +24,6 @@ wss.on('connection', function connection(ws) {
 
 router.post('/get-my-matches', function(req, res, next) {
     let idVk = "vkontakte:" + req.body.idVk;
-    console.log(idVk);
 
     User.findOne({authId: idVk}, function (err, user) {
         if (user == null) {
@@ -91,7 +90,7 @@ router.post('/get-my-matches', function(req, res, next) {
 
                             match.team2.players = vusers.map(vuser => {
                                 return {
-                                    id: vuser._id,
+                                    idUser: vuser._id,
                                     name: vuser.name
                                 }
                             });
@@ -133,16 +132,16 @@ router.post('/set-info', function(req, res, next) {
         }
 
         switch (idEvent) {
-            case 0:
-                match.status = 1;
+            case Match.EVENT.MATCH_START.name:
+                match.status = Match.STATUS.RUNNING.name;
                 break;
-            case 1:
-                match.status = 2;
+            case Match.EVENT.MATCH_END.name:
+                match.status = Match.STATUS.FINISHED.name;
                 break;
-            case 4:
-            case 5:
-            case 6:
-            case 7:
+            case Match.EVENT.GOAL.name:
+            case Match.EVENT.OWN_GOAL.name:
+            case Match.EVENT.YELLOW_CARD.name:
+            case Match.EVENT.RED_CARD.name:
                 event.idTeam = req.body.idTeam;
                 event.idPlayer = req.body.idPlayer;
                 event.minute = req.body.minute;
@@ -176,11 +175,9 @@ router.post('/set-info', function(req, res, next) {
 });
 
 router.get('/add-referee', function(req, res, next) {
-    console.log("add-referee", req.query);
     User.findById(req.query.idSend, function (err, user) {
         user.matchesToReferee.push(req.query.idMatch);
         user.save((err) => {
-            console.log(user);
             res.json({status: 200});
         });
     });

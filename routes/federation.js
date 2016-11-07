@@ -50,7 +50,7 @@ router.get('/:name', function(req, res, next) {
         
         Match.find({
             federation: federation._id,
-            status: 1,
+            status: Match.STATUS.RUNNING.name,
         }, function (err, runningMatches) {
             var isAdmin = federation.creators.some(
                 (item) => item.toString() == idUser

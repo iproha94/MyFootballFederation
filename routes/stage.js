@@ -85,7 +85,7 @@ router.get('/:idStage/start', function(req, res, next) {
             async.every(matches, function (match, callback) {
                 match.stage = idStage;
                 match.federation = stage.federation;
-                match.status = 0;
+                match.status = Match.STATUS.CREATED.name;
 
                 Team.findById(match.team1, function (err, team1) {
                     Team.findById(match.team2, function (err, team2) {
