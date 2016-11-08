@@ -19,11 +19,10 @@ var Component = React.createClass({
                     Страница команды {this.props.team.name}
                 </div>
 
-                <ListVusers header="Виртуальные пользователи"
-                      url="/vuser/"
+                <ListVusers header="Игроки команды (виртуальные пользователи)"
                       defaultMessage="Никого нет"
-                      list={this.props.team.vplayers}/>
-                {isOwnTeam ? <Link to={"/vuser/create?team=" + this.props.team._id} class="waves-effect waves-light btn">Добавить виртуального пользователя</Link> : ""}
+                      list={this.props.team.vplayersWithName}/>
+                {isOwnTeam ? <Link to={"/vuser/create?team=" + this.props.team._id} className="waves-effect waves-light btn">Добавить игрока</Link> : ""}
             </div>
         )
     }

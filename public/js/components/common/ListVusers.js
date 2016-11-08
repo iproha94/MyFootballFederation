@@ -6,9 +6,9 @@ export default React.createClass({
     render: function () {
         var list = this.props.list.map((item) => {
             return (
-                <Link key={item} to={this.props.url + (item[this.props.urlParam] || item)} className="collection-item">
-                    {item}
-                </Link>
+                <p key={item.id} className="collection-item">
+                    {item.name}
+                </p>
             )
         });
         return (

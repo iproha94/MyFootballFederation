@@ -43,7 +43,7 @@ var Component = React.createClass({
 
                 <List header="Идущие сейчас матчи:"
                       url="/match/"
-                      defaultMessage="Нету идущих матчей"
+                      defaultMessage="Нет идущих матчей"
                       list={this.props.federation.runningMatches}/>
             </div>
         );
