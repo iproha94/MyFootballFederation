@@ -19,8 +19,10 @@ var matchSchema = new Schema({
         minute: Number,
         idAction: Number,
     }],
-    federation: Schema.Types.ObjectId
-    //todo добавить 2 массива игроков от каждой комнды
+    federation: Schema.Types.ObjectId,
+    players1: [],
+    players2: []
+    //todo добавить 2 массива игроков от каждой команды
 });
 
 var Match = mongoose.model("Match", matchSchema);

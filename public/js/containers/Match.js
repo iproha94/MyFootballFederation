@@ -6,7 +6,9 @@ import Chat from '../components/match/Chat';
 import Events from '../components/match/Events';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
+import ListVusers from '../components/common/ListVusers';
 import ModalWindow from '../components/common/ModalWindow';
+import Players from '../components/match/Players';
 
 
 var Component = React.createClass({
@@ -41,6 +43,17 @@ var Component = React.createClass({
                                      onSuccess={this.onSuccessAddReferee}/>
                     </div>
                 }
+
+                <ListVusers header="Список игроков команды 1"
+                      defaultMessage="Нет игроков"
+                      list={this.props.match.players1}/>
+                
+                <ListVusers header="Список игроков команды 2"
+                      defaultMessage="Нет игроков"
+                      list={this.props.match.players2}/>
+                
+                <Players idMatch={this.props.params.idMatch}/>
+
                 <Chat/>
             </div>
 
