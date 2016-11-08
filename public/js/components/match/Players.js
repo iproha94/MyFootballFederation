@@ -17,6 +17,7 @@ var Component = React.createClass({
             success: (data) => {
                 console.log(data);
                 Materialize.toast("Операция прошла успешно", 2000);
+                this.props.matchActions.getMatch(this.props.idMatch);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
@@ -28,8 +29,8 @@ var Component = React.createClass({
         var players = this.props.team.vplayers.map((item, index) => {
             return (
                 <p>
-                    <input type='checkbox' defaultChecked={false} ref={"player"+index} name="players[]" value={item}/>
-                    <label for={"player"+index} onClick={this.handleChange} data-ref={"player"+index}>{item}</label>
+                    <input type='checkbox' defaultChecked={false} ref={"player"+item._id} name="players[]" value={item._id}/>
+                    <label for={"player"+item._id} onClick={this.handleChange} data-ref={"player"+item._id}>{item.name}</label>
                 </p>
             );
         });
@@ -39,8 +40,8 @@ var Component = React.createClass({
                 {players}
                 <input type="hidden" name="idMatch" value={this.props.idMatch}/>
                 <input type="hidden" name="idTeam" value={this.props.team._id}/>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Отправить
-                    <i class="material-icons right">send</i>
+                <button className="btn waves-effect waves-light" type="submit">Submit
+                    <i className="material-icons right">send</i>
                 </button>
             </form>
         ) : null;

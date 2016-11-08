@@ -3,7 +3,9 @@ var router = express.Router();
 var Match = require('../models/match');
 var Team = require('../models/team');
 var User = require('../models/user');
+var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
+var async = require('async');
 
 router.get('/:idMatch', function(req, res, next) {
     var idUser = null;
@@ -19,26 +21,39 @@ router.get('/:idMatch', function(req, res, next) {
             Team.findById(match.team2, function (err, team2) {
                 User.find({matchesToReferee: match._id}, function (err, users) {
                     Federation.findById(match.federation, function (err, federation) {
-                        var isAdmin = federation.creators.some(
-                            (item) => item.toString() == idUser
-                        );
-                        
-                        var currentUserTeam = null;
-                        if(team1.creators.some((item) => item.toString() == idUser)){
-                            currentUserTeam = team1;
-                        }
-                        if(team2.creators.some((item) => item.toString() == idUser)){
-                            currentUserTeam = team2;
-                        }
-                        
-                        var result = Object.assign(match.toObject(), {
-                            refereeList: users,
-                            team1: team1,
-                            team2: team2,
-                            isAdmin: isAdmin,
-                            currentUserTeam: currentUserTeam
+                        Vuser.find({_id: {$in: match.players1}}, function (err, players1) {
+                            Vuser.find({_id: {$in: match.players2}}, function (err, players2) {
+                                var isAdmin = federation.creators.some(
+                                    (item) => item.toString() == idUser
+                                );
+
+                                var currentUserTeam = {vplayers: []};
+                                if(team1.creators.some((item) => item.toString() == idUser)){
+                                    currentUserTeam = team1;
+                                }
+                                if(team2.creators.some((item) => item.toString() == idUser)){
+                                    currentUserTeam = team2;
+                                }
+
+                                Vuser.find({_id: {$in: currentUserTeam.vplayers}}, function (err, vplayers) {
+                                    console.log(vplayers);
+                                    if(currentUserTeam.toObject){
+                                        currentUserTeam = currentUserTeam.toObject();
+                                        currentUserTeam.vplayers = vplayers;
+                                    }
+                                    var result = Object.assign(match.toObject(), {
+                                        refereeList: users,
+                                        team1: team1,
+                                        team2: team2,
+                                        isAdmin: isAdmin,
+                                        currentUserTeam: currentUserTeam,
+                                        players1: players1,
+                                        players2: players2
+                                    });
+                                    res.json(result);
+                                });
+                            });
                         });
-                        res.json(result);
                     });
                 });
             });
