@@ -120,8 +120,9 @@ router.post('/set-info', function(req, res, next) {
 
     let event = {
         idEvent: idEvent,
-        idAction: req.body.idAction
-    };
+        idAction: req.body.idAction,
+        minute: req.body.minute,
+};
 
     Match.findById(idMatch, function (err, match) {
         if (err) {
@@ -144,12 +145,15 @@ router.post('/set-info', function(req, res, next) {
             case Match.EVENT.RED_CARD.name:
                 event.idTeam = req.body.idTeam;
                 event.idPlayer = req.body.idPlayer;
-                event.minute = req.body.minute;
+                event.teamName = req.body.teamName;
+                event.playerName = req.body.playerName;
                 break;
 
         }
 
         match.events.push(event);
+
+
 
         clients.forEach((ws) => {
             ws.send(JSON.stringify(event));

@@ -12,6 +12,8 @@ var matchSchema = new Schema({
     events: [{
         idTeam: Schema.Types.ObjectId,
         idPlayer: Schema.Types.ObjectId,
+        playerName: String,
+        teamName: String,
         idEvent: String,
         minute: Number,
         idAction: Number,
