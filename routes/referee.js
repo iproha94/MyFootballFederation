@@ -151,12 +151,9 @@ router.post('/set-info', function(req, res, next) {
 
         match.events.push(event);
 
-        // clients.forEach((ws) => {
-        //     ws.send(JSON.parse({
-        //         number: number,
-        //         data: data
-        //     }));
-        // });
+        clients.forEach((ws) => {
+            ws.send(JSON.stringify(event));
+        });
 
         match.save(function (err) {
             if (err) {
