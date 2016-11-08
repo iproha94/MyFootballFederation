@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import eventsData from './helpers/eventsData';
 import * as matchActions from '../../actions/match';
 import {bindActionCreators} from 'redux';
 var wsUrl = require("../../../../cfg/front").wsUrl;
+var eventsData = require('../../../../cfg/matchEvents');
 
 var Component = React.createClass({
     createWS : function () {//TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
@@ -44,17 +44,18 @@ var Component = React.createClass({
     },
     render: function () {
         var events = this.props.events.map(function (item, index) {
-                return (
-                    <li className="collection-item avatar" key={index}>
-                        <img src={eventsData[item.number].image} alt="" className="circle"/>
-                        <span className="title">
-                            {eventsData[item.number].title}
-                        </span>
-                    </li>
-                );
-            // <p>{item.message}</p>
-            // <span className="secondary-content">{item.time}</span>
-            });
+            var event = eventsData[item.idEvent];
+            return (
+                <li className="collection-item avatar" key={index}>
+                    <img src={event.image} alt="" className="circle"/>
+                    <span className="title">
+                        {event.title}
+                    </span>
+                    <p>Игрoк: {event.idPlayer} Команда: {event.idTeam}</p>
+                    <span className="secondary-content">Минута: {item.minute}</span>
+                </li>
+            );
+        });
         return (
             <div className="card">
                 {!events.length ?
