@@ -53,8 +53,8 @@ var Component = React.createClass({
                         {event.title}
                     </span>
                     <p>
-                        {item.idPlayer ? `Игрoк: ${item.idPlayer} ` : null}
-                        {item.idTeam ? `Команда: ${item.idTeam}` : null}
+                        {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}
+                        {item.idTeam ? `Команда: ${item.teamName}` : null}
                     </p>
                     <span className="secondary-content">Минута: {item.minute}</span>
                 </li>

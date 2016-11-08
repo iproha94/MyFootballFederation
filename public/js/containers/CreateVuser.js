@@ -9,7 +9,9 @@ export default React.createClass({
             url: "/api/vuser/create" + location.search ,
             success: (data) => {
                 Materialize.toast("Операция прошла успешно", 2000);
-                this.props.history.push('/vuser/' + data._id);
+                history.back();
+                // this.props.history.back();
+                // .push('/vuser/' + data._id);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);

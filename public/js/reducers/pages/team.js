@@ -6,6 +6,7 @@ const initialState = {
     name: "",
     _id: "",
     vplayers: [],
+    vplayersWithName: [],
     creators: []
 };
 

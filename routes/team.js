@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Team = require('../models/team');
 var Tournament = require('../models/tournament');
+var Vuser = require('../models/vuser');
+var async = require('async');
 
 router.post('/create', function(req, res, next) {
     var team = new Team({
@@ -29,11 +31,26 @@ router.post('/create', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
     var id = req.param("id");
-    Team.findOne({_id : id}, function (err, result) {
+    Team.findById(id, function (err, result) {
         if(err || !result) {
             return next();
         }
-        res.json(result);
+
+        async.map(result.vplayers, function (vplayer, done) {
+            Vuser.findById(vplayer, function (err, vuser) {
+                if(err) return done(err);
+
+                done(null, {
+                    id: vuser._id,
+                    name: vuser.name
+                })
+            });
+
+        }, function (err, arr) {
+            var team = result.toObject();
+            team.vplayersWithName = arr;
+            return res.json(team);
+        });
     });
 });
 
