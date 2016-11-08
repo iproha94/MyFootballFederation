@@ -14,5 +14,8 @@ module.exports = {
                 presets:[ 'es2015', "stage-0", 'react'] //поддержка ES2015, ES7 и JSX
             }
         }]
-    }
+    },
+    plugins: process.env.PROD_ENV ? [
+        new webpack.optimize.UglifyJsPlugin()
+    ] : []
 };
