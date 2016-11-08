@@ -43,15 +43,19 @@ var Component = React.createClass({
         }
     },
     render: function () {
-        var events = this.props.events.map(function (item, index) {
+        var events = this.props.match.events.map(function (item, index) {
             var event = eventsData[item.idEvent];
+            console.log(event);
             return (
                 <li className="collection-item avatar" key={index}>
                     <img src={event.image} alt="" className="circle"/>
                     <span className="title">
                         {event.title}
                     </span>
-                    <p>Игрoк: {event.idPlayer} Команда: {event.idTeam}</p>
+                    <p>
+                        {item.idPlayer ? `Игрoк: ${item.idPlayer} ` : null}
+                        {item.idTeam ? `Команда: ${item.idTeam}` : null}
+                    </p>
                     <span className="secondary-content">Минута: {item.minute}</span>
                 </li>
             );
@@ -74,7 +78,7 @@ var Component = React.createClass({
 
 export default connect((state)=>{
     return {
-        events: state.match.events,
+        match: state.match,
         currentUser: state.currentUser
     }
 }, (dispatch)=>{
