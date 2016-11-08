@@ -4,6 +4,10 @@ import {
 }  from '../../constants';
 
 const initialState = {
+    currentUserTeam: {
+        players: [],
+        vplayers: []
+    },
     team1: {
         name: ""
     },
@@ -16,7 +20,9 @@ const initialState = {
         _id: ''
     },
     events: [],
-    isAdmin: false
+    isAdmin: false,
+    players1: [],
+    players2: []
 };
 
 export default function(state = initialState, action) {

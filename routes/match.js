@@ -22,17 +22,48 @@ router.get('/:idMatch', function(req, res, next) {
                         var isAdmin = federation.creators.some(
                             (item) => item.toString() == idUser
                         );
+                        
+                        var currentUserTeam = null;
+                        if(team1.creators.some((item) => item.toString() == idUser)){
+                            currentUserTeam = team1;
+                        }
+                        if(team2.creators.some((item) => item.toString() == idUser)){
+                            currentUserTeam = team2;
+                        }
+                        
                         var result = Object.assign(match.toObject(), {
                             refereeList: users,
                             team1: team1,
                             team2: team2,
-                            isAdmin: isAdmin
+                            isAdmin: isAdmin,
+                            currentUserTeam: currentUserTeam
                         });
                         res.json(result);
                     });
                 });
             });
         });
+    });
+});
+
+router.get('/set-players', function(req, res, next) {
+    var idMatch = req.query.idMatch;
+    Match.findById(idMatch, function (err, match) {
+        switch(req.query.idTeam) {
+            case match.team1.toString():
+                req.query.players.forEach((item)=> match.players1.push(item));
+                res.json({status: "200"});
+                break;
+            case match.team2.toString():
+                req.query.players.forEach((item)=> match.players2.push(item));
+                res.json({status: "200"});
+                break;
+            default:
+                res.status(500);
+                res.json({status: "500"});
+                break;
+        }
+        match.save();
     });
 });
 
