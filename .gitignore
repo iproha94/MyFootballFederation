@@ -1,6 +1,7 @@
 node_modules
-cfg
-credentials.js
+cfg/front.js
+cfg/credentials.js
+cfg/ssl
 .idea
 bundle.js
 front.js
