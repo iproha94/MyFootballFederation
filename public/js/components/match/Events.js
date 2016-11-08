@@ -52,24 +52,40 @@ var Component = React.createClass({
                     <span className="title">
                         {event.title}
                     </span>
-                    <p>
-                        {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}
-                        {item.idTeam ? `Команда: ${item.teamName}` : null}
-                    </p>
-                    <span className="secondary-content">Минута: {item.minute}</span>
+                    <p> {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}</p>
+                    <p> {item.idTeam ? `Команда: ${item.teamName}` : null}</p>
+
+                    <span className="secondary-content">Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()}</span>
                 </li>
             );
         });
+
+        let numGoalsTeam1 = 0;
+        let numGoalsTeam2 = 0;
+
+        let idTeam1 = this.props.match.team1._id;
+        let idTeam2 = this.props.match.team2._id;
+
+        this.props.match.events.forEach(function (item) {
+            if (item.idEvent == "GOAL" && item.idTeam == idTeam1) numGoalsTeam1++;
+            if (item.idEvent == "GOAL" && item.idTeam == idTeam2) numGoalsTeam2++;
+
+            if (item.idEvent == "OWN_GOAL" && item.idTeam == idTeam1) numGoalsTeam2++;
+            if (item.idEvent == "OWN_GOAL" && item.idTeam == idTeam2) numGoalsTeam1++;
+
+        });
+
         return (
             <div className="card">
-                {!events.length ?
-                    <p className="center-align">
-                        Матч еще не начался
-                    </p>
-                    :
+                <h5 className="center"> {events.length != 0 ? "Матч прошел " + new Date(this.props.match.events[0].realTime).toLocaleDateString() : ""} </h5>
+                <h4 className="center"> {events.length != 0 ? "Счет " + numGoalsTeam1 + ":" + numGoalsTeam2 : ""} </h4>
+
+                {events.length ?
                     <ul className="collection">
-                        {events}
+                        {events.reverse()}
                     </ul>
+                    :
+                    ""
                 }
             </div>
         )

@@ -9,13 +9,13 @@ module.exports = {
         value: 1,
         name: "MATCH_END",
         title: "Матч закончился",
-        image: "/img/png/128/Cup.png"
+        image: "/img/png/128/Referee.png"
     },
     TIME_START : {
         value: 2,
         name: "TIME_START",
         title: "Начало тайма",
-        image: "/img/png/128/Referee.png"
+        image: "/img/png/128/Game-Start.png"
     },
     TIME_END : {
         value: 3,
@@ -33,7 +33,7 @@ module.exports = {
         value: 5,
         name: "OWN_GOAL",
         title: "Автогол",
-        image: "/img/png/128/GoalKeeper.png"
+        image: "/img/png/128/Goal.png"
     },
     YELLOW_CARD : {
         value: 6,

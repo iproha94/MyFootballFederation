@@ -16,6 +16,7 @@ const initialState = {
         _id: ''
     },
     events: [],
+    date: 0,
     isAdmin: false
 };
 

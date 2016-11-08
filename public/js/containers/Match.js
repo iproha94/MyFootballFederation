@@ -20,15 +20,15 @@ var Component = React.createClass({
     render: function () {
         return (
             <div className="container content-margin-top content-flex">
-                <p>
-                    Страница матча {this.props.match.team1.name}
-                        - {this.props.match.team2.name}
-                </p>
+                <h3 className="center">Страница матча {this.props.match.name}</h3>
+
+                <Events/>
 
                 <List header="Список судей"
-                      url="/account/"
-                      defaultMessage="Судья не назначен"
-                      list={this.props.match.refereeList}/>
+                    url="/account/"
+                    defaultMessage="Судья не назначен"
+                    list={this.props.match.refereeList}/>
+
 
                 {!this.props.match.isAdmin ? null :
                     <div className="container">
@@ -41,7 +41,6 @@ var Component = React.createClass({
                                      onSuccess={this.onSuccessAddReferee}/>
                     </div>
                 }
-                <Events/>
                 <Chat/>
             </div>
 

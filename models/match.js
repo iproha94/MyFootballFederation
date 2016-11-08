@@ -15,6 +15,7 @@ var matchSchema = new Schema({
         playerName: String,
         teamName: String,
         idEvent: String,
+        realTime: Date,
         minute: Number,
         idAction: Number,
     }],

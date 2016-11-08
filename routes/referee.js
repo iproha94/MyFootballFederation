@@ -118,10 +118,13 @@ router.post('/set-info', function(req, res, next) {
     let idMatch = req.body.idMatch;
     let idEvent = req.body.idEvent;
 
+    let now = new Date();
+
     let event = {
         idEvent: idEvent,
         idAction: req.body.idAction,
         minute: req.body.minute,
+        realTime: now,
 };
 
     Match.findById(idMatch, function (err, match) {
@@ -152,8 +155,6 @@ router.post('/set-info', function(req, res, next) {
         }
 
         match.events.push(event);
-
-
 
         clients.forEach((ws) => {
             ws.send(JSON.stringify(event));
