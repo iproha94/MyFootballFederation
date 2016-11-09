@@ -27,30 +27,39 @@ router.get('/:idMatch', function(req, res, next) {
                                     (item) => item.toString() == idUser
                                 );
 
-                                var currentUserTeam = {vplayers: []};
-                                if(team1.creators.some((item) => item.toString() == idUser)){
-                                    currentUserTeam = team1;
+                                var currentUserTeam1 = {vplayers: []};
+                                var currentUserTeam2 = {vplayers: []};
+                                if(team1.creators.some((item) => item.toString() == idUser)
+                                    && !match.players1.length){//если массив игроков команды текущего пользователя не пустой - то не показывать выбор игроков для матча
+                                    currentUserTeam1 = team1;
                                 }
-                                if(team2.creators.some((item) => item.toString() == idUser)){
-                                    currentUserTeam = team2;
+                                if(team2.creators.some((item) => item.toString() == idUser)
+                                    && !match.players2.length){
+                                    currentUserTeam2 = team2;
                                 }
 
-                                Vuser.find({_id: {$in: currentUserTeam.vplayers}}, function (err, vplayers) {
-                                    console.log(vplayers);
-                                    if(currentUserTeam.toObject){
-                                        currentUserTeam = currentUserTeam.toObject();
-                                        currentUserTeam.vplayers = vplayers;
-                                    }
-                                    var result = Object.assign(match.toObject(), {
-                                        refereeList: users,
-                                        team1: team1,
-                                        team2: team2,
-                                        isAdmin: isAdmin,
-                                        currentUserTeam: currentUserTeam,
-                                        players1: players1,
-                                        players2: players2
+                                Vuser.find({_id: {$in: currentUserTeam1.vplayers}}, function (err, vplayers1) {
+                                    Vuser.find({_id: {$in: currentUserTeam2.vplayers}}, function (err, vplayers2) {
+                                        if(currentUserTeam1.toObject){
+                                            currentUserTeam1 = currentUserTeam1.toObject();
+                                            currentUserTeam1.vplayers = vplayers1;
+                                        }
+                                        if(currentUserTeam2.toObject){
+                                            currentUserTeam2 = currentUserTeam2.toObject();
+                                            currentUserTeam2.vplayers = vplayers2;
+                                        }
+                                        var result = Object.assign(match.toObject(), {
+                                            refereeList: users,
+                                            team1: team1,
+                                            team2: team2,
+                                            isAdmin: isAdmin,
+                                            players1: players1,
+                                            players2: players2,
+                                            currentUserTeam1: currentUserTeam1,
+                                            currentUserTeam2: currentUserTeam2
+                                        });
+                                        res.json(result);
                                     });
-                                    res.json(result);
                                 });
                             });
                         });

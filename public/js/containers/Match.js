@@ -44,17 +44,27 @@ var Component = React.createClass({
                     </div>
                 }
 
-                <ListVusers header="Список игроков команды 1"
-                      defaultMessage="Нет игроков"
-                      list={this.props.match.players1}/>
-                
-                <ListVusers header="Список игроков команды 2"
-                      defaultMessage="Нет игроков"
-                      list={this.props.match.players2}/>
-                
-                <Players idMatch={this.props.params.idMatch}/>
+                <div className="row">
+                    <div className="col s6">
+                        <ListVusers header="Список игроков команды 1"
+                                    defaultMessage="Нет игроков"
+                                    list={this.props.match.players1}/>
+
+                        <Players idMatch={this.props.params.idMatch}
+                                 team={this.props.match.currentUserTeam1}/>
+                    </div>
+                    <div className="col s6">
+                        <ListVusers header="Список игроков команды 2"
+                                    defaultMessage="Нет игроков"
+                                    list={this.props.match.players2}/>
+
+                        <Players idMatch={this.props.params.idMatch}
+                                 team={this.props.match.currentUserTeam2}/>
+                    </div>
+                </div>
 
                 <Chat/>
+
             </div>
 
         )

@@ -28,10 +28,10 @@ var Component = React.createClass({
     render: function () {
         var players = this.props.team.vplayers.map((item, index) => {
             return (
-                <p>
+                <div>
                     <input type='checkbox' defaultChecked={false} ref={"player"+item._id} name="players[]" value={item._id}/>
                     <label for={"player"+item._id} onClick={this.handleChange} data-ref={"player"+item._id}>{item.name}</label>
-                </p>
+                </div>
             );
         });
 
@@ -40,7 +40,7 @@ var Component = React.createClass({
                 {players}
                 <input type="hidden" name="idMatch" value={this.props.idMatch}/>
                 <input type="hidden" name="idTeam" value={this.props.team._id}/>
-                <button className="btn waves-effect waves-light" type="submit">Submit
+                <button className="btn waves-effect waves-light" type="submit">Заявить список игроков
                     <i className="material-icons right">send</i>
                 </button>
             </form>
@@ -49,9 +49,7 @@ var Component = React.createClass({
 });
 
 export default connect((state)=>{
-    return {
-        team: state.match.currentUserTeam
-    }
+    return {}
 }, (dispatch)=>{
     return {
         matchActions: bindActionCreators(matchActions, dispatch)

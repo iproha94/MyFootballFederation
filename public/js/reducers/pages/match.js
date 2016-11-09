@@ -4,7 +4,11 @@ import {
 }  from '../../constants';
 
 const initialState = {
-    currentUserTeam: {
+    currentUserTeam1: {
+            players: [],
+            vplayers: []
+    },
+    currentUserTeam2: {
         players: [],
         vplayers: []
     },
