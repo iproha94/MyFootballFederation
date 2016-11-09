@@ -45,7 +45,7 @@ var Component = React.createClass({
     render: function () {
         var events = this.props.match.events.map(function (item, index) {
             var event = eventsData[item.idEvent];
-            console.log(event);
+
             return (
                 <li className="collection-item avatar" key={index}>
                     <img src={event.image} alt="" className="circle"/>
@@ -67,11 +67,11 @@ var Component = React.createClass({
         let idTeam2 = this.props.match.team2._id;
 
         this.props.match.events.forEach(function (item) {
-            if (item.idEvent == "GOAL" && item.idTeam == idTeam1) numGoalsTeam1++;
-            if (item.idEvent == "GOAL" && item.idTeam == idTeam2) numGoalsTeam2++;
+            if (item.idEvent == eventsData.GOAL.name && item.idTeam == idTeam1) numGoalsTeam1++;
+            if (item.idEvent == eventsData.GOAL.name && item.idTeam == idTeam2) numGoalsTeam2++;
 
-            if (item.idEvent == "OWN_GOAL" && item.idTeam == idTeam1) numGoalsTeam2++;
-            if (item.idEvent == "OWN_GOAL" && item.idTeam == idTeam2) numGoalsTeam1++;
+            if (item.idEvent == eventsData.OWN_GOAL.name && item.idTeam == idTeam1) numGoalsTeam2++;
+            if (item.idEvent == eventsData.OWN_GOAL.name && item.idTeam == idTeam2) numGoalsTeam1++;
 
         });
 

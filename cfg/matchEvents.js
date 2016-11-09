@@ -1,25 +1,25 @@
 module.exports = {
-    MATCH_START : {
+    MATCH_STARTED : {
         value: 0,
-        name: "MATCH_START",         
+        name: "MATCH_STARTED",
         image: "/img/png/128/Game-Start.png",
         title: "Матч начался"
     },
-    MATCH_END: {
+    MATCH_FINISHED: {
         value: 1,
-        name: "MATCH_END",
+        name: "MATCH_FINISHED",
         title: "Матч закончился",
         image: "/img/png/128/Referee.png"
     },
-    TIME_START : {
+    TIME_STARTED : {
         value: 2,
-        name: "TIME_START",
+        name: "TIME_STARTED",
         title: "Начало тайма",
         image: "/img/png/128/Game-Start.png"
     },
-    TIME_END : {
+    TIME_FINISHED : {
         value: 3,
-        name: "TIME_END",
+        name: "TIME_FINISHED",
         title: "Конец тайма",
         image: "/img/png/128/Referee.png"
     },

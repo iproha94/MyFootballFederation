@@ -136,10 +136,10 @@ router.post('/set-info', function(req, res, next) {
         }
 
         switch (idEvent) {
-            case Match.EVENT.MATCH_START.name:
+            case Match.EVENT.MATCH_STARTED.name:
                 match.status = Match.STATUS.RUNNING.name;
                 break;
-            case Match.EVENT.MATCH_END.name:
+            case Match.EVENT.MATCH_FINISHED.name:
                 match.status = Match.STATUS.FINISHED.name;
                 break;
             case Match.EVENT.GOAL.name:
