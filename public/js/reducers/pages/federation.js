@@ -10,7 +10,8 @@ const initialState = {
     city: null,
     tournaments: [],
     isAdmin: false,
-    runningMatches: []
+    runningMatches: [],
+    members: []
 };
 
 //реализация при которой если один из запросов пройдет не успешно

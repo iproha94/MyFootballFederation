@@ -12,6 +12,34 @@ var Component = React.createClass({
         this.props.federationActions
             .getTournamentsInFederation(this.props.params.federationName);
     },
+    subscribeFederation: function () {
+        $.ajax({
+            url: "/api/federation/subscribe/" + this.props.params.federationName,
+            success: (data) => {
+                Materialize.toast("Вы успешно подписались на федерацию", 2000);
+                this.props.federationActions
+                    .getFederationInfo(this.props.params.federationName);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
+        });
+    },
+    unsubscribeFederation: function () {
+        $.ajax({
+            url: "/api/federation/unsubscribe/" + this.props.params.federationName,
+            success: (data) => {
+                Materialize.toast("Вы успешно отписались от федерации", 2000);
+                this.props.federationActions
+                    .getFederationInfo(this.props.params.federationName);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
+        });
+    },
     render: function () {
         var federation = this.props.federation;
         return (
@@ -19,7 +47,7 @@ var Component = React.createClass({
                 <div className="row center">
                     Страница федерации {federation.name}
                 </div>
-                
+
                 <div className="container content-margin-top content-flex">
                     <ul className="collection with-header">
                         <li className="collection-header center"><h5>Параметры федерации</h5></li>
@@ -27,7 +55,7 @@ var Component = React.createClass({
                         <li className="collection-item">Город: {federation.city}</li>
                     </ul>
                 </div>
-                
+
                 <List header="Турниры:"
                       url="/tournament/"
                       defaultMessage="Турниров нет"
@@ -39,6 +67,13 @@ var Component = React.createClass({
                             Создать турнир
                         </Link>
                     </div>
+                }
+
+                {!this.props.currentUser._id ? null: (
+                    this.props.federation.members.includes(this.props.currentUser._id) ?
+                        <a className="waves-effect waves-light btn" onClick={this.unsubscribeFederation}>Отписаться от федерации</a>:
+                        <a className="waves-effect waves-light btn" onClick={this.subscribeFederation}>Подписаться на федерацию</a>
+                    )
                 }
 
                 <List header="Идущие сейчас матчи:"

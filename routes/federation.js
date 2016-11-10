@@ -77,4 +77,28 @@ router.get('/get-tournaments/:name', function(req, res, next) {
     });
 });
 
+router.get(['/subscribe/:name', '/unsubscribe/:name'], function(req, res, next) {
+    if(!req.user) {
+        res.status(403);
+        return res.json({
+            message: "Вы не авторизованы"
+        });
+    }
+    Federation.findOne({name : req.params.name}, function (err, federation) {
+        if(err || !federation) {
+            return next(err);
+        }
+        if(federation.members.some((item) => item.toString() == req.user._id)){
+            federation.members.pull(req.user._id);
+        } else {
+            federation.members.push(req.user._id);
+        }
+        federation.save((err) =>{
+            res.json({
+                message: "ОК"
+            });
+        });
+    });
+});
+
 module.exports = router;
