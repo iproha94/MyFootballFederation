@@ -110,6 +110,7 @@ router.get('/:idMatch/get-info', function(req, res, next) {
     let idMatch = req.params.idMatch;
 
     Match.findById(idMatch, function (err, match) {
+        if (err) return res.json("матч не найден");
         return res.json(match.events);
     });
 });
