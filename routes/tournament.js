@@ -3,9 +3,6 @@ var router = express.Router();
 var Tournament = require('../models/tournament');
 var Federation = require('../models/federation');
 var Stage = require('../models/stage');
-var Team = require('../models/team');
-var Match = require('../models/match');
-
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {

@@ -24,7 +24,8 @@ router.post('/create', function(req, res, next) {
         }
 
         res.json({
-            _id: team._id
+            message: "Команда успешно создана",
+            payload: team
         });
     });
 });

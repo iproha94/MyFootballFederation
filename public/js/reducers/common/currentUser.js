@@ -1,7 +1,8 @@
 import {
     GET_CURRENT_USER,
     GET_FEDERATIONS,
-    GET_TEAMS
+    ADD_FEDERATION_CURRENT_USER,
+    ADD_TEAM_CURRENT_USER
 }  from '../../constants';
 
 const initialState = {
@@ -22,9 +23,13 @@ export default function(state = initialState, action) {
             var newState = {...state};
             newState.federations = [...action.payload];
             return newState;
-        case GET_TEAMS:
+        case ADD_FEDERATION_CURRENT_USER:
             var newState = {...state};
-            newState.teams = [...action.payload];
+            newState.federations.push(action.payload);
+            return newState;
+        case ADD_TEAM_CURRENT_USER:
+            var newState = {...state};
+            newState.teams.push(action.payload);
             return newState;
         default:
             return state;

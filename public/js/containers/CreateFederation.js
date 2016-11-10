@@ -1,6 +1,9 @@
 import React from 'react';
+import * as federationsActions from '../actions/federation';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default React.createClass({
+var Component = React.createClass({
     handleSubmit: function (event) {
         event.preventDefault();
         $.ajax({
@@ -8,8 +11,9 @@ export default React.createClass({
             data: $(".js-form").serialize(),
             url: "/api/federation/create",
             success: (data) => {
-                Materialize.toast("Операция прошла успешно", 2000);
-                this.props.history.push('/federation/' + data.name);
+                Materialize.toast(data.message || "Операция прошла успешно", 2000);
+                this.props.federationsActions.addFederationCurrentUser(data.payload);
+                this.props.history.push('/federation/' + data.payload.name);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
@@ -43,3 +47,11 @@ export default React.createClass({
         );
     }
 });
+
+export default connect((state)=>{
+    return {}
+}, (dispatch)=>{
+    return {
+        federationsActions: bindActionCreators(federationsActions, dispatch)
+    }
+})(Component);

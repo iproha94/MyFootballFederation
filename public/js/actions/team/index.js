@@ -2,6 +2,7 @@ import {
     ADD_TEAMS_IN_TOURNAMENT,
     GET_TEAMS_BY_TOURNAMENT, 
     GET_TEAM_INFO,
+    ADD_TEAM_CURRENT_USER,
     ROUTING
 } from '../../constants';
 
@@ -34,6 +35,15 @@ export function getTeamsByTournament(tournamentId) {
                 type: GET_TEAMS_BY_TOURNAMENT,
                 payload: result
             });
+        });
+    };
+}
+
+export function addTeamCurrentUser(team) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: ADD_TEAM_CURRENT_USER,
+            payload: team
         });
     };
 }

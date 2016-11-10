@@ -3,6 +3,7 @@ import {
     GET_FEDERATION_INFO,
     GET_TOURNAMENTS_IN_FEDERATION,
     GET_FEDERATIONS_USER,
+    ADD_FEDERATION_CURRENT_USER,
     ROUTING
 } from '../../constants';
 
@@ -24,6 +25,15 @@ export function getFederationsUser(id) {
                 type: GET_FEDERATIONS_USER,
                 payload: result
             });
+        });
+    };
+}
+
+export function addFederationCurrentUser(team) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: ADD_FEDERATION_CURRENT_USER,
+            payload: team
         });
     };
 }

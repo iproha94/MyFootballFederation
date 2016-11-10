@@ -23,7 +23,8 @@ router.post('/create', function(req, res, next) {
             next(err);
         } else {
             res.json({
-                name: federation.name
+                message: "Федерация успешно создана",
+                payload: federation
             });
         }
     });

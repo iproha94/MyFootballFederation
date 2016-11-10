@@ -1,6 +1,9 @@
 import React from 'react';
+import * as teamActions from '../actions/team';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-export default React.createClass({
+var Component = React.createClass({
     handleSubmit: function (event) {
         event.preventDefault();
         $.ajax({
@@ -8,8 +11,9 @@ export default React.createClass({
             data: $(".js-form").serialize(),
             url: "/api/team/create",
             success: (data) => {
-                Materialize.toast("Операция прошла успешно", 2000);
-                this.props.history.push('/team/' + data._id);
+                Materialize.toast(data.message || "Операция прошла успешно", 2000);
+                this.props.teamActions.addTeamCurrentUser(data.payload);
+                this.props.history.push('/team/' + data.payload._id);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
@@ -49,3 +53,11 @@ export default React.createClass({
         );
     }
 });
+
+export default connect((state)=>{
+    return {}
+}, (dispatch)=>{
+    return {
+        teamActions: bindActionCreators(teamActions, dispatch)
+    }
+})(Component);
