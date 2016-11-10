@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import * as stageActions from '../actions/stage';
 import * as matchActions from '../actions/match';
 import List from '../components/common/List';
-import {Link} from 'react-router';
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -43,7 +42,7 @@ var Component = React.createClass({
                         <li className="collection-item">Тип: {stage.type.name}</li>
                     </ul>
                 </div>
-                {!this.props.stage.isAdmin ? null :
+                {!(this.props.stage.isAdmin && !this.props.matches.length) ? null :
                     <div className="row right-align">
                         <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">Начать со всеми
                             заявившимися командами</a>

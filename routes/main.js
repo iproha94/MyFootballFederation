@@ -16,7 +16,6 @@ router.get('/', function(req, res, next) {
     if(req.xhr || req.accepts('json,html' )==='json' ){
         var reg = new RegExp(req.query.term, 'i');
         Federation.find({name: reg}, function (err, result) {
-            res.status(200);
             res.json(getArray(result, "name"));
         });
     } else {
