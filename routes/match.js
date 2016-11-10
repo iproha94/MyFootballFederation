@@ -5,7 +5,6 @@ var Team = require('../models/team');
 var User = require('../models/user');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
-var async = require('async');
 
 router.get('/:idMatch', function(req, res, next) {
     var idUser = null;

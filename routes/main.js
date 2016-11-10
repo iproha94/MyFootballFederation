@@ -3,8 +3,6 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Team = require('../models/team');
 var User = require('../models/user');
-var Mongoose = require('mongoose');
-var ObjectId = Mongoose.ObjectId;
 
 function getArray(arrayObject, name) {
     var result = [];
@@ -28,7 +26,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/get-current-user', function(req, res, next) {
     if (!req.user) {
-        return res.json({});
+        return res.json(null);
     }
 
     Federation.find({creators: req.user._id}, function (err, fResult) {
@@ -44,12 +42,10 @@ router.get('/get-current-user', function(req, res, next) {
 });
 
 router.get('/is-authenticated', function(req, res, next) {
-    console.log(req.isAuthenticated());
     if(!req.isAuthenticated()) {
         return res.json({
             status: 500
         });
-        
     }
     
     res.json({
@@ -116,23 +112,6 @@ router.post('/account/get-creator/', function(req, res, next) {
     Federation.find({creators: req.user._id}, function (err, federations) {
         return res.json(federations);
     });
-});
-
-
-// router.post('/account', function(req, res, next) {
-//     if (req.body.what === 'team' && (req.xhr || req.accepts('json,html')==='json')) {
-//         Team.find({creators: req.user._id}, function (err, result) {
-//             res.send({
-//                 success: true,
-//                 teams: result
-//             });
-//         });
-//
-//     }
-// });
-
-router.get('/unauthorized', function(req, res, next) {
-    res.render("unauthorized");
 });
 
 module.exports = router;
