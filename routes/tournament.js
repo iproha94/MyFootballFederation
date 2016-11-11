@@ -50,17 +50,24 @@ router.post('/create', function(req, res, next) {
 
 router.get('/add-team', function(req, res, next) {
     Tournament.findById(req.query.idTournament, function (err, tournament) {
-        tournament.teams_requests.push(req.query.idSend);
-        tournament.save(function (err) {
-            if(err) {
+        if(!tournament.teams_requests.some((item) => item.toString() == req.query.idSend)){
+            tournament.teams_requests.push(req.query.idSend);
+            tournament.save(function (err) {
+                if(err) {
+                    return res.json({
+                        status: 403
+                    });
+                }
                 return res.json({
-                    status: 403
+                    status: 200,
+                    message: "Команда успешно добавлена"
                 });
-            }
-            return res.json({
-                status: 200
             });
-        });
+        } else {
+            return res.json({
+                message: "Эта команда уже участвует"
+            });
+        }
     });
 });
 

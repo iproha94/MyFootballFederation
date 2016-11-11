@@ -11,14 +11,8 @@ export default React.createClass({
             url: this.props.urlSend,
             success: (data) => {
                 console.log(data);
-                Materialize.toast("Операция прошла успешно", 2000);
+                Materialize.toast(data.message || "Операция прошла успешно", 2000);
                 this.props.onSuccess();
-                //TODO
-                // if (data.status == 200) {
-                //     Materialize.toast("Команда успешно добавлена", 2000);
-                // } else if (data.status == 403){
-                //     Materialize.toast("Команда уже есть", 2000);
-                // }
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
