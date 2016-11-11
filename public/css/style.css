@@ -43,7 +43,6 @@
 }
 
 .ui-autocomplete {
-    max-height: 40px;
     position: absolute;
     cursor: pointer;
     z-index: 1000;

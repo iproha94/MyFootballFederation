@@ -18,10 +18,11 @@ var Component = React.createClass({
     render: function () {
         var user = this.props.currentUser;
         var isAuthenticated = !!user._id;
+        var linkAccountPage = isAuthenticated ? "/account/" + user._id : null;
         return (
             <nav className="light-green darken-2 header-position" role="navigation">
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><Link to={"/account/" + this.props.currentUser._id}>Страница профиля</Link></li>
+                    <li><Link to={linkAccountPage}>Страница профиля</Link></li>
                     <li className="divider"></li>
                     <li><a href="/logout">Выйти</a></li>
                 </ul>
@@ -54,11 +55,11 @@ var Component = React.createClass({
                         <li>
                             <div className="userView">
                                 <img className="background" src="/img/side-nav.jpg"/>
-                                    <Link to={"/account/" + this.props.currentUser._id}>
+                                    <Link to={linkAccountPage}>
                                         <img className="circle" src={this.props.currentUser.image}/>
                                     </Link>
 
-                                    <Link to={"/account/" + this.props.currentUser._id}>
+                                    <Link to={linkAccountPage}>
                     <span className="white-text name">
                         {isAuthenticated ? user.name : "Аноним"}
                     </span>
@@ -68,7 +69,7 @@ var Component = React.createClass({
                         </li>
 
                         {isAuthenticated ?
-                            (<li><Link className="waves-effect" to={"/account/" + this.props.currentUser._id}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>)
+                            (<li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>)
                         :
                             [
                             <li><a className="subheader">Войти через:</a></li>,
