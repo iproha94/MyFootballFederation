@@ -13,14 +13,10 @@ function getArray(arrayObject, name) {
 }
 
 router.get('/', function(req, res, next) {
-    if(req.xhr || req.accepts('json,html' )==='json' ){
-        var reg = new RegExp(req.query.term, 'i');
-        Federation.find({name: reg}, function (err, result) {
-            res.json(getArray(result, "name"));
-        });
-    } else {
-        res.render("main");
-    }
+    var reg = new RegExp(req.query.term, 'i');
+    Federation.find({name: reg}, function (err, result) {
+        res.json(getArray(result, "name"));
+    });
 });
 
 router.get('/get-current-user', function(req, res, next) {
