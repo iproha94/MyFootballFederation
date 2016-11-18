@@ -118,3 +118,13 @@ footer {
 .vk-chat{
     border-radius: 4px;
 }
+
+.sortable-chosen{
+    color: red;
+}
+
+.match-teams-section{
+    min-height: 20px;
+    border-color: #00acc1;
+}
+

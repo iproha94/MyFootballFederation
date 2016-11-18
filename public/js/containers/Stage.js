@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as stageActions from '../actions/stage';
 import * as matchActions from '../actions/match';
 import List from '../components/common/List';
+import {Link} from 'react-router'
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -44,8 +45,13 @@ var Component = React.createClass({
                 </div>
                 {!(this.props.stage.isAdmin && !this.props.matches.length) ? null :
                     <div className="row right-align">
-                        <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">Начать со всеми
-                            заявившимися командами</a>
+                        <a className="waves-effect waves-light btn" onClick={this.onStart} href="#">
+                            Начать со всемизаявившимися командами
+                        </a>
+
+                        <Link className="waves-effect waves-light btn" to={`/stage/${this.props.stage._id}/planning`}>
+                            Ручное создание
+                        </Link>
                     </div>
                 }
 
