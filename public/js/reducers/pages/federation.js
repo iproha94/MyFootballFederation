@@ -11,7 +11,8 @@ const initialState = {
     tournaments: [],
     isAdmin: false,
     runningMatches: [],
-    members: []
+    members: [],
+    membersWithName: []
 };
 
 //реализация при которой если один из запросов пройдет не успешно

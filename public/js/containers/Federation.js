@@ -76,6 +76,12 @@ var Component = React.createClass({
                     )
                 }
 
+                <List header="Подписчики"
+                      url="/account/"
+                      defaultMessage="На эту федерацию ни кто не подписан"
+                      list={this.props.federation.membersWithName}/>
+
+
                 <List header="Идущие сейчас матчи:"
                       url="/match/"
                       defaultMessage="Нет идущих матчей"
