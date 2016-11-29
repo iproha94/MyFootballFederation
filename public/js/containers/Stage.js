@@ -12,8 +12,6 @@ var Component = React.createClass({
         this.props.matchActions.getMatchesInStage(this.props.params.idStage);
     },
     onStart: function (event) {
-        console.log("start");
-
         $.ajax({
             url: "/api" + location.pathname + "/start",
             success: (data) => {

@@ -1,6 +1,7 @@
 import {
     GET_STAGES, 
     GET_STAGE_INFO,
+    GET_TEAMS_REQUESTS_IN_TOURNAMENT_BY_STAGE,
     ROUTING
 } from '../../constants';
 
@@ -30,6 +31,17 @@ export function getStage(idStage) {
 
             dispatch({
                 type: GET_STAGE_INFO,
+                payload: result
+            });
+        });
+    };
+}
+
+export function getTeamsInTournament(idStage) {
+    return (dispatch, getState) => {
+        $.get("/api/stage/" + idStage + "/get-teams-req", function (result) {
+            dispatch({
+                type: GET_TEAMS_REQUESTS_IN_TOURNAMENT_BY_STAGE,
                 payload: result
             });
         });

@@ -1,8 +1,11 @@
+import {connect} from 'react-redux';
+import * as stageActions from '../actions/stage';
+import {bindActionCreators} from 'redux';
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Sortable = require('sortablejs');
 
-export  default React.createClass({
+var Component = React.createClass({
     createNewList: function(node) {//такая штука будет работать до того, пока списки матчей пусты
         var count = 0;
         var sortable = Sortable.create(node, {
@@ -17,32 +20,34 @@ export  default React.createClass({
                 }
             },
             chosenClass: "sortable-chosen",
-            onAdd: function (/**Event*/evt) {
+            onAdd: function (evt) {
                 count++;
             },
-            onRemove: function (/**Event*/evt) {
+            onRemove: function (evt) {
                 count--;
             }
         });
     },
-    list: [{name: "1"},{name: "2"},{name: "3"},{name: "4"},{name: "5"}],
     componentDidMount: function () {
-        var count = 10;
+        this.props.stageActions.getTeamsInTournament(
+            this.props.params.idStage
+        );
+    },
+    componentDidUpdate: function () {
         this.createNewList(ReactDOM.findDOMNode(this.refs.left));
-        for(var i=0; i<this.list.length/2; i++) {
+        for(var i=0; i < this.props.teams.length / 2; i++) {
             this.createNewList(ReactDOM.findDOMNode(this.refs["right" + i]));
         }
     },
     render: function () {
-        var list = this.list;
-        var teams = list.map((item, index) => {
+        var teams = this.props.teams.map((item, index) => {
             return <div className="collection-item" key={item.name}>
                 {item.name}
             </div>;
         });
 
         var section = [];
-        for(var i = 0; i<list.length/2; i++){
+        for(var i = 0; i < this.props.teams.length / 2; i++){
             section.push(
                 <div className="collection match-teams-section" ref={"right" + i}></div>
             );
@@ -65,3 +70,13 @@ export  default React.createClass({
         );
     }
 });
+
+export default connect((state)=>{
+    return {
+        teams: state.planningStage.teams
+    }
+}, (dispatch)=>{
+    return {
+        stageActions: bindActionCreators(stageActions, dispatch)
+    }
+})(Component);

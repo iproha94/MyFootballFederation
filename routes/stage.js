@@ -113,4 +113,19 @@ router.get('/:idStage/start', function(req, res, next) {
     });
 });
 
+
+router.get('/:idStage/get-teams-req', function(req, res, next) {
+    Stage.findById(req.params.idStage, function (err, stage) {
+        if (err) {
+            return next(err);
+        }
+        Tournament.findById(stage.tournament, function (err, tournament) {
+            Team.find({_id: {$in: tournament.teams_requests}}, function (err, teams) {
+                return res.json(teams);
+            });
+        });
+    });
+});
+
+
 module.exports = router;
