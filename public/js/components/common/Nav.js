@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import Search from './Search';
 
 var Component = React.createClass({
     componentDidUpdate: function() {
@@ -32,6 +33,7 @@ var Component = React.createClass({
                 </ul>
 
                 <div className="nav-wrapper container">
+
                     <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
                             iFootball
@@ -90,6 +92,11 @@ var Component = React.createClass({
                     <a href="#" data-activates="slide-out" className="button-collapse">
                         <i className="material-icons">menu</i>
                     </a>
+
+                    <Search classes="federation-search right hide-on-med-and-down"
+                            history={this.props.history}
+                            url="/federation/"
+                            placeholder="Поиск федераций"/>
                 </div>
             </nav>
         )

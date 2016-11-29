@@ -31,9 +31,9 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <form className="js-form-search">
+            <form className={`js-form-search ${this.props.classes}`}>
                 <div className="input-field">
-                    <input id="search" type="search" className="autocomplete" autocomplete="off" required/>
+                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete" autocomplete="off" required/>
                     <label for="search"><i className="material-icons">search</i></label>
                     <i className="material-icons">close</i>
                 </div>

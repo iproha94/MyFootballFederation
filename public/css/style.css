@@ -128,3 +128,7 @@ footer {
     border-color: #00acc1;
 }
 
+.federation-search{
+    position: relative;
+    right: 10px;
+}

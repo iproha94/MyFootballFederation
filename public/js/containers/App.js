@@ -11,7 +11,9 @@ var App = React.createClass({
     render: function () {
         return (
             <div>
-                <Nav location={this.props.location}/>
+                <Nav
+                    location={this.props.location}
+                    history={this.props.history}/>
                 {this.props.children}
             </div>
         );
