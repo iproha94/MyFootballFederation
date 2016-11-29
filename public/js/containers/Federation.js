@@ -52,12 +52,12 @@ var Component = React.createClass({
     render: function () {
         var federation = this.props.federation;
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <div className="row center">
                     Страница федерации {federation.name}
                 </div>
 
-                <div className="container content-margin-top content-flex">
+                <div className="container content-flex">
                     <ul className="collection with-header">
                         <li className="collection-header center"><h5>Параметры федерации</h5></li>
 

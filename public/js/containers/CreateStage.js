@@ -19,7 +19,7 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <div className="row">
                     <form method="post" onSubmit={this.handleSubmit}>
                         

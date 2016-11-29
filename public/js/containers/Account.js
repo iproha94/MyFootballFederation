@@ -27,7 +27,7 @@ var Component = React.createClass({
         var isOwnPage = (currentUser._id == user._id);
         return (
                 <div>
-                <div className="container content-margin-top content-flex">
+                <div className="container content-flex">
                     <div className="center">
                         <h3>Страница пользователя</h3>
                         <h4>{isOwnPage ? "Ваше имя: " + currentUser.name:

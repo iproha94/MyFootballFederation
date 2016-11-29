@@ -24,7 +24,7 @@ var TournamentPage = React.createClass({
         const {tournament} = this.props;
         var isAuth = !!this.props.currentUser._id;
         return (
-            <div className="container content-margin-top content-flex js-content-place">
+            <div className="container content-flex js-content-place">
                <div className="row center">
                    Страница турнира {tournament.name}
                </div>

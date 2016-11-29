@@ -15,7 +15,7 @@ var Component = React.createClass({
 
         return (
             <div>
-                <div className="container content-margin-top content-flex">
+                <div className="container content-flex">
                     Страница команды {this.props.team.name}
                 </div>
 

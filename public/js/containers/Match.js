@@ -21,7 +21,7 @@ var Component = React.createClass({
     },
     render: function () {
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <h3 className="center">Страница матча {this.props.match.name}</h3>
 
                 <Events/>

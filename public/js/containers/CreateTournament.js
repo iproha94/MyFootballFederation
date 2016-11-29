@@ -18,16 +18,8 @@ export default React.createClass({
         });
     },
     render: function () {
-        // var a = (
-        //     {{#each config}}
-        //     <p>
-        //         <input className='js-type-tournament' name="group1" type="radio" id="{{type}}"/>
-        //         <label for={{type}}>{{name}}</label>
-        //     </p>
-        //     {{/each}}
-        // );
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <div className="row">
                     <form method="post" onSubmit={this.handleSubmit}>
                         <div className="row">

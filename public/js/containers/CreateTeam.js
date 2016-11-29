@@ -23,7 +23,7 @@ var Component = React.createClass({
     },
     render: function () {
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <div className="row">
                     <form className="col s12 js-form" method="post" onSubmit={this.handleSubmit}>
                         <div className="row">

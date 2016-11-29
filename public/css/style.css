@@ -141,3 +141,24 @@ footer {
     color: grey;
 }
 */
+
+body{
+    background: #f6f4f1;
+}
+
+.card-padding {
+    padding: 20px !important;
+}
+
+.custom-footer {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.left-menu-padding{
+    padding-top: 10px;
+}
+
+.width-fullscreen{
+    width: 100%;
+}

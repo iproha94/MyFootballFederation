@@ -28,7 +28,7 @@ var Component = React.createClass({
         const stage = this.props.stage;
 
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
 
                 <div className="row center">
                     <h3>Страница стадии {stage.name}</h3>

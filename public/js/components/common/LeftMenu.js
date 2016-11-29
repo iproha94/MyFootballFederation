@@ -7,18 +7,22 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <List header="Мои федерации"
-                      url="/federation/"
-                      defaultMessage="Федераций нет"
-                      urlParam="name"
-                      list={this.props.federations}/>
-                <Link to="/federation/create" className="waves-effect waves-light btn">Создать федерацию</Link>
+                <div className="card left-menu-padding">
+                    <List header="Мои федерации"
+                          url="/federation/"
+                          defaultMessage="Федераций нет"
+                          urlParam="name"
+                          list={this.props.federations}/>
+                    <Link to="/federation/create" className="waves-effect waves-light width-fullscreen btn">Создать федерацию</Link>
+                </div>
 
-                <List header="Мои команды"
-                      url="/team/"
-                      defaultMessage="Команд нет"
-                      list={this.props.teams}/>
-                <Link to="/team/create" className="waves-effect waves-light btn">Создать команду</Link>
+                <div className="card">
+                    <List header="Мои команды"
+                          url="/team/"
+                          defaultMessage="Команд нет"
+                          list={this.props.teams}/>
+                    <Link to="/team/create" className="waves-effect waves-light width-fullscreen btn">Создать команду</Link>
+                </div>
             </div>
         )
     }
