@@ -3,6 +3,7 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
 var Match = require('../models/match');
+var User = require('../models/user');
 
 router.post('/create', function(req, res, next) {
     if (!req.isAuthenticated())  {
@@ -60,7 +61,18 @@ router.get('/:name', function(req, res, next) {
                 isAdmin: isAdmin,
                 runningMatches: runningMatches
             });
-            return res.json(result);
+
+            User.find({
+                '_id': { $in: result.members}
+            }, function(err, users){
+                if (err) {
+                    result.membersWithName = [];
+                } else {
+                    result.membersWithName = users;
+                }
+
+                return res.json(result);
+            });
         });
     });
 });
