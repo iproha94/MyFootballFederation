@@ -22,9 +22,7 @@ var App = React.createClass({
                     </div>
 
                     <div className="col s10 card-padding">
-                        <div className="card">
                             {this.props.children}
-                        </div>
                     </div>
                 </div>
             </div>

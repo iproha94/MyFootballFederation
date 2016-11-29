@@ -1,4 +1,6 @@
 import React from 'react';
+import Tournaments from '../components/federation/Tournaments';
+import Info from '../components/federation/Info';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as federationActions from '../actions/federation';
@@ -7,6 +9,7 @@ import {Link} from 'react-router';
 
 var Component = React.createClass({
     fetch: function (federationName) {
+        $('ul.tabs').tabs();
         this.props.federationActions
             .getFederationInfo(federationName);
         this.props.federationActions
@@ -14,6 +17,9 @@ var Component = React.createClass({
     },
     componentDidMount: function () {
         this.fetch(this.props.params.federationName);
+    },
+    componentWillUnmount: function () {
+        
     },
     componentWillReceiveProps: function (nextProps) {
         console.log(this.props.params.federationName,nextProps.params.federationName)
@@ -51,50 +57,37 @@ var Component = React.createClass({
     },
     render: function () {
         var federation = this.props.federation;
+
         return (
-            <div className="container content-flex">
-                <div className="row center">
-                    Страница федерации {federation.name}
-                </div>
+            <div className="row">
+                    <div className="col s12 card padding-enabled">
+                        <div className="card-image">
+                            <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
+                            <span className="card-title">
+                                Страница федерации {federation.name} Город: {federation.city}
+                            </span>
+                        </div>
 
-                <div className="container content-flex">
-                    <ul className="collection with-header">
-                        <li className="collection-header center"><h5>Параметры федерации</h5></li>
-
-                        <li className="collection-item">Город: {federation.city}</li>
-                    </ul>
-                </div>
-
-                <List header="Турниры:"
-                      url="/tournament/"
-                      defaultMessage="Турниров нет"
-                      list={this.props.tournaments}/>
-                {!this.props.federation.isAdmin ? null :
-                    <div className="row right-align">
-                        <Link className="waves-effect waves-light btn"
-                              to={"/tournament/create/?federation=" + federation.name}>
-                            Создать турнир
-                        </Link>
+                        <ul className="tabs tabs-fixed-width">
+                            <li className="tab col s3"><a href="#testt1">Инфо</a></li>
+                            <li className="tab col s3"><a className="active" href="#testt2">Турниры</a></li>
+                            <li className="tab col s3"><a href="#testt4">Организаторы</a></li>
+                        </ul>
                     </div>
-                }
 
-                {!this.props.currentUser._id ? null: (
-                    this.props.federation.members.includes(this.props.currentUser._id) ?
-                        <a className="waves-effect waves-light btn" onClick={this.unsubscribeFederation}>Отписаться от федерации</a>:
-                        <a className="waves-effect waves-light btn" onClick={this.subscribeFederation}>Подписаться на федерацию</a>
-                    )
-                }
-
-                <List header="Подписчики"
-                      url="/account/"
-                      defaultMessage="На эту федерацию ни кто не подписан"
-                      list={this.props.federation.membersWithName}/>
-
-
-                <List header="Идущие сейчас матчи:"
-                      url="/match/"
-                      defaultMessage="Нет идущих матчей"
-                      list={this.props.federation.runningMatches}/>
+                <div id="testt1" className="col s12 card">
+                    <Info federation={this.props.federation}
+                          tournaments={this.props.tournaments}
+                          currentUser={this.props.currentUser}/>
+                </div>
+                <div id="testt2" className="col s12 card">
+                    <Tournaments federation={this.props.federation}
+                                 tournaments={this.props.tournaments}
+                                 currentUser={this.props.currentUser}/>
+                </div>
+                <div id="testt4" className="col s12 card">
+                    Организаторы
+                </div>
             </div>
         );
     }

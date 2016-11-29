@@ -162,3 +162,7 @@ body{
 .width-fullscreen{
     width: 100%;
 }
+
+.padding-enabled{
+    padding: 0px !important;
+}
