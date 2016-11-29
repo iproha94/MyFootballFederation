@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default React.createClass({
     componentDidMount: function () {
@@ -15,6 +16,8 @@ export default React.createClass({
                 method: "POST",
                 select: function (event, ui) {
                     self.props.history.push(self.props.url + ui.item.value);
+                    ui.item.value = '';
+                    event.target.blur();
                 },
                 open: function (event, ui) {
                     $(".ui-menu-item-wrapper").replaceWith(function(index, oldHTML){
@@ -31,9 +34,9 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <form className={`js-form-search ${this.props.classes}`}>
+            <form className={`js-form-search ${this.props.classes}`} ref="form" >
                 <div className="input-field">
-                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete" autocomplete="off" required/>
+                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete federation-search-input" autocomplete="off" required/>
                     <label for="search"><i className="material-icons">search</i></label>
                     <i className="material-icons">close</i>
                 </div>

@@ -6,11 +6,20 @@ import List from '../components/common/List';
 import {Link} from 'react-router';
 
 var Component = React.createClass({
+    fetch: function (federationName) {
+        this.props.federationActions
+            .getFederationInfo(federationName);
+        this.props.federationActions
+            .getTournamentsInFederation(federationName);
+    },
     componentDidMount: function () {
-        this.props.federationActions
-            .getFederationInfo(this.props.params.federationName);
-        this.props.federationActions
-            .getTournamentsInFederation(this.props.params.federationName);
+        this.fetch(this.props.params.federationName);
+    },
+    componentWillReceiveProps: function (nextProps) {
+        console.log(this.props.params.federationName,nextProps.params.federationName)
+        if(this.props.params.federationName !== nextProps.params.federationName) {
+            this.fetch(nextProps.params.federationName)
+        }
     },
     subscribeFederation: function () {
         $.ajax({

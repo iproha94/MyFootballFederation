@@ -11,7 +11,7 @@ export default React.createClass({
             )
         });
         return (
-            <div className="container content-margin-top content-flex">
+            <div className="container content-flex">
                 <h5 className="center">{this.props.header}</h5>
                 <div className="collection">
                     {list.length ? list : this.props.defaultMessage}

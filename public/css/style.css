@@ -132,3 +132,12 @@ footer {
     position: relative;
     right: 10px;
 }
+
+.federation-search-input::-webkit-input-placeholder{
+    color: white;
+}
+/*
+.federation-search-input:focus::-webkit-input-placeholder{
+    color: grey;
+}
+*/

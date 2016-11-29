@@ -62,7 +62,9 @@ export function getFederationInfo(name) {
 
 export function getTournamentsInFederation(name) {
     return (dispatch, getState) => {
+        console.log("/api/federation/get-tournaments/" + name);
         return $.when($.get("/api/federation/get-tournaments/" + name)).then(function (result) {
+            console.log(result);
             return dispatch({
                 type: GET_TOURNAMENTS_IN_FEDERATION,
                 payload: result
