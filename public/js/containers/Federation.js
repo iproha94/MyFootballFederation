@@ -4,12 +4,9 @@ import Info from '../components/federation/Info';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as federationActions from '../actions/federation';
-import List from '../components/common/List';
-import {Link} from 'react-router';
 
 var Component = React.createClass({
     fetch: function (federationName) {
-        $('ul.tabs').tabs();
         this.props.federationActions
             .getFederationInfo(federationName);
         this.props.federationActions
@@ -17,9 +14,6 @@ var Component = React.createClass({
     },
     componentDidMount: function () {
         this.fetch(this.props.params.federationName);
-    },
-    componentWillUnmount: function () {
-        
     },
     componentWillReceiveProps: function (nextProps) {
         console.log(this.props.params.federationName,nextProps.params.federationName)
@@ -59,7 +53,7 @@ var Component = React.createClass({
         var federation = this.props.federation;
 
         return (
-            <div className="row">
+            <div className="row" >
                     <div className="col s12 card padding-enabled">
                         <div className="card-image">
                             <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
@@ -68,10 +62,10 @@ var Component = React.createClass({
                             </span>
                         </div>
 
-                        <ul className="tabs tabs-fixed-width">
-                            <li className="tab col s3"><a href="#testt1">Инфо</a></li>
-                            <li className="tab col s3"><a className="active" href="#testt2">Турниры</a></li>
-                            <li className="tab col s3"><a href="#testt4">Организаторы</a></li>
+                        <ul className="tabs tabs-fixed-width" id="delete">
+                            <li className="tab col s3"><a href="#testt1" className="js-link">Инфо</a></li>
+                            <li className="tab col s3"><a className="active js-link" href="#testt2">Турниры</a></li>
+                            <li className="tab col s3"><a href="#testt4" className="js-link">Организаторы</a></li>
                         </ul>
                     </div>
 

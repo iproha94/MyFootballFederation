@@ -130,7 +130,7 @@ footer {
 
 .federation-search{
     position: relative;
-    right: 10px;
+    right: 20px;
 }
 
 .federation-search-input::-webkit-input-placeholder{
@@ -165,4 +165,33 @@ body{
 
 .padding-enabled{
     padding: 0px !important;
+}
+
+/*full height = 64px*/
+.search {
+    height: 44px !important;
+    margin-top: 10px !important;
+    border-radius: 100px !important;
+    background: #558b2f !important;
+}
+
+.search:focus {
+    background: white !important;
+    margin-right: 20px;
+    transition: margin .25s ease;
+}
+
+.search::-webkit-input-placeholder {
+    color: white !important;
+}
+.search::-moz-placeholder {
+    color: white !important;
+}
+
+.search_icon__margin {
+    margin-top: -10px;
+}
+
+.vk-color{
+    background: #4f7aa0 !important;
 }
