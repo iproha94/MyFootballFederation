@@ -16,7 +16,6 @@ var Component = React.createClass({
         this.fetch(this.props.params.federationName);
     },
     componentWillReceiveProps: function (nextProps) {
-        console.log(this.props.params.federationName,nextProps.params.federationName)
         if(this.props.params.federationName !== nextProps.params.federationName) {
             this.fetch(nextProps.params.federationName)
         }
@@ -62,24 +61,22 @@ var Component = React.createClass({
                             </span>
                         </div>
 
-                        <ul className="tabs tabs-fixed-width" id="delete">
-                            <li className="tab col s3"><a href="#testt1" className="js-link">Инфо</a></li>
-                            <li className="tab col s3"><a className="active js-link" href="#testt2">Турниры</a></li>
-                            <li className="tab col s3"><a href="#testt4" className="js-link">Организаторы</a></li>
+                        <ul className="tabs tabs-fixed-width">
+                            <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
+                            <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
+                            <li className="tab col s3"><a href="#tab-id-3" className="js-link">Организаторы</a></li>
                         </ul>
                     </div>
-
-                <div id="testt1" className="col s12 card">
+                
+                <div id="tab-id-1" className="col s12 card">
                     <Info federation={this.props.federation}
-                          tournaments={this.props.tournaments}
                           currentUser={this.props.currentUser}/>
                 </div>
-                <div id="testt2" className="col s12 card">
+                <div id="tab-id-2" className="col s12 card">
                     <Tournaments federation={this.props.federation}
-                                 tournaments={this.props.tournaments}
-                                 currentUser={this.props.currentUser}/>
+                                 tournaments={this.props.tournaments}/>
                 </div>
-                <div id="testt4" className="col s12 card">
+                <div id="tab-id-3" className="col s12 card">
                     Организаторы
                 </div>
             </div>

@@ -195,3 +195,17 @@ body{
 .vk-color{
     background: #4f7aa0 !important;
 }
+
+.row .col.s2-5 {
+    width: 20%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.s9-5 {
+    width: 80%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}

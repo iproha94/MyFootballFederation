@@ -15,13 +15,13 @@ var App = React.createClass({
                 <Nav location={this.props.location}
                      history={this.props.history}/>
                 <div className="row">
-                    <div className="col s2 card-padding">
+                    <div className="col s2-5 card-padding">
                         <div>
                             <LeftMenu/>
                         </div>
                     </div>
 
-                    <div className="col s10 card-padding">
+                    <div className="col s9-5 card-padding">
                             {this.props.children}
                     </div>
                 </div>
