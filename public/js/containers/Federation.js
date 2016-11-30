@@ -20,34 +20,6 @@ var Component = React.createClass({
             this.fetch(nextProps.params.federationName)
         }
     },
-    subscribeFederation: function () {
-        $.ajax({
-            url: "/api/federation/subscribe/" + this.props.params.federationName,
-            success: (data) => {
-                Materialize.toast("Вы успешно подписались на федерацию", 2000);
-                this.props.federationActions
-                    .getFederationInfo(this.props.params.federationName);
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.log(jqXHR,textStatus,errorThrown);
-                Materialize.toast("Что то не так", 2000);
-            }
-        });
-    },
-    unsubscribeFederation: function () {
-        $.ajax({
-            url: "/api/federation/unsubscribe/" + this.props.params.federationName,
-            success: (data) => {
-                Materialize.toast("Вы успешно отписались от федерации", 2000);
-                this.props.federationActions
-                    .getFederationInfo(this.props.params.federationName);
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.log(jqXHR,textStatus,errorThrown);
-                Materialize.toast("Что то не так", 2000);
-            }
-        });
-    },
     render: function () {
         var federation = this.props.federation;
 
@@ -70,7 +42,8 @@ var Component = React.createClass({
                 
                 <div id="tab-id-1" className="col s12 card">
                     <Info federation={this.props.federation}
-                          currentUser={this.props.currentUser}/>
+                          currentUser={this.props.currentUser}
+                          getFederationInfo={this.props.federationActions.getFederationInfo}/>
                 </div>
                 <div id="tab-id-2" className="col s12 card">
                     <Tournaments federation={this.props.federation}
