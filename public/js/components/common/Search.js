@@ -36,9 +36,9 @@ export default React.createClass({
         return (
             <form className={`js-form-search ${this.props.classes}`} ref="form" >
                 <div className="input-field">
-                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete federation-search-input" autocomplete="off" required/>
-                    <label for="search"><i className="material-icons">search</i></label>
-                    <i className="material-icons">close</i>
+                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete search" autocomplete="off" required/>
+                    <label for="search"><i className="material-icons search_icon__margin">search</i></label>
+                    <i className="material-icons search_icon__margin">close</i>
                 </div>
             </form>
         );
