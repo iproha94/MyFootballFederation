@@ -5,8 +5,9 @@ import * as tournamentActions from '../actions/tournament';
 import * as stageActions from '../actions/stage';
 import * as teamActions from '../actions/team';
 import List from '../components/common/List';
+import TeamsList from '../components/tournament/TeamsList';
 import {Link} from 'react-router';
-import ModalWindow from '../components/common/ModalWindow';
+import TeamsWindow from '../components/tournament/TeamsWindow';
 
 var TournamentPage = React.createClass({
     idTournament: null,
@@ -16,52 +17,58 @@ var TournamentPage = React.createClass({
         this.props.teamActions.getTeamsByTournament(_id);
         this.props.stagesActions.getStages(_id);
     },
-    onSuccessAddTeam: function () {
-        this.props.teamActions
-            .getTeamsByTournament(this.props.params.idTournament);
-    },
+
     render: function () {
         const {tournament} = this.props;
-        var isAuth = !!this.props.currentUser._id;
+        var isAuth = !this.props.currentUser._id;
         return (
-            <div className="container content-flex js-content-place">
-               <div className="row center">
-                   Страница турнира {tournament.name}
-               </div>
-               <div className="row center">
-                   Тип турнира: {tournament.type}
-               </div>
-
-                <List header="Список заявок команд:"
-                      url="/team/"
-                      defaultMessage="Заявок от команд нет"
-                      list={this.props.teams}/>
-
-                <List header="Список этапов:"
-                      url="/stage/"
-                      defaultMessage="В турнире нет этапов"
-                      list={this.props.stages}/>
-
-                {!this.props.tournament.isAdmin ? null :
-                    <div className="row right-align">
-                        <Link className="waves-effect waves-light btn"
-                              to={"/stage/create/?tournament=" + this.props.tournament._id}>
-                            Создать этап
-                        </Link>
+            <div className="row">
+                <div className="col s12 card padding-enabled">
+                    <div className="card-image">
+                        <img src="http://www.bailoy.com/wp-content/uploads/2016/03/slide2.jpg"/>
+                        <span className="card-title tournament_card-title">
+                            Страница турнира {tournament.name}
+                        </span>
                     </div>
-                }
 
-                {!isAuth ? null :
-                    <ModalWindow urlSend="/api/tournament/add-team"
-                                 buttonName="Подать заявку от лица команды"
-                                 header="Список команд"
-                                 nameHiddenInput="idTournament"
-                                 valueArray={this.props.currentUser.teams}
-                                 valueHiddenInput={tournament._id}
-                                 onSuccess={this.onSuccessAddTeam}/>
-                }
-                
-           </div>
+                    <ul className="tabs tabs-fixed-width">
+                        <li className="tab col s4"><a href="#team-request">Заявки команд</a></li>
+                        <li className="tab col s4"><a href="#stages">Этапы</a></li>
+                        <li className="tab col s4"><a href="#matches">Матчи</a></li>
+                    </ul>
+                </div>
+
+                <div id="team-request" className="col s12 card">
+                    <TeamsList list={this.props.teams}/>
+
+                    {isAuth ? null :
+                        <TeamsWindow teams={this.props.currentUser.teams}
+                                     tournamentId={tournament._id}
+                                     teamActions={this.props.teamActions}/>
+                    }
+
+                </div>
+
+                <div id="stages" className="col s12 card">
+                    <List header="Список этапов:"
+                          url="/stage/"
+                          defaultMessage="В турнире нет этапов"
+                          list={this.props.stages}/>
+
+                    {!this.props.tournament.isAdmin ? null :
+                        <div className="row right-align">
+                            <Link className="waves-effect waves-light btn"
+                                  to={"/stage/create/?tournament=" + this.props.tournament._id}>
+                                Создать этап
+                            </Link>
+                        </div>
+                    }
+                </div>
+
+                <div id="matches" className="col s12 card">
+                    тут будет список матчей
+                </div>
+            </div>
         )
     }
 });
