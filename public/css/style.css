@@ -167,6 +167,13 @@ body{
     padding: 0px !important;
 }
 
+.tournament_card-title {
+    text-shadow: 3px -3px 6px black;
+}
+
+.card-indent {
+    margin: 10px;
+}
 /*full height = 64px*/
 .search {
     height: 44px !important;

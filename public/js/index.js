@@ -20,7 +20,7 @@ import CreateTournament from './containers/CreateTournament';
 import Match from './containers/Match';
 import CreateStage from './containers/CreateStage';
 import Forbidden from './containers/Forbidden';
-import PlanningStage from './containers/PlanningStage';
+// import PlanningStage from './containers/PlanningStage';
 
 const store = configureStore();
 
@@ -64,10 +64,11 @@ ReactDOM.render(
                 <Route path='account/:idUser' component={Account} />
                 <Route path='tournament/:idTournament' component={Tournament} />
                 <Route path='federation/:federationName' component={Federation} />
-                <Route path='stage/:idStage'>
-                    <IndexRoute component={Stage} />
-                    <Route path='planning' component={PlanningStage} />
-                </Route>
+                <Route path='stage/:idStage' component={Stage} />
+                {/*<Route path='stage/:idStage'>*/}
+                    {/*<IndexRoute component={Stage} />*/}
+                    {/*<Route path='planning' component={PlanningStage} />*/}
+                {/*</Route>*/}
                 <Route path="*" component={NotFound}/>
             </Route>
         </Router>
