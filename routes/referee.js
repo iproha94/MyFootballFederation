@@ -30,7 +30,7 @@ router.post('/get-my-matches', function(req, res, next) {
             return res.json([]);
         }
 
-        Match.find({_id: {$in: user.matchesToReferee}}, function (err, matches) {
+        Match.find({_id: {$in: user.matchesToReferee},  status: Match.STATUS.CREATED.name}, function (err, matches) {
 
             async.map(matches, function (match, done) {
                 Stage.findById(match.stage, function (err, stage) {

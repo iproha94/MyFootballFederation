@@ -116,13 +116,11 @@ router.post('/account/get-creator/', function(req, res, next) {
 });
 
 router.post('/get-interesting-matches', function (req, res, next) {
-    let idUser = req.body.idUser;
-
     let findCond;
 
-    if (idUser) {
+    if (req.user) {
         findCond = {
-            members: idUser
+            members: req.user._id
         }
     } else {
         findCond = {};
