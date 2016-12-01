@@ -143,16 +143,22 @@ router.post('/get-interesting-matches', function (req, res, next) {
                     Stage.find({tournament: tournament._id}, function (err, stages) {
                         if (err) doneTournaments(err);
 
-                        async.map(stages, function (st, doneStages) {
-                            let stage = st.toObject();
+                        let tournamentMatches = [];
 
+                        async.each(stages, function (stage, callback) {
                             Match.find({stage: stage._id}, function (err, matches) {
-                                stage.matches = matches;
+                                if (err) callback(err);
 
-                                doneStages(null, stage);
+                                tournamentMatches = tournamentMatches.concat(matches);
+
+                                callback();
                             });
-                        }, function (err, arr) {
-                            tournament.stages = arr;
+                        }, function (err) {
+                            if (err)
+                                tournament.matches = [];
+                            else
+                                tournament.matches = tournamentMatches;
+
                             doneTournaments(null, tournament);
                         });
                     });
