@@ -12,7 +12,11 @@ var Component = React.createClass({
         var federations = this.props.database.map(function(federation) {
             var tournaments = federation.tournaments.map(function(tournament) {
                 var matches = tournament.matches.map(function(match){
-                    return <div>{match.name}</div>
+                    return (
+                        <Link to={`/match/${match._id}`}>
+                            {match.name}&nbsp;&nbsp;&nbsp;&nbsp;   
+                        </Link>
+                    )
                 });
                 return (
                     <div>

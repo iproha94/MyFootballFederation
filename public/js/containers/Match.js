@@ -13,6 +13,7 @@ import Players from '../components/match/Players';
 
 var Component = React.createClass({
     componentDidMount: function() {
+        $('ul.tabs').tabs();
         this.props.matchActions.getMatch(this.props.params.idMatch);
         this.props.usersActions.getAllUser();
     },
