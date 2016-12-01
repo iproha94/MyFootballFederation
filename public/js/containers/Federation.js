@@ -13,6 +13,7 @@ var Component = React.createClass({
             .getTournamentsInFederation(federationName);
     },
     componentDidMount: function () {
+        $('ul.tabs').tabs();
         this.fetch(this.props.params.federationName);
     },
     componentWillReceiveProps: function (nextProps) {

@@ -30,6 +30,10 @@ export default React.createClass({
                     $(".ui-autocomplete").addClass("collection z-depth-1");
                 }
             });
+
+            var script = document.createElement("script");
+            script.src = "/js/lib/materialize.js";
+            document.body.appendChild(script);
         };
     },
     render: function () {

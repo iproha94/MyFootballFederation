@@ -12,6 +12,7 @@ import TeamsWindow from '../components/tournament/TeamsWindow';
 var TournamentPage = React.createClass({
     idTournament: null,
     componentDidMount: function() {
+        $('ul.tabs').tabs();
         var _id = this.props.params.idTournament;
         this.props.tournamentActions.getTournament(_id);
         this.props.teamActions.getTeamsByTournament(_id);
