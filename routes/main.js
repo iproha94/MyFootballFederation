@@ -3,6 +3,12 @@ var router = express.Router();
 var Federation = require('../models/federation');
 var Team = require('../models/team');
 var User = require('../models/user');
+var Stage = require('../models/stage');
+var Match = require('../models/match');
+var async = require('async');
+var Tournament = require('../models/tournament');
+
+
 
 function getArray(arrayObject, name) {
     var result = [];
@@ -107,6 +113,60 @@ router.post('/account/get-creator/', function(req, res, next) {
     Federation.find({creators: req.user._id}, function (err, federations) {
         return res.json(federations);
     });
+});
+
+router.post('/get-interesting-matches', function (req, res, next) {
+    let idUser = req.body.idUser;
+
+    let findCond;
+
+    if (idUser) {
+        findCond = {
+            members: idUser
+        }
+    } else {
+        findCond = {};
+    }
+
+    Federation.find(findCond, function (err, federations) {
+        if (err) return res.json([]);
+
+        async.map(federations, function (fed, doneFederations) {
+            let federation = fed.toObject();
+
+            Tournament.find({federation: federation._id}, function (err, tournaments) {
+                if (err) doneFederations(err);
+
+                async.map(tournaments, function (tourn, doneTournaments) {
+                    let tournament = tourn.toObject();
+
+                    Stage.find({tournament: tournament._id}, function (err, stages) {
+                        if (err) doneTournaments(err);
+
+                        async.map(stages, function (st, doneStages) {
+                            let stage = st.toObject();
+
+                            Match.find({stage: stage._id}, function (err, matches) {
+                                stage.matches = matches;
+
+                                doneStages(null, stage);
+                            });
+                        }, function (err, arr) {
+                            tournament.stages = arr;
+                            doneTournaments(null, tournament);
+                        });
+                    });
+
+                }, function (err, arr) {
+                    federation.tournaments = arr;
+                    doneFederations(null, federation);
+                });
+            })
+        }, function (err, arr) {
+            return res.json(arr);
+        });
+    });
+
 });
 
 module.exports = router;
