@@ -18,7 +18,7 @@ var App = React.createClass({
                 <div className="row">
                     <div className="col s2-5 card-padding">
                         <div>
-                            <LeftMenu/>
+                            <LeftMenu history={this.props.history}/>
                         </div>
                     </div>
 

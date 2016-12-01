@@ -7,8 +7,10 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <MyFederations federations = {this.props.federations} />
-                <MyTeams teams = {this.props.teams} />
+                <MyFederations federations={this.props.currentUser.federations} 
+                               history={this.props.history}/>
+                <MyTeams teams={this.props.currentUser.teams} 
+                         history={this.props.history}/>
             </div>
         )
     }
@@ -16,7 +18,6 @@ var Component = React.createClass({
 
 export default connect((state)=>{
     return {
-        federations: state.currentUser.federations,
-        teams: state.currentUser.teams,
+        currentUser: state.currentUser
     }
 })(Component);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import CreateTeam from './CreateTeam';
 
 export default React.createClass({
     render: function () {
@@ -21,7 +22,7 @@ export default React.createClass({
                     {myTeams.length ? myTeams : ""}
                 </div>
 
-                <Link to="/team/create" className="waves-effect waves-light width-fullscreen btn">Создать</Link>
+                <CreateTeam history={this.props.history}/>
             </div>
         )
     }

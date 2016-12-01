@@ -12,8 +12,6 @@ import NotFound from './containers/NotFound';
 import App from './containers/App';
 import Account from './containers/Account';
 import UsersList from './containers/UsersList';
-import CreateFederation from './containers/CreateFederation';
-import CreateTeam from './containers/CreateTeam';
 import CreateVuser from './containers/CreateVuser';
 import Federation from './containers/Federation';
 import CreateTournament from './containers/CreateTournament';
@@ -54,10 +52,8 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
                 <Route path='forbidden' component={Forbidden} />
-                <Route path='team/create' component={CreateTeam} onEnter={requireAuth(store)}/>
                 <Route path='vuser/create' component={CreateVuser} onEnter={requireAuth(store)}/>
                 <Route path='tournament/create' component={CreateTournament} onEnter={requireAuth(store)}/>
-                <Route path='federation/create' component={CreateFederation} onEnter={requireAuth(store)}/>
                 <Route path='stage/create' component={CreateStage} onEnter={requireAuth(store)}/>
                 <Route path='team/:idTeam' component={Team} />
                 <Route path='match/:idMatch' component={Match} />

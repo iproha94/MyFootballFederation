@@ -11,23 +11,23 @@ var Component = React.createClass({
     render: function () {
         var federations = this.props.database.map(function(federation) {
             var tournaments = federation.tournaments.map(function(tournament) {
-                var mathes = tournament.mathes.map(function(math){
-                    return <div>{math.name}</div>
+                var matches = tournament.matches.map(function(match){
+                    return <div>{match.name}</div>
                 });
                 return (
                     <div>
                         <h5>{tournament.name}</h5>
-                        <div className="interesting-mathes_mathes__padding">
-                            {mathes}
+                        <div className="interesting-matches_matches__padding">
+                            {matches}
                         </div>
                     </div>
                 );
             });
 
             return (
-                <div className="card interesting-mathes">
+                <div className="card interesting-matches">
                     <h4>{federation.name}</h4>
-                    <div className="interesting-mathes_tournament__padding">   
+                    <div className="interesting-matches_tournament__padding">   
                         {tournaments}               
                     </div>
                 </div>
