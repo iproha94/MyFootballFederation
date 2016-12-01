@@ -26,15 +26,15 @@ var Component = React.createClass({
             <div className="row">
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
-                        <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
-                                <span className="card-title">
-                                    Страница матча {this.props.match.name}
-                                </span>
+                        <img src="http://www.tsar.by/uploads/images/kanali/logo-match-tv.png"/>
+                        <span className="card-title">
+                            Страница матча {this.props.match.name}
+                        </span>
                     </div>
 
                     <ul className="tabs tabs-fixed-width">
-                        <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
-                        <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Судьи</a></li>
+                        <li className="tab col s3"><a href="#tab-id-1" className="active js-link">Инфо</a></li>
+                        <li className="tab col s3"><a className="js-link" href="#tab-id-2">Судьи</a></li>
                         <li className="tab col s3"><a href="#tab-id-3" className="js-link">Составы</a></li>
                     </ul>
                 </div>

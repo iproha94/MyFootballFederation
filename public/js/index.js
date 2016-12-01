@@ -61,10 +61,6 @@ ReactDOM.render(
                 <Route path='tournament/:idTournament' component={Tournament} />
                 <Route path='federation/:federationName' component={Federation} />
                 <Route path='stage/:idStage' component={Stage} />
-                {/*<Route path='stage/:idStage'>*/}
-                    {/*<IndexRoute component={Stage} />*/}
-                    {/*<Route path='planning' component={PlanningStage} />*/}
-                {/*</Route>*/}
                 <Route path="*" component={NotFound}/>
             </Route>
         </Router>

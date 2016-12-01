@@ -30,7 +30,7 @@ var Component = React.createClass({
                         <div className="card-image">
                             <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
                             <span className="card-title">
-                                Страница федерации {federation.name} Город: {federation.city}
+                                Страница федерации {federation.name}
                             </span>
                         </div>
 

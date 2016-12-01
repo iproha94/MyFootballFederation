@@ -126,7 +126,7 @@ router.post('/set-info', function(req, res, next) {
         idAction: req.body.idAction,
         minute: req.body.minute,
         realTime: now,
-};
+    };
 
     Match.findById(idMatch, function (err, match) {
         if (err) {

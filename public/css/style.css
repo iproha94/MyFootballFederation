@@ -247,8 +247,29 @@ body{
 
 .interesting-matches_tournament__padding {
     padding-left: 40px;
+    padding-right: 40px;
 }
 
 .interesting-matches_matches__padding {
     padding-left: 40px;
+    padding-right: 40px;
+}
+
+.livetable_score__online {
+    color: #ff1f13;
+}
+
+.livetable_match {
+    background-color: #edecee;
+}
+
+.livetable_match__half {
+    display: inline-block;
+    width: 50%;
+}
+
+.livetable__line {
+    border-left: 2px solid #ccc; /* Параметры линии */
+    margin-left: 20px; /* Отступ слева */
+    padding-left: 10px; /* Расстояние от линии до текста */
 }
