@@ -25,7 +25,10 @@ var Component = React.createClass({
         return (
             <div className="container content-flex">
                 <div className="row">
-                    <form className="col s12 js-form" method="post" onSubmit={this.handleSubmit}>
+                    <div className="col s5">
+                        <h4 className="brown-text">Создание федерации</h4>
+                    </div>
+                    <form className="col s7 js-form card create__padding" method="post" onSubmit={this.handleSubmit}>
                         <div className="row">
                             <div className="input-field col s12">
                                 <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
@@ -44,9 +47,11 @@ var Component = React.createClass({
                                     <label for="motto">Девиз</label>
                             </div>
                         </div>
-                        <button className="btn waves-effect waves-light" type="submit">Submit
-                            <i className="material-icons right">send</i>
-                        </button>
+                        <div className="row right">
+                            <button className="btn waves-effect waves-light create_button__margin" type="submit">Submit
+                                <i className="material-icons right">send</i>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

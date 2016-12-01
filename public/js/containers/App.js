@@ -7,6 +7,7 @@ import LeftMenu from '../components/common/LeftMenu';
 
 var App = React.createClass({
     componentDidMount: function () {
+        $("#preloader").hide();
         this.props.accountActions.getCurrentUser();
     },
     render: function () {
