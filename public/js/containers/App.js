@@ -3,7 +3,7 @@ import * as accountActions from '../actions/user';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Nav from '../components/common/Nav';
-import LeftMenu from '../components/common/LeftMenu';
+import LeftMenu from './LeftMenu';
 
 var App = React.createClass({
     componentDidMount: function () {
