@@ -235,7 +235,20 @@ body{
     height: 100px !important;
 }
 
-.left-menu-padding_card{
+.left-menu-padding_card {
     margin: 0px;
 }
 
+.interesting-mathes {
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.interesting-mathes_tournament__padding {
+    padding-left: 40px;
+}
+
+.interesting-mathes_mathes__padding {
+    padding-left: 40px;
+}

@@ -8,6 +8,7 @@ import federation from './pages/federation';
 import match from './pages/match';
 import stage from './pages/stage';
 import planningStage from './pages/planningStage';
+import main from './pages/main';
 
 export default combineReducers({
     tournament,
@@ -18,5 +19,6 @@ export default combineReducers({
     federation,
     match,
     stage,
-    planningStage
+    planningStage,
+    main
 });
