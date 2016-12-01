@@ -10,7 +10,7 @@ export default React.createClass({
                         <img src="/img/team-default-logo.png" />
                     </div>
                     <div className="card-action">
-                        <Link to={"\\team\\" + item._id}>{item.name}</Link>
+                        <Link to={"/team/" + item._id}>{item.name}</Link>
                     </div>
                 </div>
             )
