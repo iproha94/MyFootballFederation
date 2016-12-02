@@ -1,5 +1,5 @@
 import React from 'react';
-import * as tournamentActions from '../../actions/tournament';
+import * as federationActions from '../../actions/federation';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ReactDOM from 'react-dom';
@@ -16,11 +16,10 @@ var Component = React.createClass({
             url: "/api/tournament/create",
             success: (data) => {
                 $(ReactDOM.findDOMNode(this.refs.form))[0].reset();
-                Materialize.updateTextFields()
+                Materialize.updateTextFields();
                 Materialize.toast(data.message || "Операция прошла успешно", 2000);
-                //мб тут проблема
-                this.props.tournamentActions.getTournament(data.payload._id);
-                this.props.history.push('/tournament/' + data.payload._id);
+                // this.props.federationActions.getFederationInfo(this.props.federation.name);
+                this.props.history.push('/tournament/' + data._id);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
@@ -96,6 +95,6 @@ export default connect((state)=>{
     return {}
 }, (dispatch)=>{
     return {
-        tournamentActions: bindActionCreators(tournamentActions, dispatch)
+        federationActions: bindActionCreators(federationActions, dispatch)
     }
 })(Component);

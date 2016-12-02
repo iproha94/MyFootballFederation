@@ -48,6 +48,7 @@ var Component = React.createClass({
                 </div>
                 <div id="tab-id-2" className="col s12 card">
                     <Tournaments federation={this.props.federation}
+                                 history={this.props.history}
                                  tournaments={this.props.tournaments}/>
                 </div>
                 <div id="tab-id-3" className="col s12 card">

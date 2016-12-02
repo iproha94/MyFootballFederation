@@ -12,7 +12,10 @@ export default React.createClass({
                       url="/tournament/"
                       defaultMessage="Турниров нет"
                       list={this.props.tournaments}/>
-                {!this.props.federation.isAdmin ? null : <CreateTournament federation={this.props.federation}/>}
+                {!this.props.federation.isAdmin ?
+                    null :
+                    <CreateTournament federation={this.props.federation} history={this.props.history}/>
+                }
             </div>
         );
     }
