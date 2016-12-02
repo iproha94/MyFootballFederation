@@ -18,7 +18,7 @@ var Component = React.createClass({
 
                     <ul className="right hide-on-med-and-down">
                         {isAuthenticated ? [
-                            <li><Link to={linkAccountPage}>Профиля</Link></li>,
+                            <li><Link to={linkAccountPage}>Профиль</Link></li>,
                             <li><a href="/logout">Выйти</a></li>
                         ] :
                             <li><a className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>

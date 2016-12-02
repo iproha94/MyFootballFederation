@@ -76,7 +76,7 @@ var Component = React.createClass({
         });
 
         return (
-            <div className="card">
+            <div>
                 <h5 className="center"> {events.length != 0 ? "Матч прошел " + new Date(this.props.match.events[0].realTime).toLocaleDateString() : ""} </h5>
                 <h4 className="center"> {events.length != 0 ? "Счет " + numGoalsTeam1 + ":" + numGoalsTeam2 : ""} </h4>
 
@@ -85,7 +85,7 @@ var Component = React.createClass({
                         {events.reverse()}
                     </ul>
                     :
-                    ""
+                    <h5>Матч еще не начался</h5>
                 }
             </div>
         )

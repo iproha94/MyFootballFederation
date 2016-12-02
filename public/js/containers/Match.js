@@ -26,7 +26,7 @@ var Component = React.createClass({
             <div className="row">
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
-                        <img src="http://www.tsar.by/uploads/images/kanali/logo-match-tv.png"/>
+                        <img src="http://m.ratingbet.com/upload/vk/39/34/3439.jpg"/>
                         <span className="card-title">
                             Страница матча {this.props.match.name}
                         </span>

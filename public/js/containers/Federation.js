@@ -26,20 +26,20 @@ var Component = React.createClass({
 
         return (
             <div className="row" >
-                    <div className="col s12 card padding-enabled">
-                        <div className="card-image">
-                            <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
-                            <span className="card-title">
-                                Страница федерации {federation.name}
-                            </span>
-                        </div>
-
-                        <ul className="tabs tabs-fixed-width">
-                            <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
-                            <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
-                            <li className="tab col s3"><a href="#tab-id-3" className="js-link">Организаторы</a></li>
-                        </ul>
+                <div className="col s12 card padding-enabled">
+                    <div className="card-image">
+                        <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
+                        <span className="card-title">
+                            Страница федерации {federation.name}
+                        </span>
                     </div>
+
+                    <ul className="tabs tabs-fixed-width">
+                        <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
+                        <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
+                        <li className="tab col s3"><a href="#tab-id-3" className="js-link">Организаторы</a></li>
+                    </ul>
+                </div>
                 
                 <div id="tab-id-1" className="col s12 card">
                     <Info federation={this.props.federation}

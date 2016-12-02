@@ -19,7 +19,13 @@ router.post('/create', function(req, res, next) {
         });
     }
 
-    Federation.findOne({name: req.query.federation}, function (err, federation) {
+    Federation.findOne({name: req.body.federation}, function (err, federation) {
+        if (err) {
+            console.log(req.body);
+            return res.json({
+                message: "Error",
+            });
+        }
 
         var tournament = new Tournament({
             name: req.body.name,

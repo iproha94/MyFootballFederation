@@ -36,23 +36,21 @@ var Component = React.createClass({
 
                 let half = matches.length % 2 ? matches.length / 2 + 1 : matches.length / 2;
                 return (
-                    <div>
-                        <div className="livetable_match interesting-matches_matches__padding ">
-                            <h5>{tournament.name}</h5>
-                            <div className="livetable_match__half">
-                                {matches.length == 0 ? "матчей нет" : ""}
-                                {matches.slice(0, half)}
-                            </div>
-                            <div className="livetable_match__half">
-                                {matches.slice(half, matches.length)}
-                            </div>
+                    <div className="card livetable_match interesting-matches_matches__padding ">
+                        <h5>{tournament.name}</h5>
+                        <div className="livetable_match__half">
+                            {matches.length == 0 ? "матчей нет" : ""}
+                            {matches.slice(0, half)}
+                        </div>
+                        <div className="livetable_match__half">
+                            {matches.slice(half, matches.length)}
                         </div>
                     </div>
                 );
             });
 
             return (
-                <div className="interesting-matches">
+                <div className="card interesting-matches interesting-matches_tournament__padding">
                     <h4>{federation.name}</h4>
                     {tournaments}
                 </div>
@@ -61,7 +59,7 @@ var Component = React.createClass({
 
 
         return (
-            <div className="card">
+            <div >
                 {federations.length ? federations : "Подписывайтесь на федерации, чтобы увидеть здесь результаты матчей"}
             </div>
         );
