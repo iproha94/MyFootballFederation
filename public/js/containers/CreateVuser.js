@@ -26,13 +26,13 @@ export default React.createClass({
                     <form className="col s12 js-form" method="post" onSubmit={this.handleSubmit}>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="firstName" type="text" className="validate" name="firstName" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                <input id="firstName" type="text" className="validate" name="firstName" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                     <label for="firstName">Имя</label>
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="lastName" type="text" className="validate" name="lastName" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                <input id="lastName" type="text" className="validate" name="lastName" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                     <label for="lastName">Фамилия</label>
                             </div>
                         </div>

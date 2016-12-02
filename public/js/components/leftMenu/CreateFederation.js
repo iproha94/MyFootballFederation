@@ -43,13 +43,13 @@ var Component = React.createClass({
                             <form className="col s12 js-form" method="post" ref="form" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="name">Имя федерации</label>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="city" type="text" className="validate" name="city" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                        <input id="city" type="text" className="validate" name="city" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="city">Город</label>
                                     </div>
                                 </div>

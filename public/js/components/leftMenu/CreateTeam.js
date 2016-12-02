@@ -43,19 +43,19 @@ var Component = React.createClass({
                             <form className="col s12 js-form create__padding js-form" ref="form" method="post" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="name">Название команды</label>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="city" type="text" className="validate" name="city" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                        <input id="city" type="text" className="validate" name="city" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="city">Город</label>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="motto" type="text" className="validate" name="motto" required pattern="[a-zA-Z][a-zA-Z0-9\s]*"/>
+                                        <input id="motto" type="text" className="validate" name="motto" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="motto">Девиз</label>
                                     </div>
                                 </div>

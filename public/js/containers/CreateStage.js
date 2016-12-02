@@ -25,7 +25,7 @@ export default React.createClass({
                         
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z][a-zA-Z0-9\s]*" />
+                                <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*" />
                                     <label for="name">Название этапа</label>
                             </div>
                         </div>
