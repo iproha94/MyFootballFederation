@@ -85,6 +85,12 @@ router.get('/account/add-creator/', function(req, res, next) {
     var idFederation = req.query.idSend;
     console.log(idUser, idFederation);
     Federation.findById(idFederation, function (err, federation) {
+        if(err) {
+            return res.json({
+                status: 403
+            });
+        }
+        
         var isCreatorsCurrentUser = federation.creators.some(function(item){
             return item.equals(req.user._id);
         });
