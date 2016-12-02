@@ -29,6 +29,8 @@ var Component = React.createClass({
             url: "/api/account/save-change/",
             success: (data) => {
                 Materialize.toast("Изменения успешно сохранены", 2000);
+                this.props.accountActions.getCurrentUser();
+
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.log(jqXHR,textStatus,errorThrown);
@@ -60,8 +62,8 @@ var Component = React.createClass({
                             <form className="col s12" method="post" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s6">
-                                            <input id="email" type="email" class="validate" defaultValue={this.props.currentUser.email} name="email"/>
-                                            <label for="email">Email</label>
+                                            <input id="email" type="email" className="validate" defaultValue={this.props.currentUser.email} name="email"/>
+                                            <label for="email" className={this.props.currentUser.email ? "active" : null}>Email</label>
                                     </div>
                                 </div>
                                 <div className="row"> 
