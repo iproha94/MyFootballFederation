@@ -19,7 +19,24 @@ var opts = {
 		socketOptions: { keepAlive: 1 }
 	}
 };
-mongoose.connect(credentials.mongo.stringConnection, opts);
+
+console.log(process.env.DB);
+switch (process.env.DB) {
+	case "presentation":
+		mongoose.connect(credentials.mongo.presentation, opts);
+		break;
+
+	case "test":
+		mongoose.connect(credentials.mongo.test, opts);
+		break;
+
+	case "production":
+		mongoose.connect(credentials.mongo.production, opts);
+		break;
+
+	default:
+		mongoose.connect(credentials.mongo.stringConnection, opts);
+}
 
 app.use(require('cookie-parser')(credentials.cookieSecret));
 

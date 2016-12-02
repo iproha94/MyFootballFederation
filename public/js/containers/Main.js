@@ -57,10 +57,11 @@ var Component = React.createClass({
             );
         });
 
-
         return (
             <div >
-                {federations.length ? federations : "Подписывайтесь на федерации, чтобы увидеть здесь результаты матчей"}
+                {!federations.length && !this.props.currentUser._id ? "У вас есть возможность создать первую федерацию на этой платформе" : ""}
+                {federations.length ? federations : ""}
+                {!federations.length && this.props.currentUser._id ? "Подписывайтесь на федерации, чтобы увидеть здесь результаты матчей" : ""}
             </div>
         );
    } 
