@@ -25,7 +25,7 @@ var Component = React.createClass({
         var federation = this.props.federation;
 
         return (
-            <div className="row" >
+            <div className="row">
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
                         <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>

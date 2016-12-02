@@ -11,18 +11,21 @@ var App = React.createClass({
         this.props.accountActions.getCurrentUser();
     },
     render: function () {
+        var isAuth = !!this.props.currentUser._id;
         return (
             <div>
                 <Nav location={this.props.location}
                      history={this.props.history}/>
                 <div className="row">
-                    <div className="col s2-5 card-padding">
-                        <div>
-                            <LeftMenu history={this.props.history}/>
+                    {!isAuth ? null :
+                        <div className="col s2-5 card-padding">
+                            <div>
+                                <LeftMenu history={this.props.history}/>
+                            </div>
                         </div>
-                    </div>
+                    }
 
-                    <div className="col s9-5 card-padding">
+                    <div className={`col card-padding ${isAuth? "s9-5" : "s12 custom-container"}`}>
                             {this.props.children}
                     </div>
                 </div>

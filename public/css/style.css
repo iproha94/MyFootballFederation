@@ -272,3 +272,23 @@ body{
     margin-left: 20px; /* Отступ слева */
     padding-left: 10px; /* Расстояние от линии до текста */
 }
+
+
+.custom-container {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+}
+
+@media only screen and (min-width: 601px) {
+    .custom-container {
+        padding-left: 7.5% !important; 
+        padding-right: 7.5% !important; 
+    } 
+}
+
+@media only screen and (min-width: 993px) {
+    .custom-container {
+        padding-left: 15% !important; 
+        padding-right: 15% !important; 
+    } 
+}
