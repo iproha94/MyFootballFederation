@@ -6,7 +6,9 @@ var userSchema = new Schema({
     name: String,
     created: Date,
     image: String,
-    matchesToReferee: [Schema.Types.ObjectId]
+    matchesToReferee: [Schema.Types.ObjectId],
+    email: String,
+    notifications: Boolean
 });
 
 var User = mongoose.model("User", userSchema);

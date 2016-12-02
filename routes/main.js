@@ -115,6 +115,22 @@ router.post('/account/get-creator/', function(req, res, next) {
     });
 });
 
+
+router.post('/account/save-change/', function(req, res, next) {
+    var updateData = { 
+        notifications: !!req.body.notifications,
+        email: req.body.email
+    };
+    User.findByIdAndUpdate(req.user._id, { $set: updateData }, { new: true }, function (err, user) {
+        if (err) return next(err);
+        res.json({
+            message: "OK"
+        });
+    });
+});
+
+
+
 router.post('/get-interesting-matches', function (req, res, next) {
     let findCond;
 

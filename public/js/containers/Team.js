@@ -11,6 +11,11 @@ var Component = React.createClass({
         $('ul.tabs').tabs();
         this.props.teamActions.getTeamInfo(this.props.params.idTeam);
     },
+    componentWillReceiveProps: function (nextProps) {
+        if(this.props.params.idTeam !== nextProps.params.idTeam) {
+            this.props.teamActions.getTeamInfo(nextProps.params.idTeam);
+        }
+    },
     render: function () {
         var isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
 
