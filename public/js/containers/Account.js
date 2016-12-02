@@ -7,6 +7,7 @@ import * as federationsActions from '../actions/federation';
 import List from '../components/common/List';
 import {Link} from 'react-router';
 import Chart from '../components/common/Chart';
+import ReactDOM from 'react-dom';
 
 var Component = React.createClass({
     componentDidMount: function () {
@@ -20,38 +21,61 @@ var Component = React.createClass({
     onSuccessAddUser: function () {
         this.props.federationsActions.getFederationsUser(this.props.params.idUser);
     },
+    handleSubmit: function (event) {
+        event.preventDefault();
+        $.ajax({
+            method: 'POST',
+            data: $(event.target).serialize(),
+            url: "/api/account/save-change/",
+            success: (data) => {
+                Materialize.toast("Изменения успешно сохранены", 2000);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
+        });
+    },
+    handleChange: function (event) {
+        var input = ReactDOM.findDOMNode(this.refs.checkbox);
+        input.checked = !input.checked;
+    },
     render: function () {
         var currentUser = this.props.currentUser;
         var user = this.props.pageUser;
         var isAuth = !!currentUser._id;
         var isOwnPage = (currentUser._id == user._id);
         return (
-                <div>
-                <div className="container content-flex">
-                    <div className="center">
-                        <h3>Страница пользователя</h3>
-                        <h4>{isOwnPage ? "Ваше имя: " + currentUser.name:
-                                        "Имя пользователя: "+ user.name}
+            <div className="row">
+                <div className="col s12 card account-page__padding">
+                    <div>
+                        <h4>{isOwnPage ? "Ваш профиль " + currentUser.name:
+                                        "Профиль пользователя: "+ user.name}
                         </h4>
                         <h5>{isOwnPage && currentUser.newUser ? "Поздравляем с регистрацией": ""}
                         </h5>
 
-                        <List header="Команды"
-                              url="/team/"
-                              defaultMessage="Команд нет"
-                              list={this.props.pageUser.teams}/>
-                        {isOwnPage ? <Link to="/team/create" className="waves-effect waves-light btn">Создать команду</Link> : ""}
 
+                        {!isOwnPage ? null :
+                            <form className="col s12" method="post" onSubmit={this.handleSubmit}>
+                                <div className="row">
+                                    <div className="input-field col s6">
+                                            <input id="email" type="email" class="validate" defaultValue={this.props.currentUser.email} name="email"/>
+                                            <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div className="row"> 
+                                    <div className="col">
+                                        <input type="checkbox" id="test5" defaultChecked={this.props.currentUser.notifications} ref="checkbox" name="notifications"/>
+                                        <label for="test5" onClick={this.handleChange}>Присылать письма уведомления</label>
+                                    </div>
+                                </div>
+                                <button className="btn waves-effect waves-light" type="submit">Сохранить изменения
+                                    <i className="material-icons right">send</i>
+                                </button>
+                            </form>
+                        }
 
-                        <List header="Федерации"
-                              url="/federation/"
-                              defaultMessage="Федераций нет"
-                              urlParam="name"
-                              list={this.props.pageUser.federations}/>
-                        {isOwnPage ? <Link to="/federation/create" className="waves-effect waves-light btn">Создать федерацию</Link> : ""}
-
-                        <Chart/>
-                        
                         <div className="row content-margin-top">
                             {isOwnPage || !isAuth ? "" :
                                 <ModalWindow urlSend="/api/account/add-creator/"

@@ -6,6 +6,8 @@ import {
 }  from '../../constants';
 
 const initialState = {
+    email: null,
+    notifications: false,
     name: "",
     _id: "",
     teams: [],
