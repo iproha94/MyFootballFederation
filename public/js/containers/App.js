@@ -18,14 +18,14 @@ var App = React.createClass({
                      history={this.props.history}/>
                 <div className="row">
                     {!isAuth ? null :
-                        <div className="col s2-5 card-padding">
+                        <div className="col s12 m4 l3 card-padding">
                             <div>
                                 <LeftMenu history={this.props.history}/>
                             </div>
                         </div>
                     }
 
-                    <div className={`col card-padding ${isAuth? "s9-5" : "s12 custom-container"}`}>
+                    <div className={`col card-padding ${isAuth ? "s12 m8 l9" : "s12 m12 l12 custom-container"}`}>
                             {this.props.children}
                     </div>
                 </div>

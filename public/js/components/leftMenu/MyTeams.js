@@ -6,7 +6,7 @@ export default React.createClass({
     render: function () {
         var myTeams = this.props.teams.map((item) => {
             return (
-                <Link key={item._id} to={"/team/" + item._id} className="collection-item">
+                <Link key={item._id} to={"/team/" + item._id} className="truncate collection-item">
                     {item.name}
                 </Link>
             )
