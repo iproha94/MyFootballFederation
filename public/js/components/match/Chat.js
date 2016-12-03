@@ -11,7 +11,7 @@ export default React.createClass({
                 apiId: 5630102,
                 onlyWidgets: true
             });
-            VK.Widgets.Comments("vk_comments");
+            VK.Widgets.Comments("vk_comments", {autoPublish: 0});
         }
     },
     render: function () {

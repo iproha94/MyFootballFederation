@@ -27,8 +27,8 @@ var Component = React.createClass({
         return (
             <div className="row">
                 <div className="col s12 card padding-enabled">
-                    <div className="card-image">
-                        <img src="http://www.drodd.com/images13/football-wallpapers.jpg"/>
+                    <div className="card-image tournament_card-title">
+                        <img src="/img/federation-default-banner.jpg"/>
                         <span className="card-title">
                             Страница федерации {federation.name}
                         </span>

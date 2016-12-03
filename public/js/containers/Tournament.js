@@ -26,7 +26,7 @@ var TournamentPage = React.createClass({
             <div className="row">
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
-                        <img src="http://www.bailoy.com/wp-content/uploads/2016/03/slide2.jpg"/>
+                        <img src="/img/tournament-default-banner.jpg"/>
                         <span className="card-title tournament_card-title">
                             Страница турнира {tournament.name}
                         </span>

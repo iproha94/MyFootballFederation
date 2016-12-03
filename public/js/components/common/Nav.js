@@ -13,7 +13,7 @@ var Component = React.createClass({
                 <div className="nav-wrapper container">
                     <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
-                            iFootball
+                            Футбольные платформы
                     </Link>
 
                     <ul className="right hide-on-med-and-down">

@@ -12,8 +12,10 @@ var Component = React.createClass({
     render: function () {
         let getScoreTeam = function (events, idTeam) {
             let score = 0;
+
             events.forEach(function (event) {
                 if (idTeam == event.idTeam && event.idEvent == "GOAL") score++;
+                if (idTeam != event.idTeam && event.idEvent == "OWN_GOAL") score++;
             });
 
             return score;

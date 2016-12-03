@@ -20,22 +20,25 @@ var opts = {
 	}
 };
 
-console.log(process.env.DB);
 switch (process.env.DB) {
 	case "presentation":
-		mongoose.connect(credentials.mongo.presentation, opts);
+        console.log("запущенная база: " + credentials.mongo.presentation);
+        mongoose.connect(credentials.mongo.presentation, opts);
 		break;
 
 	case "test":
-		mongoose.connect(credentials.mongo.test, opts);
+        console.log("запущенная база: " + credentials.mongo.test);
+        mongoose.connect(credentials.mongo.test, opts);
 		break;
 
 	case "production":
-		mongoose.connect(credentials.mongo.production, opts);
+        console.log("запущенная база: " + credentials.mongo.production);
+        mongoose.connect(credentials.mongo.production, opts);
 		break;
 
 	default:
-		mongoose.connect(credentials.mongo.stringConnection, opts);
+        console.log("запущенная база: " + credentials.mongo.stringConnection);
+        mongoose.connect(credentials.mongo.stringConnection, opts);
 }
 
 app.use(require('cookie-parser')(credentials.cookieSecret));
@@ -142,6 +145,6 @@ app.get(/.*/, function root(req, res) {
 server.on('request', app);
 server.listen(app.get('port'), function () {
 	console.log( 'Express запущен на http://localhost:' +
-		app.get('port') + '; нажмите Ctrl+C для завершения.' );
+		app.get('port') + ';\nнажмите Ctrl+C для завершения.' );
 });
 
