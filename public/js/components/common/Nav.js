@@ -10,10 +10,10 @@ var Component = React.createClass({
         var linkAccountPage = isAuthenticated ? "/account/" + user._id : null;
         return (
             <nav className="light-green darken-2 header-position" role="navigation">
-                <div className="nav-wrapper container">
+                <div className="truncate nav-wrapper container">
                     <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
-                            Футбольные платформы
+                        Матчи online
                     </Link>
 
                     <ul className="right hide-on-med-and-down">

@@ -54,9 +54,9 @@ var Component = React.createClass({
                     </span>
                     <p> {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}</p>
                     <p> {item.idTeam ? `Команда: ${item.teamName}` : null}</p>
-                    <p className="hide-on-med-and-up"> Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()} </p>
+                    <p className="hide-on-large-only"> Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()} </p>
 
-                    <span className="secondary-content hide-on-small-only">Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()}</span>
+                    <span className="secondary-content hide-on-med-and-down">Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()}</span>
                 </li>
             );
         });
