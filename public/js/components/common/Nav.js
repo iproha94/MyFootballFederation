@@ -16,14 +16,14 @@ var Component = React.createClass({
                         Матчи online
                     </Link>
 
-                    <ul className="right hide-on-med-and-down">
-                        {isAuthenticated ? [
-                            <li><Link to={linkAccountPage}>Профиль</Link></li>,
-                            <li><a href="/logout">Выйти</a></li>
-                        ] :
-                            <li><a className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>
-                        }
-                    </ul>
+                    {/*<ul className="right hide-on-med-and-down">*/}
+                        {/*{isAuthenticated ? [*/}
+                            {/*<li><Link to={linkAccountPage}>Профиль</Link></li>,*/}
+                            {/*<li><a href="/logout">Выйти</a></li>*/}
+                        {/*] :*/}
+                            {/*<li><a className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>*/}
+                        {/*}*/}
+                    {/*</ul>*/}
 
                     <ul id="slide-out" className="side-nav">
                         <li>
@@ -41,21 +41,21 @@ var Component = React.createClass({
                             </div>
                         </li>
 
-                        {isAuthenticated ? (
-                            <li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>
-                        ) : [
-                            <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>
-                        ]}
+                        {/*{isAuthenticated ? (*/}
+                            {/*<li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>*/}
+                        {/*) : [*/}
+                            {/*<li><a className="subheader">Войти через:</a></li>,*/}
+                            {/*<li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>*/}
+                        {/*]}*/}
 
                         <li><div className="divider"></div></li>
                         <li><a className="subheader">Дополнительно</a></li>
 
-                        {isAuthenticated ? [
-                            <li><a className="waves-effect" href="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
-                        ] : (
-                            <li><a className="waves-effect" href="#!"><i className="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
-                        )}
+                        {/*{isAuthenticated ? [*/}
+                            {/*<li><a className="waves-effect" href="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>*/}
+                        {/*] : (*/}
+                            {/*<li><a className="waves-effect" href="#!"><i className="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>*/}
+                        {/*)}*/}
                     </ul>
 
                     <a href="#" data-activates="slide-out" className="button-collapse">
