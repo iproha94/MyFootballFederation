@@ -297,3 +297,13 @@ body{
     padding-left: 30px !important;
     padding-right: 30px !important;
 }
+
+.interesting-matches_col__margin-top {
+    margin-top: -14px;
+}
+
+@media only screen and (min-width: 993px) {
+    .interesting-matches_col__margin-top {
+        margin-top: auto;
+    }
+}

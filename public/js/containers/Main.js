@@ -38,13 +38,13 @@ var Component = React.createClass({
 
                 let half = matches.length % 2 ? matches.length / 2 + 1 : matches.length / 2;
                 return (
-                    <div className="card livetable_match interesting-matches_matches__padding ">
+                    <div className="card livetable_match interesting-matches_matches__padding row">
                         <h5>{tournament.name}</h5>
-                        <div className="livetable_match__half">
+                        <div className="col s12 m12 l6">
                             {matches.length == 0 ? "матчей нет" : ""}
                             {matches.slice(0, half)}
                         </div>
-                        <div className="livetable_match__half">
+                        <div className="col s12 m12 l6 interesting-matches_col__margin-top">
                             {matches.slice(half, matches.length)}
                         </div>
                     </div>
