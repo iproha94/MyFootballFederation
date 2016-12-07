@@ -12,12 +12,10 @@ import NotFound from './containers/NotFound';
 import App from './containers/App';
 import Account from './containers/Account';
 import UsersList from './containers/UsersList';
-import CreateVuser from './containers/CreateVuser';
 import Federation from './containers/Federation';
 import Match from './containers/Match';
 import CreateStage from './containers/CreateStage';
 import Forbidden from './containers/Forbidden';
-// import PlanningStage from './containers/PlanningStage';
 
 const store = configureStore();
 
@@ -51,7 +49,6 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
                 <Route path='forbidden' component={Forbidden} />
-                <Route path='vuser/create' component={CreateVuser} onEnter={requireAuth(store)}/>
                 <Route path='stage/create' component={CreateStage} onEnter={requireAuth(store)}/>
                 <Route path='team/:idTeam' component={Team} />
                 <Route path='match/:idMatch' component={Match} />

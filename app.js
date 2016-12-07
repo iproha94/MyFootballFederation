@@ -1,6 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var credentials = require('./cfg/credentials.js');
+var bodyParser = require('body-parser');
+
 var mainRoutes = require('./routes/main');
 var teamRoutes = require('./routes/team');
 var stageRoutes = require('./routes/stage');
@@ -8,7 +10,7 @@ var matchRoutes = require('./routes/match');
 var vuserRoutes = require('./routes/vuser');
 var tournamentRoutes = require('./routes/tournament');
 var federationRoutes = require('./routes/federation');
-var bodyParser = require('body-parser');
+
 
 var app = express();
 
@@ -20,7 +22,7 @@ var opts = {
 	}
 };
 
-switch (process.env.DB) {
+switch (process.env.NODE_ENV) {
 	case "presentation":
         console.log("запущенная база: " + credentials.mongo.presentation);
         mongoose.connect(credentials.mongo.presentation, opts);
@@ -36,17 +38,13 @@ switch (process.env.DB) {
         mongoose.connect(credentials.mongo.production, opts);
 		break;
 
+	case "development":
 	default:
-        console.log("запущенная база: " + credentials.mongo.stringConnection);
-        mongoose.connect(credentials.mongo.stringConnection, opts);
+        console.log("запущенная база: " + credentials.mongo.development);
+        mongoose.connect(credentials.mongo.development, opts);
 }
 
 app.use(require('cookie-parser')(credentials.cookieSecret));
-
-//Обеспечивает поддержку сеансов на основе идентификатора сеанса, хранимого
-// в cookie-файле. По умолчанию используется хранилище в памяти, не подходя-
-// щее для реальных условий эксплуатации, но может быть настроено для при-
-// менения хранилища на основе базы данных (см. главы 9 и 13).
 
 var sessionParser = require('express-session')({
 	resave: false,
@@ -61,16 +59,7 @@ var sessionParser = require('express-session')({
 app.use(sessionParser);
 exports.sessionParser = sessionParser;
 
-
 var auth = require('./lib/auth.js')(app, {
-	// baseUrl опционален; по умолчанию будет
-	// использоваться localhost, если вы пропустите его;
-	// имеет смысл установить его, если вы не
-	// работаете на своей локальной машине. Например,
-	// если вы используете staging-сервер,
-	// можете установить в переменной окружения BASE_URL
-	// https://staging.meadowlark.com
-	baseUrl: process.env.BASE_URL,
 	providers: credentials.authProviders,
 	successRedirect: '/account',
 	failureRedirect: '/unauthorized'
@@ -106,10 +95,10 @@ if (app.get('port') == 443) {
 	server = require('http').createServer();
 }
 
-module.exports = server;
+module.exports.server = server;
 
-//импортируется ниже эксорта сервера
-var refereeRoutes = require('./routes/referee');
+var refereeRoutes = require('./routes/referee'); //импортируется ниже exports сервера
+
 app.use('/api-referee', refereeRoutes);
 app.use('/api/', mainRoutes);
 app.use('/api/stage', stageRoutes);
@@ -148,3 +137,4 @@ server.listen(app.get('port'), function () {
 		app.get('port') + ';\nнажмите Ctrl+C для завершения.' );
 });
 
+module.exports.app = app; // для тестирования

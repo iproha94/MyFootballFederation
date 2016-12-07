@@ -16,7 +16,6 @@ export function getTeamInfo(_id) {
                     payload: {
                         nextUrl: "/404"
                     }
-
                 });
             }
 

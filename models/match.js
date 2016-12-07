@@ -22,7 +22,6 @@ var matchSchema = new Schema({
     federation: Schema.Types.ObjectId,
     players1: [],
     players2: []
-    //todo добавить 2 массива игроков от каждой команды
 });
 
 var Match = mongoose.model("Match", matchSchema);

@@ -88,8 +88,3 @@ export default connect((state)=>{
         stagesActions: bindActionCreators(stageActions, dispatch)
     }
 })(TournamentPage);
-//подключаем React компонент к Redux store. =>
-//добавляет в this.props все данные из обекта mapStateToProps
-//и все методы из mapDispatchToProps + метод dispatch
-//таким образом с помощью этого метода можно добавить
-// в любой компонент нужные данные из store

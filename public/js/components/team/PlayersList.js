@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-//я думаю это временный файл, чтобы я хоть как то показывал список виртуальных пользователей, потом сделаю лучше
 export default React.createClass({
     render: function () {
         var list = this.props.players.map((item) => {

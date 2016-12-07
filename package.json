@@ -4,7 +4,8 @@
   "description": "Платформа для создания футбольных федераций. <hr> Выпускной проект в Технопарке <hr> Nodejs, MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ",
+    "start": "node app"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "grunt": "^1.0.1",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-jshint": "^1.0.0",

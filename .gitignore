@@ -5,3 +5,4 @@ cfg/ssl
 .idea
 bundle.js
 front.js
+*.log

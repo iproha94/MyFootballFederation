@@ -2,9 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as teamActions from '../actions/team';
-import PlayersList from '../components/team/PlayersList';
-import {Link} from 'react-router';
-
+import VusersList from '../components/team/VusersList';
+import CreateVuser from '../components/team/CreateVuser';
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -17,7 +16,7 @@ var Component = React.createClass({
         }
     },
     render: function () {
-        var isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
+        let isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
 
         return (
             <div>
@@ -36,9 +35,14 @@ var Component = React.createClass({
                 </div>
 
                 <div id="players" className="col s12 card">
-                    <PlayersList players = {this.props.team.vplayersWithName}/>
+                    <VusersList vusers={this.props.team.vplayersWithName}/>
 
-                    {isOwnTeam ? <Link to={"/vuser/create?team=" + this.props.team._id} className="waves-effect waves-light btn">Добавить игрока</Link> : ""}
+                    {!isOwnTeam ?
+                        null :
+                        <CreateVuser team={this.props.team}
+                                     history={this.props.history}
+                                     teamActions={this.props.teamActions}/>
+                    }
                 </div>
 
                 <div id="matches" className="col s12 card">

@@ -1,6 +1,5 @@
 import React from 'react';
 import List from '../../components/common/List';
-import {Link} from 'react-router';
 import CreateTournament from './CreateTournament';
 
 

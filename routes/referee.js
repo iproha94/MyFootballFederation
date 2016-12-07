@@ -8,7 +8,7 @@ var Team = require('../models/team');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 var WebSocketServer = require('ws').Server;
-var server = require('../app');
+var server = require('../app').server;
 var async = require('async');
 
 var wss = new WebSocketServer({ server: server });
