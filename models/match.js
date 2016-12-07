@@ -8,6 +8,7 @@ var matchSchema = new Schema({
     team1: Schema.Types.ObjectId,
     team2: Schema.Types.ObjectId,
     stage: Schema.Types.ObjectId,
+    federation: Schema.Types.ObjectId,
     status: String,
     events: [{
         idTeam: Schema.Types.ObjectId,
@@ -19,7 +20,6 @@ var matchSchema = new Schema({
         minute: Number,
         idAction: Number,
     }],
-    federation: Schema.Types.ObjectId,
     players1: [],
     players2: []
 });

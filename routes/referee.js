@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
+
+var WebSocketServer = require('ws').Server;
+var server = require('../app').server;
+
 var User = require('../models/user');
 var Match = require('../models/match');
 var Stage = require('../models/stage');
@@ -7,9 +12,6 @@ var Tournament = require('../models/tournament');
 var Team = require('../models/team');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
-var WebSocketServer = require('ws').Server;
-var server = require('../app').server;
-var async = require('async');
 
 var wss = new WebSocketServer({ server: server });
 var clients = new Set();
@@ -23,11 +25,15 @@ wss.on('connection', function connection(ws) {
 
 
 router.post('/get-my-matches', function(req, res, next) {
+    if (!req.body.idVk) {
+        return res.status(400).json([]);
+    }
+
     let idVk = "vkontakte:" + req.body.idVk;
 
     User.findOne({authId: idVk}, function (err, user) {
         if (user == null) {
-            return res.json([]);
+            return res.status(404).json([]);
         }
 
         Match.find({_id: {$in: user.matchesToReferee},  status: Match.STATUS.CREATED.name}, function (err, matches) {
@@ -99,7 +105,7 @@ router.post('/get-my-matches', function(req, res, next) {
                         });
                     });
                 }, function (err, arr) {
-                    return res.json(arr);
+                    return res.status(200).json(arr);
                 });
             });
         });
