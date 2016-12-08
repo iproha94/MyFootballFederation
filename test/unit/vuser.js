@@ -1,15 +1,15 @@
 process.env.NODE_ENV = 'test';
 
-let mongoose = require("mongoose");
-let Vuser = require('../models/vuser');
-
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let app = require('../app').app;
+chai.use(chaiHttp);
 
 let should = chai.should();
 
-chai.use(chaiHttp);
+let Vuser = require('../../models/vuser');
+
+let app = require('../../app').app;
+
 
 describe('Vuser API', () => {
     beforeEach((done) => {

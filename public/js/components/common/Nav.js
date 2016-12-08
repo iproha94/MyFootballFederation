@@ -21,7 +21,7 @@ var Component = React.createClass({
                             <li><Link to={linkAccountPage}>Профиль</Link></li>,
                             <li><a href="/logout">Выйти</a></li>
                         ] :
-                            <li><a className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>
+                            <li><a id="vk-auth-btn" className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>
                         }
                     </ul>
 

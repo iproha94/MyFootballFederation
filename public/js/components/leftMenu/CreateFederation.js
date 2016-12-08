@@ -33,7 +33,7 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
+                <a id="create-federation-btn" onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
                    href="#modal-federation">Создать</a>
 
                 <div id="modal-federation" className="modal modal-fixed-footer">

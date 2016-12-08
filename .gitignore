@@ -6,3 +6,4 @@ cfg/ssl
 bundle.js
 front.js
 *.log
+test/gui/tools

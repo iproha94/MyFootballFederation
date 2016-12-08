@@ -33,7 +33,7 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
+                <a id="create-team-btn" onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
                    href="#modal-team">Создать</a>
 
                 <div id="modal-team" className="modal modal-fixed-footer">
@@ -43,20 +43,14 @@ var Component = React.createClass({
                             <form className="col s12 js-form create__padding js-form" ref="form" method="post" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
+                                        <input id="team-name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="name">Название команды</label>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="city" type="text" className="validate" name="city" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
+                                        <input id="team-city" type="text" className="validate" name="city" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="city">Город</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="input-field col s12">
-                                        <input id="motto" type="text" className="validate" name="motto" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
-                                            <label for="motto">Девиз</label>
                                     </div>
                                 </div>
                             </form>
@@ -64,7 +58,7 @@ var Component = React.createClass({
                     </div>
     
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                        <a id="send-team-btn" href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
                     </div>
                 </div>
             </div>

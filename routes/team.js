@@ -8,18 +8,18 @@ var async = require('async');
 router.post('/create', function(req, res, next) {
     var team = new Team({
         name: req.body.name,
-        creators: [req.user._id],
         city: req.body.city,
-        motto: req.body.motto,
+        creators: [req.user._id],
         players: [],
         player_requests: []
     });
-    
+
     team.save(function (err) {
         if(err) {
             res.status(500);
+
             return res.json({
-                message: "что-то не так"
+                message: "ошибка"
             });
         }
 

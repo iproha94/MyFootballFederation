@@ -2,17 +2,17 @@ process.env.NODE_ENV = 'test';
 
 let mongoose = require("mongoose");
 
-var User = require('../models/user');
-var Match = require('../models/match');
-var Stage = require('../models/stage');
-var Tournament = require('../models/tournament');
-var Team = require('../models/team');
-var Vuser = require('../models/vuser');
-var Federation = require('../models/federation');
+var User = require('../../models/user');
+var Match = require('../../models/match');
+var Stage = require('../../models/stage');
+var Tournament = require('../../models/tournament');
+var Team = require('../../models/team');
+var Vuser = require('../../models/vuser');
+var Federation = require('../../models/federation');
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let app = require('../app').app;
+let app = require('../../app').app;
 
 let should = chai.should();
 let expect = require('chai').expect;
