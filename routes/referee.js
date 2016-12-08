@@ -124,22 +124,25 @@ router.get('/:idMatch/get-info', function(req, res, next) {
 router.post('/set-info', function(req, res, next) {
     let idMatch = req.body.idMatch;
     let idEvent = req.body.idEvent;
+    let idAction = req.body.idAction;
+    let minute = req.body.minute;
+
+    if (!idMatch || !idEvent || isNaN(idAction) || isNaN(minute)) {
+        return res.status(400).json(null);
+    }
 
     let now = new Date();
 
     let event = {
         idEvent: idEvent,
-        idAction: req.body.idAction,
-        minute: req.body.minute,
+        idAction: idAction,
+        minute: minute,
         realTime: now,
     };
 
     Match.findById(idMatch, function (err, match) {
-        if (err) {
-            return res.json({
-                status: "NOT FOUND",
-                code: 404
-            });
+        if (err || !match) {
+            return res.status(404).json(null);
         }
 
         switch (idEvent) {
@@ -169,16 +172,10 @@ router.post('/set-info', function(req, res, next) {
 
         match.save(function (err) {
             if (err) {
-                return res.json({
-                    status: "ERROR",
-                    code: 500
-                });
+                return res.status(500).json(null);
             }
 
-            return res.json({
-                status: "OK",
-                code: 200
-            });
+            return res.status(200).json(null);
         });
     });
 });

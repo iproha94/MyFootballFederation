@@ -22,6 +22,8 @@ var opts = {
 	}
 };
 
+mongoose.Promise = global.Promise;
+
 switch (process.env.NODE_ENV) {
 	case "presentation":
         console.log("запущенная база: " + credentials.mongo.presentation);
