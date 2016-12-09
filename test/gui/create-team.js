@@ -9,13 +9,10 @@ let Team = require('../../models/team');
 var secret = require('./tools/secret');
 let app = require('../../app').app;
 
-var SELENIUM_HOST = 'http://localhost:4444/wd/hub';
 var URL = 'http://localhost:8080';
 
-
 var client = new wd.Builder()
-    .usingServer(SELENIUM_HOST)
-    .withCapabilities({ browserName: 'chrome' })
+    .forBrowser('chrome')
     .build();
 
 let vkPage = require('./pages/vk').vkPage;
@@ -34,7 +31,6 @@ describe('GUI Create team', () => {
     });
 
     it('create team', function(done) {
-        this.timeout(30000);
         let teamName = 'NAME TEAM1';
         let teamCity = 'CITY TEAM1';
 
@@ -44,16 +40,14 @@ describe('GUI Create team', () => {
                 mainPage.open(URL);
                 mainPage.auth();
                 mainPage.createTeam(teamName, teamCity);
+                client.quit();
             })
             .then(() => {
                 return Team.find({name: teamName}, function (err, team) {
                     assert.isNull(err);
                     assert.isNotNull(team);
+                    done();
                 })
-            })
-            .then(() => {
-                client.close();
-                done();
             })
     });
 });

@@ -14,6 +14,8 @@ function vkPage(driver) {
         self.driver.findElement(wd.By.id('index_pass')).sendKeys(passVk);
 
         self.driver.findElement(wd.By.id('index_login_button')).click();
+
+        return self.driver.wait(wd.until.titleIs('Новости'));
     }
 
 }

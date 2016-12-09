@@ -21,7 +21,8 @@ function mainPage(driver) {
     };
 
     self.createTeam = function(teamName, teamCity) {
-        self.driver.findElement(wd.By.id('create-team-btn')).click();
+        var createTeamBtn = self.driver.wait(wd.until.elementLocated(wd.By.id('create-team-btn')), 10000);
+        createTeamBtn.click();
 
         self.driver.findElement(wd.By.id('team-name')).sendKeys(teamName);
         self.driver.findElement(wd.By.id('team-city')).sendKeys(teamCity);
