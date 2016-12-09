@@ -19,7 +19,7 @@ let expect = require('chai').expect;
 
 chai.use(chaiHttp);
 
-describe('Referee API', () => {
+describe('API Referee', () => {
     let federation;
     let tournament;
     let stage;

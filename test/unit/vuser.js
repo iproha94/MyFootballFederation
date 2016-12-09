@@ -11,7 +11,7 @@ let Vuser = require('../../models/vuser');
 let app = require('../../app').app;
 
 
-describe('Vuser API', () => {
+describe('API Vuser', () => {
     beforeEach((done) => {
         Vuser.remove()
             .then(() => {

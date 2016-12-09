@@ -4,7 +4,7 @@
   "description": "Платформа для создания футбольных федераций. <hr> Выпускной проект в Технопарке <hr> Nodejs, MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./test/gui/*.js",
+    "test": "mocha ./test/**/*.js",
     "start": "node app"
   },
   "repository": {

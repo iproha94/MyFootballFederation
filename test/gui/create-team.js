@@ -25,7 +25,7 @@ let mainPage = require('./pages/main').mainPage;
 mainPage = new mainPage(client);
 
 
-describe('Create team', () => {
+describe('GUI Create team', () => {
     beforeEach((done) => {
         Team.remove()
             .then(() => {
@@ -52,6 +52,7 @@ describe('Create team', () => {
                 })
             })
             .then(() => {
+                client.close();
                 done();
             })
     });

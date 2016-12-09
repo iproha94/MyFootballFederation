@@ -16,14 +16,12 @@ router.post('/create', function(req, res, next) {
 
     team.save(function (err) {
         if(err) {
-            res.status(500);
-
-            return res.json({
+            return res.status(500).json({
                 message: "ошибка"
             });
         }
 
-        res.json({
+        return res.status(200).json({
             message: "Команда успешно создана",
             payload: team
         });
