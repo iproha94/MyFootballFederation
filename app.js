@@ -136,7 +136,7 @@ app.get(/.*/, function root(req, res) {
 server.on('request', app);
 server.listen(app.get('port'), function () {
 	console.log( 'Express запущен на http://localhost:' +
-		app.get('port') + ';\nнажмите Ctrl+C для завершения.' );
+		app.get('port') + '; нажмите Ctrl+C для завершения.' );
 });
 
 module.exports.app = app; // для тестирования

@@ -4,7 +4,7 @@
   "description": "Платформа для создания футбольных федераций. <hr> Выпускной проект в Технопарке <hr> Nodejs, MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./test/gui/*.js --no-timeouts ",
+    "test": "mocha test/unit/ --no-timeouts ",
     "start": "node app"
   },
   "repository": {
@@ -53,6 +53,7 @@
     "grunt-sass": "^1.2.1",
     "grunt-shell": "^1.3.1",
     "grunt-webpack": "^1.0.16",
+    "jscoverage": "^0.6.0",
     "jsx-loader": "^0.13.2",
     "mocha": "^3.1.0",
     "react": "^15.3.2",

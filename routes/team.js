@@ -64,7 +64,7 @@ router.post('/add-vuser', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    var id = req.param("id");
+    var id = req.params.id;
     Team.findById(id, function (err, result) {
         if(err || !result) {
             return next();

@@ -12,7 +12,7 @@ let app = require('../../app').app;
 var URL = 'http://localhost:8080';
 
 var client = new wd.Builder()
-    .forBrowser('firefox')
+    .forBrowser('chrome')
     .build();
 
 let vkPage = require('./pages/vk').vkPage;
@@ -30,7 +30,7 @@ describe('GUI Create team', () => {
             })
     });
 
-    it('create team', function(done) {
+    it('normal create team', function(done) {
         client.manage().timeouts().implicitlyWait(5000);
 
         let teamName = 'NAME TEAM1';
