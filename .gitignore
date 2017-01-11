@@ -1,9 +1,7 @@
 node_modules
-cfg/front.js
 cfg/credentials.js
 cfg/ssl
 .idea
 bundle.js
-front.js
 *.log
 test/gui/tools

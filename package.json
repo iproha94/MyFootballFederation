@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test/unit/ --no-timeouts ",
-    "start": "node app"
+    "start": "NODE_ENV=presentation node app_cluster"
   },
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "connect-redis": "^3.2.0",
     "grunt": "^1.0.1",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-jshint": "^1.0.0",
@@ -57,10 +58,12 @@
     "jsx-loader": "^0.13.2",
     "mocha": "^3.1.0",
     "react": "^15.3.2",
+    "redis": "^2.6.3",
     "selenium-webdriver": "^3.0.0-beta-3",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "websocketserver": "^1.0.0"
   }
 }

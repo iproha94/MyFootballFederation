@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var front = require('../cfg/front.js');
 
 var WebSocketServer = require('ws').Server;
-var server = require('../app').server;
 
 var User = require('../models/user');
 var Match = require('../models/match');
@@ -13,16 +13,7 @@ var Team = require('../models/team');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 
-var wss = new WebSocketServer({ server: server });
-var clients = new Set();
-
-wss.on('connection', function connection(ws) {
-    clients.add(ws);
-    ws.on('close', function() {
-        clients.delete(ws);
-    });
-});
-
+var wss = new WebSocketServer({port: front.port});
 
 router.post('/get-my-matches', function(req, res, next) {
     if (!req.body.idVk) {
@@ -166,8 +157,8 @@ router.post('/set-info', function(req, res, next) {
 
         match.events.push(event);
 
-        clients.forEach((ws) => {
-            ws.send(JSON.stringify(event));
+        wss.clients.forEach(function each(client) {
+            client.send(JSON.stringify(event));
         });
 
         match.save(function (err) {
