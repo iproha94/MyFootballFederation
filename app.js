@@ -15,7 +15,7 @@ function startServer() {
 
 	var app = express();
 
-	app.set('port', credentials.port || 8080);
+	app.set('port', process.env.PORT || credentials.port || 8080);
 
 	var opts = {
 		server: {
@@ -61,7 +61,7 @@ function startServer() {
 
 	var auth = require('./lib/auth.js')(app, {
 		providers: credentials.authProviders,
-		successRedirect: '/account',
+		successRedirect: '/',
 		failureRedirect: '/unauthorized'
 	});
 
@@ -76,8 +76,6 @@ function startServer() {
 	app.use(express.static('public'));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
-
-	var server = require('http').createServer();
 
 	app.use('/api-referee', refereeRoutes);
 	app.use('/api/', mainRoutes);
@@ -118,6 +116,7 @@ function startServer() {
 		res.sendFile(__dirname  + '/public/index.html');
 	});
 
+	var server = require('http').createServer();
 	server.on('request', app);
 	server.listen(app.get('port'), function () {
 		console.log( 'Express запущен на http://localhost:' +

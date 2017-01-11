@@ -5,3 +5,4 @@ cfg/ssl
 bundle.js
 *.log
 test/gui/tools
+*.rdb
