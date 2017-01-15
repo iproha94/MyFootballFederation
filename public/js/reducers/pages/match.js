@@ -1,6 +1,7 @@
 import {
-    GET_MATCH, 
-    ADD_EVENT_IN_LOG
+    GET_MATCH,
+    ADD_EVENT_IN_LOG,
+    DEL_EVENT_IN_LOG
 }  from '../../constants';
 
 const initialState = {
@@ -37,6 +38,12 @@ export default function(state = initialState, action) {
         case ADD_EVENT_IN_LOG:
             var newState = {...state};
             newState.events.push(action.payload);
+            return newState;
+        case DEL_EVENT_IN_LOG:
+            var newState = {...state};
+            newState.events = newState.events.filter(obj => {
+                return obj.idAction !== -action.payload.idAction;
+            });
             return newState;
         default:
             return state;

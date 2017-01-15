@@ -14,6 +14,7 @@ var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 
 var wss = new WebSocketServer({port: front.port});
+console.log("WebSocketServer запущен на порту: " + front.port);
 
 router.post('/get-my-matches', function(req, res, next) {
     if (!req.body.idVk) {
@@ -147,12 +148,16 @@ router.post('/set-info', function(req, res, next) {
             case Match.EVENT.OWN_GOAL.name:
             case Match.EVENT.YELLOW_CARD.name:
             case Match.EVENT.RED_CARD.name:
+            case Match.EVENT.ASSIST.name:
                 event.idTeam = req.body.idTeam;
                 event.idPlayer = req.body.idPlayer;
                 event.teamName = req.body.teamName;
                 event.playerName = req.body.playerName;
                 break;
+        }
 
+        if (idEvent == Match.EVENT.ASSIST.name) {
+            event.idParentAction = req.body.idParentAction;
         }
 
         match.events.push(event);
@@ -170,6 +175,38 @@ router.post('/set-info', function(req, res, next) {
         });
     });
 });
+
+router.post('/del-info', function(req, res) {
+    let idMatch = req.body.idMatch;
+    let idAction = req.body.idAction;
+
+    if (!idMatch || isNaN(idAction)) {
+        return res.status(400).json(null);
+    }
+
+    Match.findById(idMatch, function (err, match) {
+        if (err || !match) {
+            return res.status(404).json(null);
+        }
+
+        match.events = match.events.filter(obj => {
+            return obj.idAction !== idAction;
+        });
+
+        wss.clients.forEach(function each(client) {
+            client.send(JSON.stringify({idAction: -idAction}));
+        });
+
+        match.save(function (err) {
+            if (err) {
+                return res.status(500).json(null);
+            }
+
+            return res.status(200).json(null);
+        });
+    });
+});
+
 
 router.get('/add-referee', function(req, res, next) {
     User.findById(req.query.idSend, function (err, user) {

@@ -2,6 +2,7 @@ import {
     GET_MATCH,
     GET_MATCHES_IN_STAGE,
     ADD_EVENT_IN_LOG,
+    DEL_EVENT_IN_LOG,
     ROUTING
 } from '../../constants';
 
@@ -43,6 +44,15 @@ export function addEventInLog(object) {
     return (dispatch, getState) => {
         return dispatch({
             type: ADD_EVENT_IN_LOG,
+            payload: object
+        });
+    };
+}
+
+export function delEventInLog(object) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: DEL_EVENT_IN_LOG,
             payload: object
         });
     };

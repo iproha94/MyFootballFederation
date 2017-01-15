@@ -46,5 +46,17 @@ module.exports = {
         name: "RED_CARD",
         image: "/img/png/128/Red-Card.png",
         title: "Красная карточка"
+    },
+    ASSIST : {
+        value: 8,
+        name: "ASSIST",
+        image: "/img/png/128/Kick.png",
+        title: "Голевой пас"
+    },
+    MIN : {
+        value: 9,
+        name: "MIN",
+        // image: "/img/png/128/Kick.png",
+        title: "Минута матча"
     }
 };

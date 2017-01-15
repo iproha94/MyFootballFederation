@@ -19,6 +19,7 @@ var matchSchema = new Schema({
         realTime: Date,
         minute: Number,
         idAction: Number,
+        idParentAction: Number,
     }],
     players1: [],
     players2: []

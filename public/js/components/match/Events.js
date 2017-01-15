@@ -13,7 +13,11 @@ var Component = React.createClass({
         // обработчик входящих сообщений
         this.ws.onmessage = (event) => {
             var incomingMessage = JSON.parse(event.data);
-            this.props.matchActions.addEventInLog(incomingMessage);
+            if (incomingMessage.idAction < 0) {
+                this.props.matchActions.delEventInLog(incomingMessage);
+            } else {
+                this.props.matchActions.addEventInLog(incomingMessage);
+            }
         };
 
         this.ws.onclose = (event) => {
@@ -44,14 +48,13 @@ var Component = React.createClass({
     },
     render: function () {
         var events = this.props.match.events.map(function (item, index) {
+            //TODO Warning
             var event = eventsData[item.idEvent];
 
             return (
                 <li className="collection-item avatar" key={index}>
                     <img src={event.image} alt="" className="circle"/>
-                    <span className="title">
-                        {event.title}
-                    </span>
+                    <span className="title">{event.title}</span>
                     <p> {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}</p>
                     <p> {item.idTeam ? `Команда: ${item.teamName}` : null}</p>
                     <p className="hide-on-large-only"> Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()} </p>
@@ -78,7 +81,7 @@ var Component = React.createClass({
 
         return (
             <div>
-                <h5 className="center"> {events.length != 0 ? "Матч прошел " + new Date(this.props.match.events[0].realTime).toLocaleDateString() : ""} </h5>
+                <h5 className="center"> {events.length != 0 ? "Дата матча " + new Date(this.props.match.events[0].realTime).toLocaleDateString() : ""} </h5>
                 <h4 className="center"> {events.length != 0 ? "Счет " + numGoalsTeam1 + ":" + numGoalsTeam2 : ""} </h4>
 
                 {events.length ?
