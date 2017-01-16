@@ -1,6 +1,7 @@
 import React from 'react';
 import Tournaments from '../components/federation/Tournaments';
 import Info from '../components/federation/Info';
+import Stream from '../components/federation/Stream';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as federationActions from '../actions/federation';
@@ -38,6 +39,7 @@ var Component = React.createClass({
                         <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
                         <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
                         <li className="tab col s3"><a href="#tab-id-3" className="js-link">Организаторы</a></li>
+                        <li className="tab col s3"><a href="#tab-id-4" className="js-link">Видеотрансляция</a></li>
                     </ul>
                 </div>
                 
@@ -46,13 +48,19 @@ var Component = React.createClass({
                           currentUser={this.props.currentUser}
                           getFederationInfo={this.props.federationActions.getFederationInfo}/>
                 </div>
+
                 <div id="tab-id-2" className="col s12 card">
                     <Tournaments federation={this.props.federation}
                                  history={this.props.history}
                                  tournaments={this.props.tournaments}/>
                 </div>
+
                 <div id="tab-id-3" className="col s12 card">
                     Организаторы
+                </div>
+
+                <div id="tab-id-4" className="col s12 card">
+                    <Stream federation={this.props.federation} />
                 </div>
             </div>
         );
