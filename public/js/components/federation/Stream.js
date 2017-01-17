@@ -6,9 +6,9 @@ export default React.createClass({
     componentWillReceiveProps: function(nextProps) {
         var playerInstance = jwplayer("myElement");
         playerInstance.setup({
-            file: `http://${front.ip}:${front.streamPort}/hls/${nextProps.channel}.m3u8`,
-            hlshtml: true
-            // file: `rtmp://192.168.0.38:1935/mytv/${nextProps.channel}`
+            // file: `http://${front.ip}:${front.streamPort}/hls/${nextProps.channel}.m3u8`,
+            // hlshtml: true
+            file: `rtmp://${front.ip}:1935/mytv/${nextProps.channel}`
         });
     },
     render: function () {
