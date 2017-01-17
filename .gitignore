@@ -1,7 +1,7 @@
 node_modules
 cfg/credentials.js
 cfg/ssl
-cfg/front2.js
+cfg/front.js
 .idea
 bundle.js
 *.log
