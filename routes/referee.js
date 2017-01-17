@@ -13,8 +13,8 @@ var Team = require('../models/team');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 
-var wss = new WebSocketServer({port: front.port});
-console.log("WebSocketServer запущен на порту: " + front.port);
+var wss = new WebSocketServer({port: front.websocketPort});
+console.log("WebSocketServer запущен на порту: " + front.websocketPort);
 
 router.post('/get-my-matches', function(req, res, next) {
     if (!req.body.idVk) {

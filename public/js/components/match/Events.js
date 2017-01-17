@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as matchActions from '../../actions/match';
 import {bindActionCreators} from 'redux';
-var port = require("../../../../cfg/front").port;
+var websocketPort = require("../../../../cfg/front").websocketPort;
 var eventsData = require('../../../../cfg/matchEvents');
 
 var Component = React.createClass({
     createWS : function () {//TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
         // создать подключение
-        this.ws = new WebSocket("ws://" + document.domain + ":" + port);
+        this.ws = new WebSocket("ws://" + document.domain + ":" + websocketPort);
 
         // обработчик входящих сообщений
         this.ws.onmessage = (event) => {

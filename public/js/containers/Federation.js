@@ -40,7 +40,7 @@ var Component = React.createClass({
                         <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
                         <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
                         <li className="tab col s3"><a href="#tab-id-3" className="js-link">Организаторы</a></li>
-                        <li className="tab col s3"><a href="#tab-id-4" className="js-link">Видеотрансляция</a></li>
+                        <li className="tab col s3"><a href="#tab-id-4" className="js-link">Прямой эфир</a></li>
                     </ul>
                 </div>
                 
