@@ -24,6 +24,7 @@ var Component = React.createClass({
     },
     render: function () {
         var federation = this.props.federation;
+        var channel = String(this.props.federation._id).substring(19);
 
         return (
             <div className="row">
@@ -60,7 +61,7 @@ var Component = React.createClass({
                 </div>
 
                 <div id="tab-id-4" className="col s12 card">
-                    <Stream federation={this.props.federation} />
+                    <Stream channel={channel} />
                 </div>
             </div>
         );
