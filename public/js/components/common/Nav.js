@@ -12,7 +12,7 @@ var Component = React.createClass({
             <nav className="light-green darken-2 header-position" role="navigation">
                 <div className="truncate nav-wrapper container">
                     <Link id="logo-container" to="/" className="brand-logo">
-                        <img src="/footmanball.png" className="logo-image"/>
+                        <img src="/img/logo.png" className="logo-image"/>
                         Footman
                     </Link>
 

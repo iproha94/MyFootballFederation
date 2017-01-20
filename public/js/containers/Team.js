@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as teamActions from '../actions/team';
 import VusersList from '../components/team/VusersList';
 import CreateVuser from '../components/team/CreateVuser';
+import Setting from '../components/team/Setting';
 
 var Component = React.createClass({
     componentDidMount: function() {
@@ -17,20 +18,23 @@ var Component = React.createClass({
     },
     render: function () {
         let isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
+        let logo = `/uploaded/team/logo/${this.props.team._id}.png`;
+        let banner = `/uploaded/team/banner/${this.props.team._id}.png`;
 
         return (
             <div>
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
-                        <img src="http://www.bailoy.com/wp-content/uploads/2016/03/slide2.jpg"/>
+                        <img src={banner}/>
                         <span className="card-title tournament_card-title">
                             Страница команды {this.props.team.name}
                         </span>
                     </div>
 
                     <ul className="tabs tabs-fixed-width">
-                        <li className="tab col s6"><a href="#players">Игроки</a></li>
-                        <li className="tab col s6"><a href="#matches">Матчи</a></li>
+                        <li className="tab col s4"><a href="#players">Игроки</a></li>
+                        <li className="tab col s4"><a href="#matches">Матчи</a></li>
+                        <li className="tab col s4"><a href="#setting">Настройка</a></li>
                     </ul>
                 </div>
 
@@ -47,6 +51,10 @@ var Component = React.createClass({
 
                 <div id="matches" className="col s12 card">
                     здесь будут матчи
+                </div>
+
+                <div id="setting" className="col s12 card">
+                    <Setting />
                 </div>
             </div>
         )

@@ -307,3 +307,22 @@ body{
         margin-top: auto;
     }
 }
+
+.match_logo1 {
+    left: -120px;
+    top: 25px;
+    width: 50px;
+}
+
+.match_logo2 {
+    left: -120px;
+    top: 25px;
+    width: 50px;
+}
+
+.match_banner {
+    left: -120px;
+    top: 25px;
+}
+
+.match IMG  { position: relative; }
