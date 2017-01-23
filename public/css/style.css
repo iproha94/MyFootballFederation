@@ -309,20 +309,19 @@ body{
 }
 
 .match_logo1 {
-    left: -120px;
-    top: 25px;
-    width: 50px;
+    width: 25% !important;
+    position: absolute  !important; /* Абсолютное позиционирование */
+    top: 10%  !important;
+    left: 20%  !important;
 }
 
 .match_logo2 {
-    left: -120px;
-    top: 25px;
-    width: 50px;
+    width: 25% !important;
+    position: absolute  !important; /* Абсолютное позиционирование */
+    top: 10%  !important;
+    left: 60%  !important;
 }
 
-.match_banner {
-    left: -120px;
-    top: 25px;
-}
+.my-teams_banner-team {
 
-.match IMG  { position: relative; }
+}

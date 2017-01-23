@@ -47,22 +47,30 @@ var Component = React.createClass({
         }
     },
     render: function () {
-        var events = this.props.match.events.map(function (item, index) {
-            //TODO Warning
-            var event = eventsData[item.idEvent];
+        var events = this.props.match.events
+            .filter((item) => {
+                return item.idEvent != eventsData.MIN.name
+                    && item.idEvent != eventsData.TIME_FINISHED.name
+                    && item.idEvent != eventsData.TIME_STARTED.name
+                    && item.idEvent != eventsData.MATCH_FINISHED.name
+                    && item.idEvent != eventsData.MATCH_STARTED.name;
+            })
+            .map(function (item, index) {
+                //TODO Warning
+                var event = eventsData[item.idEvent];
 
-            return (
-                <li className="collection-item avatar" key={index}>
-                    <img src={event.image} alt="" className="circle"/>
-                    <span className="title">{event.title}</span>
-                    <p> {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}</p>
-                    <p> {item.idTeam ? `Команда: ${item.teamName}` : null}</p>
-                    <p className="hide-on-large-only"> Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()} </p>
+                return (
+                    <li className="collection-item avatar" key={index}>
+                        <img src={event.image} alt="" className="circle"/>
+                        <span className="title">{event.title}</span>
+                        <p> {item.idPlayer ? `Игрoк: ${item.playerName} ` : null}</p>
+                        <p> {item.idTeam ? `Команда: ${item.teamName}` : null}</p>
+                        <p className="hide-on-large-only"> Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()} </p>
 
-                    <span className="secondary-content hide-on-med-and-down">Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()}</span>
-                </li>
-            );
-        });
+                        <span className="secondary-content hide-on-med-and-down">Минута: {item.minute}; Время: {new Date(item.realTime).toLocaleTimeString()}</span>
+                    </li>
+                );
+            });
 
         let numGoalsTeam1 = 0;
         let numGoalsTeam2 = 0;
@@ -76,20 +84,35 @@ var Component = React.createClass({
 
             if (item.idEvent == eventsData.OWN_GOAL.name && item.idTeam == idTeam1) numGoalsTeam2++;
             if (item.idEvent == eventsData.OWN_GOAL.name && item.idTeam == idTeam2) numGoalsTeam1++;
-
         });
+
+        let lastEvent = this.props.match.events[this.props.match.events.length - 1];
 
         return (
             <div>
-                <h5 className="center"> {events.length != 0 ? "Дата матча " + new Date(this.props.match.events[0].realTime).toLocaleDateString() : ""} </h5>
-                <h4 className="center"> {events.length != 0 ? "Счет " + numGoalsTeam1 + ":" + numGoalsTeam2 : ""} </h4>
+                <h5 className="center"> {lastEvent
+                && lastEvent.idEvent != eventsData.MATCH_FINISHED.name
+                && lastEvent.idEvent != eventsData.TIME_FINISHED.name
+                    ? "Идет " + lastEvent.minute + " минута" : ""} </h5>
+
+                <h5 className="center"> {lastEvent
+                && lastEvent.idEvent != eventsData.MATCH_FINISHED.name
+                && lastEvent.idEvent == eventsData.TIME_FINISHED.name
+                    ? "перерыв" : ""} </h5>
+
+                <h5 className="center"> {lastEvent && lastEvent.idEvent == eventsData.MATCH_FINISHED.name
+                    ? "Матч прошел " + new Date(lastEvent.realTime).toLocaleDateString() : ""} </h5>
+
+                <h5 className="center"> {!lastEvent
+                    ? "Матч еще не начался"
+                    : "Счет " + numGoalsTeam1 + ":" + numGoalsTeam2} </h5>
 
                 {events.length ?
                     <ul className="collection">
                         {events.reverse()}
                     </ul>
                     :
-                    <h5>Матч еще не начался</h5>
+                    <h5>Событий в матче пока нет</h5>
                 }
             </div>
         )

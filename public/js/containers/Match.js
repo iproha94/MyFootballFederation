@@ -10,7 +10,6 @@ import ListVusers from '../components/common/ListVusers';
 import ModalWindow from '../components/common/ModalWindow';
 import Players from '../components/match/Players';
 
-
 var Component = React.createClass({
     componentDidMount: function() {
         $('ul.tabs').tabs();
@@ -29,14 +28,14 @@ var Component = React.createClass({
                 <div className="row">
                     <div className="col s12 card padding-enabled">
                         <div className="card-image">
-                            {/*<div class="match">*/}
-                                <img src="/img/match-default-banner.jpg" class="match_banner"/>
-                                {/*<img src={logo1}  class="match_logo1" />*/}
-                                {/*<img src={logo2}  class="match_logo2" />*/}
-                            {/*</div>*/}
+                            <div className="match">
+                                <img src="/img/match-default-banner.jpg" className="match_banner"/>
+                                <img src={logo1}  className="match_logo1" />
+                                <img src={logo2}  className="match_logo2" />
+                            </div>
                             <span className="card-title tournament_card-title">
-                            Страница матча {this.props.match.name}
-                        </span>
+                                Страница матча {this.props.match.name}
+                            </span>
                         </div>
 
                         <ul className="tabs tabs-fixed-width">

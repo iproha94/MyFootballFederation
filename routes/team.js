@@ -4,15 +4,22 @@ var Team = require('../models/team');
 var Tournament = require('../models/tournament');
 var Vuser = require('../models/vuser');
 var async = require('async');
+var formidable = require('formidable' );
 
 router.post('/create', function(req, res, next) {
     var team = new Team({
-        name: req.body.name,
-        city: req.body.city,
+        name: req.body.name.trim(),
+        city: req.body.city.trim(),
         creators: [req.user._id],
         players: [],
         player_requests: []
     });
+
+    if (team.name.length == 0 || team.city.length == 0 ) {
+        return res.status(400).json({
+            message: "ошибка"
+        });
+    }
 
     team.save(function (err) {
         if(err) {
@@ -26,6 +33,33 @@ router.post('/create', function(req, res, next) {
             payload: team
         });
     });
+});
+
+//TODO
+router.post('/add-banner', function(req, res, next) {
+    console.log('start recv banner' + req.body.team);
+
+    var form = new formidable.IncomingForm();
+
+    form.parse(req, function(err, fields, files) {
+        console.log('parse' );
+
+        if (err) {
+            console.log('500' );
+            return res.status(500).json(null);
+        }
+
+        console.log('received fields:' );
+        console.log(fields);
+
+        console.log('received files:' );
+        console.log(files);
+
+        console.log('200' );
+        return res.status(200).json(null);
+    });
+
+    console.log('finish recv banner' + req.body.team);
 });
 
 router.post('/add-vuser', function(req, res, next) {

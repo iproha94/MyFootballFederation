@@ -7,6 +7,9 @@ import CreateVuser from '../components/team/CreateVuser';
 import Setting from '../components/team/Setting';
 
 var Component = React.createClass({
+    getInitialState: function() {
+        return {srcTeamBanner: '/img/my-teams.jpg'};
+    },
     componentDidMount: function() {
         $('ul.tabs').tabs();
         this.props.teamActions.getTeamInfo(this.props.params.idTeam);
@@ -15,17 +18,21 @@ var Component = React.createClass({
         if(this.props.params.idTeam !== nextProps.params.idTeam) {
             this.props.teamActions.getTeamInfo(nextProps.params.idTeam);
         }
+
+        this.setState({srcTeamBanner: `/uploaded/team/banner/` + nextProps.team._id + `.png`});
+    },
+    teamBannerNotFound: function() {
+        this.setState({srcTeamBanner: '/img/my-teams.jpg'});
     },
     render: function () {
         let isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
-        let logo = `/uploaded/team/logo/${this.props.team._id}.png`;
-        let banner = `/uploaded/team/banner/${this.props.team._id}.png`;
 
         return (
             <div>
                 <div className="col s12 card padding-enabled">
                     <div className="card-image">
-                        <img src={banner}/>
+                        <img src={this.state.srcTeamBanner} onError={this.teamBannerNotFound}/>
+
                         <span className="card-title tournament_card-title">
                             Страница команды {this.props.team.name}
                         </span>
@@ -54,7 +61,7 @@ var Component = React.createClass({
                 </div>
 
                 <div id="setting" className="col s12 card">
-                    <Setting />
+                    <Setting team={this.props.team} />
                 </div>
             </div>
         )

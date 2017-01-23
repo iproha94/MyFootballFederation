@@ -37,7 +37,11 @@ export default React.createClass({
                         <h4>Создание игрока</h4>
 
                         <div className="row">
-                            <form className="col s12 js-form create__padding js-form" ref="form" method="post" onSubmit={this.handleSubmit}>
+                            <form className="col s12 js-form create__padding js-form"
+                                  ref="form"
+                                  method="post"
+                                  onSubmit={this.handleSubmit}>
+
                                 <input name="team" value={this.props.team._id} type="hidden"/>
 
                                 <div className="row">

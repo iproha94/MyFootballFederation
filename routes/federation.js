@@ -14,10 +14,16 @@ router.post('/create', function(req, res, next) {
     }
 
     var federation = new Federation({
-        name: req.body.name,
-        city: req.body.city,
+        name: req.body.name.trim(),
+        city: req.body.city.trim(),
         creators: [req.user._id]
     });
+
+    if (federation.name.length == 0 || federation.city.length == 0) {
+        return res.status(400).json({
+            message: "ошибка"
+        });
+    }
 
     federation.save(function (err) {
         if(err) {

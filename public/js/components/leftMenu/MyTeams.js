@@ -3,10 +3,24 @@ import {Link} from 'react-router';
 import CreateTeam from './CreateTeam';
 
 export default React.createClass({
+    getInitialState: function() {
+        return {nowTeamBanner: '/img/my-teams.jpg'};
+    },
+    setTeamBanner: function(id) {
+        this.setState({nowTeamBanner: `/uploaded/team/banner/` + id + `.png`});
+    },
+    resetTeamBanner: function() {
+        this.setState({nowTeamBanner: '/img/my-teams.jpg'});
+    },
     render: function () {
         var myTeams = this.props.teams.map((item) => {
+            let boundSetTeamBanner = this.setTeamBanner.bind(this, item._id);
             return (
-                <Link key={item._id} to={"/team/" + item._id} className="truncate collection-item">
+                <Link key={item._id}
+                      onMouseLeave={this.resetTeamBanner}
+                      onMouseEnter={boundSetTeamBanner}
+                      to={"/team/" + item._id}
+                      className="truncate collection-item">
                     {item.name}
                 </Link>
             )
@@ -14,7 +28,7 @@ export default React.createClass({
         return (
             <div className="card">
                 <div className="card-image">
-                    <img src="/img/my-teams.jpg" />
+                    <img src={this.state.nowTeamBanner} onError={this.resetTeamBanner} className="my-teams_banner-team"/>
                     <span className="card-title tournament_card-title">Мои команды</span>
                 </div>
 
