@@ -1,7 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-export default React.createClass({
+export default {
     componentDidMount: function () {
         var script = document.createElement("script");
         script.src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js";
@@ -35,17 +32,5 @@ export default React.createClass({
             script.src = "/js/lib/materialize.js";
             document.body.appendChild(script);
         };
-    },
-    render: function () {
-        return (
-            <form className={`js-form-search ${this.props.classes}`} ref="form" >
-                <div className="input-field">
-                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete search" autocomplete="off" required/>
-                    <label for="search"><i className="material-icons search_icon__margin">search</i></label>
-                    <i className="material-icons search_icon__margin">close</i>
-                </div>
-            </form>
-        );
     }
-});
-
+};

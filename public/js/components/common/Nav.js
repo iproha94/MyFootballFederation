@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import Search from './Search';
+import NavBarSearch from './Search/NavBarSearch';
+import NavSideSearch from './Search/NavSideSearch';
 
 var Component = React.createClass({
     render: function () {
@@ -41,6 +42,12 @@ var Component = React.createClass({
                             </div>
                         </li>
 
+                        <li>
+                            <NavSideSearch history={this.props.history}
+                                           url="/federation/"
+                                           placeholder="Поиск федераций"/>
+                        </li>
+
                         {isAuthenticated ? (
                             <li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>
                         ) : [
@@ -62,10 +69,9 @@ var Component = React.createClass({
                         <i className="material-icons">menu</i>
                     </a>
 
-                    <Search classes="federation-search right hide-on-med-and-down"
-                            history={this.props.history}
-                            url="/federation/"
-                            placeholder="Поиск федераций"/>
+                    <NavBarSearch history={this.props.history}
+                                  url="/federation/"
+                                  placeholder="Поиск федераций"/>
                 </div>
             </nav>
         )

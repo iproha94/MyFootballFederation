@@ -325,3 +325,21 @@ body{
 .my-teams_banner-team {
 
 }
+
+.nav-side-search {
+    margin-left: 4px;
+    margin-right: 4px;
+    height: 44px;
+}
+
+.nav-side-search_input {
+    color: #444;
+}
+
+.nav-side-search_icons {
+    margin-top: -10px;
+}
+
+.nav-side-search_icons__color {
+    color: #444 !important;
+}

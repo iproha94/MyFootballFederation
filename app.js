@@ -12,7 +12,8 @@ function startServer() {
 	var tournamentRoutes = require('./routes/tournament');
 	var federationRoutes = require('./routes/federation');
 	var refereeRoutes = require('./routes/referee');
-
+	var os = require('os');
+	
 	var app = express();
 
 	app.set('port', process.env.PORT || credentials.port || 8080);
@@ -53,7 +54,7 @@ function startServer() {
 	var RedisStore = require('connect-redis')(session);
 
 	app.use(session({
-		store: new RedisStore({ host: 'localhost', port: 6379}),
+		store: os.platform() == "win32" ? undefined : new RedisStore({ host: 'localhost', port: 6379}),
 		resave: false,
 		saveUninitialized: false,
 		secret: credentials.cookieSecret,
