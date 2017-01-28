@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateFederation from './CreateFederation';
+import CreateFederationButton from './CreateFederationButton';
 import {Link} from 'react-router';
 
 export default React.createClass({
@@ -22,7 +22,7 @@ export default React.createClass({
                     {myFederations.length ? myFederations : ""}
                 </div>
 
-                <CreateFederation history={this.props.history}/>
+                <CreateFederationButton/>
             </div>
         )
     }

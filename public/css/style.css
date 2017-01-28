@@ -161,6 +161,8 @@ body{
 
 .width-fullscreen{
     width: 100%;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
 }
 
 .padding-enabled{
@@ -343,3 +345,11 @@ body{
 .nav-side-search_icons__color {
     color: #444 !important;
 }
+
+@media only screen and (min-width: 601px) and (max-width: 993px) {
+    .m-padding {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+}
+

@@ -33,9 +33,6 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <a id="create-team-btn" onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
-                   href="#modal-team">Создать</a>
-
                 <div id="modal-team" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>Создание команды</h4>

@@ -5,9 +5,6 @@ import {bindActionCreators} from 'redux';
 import ReactDOM from 'react-dom';
 
 var Component = React.createClass({
-    componentDidMount: function(){
-        $('.modal-trigger').leanModal();
-    },
     onClickModalAction: function(event) {
         event.preventDefault();
         $.ajax({
@@ -33,9 +30,6 @@ var Component = React.createClass({
     render: function () {
         return (
             <div>
-                <a id="create-federation-btn" onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
-                   href="#modal-federation">Создать</a>
-
                 <div id="modal-federation" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>Создание Федерации</h4>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import CreateTeam from './CreateTeam';
+import CreateTeamButton from './CreateTeamButton';
 
 export default React.createClass({
     getInitialState: function() {
@@ -36,7 +36,7 @@ export default React.createClass({
                     {myTeams.length ? myTeams : ""}
                 </div>
 
-                <CreateTeam history={this.props.history}/>
+                <CreateTeamButton/>
             </div>
         )
     }
