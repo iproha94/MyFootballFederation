@@ -5,6 +5,7 @@ var Tournament = require('../models/tournament');
 var Vuser = require('../models/vuser');
 var async = require('async');
 var formidable = require('formidable' );
+var fs = require('fs');
 
 router.post('/create', function(req, res, next) {
     var team = new Team({
@@ -35,36 +36,54 @@ router.post('/create', function(req, res, next) {
     });
 });
 
-//TODO
+
 router.post('/add-banner', function(req, res, next) {
-    console.log('start recv banner' + req.body.team);
+    if(!req.user) {
+        return res.status(403).json(null);
+    }
 
     var form = new formidable.IncomingForm();
+    form.uploadDir = "uploaded/team";
 
     form.parse(req, function(err, fields, files) {
-        console.log('parse' );
-
         if (err) {
-            console.log('500' );
+            console.log('500');
             return res.status(500).json(null);
         }
 
-        console.log('received fields:' );
-        console.log(fields);
+        Team.findById(fields.team, function (err, team) {
+            if (err || !team) {
+                return next();
+            }
+            if(team.creators.some((item) =>
+                    item.equals(req.user._id)
+                )){
+                if(files.banner.size) {//TODO нужно найти более правильный способ проверки пришел ли файл
+                    fs.renameSync(files.banner.path,
+                        `${form.uploadDir}/banner/${fields.team}.png`);
+                } else {
+                    fs.unlink(files.banner.path);
+                }
+                if(files.logo.size) {
+                    fs.renameSync(files.logo.path,
+                        `${form.uploadDir}/logo/${fields.team}.png`);
+                } else {
+                    fs.unlink(files.logo.path);
+                }
 
-        console.log('received files:' );
-        console.log(files);
+                return res.status(200).json(null);
+            }
 
-        console.log('200' );
-        return res.status(200).json(null);
+            fs.unlink(files.banner.path);
+            fs.unlink(files.logo.path);
+            return res.status(403).json(null);
+        });
     });
-
-    console.log('finish recv banner' + req.body.team);
 });
 
 router.post('/add-vuser', function(req, res, next) {
     var vuser = new Vuser({
-        name: req.body.firstName + " " + req.body.lastName,
+        name: req.body.firstName + " " + req.body.lastName
     });
 
     var promise = vuser.save(function (err) {

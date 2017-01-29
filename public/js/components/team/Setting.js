@@ -4,13 +4,18 @@ import ReactDOM from 'react-dom';
 export default React.createClass({
     sendTeamBanner: function(event) {
         event.preventDefault();
+        var form = ReactDOM.findDOMNode(this.refs.form);
+        var formData = new FormData(form);
         $.ajax({
             method: 'POST',
-            contentType: 'multipart/form-data',
-            data:$(ReactDOM.findDOMNode(this.refs.form)).serialize(),
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
             url: "/api/team/add-banner",
             success: (data) => {
-                $(ReactDOM.findDOMNode(this.refs.form))[0].reset();
+                $(form)[0].reset();
                 Materialize.toast(data.message || "Операция прошла успешно", 2000);
             },
             error: (jqXHR, textStatus, errorThrown) => {
@@ -22,23 +27,53 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <h4>Баннер: </h4>
                 <form ref="form"
-                      method="post"
-                      onSubmit={this.handleSubmit}>
+                      className="col s12"
+                      onSubmit={this.sendTeamBanner}>
 
                     <input name="team" value={this.props.team._id} type="hidden"/>
 
-                    <input type="file"
-                           className="form-control"
-                           required
-                           accept="image/*"
-                           id="fieldPhoto"
-                           name="banner" />
+                    <div className="row">
+                        <div className="file-field input-field col s12">
+                            <div className="btn">
+                                <span>Баннер</span>
+                                <input type="file"
+                                       className="form-control"
+                                       accept="image/*"
+                                       id="fieldPhoto"
+                                       name="banner" />
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input className="file-path validate" type="text" name="img-name"/>
+                            </div>
+                        </div>
+                    </div>
 
-                    <input type="submit" value="Upload" onClick={this.sendTeamBanner}/>
+
+                    <div className="row">
+                        <div className="file-field input-field col s12">
+                            <div className="btn">
+                                <span>Лого</span>
+                                <input type="file"
+                                       className="form-control"
+                                       accept="image/*"
+                                       id="fieldPhoto"
+                                       name="logo" />
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input className="file-path validate" type="text" name="img-name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col s12 right-align">
+                            <button className="btn waves-effect waves-light" type="submit" name="action">Отправить
+                                <i className="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
-
             </div>
         );
     }
