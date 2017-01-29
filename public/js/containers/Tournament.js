@@ -6,6 +6,7 @@ import * as stageActions from '../actions/stage';
 import * as teamActions from '../actions/team';
 import List from '../components/common/List';
 import TeamsList from '../components/tournament/TeamsList';
+import CreateStage from '../components/tournament/CreateStage';
 import {Link} from 'react-router';
 import TeamsWindow from '../components/tournament/TeamsWindow';
 
@@ -57,12 +58,7 @@ var TournamentPage = React.createClass({
                           list={this.props.stages}/>
 
                     {!this.props.tournament.isAdmin ? null :
-                        <div className="row right-align">
-                            <Link className="waves-effect waves-light btn"
-                                  to={"/stage/create/?tournament=" + this.props.tournament._id}>
-                                Создать этап
-                            </Link>
-                        </div>
+                            <CreateStage tournamentId={this.props.tournament._id}/>
                     }
                 </div>
 

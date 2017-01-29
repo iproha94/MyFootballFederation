@@ -14,33 +14,9 @@ import Account from './containers/Account';
 import UsersList from './containers/UsersList';
 import Federation from './containers/Federation';
 import Match from './containers/Match';
-import CreateStage from './containers/CreateStage';
 import Forbidden from './containers/Forbidden';
 
 const store = configureStore();
-
-function requireAuth(store) {
-    return (nextState, replace, callback) => {
-        var currentUser = store.getState().currentUser;
-        if(!currentUser._id) {
-            fetch("/api/is-authenticated", {
-                credentials: 'include'
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status == 500) {
-                        replace("/forbidden");
-                    }
-                    callback();
-                })
-                .catch(error => {
-                    callback(error);
-                });
-        } else {
-            callback();
-        }
-    };
-}
 
 ReactDOM.render(
     <Provider store={store}>
@@ -49,7 +25,6 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
                 <Route path='forbidden' component={Forbidden} />
-                <Route path='stage/create' component={CreateStage} onEnter={requireAuth(store)}/>
                 <Route path='team/:idTeam' component={Team} />
                 <Route path='match/:idMatch' component={Match} />
                 <Route path='account/:idUser' component={Account} />
