@@ -4,6 +4,8 @@ var Federation = require('../models/federation');
 var Tournament = require('../models/tournament');
 var Match = require('../models/match');
 var User = require('../models/user');
+var formidable = require('formidable' );
+var fs = require('fs');
 
 router.post('/create', function(req, res, next) {
     if (!req.isAuthenticated())  {
@@ -116,6 +118,46 @@ router.get(['/subscribe/:name', '/unsubscribe/:name'], function(req, res, next) 
             res.json({
                 message: "ОК"
             });
+        });
+    });
+});
+
+
+
+router.post('/add-banner', function(req, res, next) {
+    if(!req.user) {
+        return res.status(403).json(null);
+    }
+
+    var form = new formidable.IncomingForm();
+    form.uploadDir = "uploaded/federation";
+
+    form.parse(req, function(err, fields, files) {
+        if (err) {
+            console.log('500');
+            return res.status(500).json(null);
+        }
+
+        console.log(files, fields);
+        Federation.findById(fields.federation, function (err, federation) {
+            if (err || !federation) {
+                return next();
+            }
+            if(federation.creators.some((item) =>
+                    item.equals(req.user._id)
+                )){
+                if(files.banner.size) {
+                    fs.renameSync(files.banner.path,
+                        `${form.uploadDir}/banner/${fields.federation}.png`);
+                } else {
+                    fs.unlink(files.banner.path);
+                }
+
+                return res.status(200).json(null);
+            }
+
+            fs.unlink(files.banner.path);
+            return res.status(403).json(null);
         });
     });
 });
