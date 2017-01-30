@@ -45,6 +45,11 @@ router.post('/add-banner', function(req, res, next) {
     var form = new formidable.IncomingForm();
     form.uploadDir = "uploaded/team";
 
+    //так плохо и некрасиво сделано потому что мы хотим
+    //задать имя файла из fields - а его можно получить только в этом методе
+    //+ по идее form.parse нужно вызывать после проверки того что 
+    //пользователь - капитан этой команды - но без вызова этого метода 
+    //мы никак не можем получить id команды
     form.parse(req, function(err, fields, files) {
         if (err) {
             console.log('500');
