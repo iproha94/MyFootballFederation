@@ -2,7 +2,8 @@ import {
     GET_USER_BY_ID,
     GET_CURRENT_USER,
     GET_ALL_USER,
-    ROUTING
+    ROUTING,
+    LOGOUT
 } from '../../constants';
 
 
@@ -35,6 +36,15 @@ export function getCurrentUser() {
             });
         });
     };
+}
+
+export function logout() {
+    return (dispatch, getState) => {
+        dispatch({
+            type: LOGOUT,
+            payload: {}
+        });
+    }
 }
 
 export function getAllUser() {

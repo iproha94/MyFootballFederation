@@ -1,15 +1,60 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
 import NavBarSearch from './Search/NavBarSearch';
 import NavSideSearch from './Search/NavSideSearch';
 import CreateTeamButton from '../leftMenu/CreateTeamButton';
 import CreateFederationButton from '../leftMenu/CreateFederationButton';
+import * as accountActions from '../../actions/user';
+
 
 var Component = React.createClass({
     componentDidMount: function () {
         $('.button-collapse').sideNav({
                 closeOnClick: true // Closes side-nav on <a> clicks
+        });
+    },
+    authOnClick: function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/auth/vkontakte",
+            dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true,
+                cors: false
+            },
+            crossDomain : true,
+            success: (data) => {
+                console.log(data);
+                this.props.accountActions.getCurrentUser();
+                Materialize.toast(data.message || "Вы успешно вошли", 2000);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
+        });
+    },
+    logoutOnClick: function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/logout",
+            dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true,
+                cors: false
+            },
+            crossDomain : true,
+            success: (data) => {
+                console.log(data);
+                this.props.accountActions.logout();
+                Materialize.toast(data.message || "Вы успешно вышли", 2000);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.log(jqXHR,textStatus,errorThrown);
+                Materialize.toast("Что то не так", 2000);
+            }
         });
     },
     render: function () {
@@ -39,9 +84,14 @@ var Component = React.createClass({
                     <ul className="right hide-on-med-and-down">
                         {isAuthenticated ? [
                             <li><Link to={linkAccountPage}>Профиль</Link></li>,
-                            <li><a href="/logout">Выйти</a></li>
+                            <li><a onClick={this.logoutOnClick}>Выйти</a></li>
                         ] :
-                            <li><a id="vk-auth-btn" className="waves-effect waves-light btn vk-color" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}>Войти через VK</a></li>
+                            <li><a id="vk-auth-btn"
+                                   className="waves-effect waves-light btn vk-color"
+                                   onClick={this.authOnClick}>
+                                    Войти через VK
+                                </a>
+                            </li>
                         }
                     </ul>
 
@@ -71,7 +121,12 @@ var Component = React.createClass({
                             <li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>
                         ) : [
                             <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect" href={"/auth/vkontakte?redirect=" + this.props.location.pathname}><i className="fa fa-vk fa-lg" aria-hidden="true"></i>Вконтакте</a></li>
+                            <li><a className="waves-effect"
+                                   onClick={this.authOnClick}>
+                                    <i className="fa fa-vk fa-lg" aria-hidden="true"></i>
+                                    Вконтакте
+                                </a>
+                            </li>
                         ]}
 
                         {!isAuthenticated ? null : [
@@ -90,7 +145,7 @@ var Component = React.createClass({
                         <li><a className="subheader">Дополнительно</a></li>
 
                         {isAuthenticated ? [
-                            <li><a className="waves-effect" href="/logout"><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
+                            <li><a className="waves-effect" onClick={this.logoutOnClick} ><i className="fa fa-bed fa-lg" aria-hidden="true"></i>Выйти</a></li>
                         ] : (
                             <li><a className="waves-effect" href="#!"><i className="fa fa-coffee fa-lg" aria-hidden="true"></i>Для соблюдения material</a></li>
                         )}
@@ -113,5 +168,8 @@ export default connect((state)=>{
     return {
         currentUser: state.currentUser
     }
+}, (dispatch)=>{
+    return {
+        accountActions: bindActionCreators(accountActions, dispatch)
+    }
 })(Component);
-

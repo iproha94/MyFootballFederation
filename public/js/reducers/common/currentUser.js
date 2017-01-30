@@ -2,7 +2,8 @@ import {
     GET_CURRENT_USER,
     GET_FEDERATIONS,
     ADD_FEDERATION_CURRENT_USER,
-    ADD_TEAM_CURRENT_USER
+    ADD_TEAM_CURRENT_USER,
+    LOGOUT
 }  from '../../constants';
 
 const initialState = {
@@ -33,6 +34,8 @@ export default function(state = initialState, action) {
             var newState = {...state};
             newState.teams.push(action.payload);
             return newState;
+        case LOGOUT:
+            return initialState;
         default:
             return state;
     }

@@ -26,3 +26,5 @@ export const GET_TEAMS_REQUESTS_IN_TOURNAMENT_BY_STAGE = 'GET_TEAMS_REQUESTS_IN_
 export const ROUTING = 'ROUTING';
 
 export const GET_DATABASE = 'GET_DATABASE';
+
+export const LOGOUT = 'LOGOUT';
