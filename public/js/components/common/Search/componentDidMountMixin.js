@@ -1,36 +1,37 @@
+var horsey = require("horsey");
+import ReactDOM from 'react-dom';
+
 export default {
     componentDidMount: function () {
-        var script = document.createElement("script");
-        script.src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js";
-        document.body.appendChild(script);
         var self = this;
-        script.onload = function () {
-            $('.js-form-search').submit(function (event) {
-                event.preventDefault();
-            });
-            $('input.autocomplete').autocomplete({
-                source: '/api/',
-                method: "POST",
-                select: function (event, ui) {
-                    self.props.history.push(self.props.url + ui.item.value);
-                    ui.item.value = '';
-                    event.target.blur();
-                },
-                open: function (event, ui) {
-                    $(".ui-menu-item-wrapper").replaceWith(function(index, oldHTML){
-                        return $("<a>").html(oldHTML)
-                            .addClass("collection-item ui-menu-item-wrapper green-text text-darken-1");
-                    });
-                    $(".ui-autocomplete:visible").css({top:"+=5"});
-                },
-                create: function(event, ui) {
-                    $(".ui-autocomplete").addClass("collection z-depth-1");
-                }
-            });
+        var input = ReactDOM.findDOMNode(this.refs.input);
+        horsey(input, {
+            noMatches: "Ничего не найдено",
+            source (data, done) {
+                $.ajax({
+                    url: '/api/',
+                    data: {term: data.input},
+                    success: (dataServer) => {
+                        done(null, [{
+                            list: dataServer
+                        }])
+                    }
+                });
 
-            var script = document.createElement("script");
-            script.src = "/js/lib/materialize.js";
-            document.body.appendChild(script);
-        };
+                var padding = 56;
+                $(".sey-container")
+                    .addClass("collection z-depth-1")
+                    .width($(input).width() + padding);
+            },
+            renderItem: function (li, suggestion) {
+                li.innerHTML = `<a class="collection-item ui-menu-item-wrapper green-text text-darken-1">
+                                ${suggestion}
+                                </a>`;
+                $(li).click(function (e) {
+                    self.props.history.push(self.props.url + suggestion);
+                    $(li).off("click");
+                });
+            }
+        });
     }
 };

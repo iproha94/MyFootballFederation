@@ -7,7 +7,7 @@ export default React.createClass({
         return (
             <form className={`js-form-search card nav-side-search`} ref="form" >
                 <div className="input-field">
-                    <input id="search" placeholder={this.props.placeholder} type="search" className="autocomplete nav-side-search_input" autocomplete="off" required/>
+                    <input id="search" placeholder={this.props.placeholder} type="search" ref="input" className="autocomplete nav-side-search_input" autocomplete="off" required/>
                     <label for="search"><i className="material-icons nav-side-search_icons nav-side-search_icons__color">search</i></label>
                     <i className="material-icons nav-side-search_icons">close</i>
                 </div>
