@@ -7,7 +7,8 @@ const initialState = {
     _id: "",
     vplayers: [],
     vplayersWithName: [],
-    creators: []
+    creators: [],
+    isAdmin: false
 };
 
 export default function(state = initialState, action) {

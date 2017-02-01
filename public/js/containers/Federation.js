@@ -25,8 +25,9 @@ var Component = React.createClass({
     },
     render: function () {
         var federation = this.props.federation;
+        var isAdmin = federation.isAdmin;
         var channel = String(this.props.federation._id).substring(19);
-
+        console.log("isAdmin", isAdmin);
         return (
             <div className="row">
                 <div className="col s12 card padding-enabled">
@@ -40,8 +41,10 @@ var Component = React.createClass({
                     <ul className="tabs tabs-fixed-width">
                         <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
                         <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
-                        <li className="tab col s3"><a href="#tab-id-3" className="js-link">Настройки</a></li>
-                        <li className="tab col s3"><a href="#tab-id-4" className="js-link">Прямой эфир</a></li>
+                        <li className="tab col s3"><a href="#tab-id-3" className="js-link">Прямой эфир</a></li>
+                        {!isAdmin ? null :
+                            <li className="tab col s3"><a href="#tab-id-4" className="js-link">Настройки</a></li>
+                        }
                     </ul>
                 </div>
                 
@@ -58,12 +61,14 @@ var Component = React.createClass({
                 </div>
 
                 <div id="tab-id-3" className="col s12 card">
-                    <Setting federationId={this.props.federation._id}/>
-                </div>
-
-                <div id="tab-id-4" className="col s12 card">
                     <Stream channel={channel} />
                 </div>
+
+                {!isAdmin? null:
+                    <div id="tab-id-4" className="col s12 card">
+                        <Setting federationId={this.props.federation._id}/>
+                    </div>
+                }
             </div>
         );
     }

@@ -26,7 +26,7 @@ var Component = React.createClass({
     },
     render: function () {
         let isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
-
+        let isAdmin = isOwnTeam;
         return (
             <div>
                 <div className="col s12 card padding-enabled">
@@ -41,7 +41,9 @@ var Component = React.createClass({
                     <ul className="tabs tabs-fixed-width">
                         <li className="tab col s4"><a href="#players">Игроки</a></li>
                         <li className="tab col s4"><a href="#matches">Матчи</a></li>
-                        <li className="tab col s4"><a href="#setting">Настройка</a></li>
+                        {!isAdmin ? null :
+                            <li className="tab col s4"><a href="#setting">Настройка</a></li>
+                        }
                     </ul>
                 </div>
 
@@ -60,9 +62,11 @@ var Component = React.createClass({
                     здесь будут матчи
                 </div>
 
-                <div id="setting" className="col s12 card">
-                    <Setting team={this.props.team} />
-                </div>
+                {!isAdmin ? null :
+                    <div id="setting" className="col s12 card">
+                        <Setting team={this.props.team}/>
+                    </div>
+                }
             </div>
         )
     }

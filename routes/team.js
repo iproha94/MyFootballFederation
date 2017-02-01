@@ -123,6 +123,10 @@ router.post('/add-vuser', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
     var id = req.params.id;
+    var idUser = null;
+    if(req.user){
+        idUser = req.user._id;
+    }
     Team.findById(id, function (err, result) {
         if(err || !result) {
             return next();
@@ -141,6 +145,9 @@ router.get('/:id', function(req, res, next) {
         }, function (err, arr) {
             var team = result.toObject();
             team.vplayersWithName = arr;
+            team.isAdmin  = team.creators.some(
+                (item) => item.toString() == idUser
+            );
             return res.json(team);
         });
     });
