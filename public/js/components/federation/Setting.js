@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AdminAdd from './AdminAdd';
 
 export default React.createClass({
     sendBanner: function(event) {
@@ -57,6 +58,10 @@ export default React.createClass({
                         </div>
                     </div>
                 </form>
+
+
+                <AdminAdd federationId={this.props.federationId}/>
+
             </div>
         );
     }

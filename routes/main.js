@@ -25,6 +25,37 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/get-user-list-by-regexp', function(req, res, next) {
+    if(!req.user) {
+        return res.status(403).json(null);
+    }
+
+    var reg = new RegExp(req.query.term, 'i');
+
+    var searchByName = {$and: [
+        {name: reg},
+        {_id: {$ne: req.user._id}}
+    ]};
+
+    var searchByVk = {$and: [
+        {authId: reg},
+        {_id: {$ne: req.user._id}}
+    ]};
+
+    var searchByEmail = {$and: [
+        {email: reg},
+        {_id: {$ne: req.user._id}}
+    ]};
+
+    User.find({$or:[
+        searchByName,
+        searchByVk,
+        searchByEmail
+    ]}, function (err, result) {
+        res.json(result);
+    });
+});
+
 router.get('/get-current-user', function(req, res, next) {
     if (!req.user) {
         return res.json(null);
@@ -81,6 +112,11 @@ router.get('/get-user/:idUser', function(req, res, next) {
 
 //тут возможна атака csrf 
 router.get('/account/add-creator/', function(req, res, next) {
+    if(!req.user) {
+        return res.json({
+            status: 403
+        });
+    }
     var idUser = req.query.idUser;
     var idFederation = req.query.idSend;
     console.log(idUser, idFederation);
