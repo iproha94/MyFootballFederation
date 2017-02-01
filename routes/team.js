@@ -162,4 +162,44 @@ router.post('/get-team-by-tournament/:idTournament', function(req, res, next) {
         });
     });
 });
+
+router.get('/add-creator/', function(req, res, next) {
+    if(!req.user) {
+        return res.json({
+            status: 403
+        });
+    }
+    var idUser = req.query.idUser;
+    var idTeam = req.query.idTeam;
+    Team.findById(idTeam, function (err, team) {
+        if(err || !team) {
+            return res.json({
+                status: 403
+            });
+        }
+
+        var isCreatorsCurrentUser = team.creators.some(function(item){
+            return item.equals(req.user._id);
+        });
+        if(isCreatorsCurrentUser) {
+            team.creators.push(idUser);
+            team.save(function (err) {
+                if(err) {
+                    return res.json({
+                        status: 403
+                    });
+                }
+
+                return res.json({
+                    status: 200
+                });
+            });
+        } else {
+            return res.json({
+                status: 403
+            });
+        }
+    });
+});
+
 module.exports = router;

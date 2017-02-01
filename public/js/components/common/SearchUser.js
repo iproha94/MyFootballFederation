@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var horsey = require("horsey");
 
+//api:
+//url - куда отправлять данные
+//nameSendField - имя поля которое будет отправлено
+//sendField - значения поля которое будет отправлено
+//inputLabel - placeholder для input
+
 export default React.createClass({
     getInitialState: function() {
         return {idUser: null};
@@ -33,7 +39,7 @@ export default React.createClass({
             getText: 'name',
             getValue: '_id',
             filter: function (query, suggestion) {
-              return true;
+                return true;
             },
             renderItem: function (li, suggestion) {
                 console.log(suggestion);
@@ -53,9 +59,9 @@ export default React.createClass({
             $.ajax({
                 data: {
                     idUser: this.state.idUser,
-                    idSend: this.props.federationId
+                    [this.props.nameSendField]: this.props.sendField
                 },
-                url: "/api/account/add-creator/",
+                url: this.props.url,
                 success: (data) => {
                     $(ReactDOM.findDOMNode(this.refs.form))[0].reset();
                     Materialize.toast(data.message || "Операция прошла успешно", 2000);
@@ -69,30 +75,30 @@ export default React.createClass({
     },
     render: function () {
         return (
-                <div className="row">
-                    <form className="col s12"
-                          onSubmit={this.onSubmit}
-                          ref="form">
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input id="last_name"
-                                       type="text"
-                                       ref="input"
-                                       required
-                                       className="validate" />
-                                    <label for="last_name">Добавить организатора</label>
-                            </div>
+            <div className="row">
+                <form className="col s12"
+                      onSubmit={this.onSubmit}
+                      ref="form">
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input id="last_name"
+                                   type="text"
+                                   ref="input"
+                                   required
+                                   className="validate" />
+                            <label for="last_name">{this.props.inputLabel}</label>
                         </div>
-                        
-                        <div className="row">
-                            <div className="col s12 right-align">
-                                <button className="btn waves-effect waves-light" type="submit" name="action">Добавить
-                                    <i className="material-icons right">send</i>
-                                </button>
-                            </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col s12 right-align">
+                            <button className="btn waves-effect waves-light" type="submit" name="action">Добавить
+                                <i className="material-icons right">send</i>
+                            </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
         );
     }
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SearchUser from '../common/SearchUser'
 
 export default React.createClass({
     sendTeamBanner: function(event) {
@@ -73,6 +74,11 @@ export default React.createClass({
                             </button>
                         </div>
                     </div>
+
+                    <SearchUser sendField={this.props.team._id}
+                                nameSendField="idTeam"
+                                inputLabel="Добавить капитана"
+                                url="/api/team/add-creator/" />
                 </form>
             </div>
         );

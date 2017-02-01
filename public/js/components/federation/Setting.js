@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AdminAdd from './AdminAdd';
+import SearchUser from '../common/SearchUser';
 
 export default React.createClass({
     sendBanner: function(event) {
@@ -60,7 +60,10 @@ export default React.createClass({
                 </form>
 
 
-                <AdminAdd federationId={this.props.federationId}/>
+                <SearchUser sendField={this.props.federationId}
+                            nameSendField="idSend"
+                            inputLabel="Добавить организатора"
+                            url="/api/account/add-creator/" />
 
             </div>
         );
