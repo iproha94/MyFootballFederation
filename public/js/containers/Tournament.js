@@ -7,8 +7,8 @@ import * as teamActions from '../actions/team';
 import List from '../components/common/List';
 import TeamsList from '../components/tournament/TeamsList';
 import CreateStage from '../components/tournament/CreateStage';
-import {Link} from 'react-router';
 import TeamsWindow from '../components/tournament/TeamsWindow';
+import StageList from '../components/tournament/StageList';
 
 var TournamentPage = React.createClass({
     idTournament: null,
@@ -62,8 +62,8 @@ var TournamentPage = React.createClass({
                     }
                 </div>
 
-                <div id="matches" className="col s12 card">
-                    тут будет список матчей
+                <div id="matches" className="col s12 padding-enabled">
+                    <StageList stages={this.props.stages}/>
                 </div>
             </div>
         )

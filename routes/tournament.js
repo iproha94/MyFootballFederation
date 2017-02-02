@@ -3,6 +3,8 @@ var router = express.Router();
 var Tournament = require('../models/tournament');
 var Federation = require('../models/federation');
 var Stage = require('../models/stage');
+var async = require('async');
+var Match = require('../models/match');
 
 router.get('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -79,6 +81,31 @@ router.get('/add-team', function(req, res, next) {
 
 
 router.get('/get-stage/:idTournament', function (req, res, next) {
+    Stage.find({tournament: req.params.idTournament}, function (err, stages) {
+        var resultStages = [];
+        async.each(stages, function (stage, callback) {
+            Match.find({stage: stage._id}, function (err, matches) {
+                if (err) callback(err);
+                var resultStage = stage.toObject();
+                resultStage.matches = matches;
+                resultStages.push(resultStage);
+                callback();
+            });
+        }, function (err) {
+            if (err) {
+                return res.status(500).json(null);
+            }
+
+            console.log(resultStages);
+            res.json(resultStages);
+        });
+    });
+
+
+});
+
+
+router.get('/get-stages-with-mathes/:idTournament', function (req, res, next) {
     Stage.find({tournament: req.params.idTournament}, function (err, stages) {
         res.json(stages);
     });
