@@ -18,7 +18,8 @@ router.post('/create', function(req, res, next) {
     var federation = new Federation({
         name: req.body.name.trim(),
         city: req.body.city.trim(),
-        creators: [req.user._id]
+        creators: [req.user._id],
+        members: [req.user._id]
     });
 
     Federation.findOne({name : federation.name}, function (err, result) {

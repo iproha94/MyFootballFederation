@@ -3,7 +3,9 @@ import {
     GET_FEDERATIONS,
     ADD_FEDERATION_CURRENT_USER,
     ADD_TEAM_CURRENT_USER,
-    LOGOUT
+    LOGOUT,
+    REMOVE_CURRENT_USER_FEDERATION,
+    ADD_CURRENT_USER_FEDERATION
 }  from '../../constants';
 
 const initialState = {
@@ -36,6 +38,20 @@ export default function(state = initialState, action) {
             return newState;
         case LOGOUT:
             return initialState;
+        case REMOVE_CURRENT_USER_FEDERATION:
+            var newState = {...state};
+            var newFederations = [];
+            for(var federation of state.federations) {
+                if(federation.name != action.payload) {
+                    newFederations.push(federation);
+                }
+            }
+            newState.federations = newFederations;
+            return newState;
+        case ADD_CURRENT_USER_FEDERATION:
+            var newState = {...state};
+            newState.federations.push(action.payload);
+            return newState;
         default:
             return state;
     }

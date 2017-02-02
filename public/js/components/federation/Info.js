@@ -7,6 +7,7 @@ export default React.createClass({
             url: "/api/federation/subscribe/" + this.props.federation.name,
             success: (data) => {
                 Materialize.toast("Вы успешно подписались на федерацию", 2000);
+                this.props.addCurrentUserFederation(this.props.federation);
                 this.props.getFederationInfo(this.props.federation.name);
             },
             error: (jqXHR, textStatus, errorThrown) => {
@@ -20,6 +21,7 @@ export default React.createClass({
             url: "/api/federation/unsubscribe/" + this.props.federation.name,
             success: (data) => {
                 Materialize.toast("Вы успешно отписались от федерации", 2000);
+                this.props.removeCurrentUserFederation(this.props.federation.name);
                 this.props.getFederationInfo(this.props.federation.name);
             },
             error: (jqXHR, textStatus, errorThrown) => {

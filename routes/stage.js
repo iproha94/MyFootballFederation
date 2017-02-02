@@ -7,17 +7,9 @@ var Federation = require('../models/federation');
 var Team = require('../models/team');
 var async = require('async');
 
-
-router.get('/create', function(req, res, next) {
-    if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
-    }
-    res.render("create-stage");
-});
-
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
+        return res.status(403).json(null);
     }
 
     Tournament.findOne({_id: req.query.tournament}, function (err, tournament) {

@@ -61,7 +61,7 @@ router.get('/get-current-user', function(req, res, next) {
         return res.json(null);
     }
 
-    Federation.find({creators: req.user._id}, function (err, fResult) {
+    Federation.find({members: req.user._id}, function (err, fResult) {
         Team.find({creators: req.user._id}, function (err, tResult) {
             var result = Object.assign(req.user.toObject(), {
                 federations: fResult,

@@ -3,7 +3,9 @@ import {
     GET_CURRENT_USER,
     GET_ALL_USER,
     ROUTING,
-    LOGOUT
+    LOGOUT,
+    REMOVE_CURRENT_USER_FEDERATION,
+    ADD_CURRENT_USER_FEDERATION
 } from '../../constants';
 
 
@@ -45,6 +47,24 @@ export function logout() {
             payload: {}
         });
     }
+}
+
+export function removeCurrentUserFederation(name) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: REMOVE_CURRENT_USER_FEDERATION,
+            payload: name
+        });
+    };
+}
+
+export function addCurrentUserFederation(federation) {
+    return (dispatch, getState) => {
+        return dispatch({
+            type: ADD_CURRENT_USER_FEDERATION,
+            payload: federation
+        });
+    };
 }
 
 export function getAllUser() {

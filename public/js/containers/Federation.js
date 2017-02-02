@@ -6,6 +6,7 @@ import Setting from '../components/federation/Setting';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as federationActions from '../actions/federation';
+import * as userActions from '../actions/user';
 
 var Component = React.createClass({
     fetch: function (federationName) {
@@ -51,6 +52,8 @@ var Component = React.createClass({
                 <div id="tab-id-1" className="col s12 card">
                     <Info federation={this.props.federation}
                           currentUser={this.props.currentUser}
+                          addCurrentUserFederation={this.props.userActions.addCurrentUserFederation}
+                          removeCurrentUserFederation={this.props.userActions.removeCurrentUserFederation}
                           getFederationInfo={this.props.federationActions.getFederationInfo}/>
                 </div>
 
@@ -82,6 +85,7 @@ export default connect((state)=>{
     }
 }, (dispatch)=>{
     return {
-        federationActions: bindActionCreators(federationActions, dispatch)
+        federationActions: bindActionCreators(federationActions, dispatch),
+        userActions: bindActionCreators(userActions, dispatch)
     }
 })(Component);

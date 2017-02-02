@@ -6,12 +6,6 @@ var Stage = require('../models/stage');
 var async = require('async');
 var Match = require('../models/match');
 
-router.get('/create', function(req, res, next) {
-    if(!req.isAuthenticated()) {
-        return res.redirect('/unauthorized' );
-    }
-    res.render("create-tournament");
-});
 
 router.post('/create', function(req, res, next) {
     if(!req.isAuthenticated()) {
@@ -25,7 +19,7 @@ router.post('/create', function(req, res, next) {
         if (err) {
             console.log(req.body);
             return res.json({
-                message: "Error",
+                message: "Error"
             });
         }
 
@@ -96,7 +90,6 @@ router.get('/get-stage/:idTournament', function (req, res, next) {
                 return res.status(500).json(null);
             }
 
-            console.log(resultStages);
             res.json(resultStages);
         });
     });
