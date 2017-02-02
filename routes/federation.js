@@ -21,6 +21,12 @@ router.post('/create', function(req, res, next) {
         creators: [req.user._id]
     });
 
+    Federation.findOne({name : federation.name}, function (err, result) {
+        if (err || !federation) {
+            return next();
+        }
+    });
+
     if (federation.name.length == 0 || federation.city.length == 0) {
         return res.status(400).json({
             message: "ошибка"
@@ -29,6 +35,13 @@ router.post('/create', function(req, res, next) {
 
     federation.save(function (err) {
         if(err) {
+            var codeDuplicateKey = 11000;
+            if(err.code == codeDuplicateKey) {
+                return res.status(403).json({
+                    message: "Федерация с таким именем уже существует"
+                });
+            }
+
             next(err);
         } else {
             res.json({

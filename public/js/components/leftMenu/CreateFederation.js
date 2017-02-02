@@ -13,14 +13,15 @@ var Component = React.createClass({
             url: "/api/federation/create",
             success: (data) => {
                 $(ReactDOM.findDOMNode(this.refs.form))[0].reset();
-                Materialize.updateTextFields()
+                Materialize.updateTextFields();
                 Materialize.toast(data.message || "Операция прошла успешно", 2000);
                 this.props.federationsActions.addFederationCurrentUser(data.payload);
                 this.props.history.push('/federation/' + data.payload.name);
             },
             error: (jqXHR, textStatus, errorThrown) => {
-                console.log(jqXHR,textStatus,errorThrown);
-                Materialize.toast("Что то не так", 2000);
+                console.log(jqXHR, textStatus ,errorThrown);
+                Materialize.toast(jqXHR.responseJSON.message ||
+                    "Что то не так", 2000);
             }
         });
     },
@@ -37,7 +38,7 @@ var Component = React.createClass({
                             <form className="col s12 js-form" method="post" ref="form" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="name" type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
+                                        <input id="name"  type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
                                             <label for="name">Имя федерации</label>
                                     </div>
                                 </div>
