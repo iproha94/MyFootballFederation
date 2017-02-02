@@ -11,7 +11,7 @@ export default React.createClass({
     triggerCollapsible: function(idStage) {
         var self = this;
         return function (event) {
-            if(!self.state.openedStage){
+            if(self.state.openedStage != idStage){
                 self.setState({openedStage: idStage});
             } else {
                 self.setState({openedStage: ''});
@@ -22,22 +22,25 @@ export default React.createClass({
         var list = this.props.stages.map((stage) => {
 
             var matchList = stage.matches.map((match) => {
-                return <Link to={`/match/${match._id}`} className="collection-item">{match.name}</Link>
+                return <Link to={`/match/${match._id}`}
+                             key={match._id}
+                             className="collection-item">{match.name}</Link>
             });
 
             return (
-                <li className="margin-enabled" onClick={this.triggerCollapsible(stage._id)}>
+                <li className="margin-enabled" key={stage._id} onClick={this.triggerCollapsible(stage._id)}>
                     <div className="collapsible-header">
                         <i className={`
                             material-icons
                             icon-time-transition
-                             ${this.state.openedStage == stage._id ? "turn-icon": ""}`}>
+                            ${this.state.openedStage == stage._id ? "turn-icon": ""}`}>
                             play_arrow
                         </i>
                         {stage.name}
                     </div>
 
-                    <div className="collapsible-body">
+                    <div className={`collapsible-body
+                                    ${!matchList.length ? 'custom-collapsible-body' : ''}`}>
                         <span>
                              {!matchList.length ? "В этапе ещё нет матчей" :
                                  <div className="collection">

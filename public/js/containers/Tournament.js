@@ -8,7 +8,7 @@ import List from '../components/common/List';
 import TeamsList from '../components/tournament/TeamsList';
 import CreateStage from '../components/tournament/CreateStage';
 import TeamsWindow from '../components/tournament/TeamsWindow';
-import StageList from '../components/tournament/StageList';
+import StageListWithMathes from '../components/tournament/StageListWithMathes';
 
 var TournamentPage = React.createClass({
     idTournament: null,
@@ -63,7 +63,7 @@ var TournamentPage = React.createClass({
                 </div>
 
                 <div id="matches" className="col s12 padding-enabled">
-                    <StageList stages={this.props.stages}/>
+                    <StageListWithMathes stages={this.props.stages}/>
                 </div>
             </div>
         )

@@ -426,3 +426,8 @@ body{
 .turn-icon {
     transform: rotate(90deg);
 }
+
+.custom-collapsible-body {
+    background: white;
+    padding: 10px 20px;
+}

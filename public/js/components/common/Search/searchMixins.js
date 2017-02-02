@@ -33,5 +33,9 @@ export default {
                 });
             }
         });
+    },
+    resetForm: function () {
+        var form = ReactDOM.findDOMNode(this.refs.form);
+        form.reset();
     }
 };
