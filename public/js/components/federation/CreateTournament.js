@@ -8,7 +8,7 @@ var Component = React.createClass({
     componentDidMount: function(){
         $('.modal-trigger').leanModal();
     },
-    onClickModalAction: function(event) {
+    handleSubmit: function(event) {
         event.preventDefault();
         $.ajax({
             method: 'POST',
@@ -40,7 +40,10 @@ var Component = React.createClass({
                     <div className="modal-content">
                         <h4>Создание турнира</h4>
                         <div className="row">
-                            <form className="col s12 js-form create__padding js-form" ref="form" method="post" onSubmit={this.handleSubmit}>
+                            <form className="col s12 js-form create__padding js-form"
+                                  ref="form"
+                                  id="form-create-tournament"
+                                  onSubmit={this.handleSubmit}>
                                 <input name="federation" value={this.props.federation.name} type="hidden"/>
 
                                 <div className="row">
@@ -82,7 +85,11 @@ var Component = React.createClass({
                     </div>
 
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                        <button form="form-create-tournament"
+                                type="submit"
+                                className="modal-action modal-close waves-effect waves-green btn-flat ">
+                            Добавить
+                        </button>
                     </div>
                 </div>
             </div>

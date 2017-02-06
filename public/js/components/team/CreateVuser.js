@@ -5,7 +5,7 @@ export default React.createClass({
     componentDidMount: function(){
         $('.modal-trigger').leanModal();
     },
-    onClickModalAction: function(event) {
+    handleSubmit: function(event) {
         event.preventDefault();
         $.ajax({
             method: 'POST',
@@ -30,16 +30,16 @@ export default React.createClass({
         return (
             <div>
                 <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
-                   href="#modal-tournament">Создать</a>
+                   href="#modal-vuser">Создать</a>
 
-                <div id="modal-tournament" className="modal modal-fixed-footer">
+                <div id="modal-vuser" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>Создание игрока</h4>
 
                         <div className="row">
                             <form className="col s12 js-form create__padding js-form"
                                   ref="form"
-                                  method="post"
+                                  id="form-create-vuser"
                                   onSubmit={this.handleSubmit}>
 
                                 <input name="team" value={this.props.team._id} type="hidden"/>
@@ -62,7 +62,9 @@ export default React.createClass({
                     </div>
 
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                        <button  form="form-create-vuser"
+                                 type="submit"
+                                 className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</button>
                     </div>
                 </div>
             </div>

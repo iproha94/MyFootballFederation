@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import ReactDOM from 'react-dom';
 
 var Component = React.createClass({
-    onClickModalAction: function(event) {
+    handleSubmit: function(event) {
         event.preventDefault();
         $.ajax({
             method: 'POST',
@@ -35,7 +35,10 @@ var Component = React.createClass({
                     <div className="modal-content">
                         <h4>Создание Федерации</h4>
                         <div className="row">
-                            <form className="col s12 js-form" method="post" ref="form" onSubmit={this.handleSubmit}>
+                            <form className="col s12 js-form"
+                                  id="form-create-federation"
+                                  ref="form"
+                                  onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="input-field col s12">
                                         <input id="name"  type="text" className="validate" name="name" required pattern="[a-zA-Z0-9а-яёА-ЯЁ_][a-zA-Z0-9а-яёА-ЯЁ_\s]*"/>
@@ -53,8 +56,13 @@ var Component = React.createClass({
                     </div>
     
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                        <button form="form-create-federation"
+                                type="submit"
+                                className="modal-action modal-close waves-effect waves-green btn-flat ">
+                            Добавить
+                        </button>
                     </div>
+
                 </div>
             </div>
         );

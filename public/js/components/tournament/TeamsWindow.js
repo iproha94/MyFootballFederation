@@ -4,7 +4,8 @@ export default React.createClass({
     componentDidMount: function(){
         $('.modal-trigger').leanModal();
     },
-    onClickModalAction: function(event) {
+    handleSubmit: function(event) {
+        event.preventDefault();
         $.ajax({
             data: $(".js-modal-form").serialize(),
             url: "/api/tournament/add-team",
@@ -43,7 +44,10 @@ export default React.createClass({
                     <div className="modal-content">
                         <h4>Выберите команду</h4>
                         <div>
-                            <form className="js-modal-form" onChange={this.onChange}>
+                            <form className="js-modal-form"
+                                  id="form-add-team"
+                                  onSubmit={this.handleSubmit}
+                                  onChange={this.onChange}>
                                 <input type="hidden" name="idTournament" value={this.props.tournamentId}/>
                                 <div className="input-field col s12">
                                     <select name="idSend">
@@ -55,7 +59,9 @@ export default React.createClass({
                     </div>
 
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Отправить заявку</a>
+                        <button form="form-add-team"
+                                type="submit"
+                                className="modal-action modal-close waves-effect waves-green btn-flat ">Отправить заявку</button>
                     </div>
                 </div>
             </div>

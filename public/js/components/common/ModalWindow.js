@@ -1,11 +1,12 @@
-import ModalForm from './ModalForm';
 import React from 'react';
 
 export default React.createClass({
     componentDidMount: function(){
         $('.modal-trigger').leanModal();
     },
-    onClickModalAction: function(event) {
+    idForm: "form-" + Math.random(),
+    handleSubmit: function(event) {
+        event.preventDefault();
         $.ajax({
             data: $(".js-modal-form").serialize(),
             url: this.props.urlSend,
@@ -23,7 +24,18 @@ export default React.createClass({
     onClickStart: function () {
         $('select').material_select();
     },
+    onChange: function () {
+        $('select').material_select();
+    },
     render: function () {
+        var options = this.props.valueArray.map(function (item) {
+            return (
+                <option key={item._id} value={item._id}>
+                    {item.name}
+                </option>
+            )
+        });
+        
         return (
             <div>
                 <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn"
@@ -32,13 +44,30 @@ export default React.createClass({
                 <div id="modal1" className="modal modal-fixed-footer">
                     <div className="modal-content">
                         <h4>{this.props.header}</h4>
-                        <ModalForm valueArray={this.props.valueArray}
-                                   nameHiddenInput={this.props.nameHiddenInput}
-                                   valueHiddenInput={this.props.valueHiddenInput}/>
+                        
+                        <div>
+                            <form className="js-modal-form"
+                                  id={this.idForm}
+                                  onSubmit={this.handleSubmit}
+                                  onChange={this.onChange}>
+                                <input type="hidden" name={this.props.nameHiddenInput} value={this.props.valueHiddenInput}/>
+                                <div className="input-field col s12">
+                                    <select name="idSend">
+                                        {options}
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        
                     </div>
-    
+                    
+
                     <div className="modal-footer">
-                        <a href="#!" onClick={this.onClickModalAction} className="modal-action modal-close waves-effect waves-green btn-flat ">Добавить</a>
+                        <button form={this.idForm}
+                                type="submit"
+                                className="modal-action modal-close waves-effect waves-green btn-flat ">
+                            Добавить
+                        </button>
                     </div>
                 </div>
             </div>
