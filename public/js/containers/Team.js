@@ -11,10 +11,13 @@ var Component = React.createClass({
         return {srcTeamBanner: '/img/my-teams.jpg'};
     },
     componentDidMount: function() {
-        $('ul.tabs').tabs();
         this.props.teamActions.getTeamInfo(this.props.params.idTeam);
     },
+    componentDidUpdate: function () {
+        $('ul.tabs').tabs();
+    },
     componentWillReceiveProps: function (nextProps) {
+        $('ul.tabs').tabs();
         if(this.props.params.idTeam !== nextProps.params.idTeam) {
             this.props.teamActions.getTeamInfo(nextProps.params.idTeam);
         }
