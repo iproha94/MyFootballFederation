@@ -5,6 +5,8 @@ import * as teamActions from '../actions/team';
 import VusersList from '../components/team/VusersList';
 import CreateVuser from '../components/team/CreateVuser';
 import Setting from '../components/team/Setting';
+import MatchList from '../components/team/MatchList';
+import List from '../components/common/List';
 
 var Component = React.createClass({
     getInitialState: function() {
@@ -17,22 +19,20 @@ var Component = React.createClass({
         $('ul.tabs').tabs();
     },
     componentWillReceiveProps: function (nextProps) {
-        $('ul.tabs').tabs();
         if(this.props.params.idTeam !== nextProps.params.idTeam) {
             this.props.teamActions.getTeamInfo(nextProps.params.idTeam);
         }
-
         this.setState({srcTeamBanner: `/uploaded/team/banner/` + nextProps.team._id + `.png`});
     },
     teamBannerNotFound: function() {
         this.setState({srcTeamBanner: '/img/my-teams.jpg'});
     },
     render: function () {
-        let isOwnTeam = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
-        let isAdmin = isOwnTeam;
+        let isAdmin = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;
+
         return (
             <div>
-                <div className="col s12 card padding-enabled">
+                <div className="col s12 card padding-disabled">
                     <div className="card-image">
                         <img src={this.state.srcTeamBanner} onError={this.teamBannerNotFound}/>
 
@@ -50,21 +50,25 @@ var Component = React.createClass({
                     </ul>
                 </div>
 
-                <div id="players" className="col s12 card">
+                <div id="players" className="col s12 card ">
                     <VusersList vusers={this.props.team.vplayersWithName}/>
 
-                    {!isOwnTeam ?
+                    {!isAdmin ?
                         null :
-                        <CreateVuser team={this.props.team}
-                                     history={this.props.history}
-                                     teamActions={this.props.teamActions}/>
+                        <div className="row">
+                            <div className="col s12">
+                                <CreateVuser team={this.props.team}
+                                             history={this.props.history}
+                                             teamActions={this.props.teamActions}/>
+                            </div>
+                        </div>
                     }
                 </div>
 
-                <div id="matches" className="col s12 card">
-                    здесь будут матчи
+                <div id="matches" className="col s12 card padding-disabled">
+                    <MatchList matches={this.props.team.matches}/>
                 </div>
-
+                
                 {!isAdmin ? null :
                     <div id="setting" className="col s12 card">
                         <Setting team={this.props.team}/>

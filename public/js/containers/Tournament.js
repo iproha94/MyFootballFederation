@@ -25,7 +25,7 @@ var TournamentPage = React.createClass({
         var isAuth = !this.props.currentUser._id;
         return (
             <div className="row">
-                <div className="col s12 card padding-enabled">
+                <div className="col s12 card padding-disabled">
                     <div className="card-image">
                         <img src="/img/tournament-default-banner.jpg"/>
                         <span className="card-title tournament_card-title">
@@ -62,7 +62,7 @@ var TournamentPage = React.createClass({
                     }
                 </div>
 
-                <div id="matches" className="col s12 padding-enabled">
+                <div id="matches" className="col s12 padding-disabled">
                     <StageListWithMathes stages={this.props.stages}/>
                 </div>
             </div>

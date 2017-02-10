@@ -29,8 +29,10 @@ export default React.createClass({
     render: function () {
         return (
             <div>
-                <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn width-fullscreen"
-                   href="#modal-vuser">Создать</a>
+                <div>
+                    <a onClick={this.onClickStart} className="modal-trigger waves-effect waves-light btn"
+                       href="#modal-vuser">Создать</a>
+                </div>
 
                 <div id="modal-vuser" className="modal modal-fixed-footer">
                     <div className="modal-content">

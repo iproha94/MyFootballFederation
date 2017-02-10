@@ -8,6 +8,7 @@ const initialState = {
     vplayers: [],
     vplayersWithName: [],
     creators: [],
+    matches: [],
     isAdmin: false
 };
 

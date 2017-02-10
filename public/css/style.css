@@ -165,7 +165,7 @@ body{
     margin-left: 0px !important;
 }
 
-.padding-enabled{
+.padding-disabled{
     padding: 0px !important;
 }
 
@@ -430,4 +430,9 @@ body{
 .custom-collapsible-body {
     background: white;
     padding: 10px 20px;
+}
+
+.matchList_margin__disabled {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }

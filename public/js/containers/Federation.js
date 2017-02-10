@@ -33,7 +33,7 @@ var Component = React.createClass({
         console.log("isAdmin", isAdmin);
         return (
             <div className="row">
-                <div className="col s12 card padding-enabled">
+                <div className="col s12 card padding-disabled">
                     <div className="card-image tournament_card-title">
                         <img src="/img/federation-default-banner.jpg"/>
                         <span className="card-title">

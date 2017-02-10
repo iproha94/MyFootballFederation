@@ -26,7 +26,7 @@ var Component = React.createClass({
         return (
             <div>
                 <div className="row">
-                    <div className="col s12 card padding-enabled">
+                    <div className="col s12 card padding-disabled">
                         <div className="card-image">
                             <div className="match">
                                 <img src="/img/match-default-banner.jpg" className="match_banner"/>

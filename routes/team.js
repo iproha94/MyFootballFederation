@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Team = require('../models/team');
+var Match = require('../models/match');
 var Tournament = require('../models/tournament');
 var Vuser = require('../models/vuser');
 var async = require('async');
@@ -148,7 +149,14 @@ router.get('/:id', function(req, res, next) {
             team.isAdmin  = team.creators.some(
                 (item) => item.toString() == idUser
             );
-            return res.json(team);
+
+            Match.find({ $or:[
+                {'team1': team._id},
+                {'team2': team._id}
+            ]}, function (err, matches) {
+                team.matches = matches;
+                return res.json(team);
+            });
         });
     });
 });
