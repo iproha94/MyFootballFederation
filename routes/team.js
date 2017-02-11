@@ -44,7 +44,7 @@ router.post('/add-banner', function(req, res, next) {
     }
 
     var form = new formidable.IncomingForm();
-    form.uploadDir = "uploaded/team";
+    form.uploadDir = "public/uploaded/team";
 
     //так плохо и некрасиво сделано потому что мы хотим
     //задать имя файла из fields - а его можно получить только в этом методе

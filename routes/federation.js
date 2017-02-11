@@ -144,7 +144,7 @@ router.post('/add-banner', function(req, res, next) {
     }
 
     var form = new formidable.IncomingForm();
-    form.uploadDir = "uploaded/federation";
+    form.uploadDir = "public/uploaded/federation";
 
     form.parse(req, function(err, fields, files) {
         if (err) {
