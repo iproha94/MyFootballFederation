@@ -32,14 +32,14 @@ function startServer() {
 			mongoose.connect(credentials.mongo.presentation, opts);
 			break;
 
-		case "test":
-			console.log("запущенная база: " + credentials.mongo.test);
-			mongoose.connect(credentials.mongo.test, opts);
-			break;
-
 		case "production":
 			console.log("запущенная база: " + credentials.mongo.production);
 			mongoose.connect(credentials.mongo.production, opts);
+			break;
+
+		case "test":
+			console.log("запущенная база: " + credentials.mongo.test);
+			mongoose.connect(credentials.mongo.test, opts);
 			break;
 
 		case "development":
@@ -51,10 +51,27 @@ function startServer() {
 	app.use(require('cookie-parser')(credentials.cookieSecret));
 
 	var session = require('express-session');
-	var RedisStore = require('connect-redis')(session);
+
+	let sessionStore;
+	switch (process.env.NODE_ENV) {
+		case "presentation":
+		case "production":
+			var RedisStore = require('connect-redis')(session);
+			let redisPort = credentials.redisPort || 6379;
+			console.log(`для сессий запущенна база Redis: localhost:${redisPort}`);
+			sessionStore = new RedisStore({host: 'localhost', port: redisPort});
+			break;
+
+		case "test":
+		case "development":
+		default:
+			console.log("для сессий память процесса");
+			var MemoryStore = require('session-memory-store')(session);
+			sessionStore = new MemoryStore();
+	}
 
 	app.use(session({
-		store: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "test" ? undefined : new RedisStore({host: 'localhost', port: 6379}),
+		store: sessionStore,
 		resave: false,
 		saveUninitialized: false,
 		secret: credentials.cookieSecret,

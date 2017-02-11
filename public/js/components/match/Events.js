@@ -8,7 +8,7 @@ var eventsData = require('../../../../cfg/matchEvents');
 var Component = React.createClass({
     createWS : function () {//TODO проверить работу (offline режим в хроме не запрещает обращения к серверу на локалке)
         // создать подключение
-        this.ws = new WebSocket(`wss://${front.ip}:${front.websocketPort}`);
+        this.ws = new WebSocket(`wss://${document.domain}:${front.websocketPort}`);
 
         // обработчик входящих сообщений
         this.ws.onmessage = (event) => {

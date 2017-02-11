@@ -27,7 +27,7 @@ export default React.createClass({
         });
         return (
             <div className="card">
-                <div className="card-image">
+                <div className="card-image left-menu_team-banner">
                     <img src={this.state.nowTeamBanner} onError={this.resetTeamBanner} className="my-teams_banner-team"/>
                     <span className="card-title tournament_card-title">Мои команды</span>
                 </div>
