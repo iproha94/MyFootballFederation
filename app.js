@@ -16,7 +16,7 @@ function startServer() {
 	
 	var app = express();
 
-	app.set('port', process.env.PORT || credentials.port || 8080);
+	app.set('port', process.env.PORT || credentials.serverPort || 8080);
 
 	var opts = {
 		server: {
@@ -54,7 +54,7 @@ function startServer() {
 	var RedisStore = require('connect-redis')(session);
 
 	app.use(session({
-		store: os.platform() == "win32" ? undefined : new RedisStore({ host: 'localhost', port: 6379}),
+		store: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "test" ? undefined : new RedisStore({host: 'localhost', port: 6379}),
 		resave: false,
 		saveUninitialized: false,
 		secret: credentials.cookieSecret,
