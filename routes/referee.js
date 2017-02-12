@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
-var front = require('../cfg/front.js');
+var credentials = require('../cfg/credentials.js');
 
 var WebSocketServer = require('ws').Server;
 
@@ -13,8 +13,9 @@ var Team = require('../models/team');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
 
-var wss = new WebSocketServer({port: front.websocketPort});
-console.log("WebSocketServer запущен на порту: " + front.websocketPort);
+let port = credentials.websocketPort || 8081;
+var wss = new WebSocketServer({port: port});
+console.log("WebSocketServer запущен на порту: " + port);
 
 router.post('/get-my-matches', function(req, res, next) {
     if (!req.body.idVk) {

@@ -443,6 +443,7 @@ body{
     margin-bottom: 0px !important;
 }
 
+
 .tabs_border-top {
     border-top: 1px solid rgba(160,160,160,0.2);
 }
@@ -470,4 +471,8 @@ body{
 
 .enabled-border-bottom .collection-item:last-child {
     border-bottom: 1px solid #e0e0e0;
+}
+
+.left-menu_team-banner {
+    height: 150px;
 }
