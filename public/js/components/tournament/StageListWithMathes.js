@@ -20,6 +20,7 @@ export default React.createClass({
         }
     },
     render: function () {
+        var isAdmin = this.props.isAdmin;
         var list = this.props.stages.map((stage) => {
             return (
                 <li className="margin-enabled" key={stage._id} onClick={this.triggerCollapsible(stage._id)}>
@@ -33,15 +34,26 @@ export default React.createClass({
                         {stage.name}
                     </div>
 
-                    <div className={`collapsible-body
-                                    ${!stage.matches.length ? 'custom-collapsible-body' : ''}`}>
-                        <span>
-                             {!stage.matches.length ? "В этапе ещё нет матчей" :
-                                 <div className="collection">
-                                     <MatchList matches={stage.matches}/>
+                    <div className='collapsible-body white'>
+                             {!stage.matches.length ?
+                                 <div className={`empty-collapsible-body_padding
+                                 ${!isAdmin? "empty-collapsible-body_padding-bottom" : ""}`}>
+                                     В этапе ещё нет матчей
+                                 </div>
+                                 :
+                                 <div className="enabled-border-bottom">
+                                    <MatchList matches={stage.matches}/>
                                  </div>
                              }
-                        </span>
+
+                        {!isAdmin ? null :
+                            <div className="match-create-button">
+                                <a className="right modal-trigger btn-floating btn-large waves-effect waves-light red"
+                                   href="#modal-stage">
+                                    <i className="material-icons">add</i>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </li>
             )

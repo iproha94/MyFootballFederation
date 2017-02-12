@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import * as tournamentActions from '../actions/tournament';
 import * as stageActions from '../actions/stage';
 import * as teamActions from '../actions/team';
-import List from '../components/common/List';
 import TeamsList from '../components/tournament/TeamsList';
 import CreateStage from '../components/tournament/CreateStage';
 import TeamsWindow from '../components/tournament/TeamsWindow';
@@ -51,7 +50,8 @@ var TournamentPage = React.createClass({
                 </div>
 
                 <div id="matches" className="col s12 padding-disabled">
-                    <StageListWithMathes stages={this.props.stages}/>
+                    <StageListWithMathes stages={this.props.stages}
+                                         isAdmin={this.props.tournament.isAdmin}/>
 
                     {!this.props.tournament.isAdmin ? null :
                         <CreateStage tournamentId={this.props.tournament._id}/>
