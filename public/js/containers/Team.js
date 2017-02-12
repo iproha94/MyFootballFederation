@@ -33,14 +33,18 @@ var Component = React.createClass({
             <div>
                 <div className="col s12 card padding-disabled">
                     <div className="card-image">
-                        <img src={this.state.srcTeamBanner} onError={this.teamBannerNotFound}/>
+                        <img src={this.state.srcTeamBanner}
+                             className="banner_limits-size"
+                             onError={this.teamBannerNotFound}/>
+                    </div>
 
-                        <span className="card-title tournament_card-title">
-                            Страница команды {this.props.team.name}
+                    <div className="card-content">
+                        <span className="card-title">
+                            Команда {this.props.team.name}
                         </span>
                     </div>
 
-                    <ul className="tabs tabs-fixed-width">
+                    <ul className="tabs tabs-fixed-width tabs_border-top">
                         <li className="tab col s4"><a href="#players">Игроки</a></li>
                         <li className="tab col s4"><a href="#matches">Матчи</a></li>
                         {!isAdmin ? null :
@@ -49,7 +53,7 @@ var Component = React.createClass({
                     </ul>
                 </div>
 
-                <div id="players" className="col s12 card ">
+                <div id="players" className="col s12 padding-disabled">
                     <VusersList vusers={this.props.team.vplayersWithName}/>
 
                     {!isAdmin ?
@@ -69,7 +73,7 @@ var Component = React.createClass({
                 </div>
                 
                 {!isAdmin ? null :
-                    <div id="setting" className="col s12 card">
+                    <div id="setting" className="col s12 padding-disabled">
                         <Setting team={this.props.team}/>
                     </div>
                 }

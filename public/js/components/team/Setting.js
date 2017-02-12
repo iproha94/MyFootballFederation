@@ -29,7 +29,7 @@ export default React.createClass({
         return (
             <div>
                 <form ref="form"
-                      className="col s12"
+                      className="col s12 card"
                       onSubmit={this.sendTeamBanner}>
 
                     <input name="team" value={this.props.team._id} type="hidden"/>
@@ -74,12 +74,13 @@ export default React.createClass({
                             </button>
                         </div>
                     </div>
-
-                    <SearchUser sendField={this.props.team._id}
-                                nameSendField="idTeam"
-                                inputLabel="Добавить капитана"
-                                url="/api/team/add-creator/" />
                 </form>
+
+                <SearchUser sendField={this.props.team._id}
+                            nameSendField="idTeam"
+                            isCard={true}
+                            inputLabel="Добавить капитана"
+                            url="/api/team/add-creator/" />
             </div>
         );
     }
