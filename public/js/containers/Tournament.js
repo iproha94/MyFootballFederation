@@ -35,8 +35,7 @@ var TournamentPage = React.createClass({
 
                     <ul className="tabs tabs-fixed-width">
                         <li className="tab col s4"><a href="#team-request">Заявки команд</a></li>
-                        <li className="tab col s4"><a href="#stages">Этапы</a></li>
-                        <li className="tab col s4"><a href="#matches">Матчи</a></li>
+                        <li className="tab col s4"><a href="#matches">Матчи и Этапы</a></li>
                     </ul>
                 </div>
 
@@ -51,19 +50,12 @@ var TournamentPage = React.createClass({
 
                 </div>
 
-                <div id="stages" className="col s12 card">
-                    <List header="Список этапов:"
-                          url="/stage/"
-                          defaultMessage="В турнире нет этапов"
-                          list={this.props.stages}/>
-
-                    {!this.props.tournament.isAdmin ? null :
-                            <CreateStage tournamentId={this.props.tournament._id}/>
-                    }
-                </div>
-
                 <div id="matches" className="col s12 padding-disabled">
                     <StageListWithMathes stages={this.props.stages}/>
+
+                    {!this.props.tournament.isAdmin ? null :
+                        <CreateStage tournamentId={this.props.tournament._id}/>
+                    }
                 </div>
             </div>
         )

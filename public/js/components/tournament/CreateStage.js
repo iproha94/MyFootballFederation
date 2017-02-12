@@ -58,8 +58,11 @@ var Component = React.createClass({
                     </div>
                 </div>
 
-                <a className="modal-trigger waves-effect waves-light btn width-fullscreen"
-                   href="#modal-stage">Создать</a>
+                <a className="floating-add-button_margin right modal-trigger btn-floating btn-large waves-effect waves-light red"
+                   href="#modal-stage">
+                    <i className="material-icons">add</i>
+                </a>
+
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import MatchList from '../common/MatchList';
 
 export default React.createClass({
     componentDidMount: function(){
@@ -20,13 +21,6 @@ export default React.createClass({
     },
     render: function () {
         var list = this.props.stages.map((stage) => {
-
-            var matchList = stage.matches.map((match) => {
-                return <Link to={`/match/${match._id}`}
-                             key={match._id}
-                             className="collection-item">{match.name}</Link>
-            });
-
             return (
                 <li className="margin-enabled" key={stage._id} onClick={this.triggerCollapsible(stage._id)}>
                     <div className="collapsible-header">
@@ -40,11 +34,11 @@ export default React.createClass({
                     </div>
 
                     <div className={`collapsible-body
-                                    ${!matchList.length ? 'custom-collapsible-body' : ''}`}>
+                                    ${!stage.matches.length ? 'custom-collapsible-body' : ''}`}>
                         <span>
-                             {!matchList.length ? "В этапе ещё нет матчей" :
+                             {!stage.matches.length ? "В этапе ещё нет матчей" :
                                  <div className="collection">
-                                     {matchList}
+                                     <MatchList matches={stage.matches}/>
                                  </div>
                              }
                         </span>
