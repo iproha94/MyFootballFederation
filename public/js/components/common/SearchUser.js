@@ -75,30 +75,28 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <div className="row">
-                <form className="col s12"
-                      onSubmit={this.onSubmit}
-                      ref="form">
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input id="last_name"
-                                   type="text"
-                                   ref="input"
-                                   required
-                                   className="validate" />
-                            <label for="last_name">{this.props.inputLabel}</label>
-                        </div>
+            <form className={`col s12 ${this.props.isCard ? "card" : ""}`}
+                  onSubmit={this.onSubmit}
+                  ref="form">
+                <div className="row">
+                    <div className="input-field col s12">
+                        <input id="last_name"
+                               type="text"
+                               ref="input"
+                               required
+                               className="validate" />
+                        <label for="last_name">{this.props.inputLabel}</label>
                     </div>
+                </div>
 
-                    <div className="row">
-                        <div className="col s12 right-align">
-                            <button className="btn waves-effect waves-light" type="submit" name="action">Добавить
-                                <i className="material-icons right">send</i>
-                            </button>
-                        </div>
+                <div className="row">
+                    <div className="col s12 right-align">
+                        <button className="btn waves-effect waves-light" type="submit" name="action">Добавить
+                            <i className="material-icons right">send</i>
+                        </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         );
     }
 });

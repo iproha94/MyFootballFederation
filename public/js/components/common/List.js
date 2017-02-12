@@ -10,13 +10,15 @@ export default React.createClass({
                 </Link>
             )
         });
-        return (
-            <div className="container content-flex">
-                <h5 className="center">{this.props.header}</h5>
-                <div className="collection">
-                    {list.length ? list : this.props.defaultMessage}
+        
+        return list.length ?
+                <div className="collection matchList_margin__disabled card">
+                    {list}
                 </div>
-            </div>
-        )
+                :
+                <div className="list-empty_padding card">
+                    {this.props.defaultMessage}
+                </div>
+
     }
 });

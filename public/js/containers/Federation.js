@@ -1,12 +1,13 @@
 import React from 'react';
-import Tournaments from '../components/federation/Tournaments';
-import Info from '../components/federation/Info';
+import SubscribeButton from '../components/federation/SubscribeButton';
+import List from '../components/common/List';
 import Stream from '../components/federation/Stream';
 import Setting from '../components/federation/Setting';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as federationActions from '../actions/federation';
 import * as userActions from '../actions/user';
+import CreateTournament from '../components/federation/CreateTournament';
 
 var Component = React.createClass({
     fetch: function (federationName) {
@@ -30,19 +31,27 @@ var Component = React.createClass({
         var federation = this.props.federation;
         var isAdmin = federation.isAdmin;
         var channel = String(this.props.federation._id).substring(19);
-        console.log("isAdmin", isAdmin);
         return (
             <div className="row">
                 <div className="col s12 card padding-disabled">
                     <div className="card-image tournament_card-title">
-                        <img src="/img/federation-default-banner.jpg"/>
-                        <span className="card-title">
-                            Страница федерации {federation.name}
-                        </span>
+                        <img className="banner_limits-size"
+                             src="/img/federation-default-banner.jpg"/>
                     </div>
 
-                    <ul className="tabs tabs-fixed-width">
-                        <li className="tab col s3"><a href="#tab-id-1" className="js-link">Инфо</a></li>
+                    <div className="card-content">
+                        <span className="card-title">
+                            Федерация {federation.name}
+                        </span>
+
+                        <SubscribeButton federation={this.props.federation}
+                                         currentUser={this.props.currentUser}
+                                         addCurrentUserFederation={this.props.userActions.addCurrentUserFederation}
+                                         removeCurrentUserFederation={this.props.userActions.removeCurrentUserFederation}
+                                         getFederationInfo={this.props.federationActions.getFederationInfo}/>
+                    </div>
+
+                    <ul className="tabs tabs-fixed-width tabs_border-top">
                         <li className="tab col s3"><a className="active js-link" href="#tab-id-2">Турниры</a></li>
                         <li className="tab col s3"><a href="#tab-id-3" className="js-link">Прямой эфир</a></li>
                         {!isAdmin ? null :
@@ -50,28 +59,26 @@ var Component = React.createClass({
                         }
                     </ul>
                 </div>
-                
-                <div id="tab-id-1" className="col s12 card">
-                    <Info federation={this.props.federation}
-                          currentUser={this.props.currentUser}
-                          addCurrentUserFederation={this.props.userActions.addCurrentUserFederation}
-                          removeCurrentUserFederation={this.props.userActions.removeCurrentUserFederation}
-                          getFederationInfo={this.props.federationActions.getFederationInfo}/>
+
+                <div id="tab-id-2" className="col s12 padding-disabled">
+                    <List url="/tournament/"
+                          defaultMessage="Турниров нет"
+                          list={this.props.tournaments}/>
+
+                        {!this.props.federation.isAdmin ? null :
+                            <CreateTournament federation={this.props.federation}
+                                              history={this.props.history}/>
+                        }
                 </div>
 
-                <div id="tab-id-2" className="col s12 card">
-                    <Tournaments federation={this.props.federation}
-                                 history={this.props.history}
-                                 tournaments={this.props.tournaments}/>
-                </div>
-
-                <div id="tab-id-3" className="col s12 card">
+                <div id="tab-id-3" className="col s12 card padding-disabled">
                     <Stream channel={channel} />
                 </div>
 
                 {!isAdmin? null:
-                    <div id="tab-id-4" className="col s12 card">
-                        <Setting federationId={this.props.federation._id}/>
+                    <div id="tab-id-4" className="col s12 padding-disabled">
+                        <Setting federationId={this.props.federation._id}
+                                 channel={channel} />
                     </div>
                 }
             </div>

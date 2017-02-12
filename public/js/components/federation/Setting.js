@@ -28,8 +28,12 @@ export default React.createClass({
     render: function () {
         return (
             <div>
+                <div className="col s12 card">
+                    <p>Индентификатор вашего канала для трансляций: {this.props.channel} </p>
+                </div>
+
                 <form ref="form"
-                      className="col s12"
+                      className="col s12 card"
                       onSubmit={this.sendBanner}>
 
                     <input name="federation" value={this.props.federationId} type="hidden"/>
@@ -59,12 +63,11 @@ export default React.createClass({
                     </div>
                 </form>
 
-
                 <SearchUser sendField={this.props.federationId}
                             nameSendField="idSend"
+                            isCard={true}
                             inputLabel="Добавить организатора"
                             url="/api/account/add-creator/" />
-
             </div>
         );
     }

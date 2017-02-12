@@ -6,7 +6,6 @@ import VusersList from '../components/team/VusersList';
 import CreateVuser from '../components/team/CreateVuser';
 import Setting from '../components/team/Setting';
 import MatchList from '../components/team/MatchList';
-import List from '../components/common/List';
 
 var Component = React.createClass({
     getInitialState: function() {

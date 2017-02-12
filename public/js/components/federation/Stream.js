@@ -18,10 +18,7 @@ export default React.createClass({
     },
     render: function () {
         return (
-            <div className="container content-flex">
-                <p>Идентификатор канала: {this.props.channel}</p>
-                <div id="myElement" ></div>
-            </div>
+            <div id="myElement" ></div>
         );
     }
 });

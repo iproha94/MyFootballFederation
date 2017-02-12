@@ -436,3 +436,22 @@ body{
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
+
+.tabs_border-top {
+    border-top: 1px solid rgba(160,160,160,0.2);
+}
+
+.list-empty_padding {
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.floating-add-button_margin {
+    margin-top: 15px;
+}
+
+.banner_limits-size {/*с масштабированием все очень сложно*/
+    max-height: 500px;
+    min-height: 100px;
+}
