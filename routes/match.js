@@ -5,6 +5,8 @@ var Team = require('../models/team');
 var User = require('../models/user');
 var Vuser = require('../models/vuser');
 var Federation = require('../models/federation');
+var async = require('async');
+var Stage = require('../models/stage');
 
 router.get('/:idMatch', function(req, res, next) {
     var idUser = null;
@@ -89,5 +91,49 @@ router.get('/set-players', function(req, res, next) {
         match.save();
     });
 });
+
+
+router.post('/create', function(req, res, next) {
+    var idStage = req.body.idStage;
+    var teams = req.body.teams;
+
+    Stage.findById(idStage, function (err, stage) {
+        if (err) {
+            return next(err);
+        }
+
+        let matches = Stage.types.liga.createMatches(teams, 1);
+        var resultMatches = [];
+        async.every(matches, function (match, callback) {
+            match.stage = idStage;
+            match.federation = stage.federation;
+            match.status = Match.STATUS.CREATED.name;
+
+            Team.findById(match.team1, function (err, team1) {
+                Team.findById(match.team2, function (err, team2) {
+                    match.name = team1.name + " vs " + team2.name;
+
+                    match.save(function (err) {
+                        if(err) callback();
+                        resultMatches.push(match);
+                        callback(null, !err)
+                    });
+                });
+            })
+        }, function (err, result) {
+            if (!result) {
+                return res.json({
+                    "status": "ERROR"
+                });
+            }
+
+            return res.json({
+                "status": "OK",
+                matches: resultMatches
+            });
+        });
+    });
+});
+
 
 module.exports = router;
