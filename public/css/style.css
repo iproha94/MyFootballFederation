@@ -474,3 +474,7 @@ body{
 .left-menu_banner {
     height: 150px;
 }
+
+.teams-select-header {
+    margin-bottom: 8px;
+}

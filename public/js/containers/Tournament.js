@@ -51,6 +51,8 @@ var TournamentPage = React.createClass({
 
                 <div id="matches" className="col s12 padding-disabled">
                     <StageListWithMathes stages={this.props.stages}
+                                         addMatchesInStage={this.props.tournamentActions.addMatchesInStage}
+                                         tournamentTeams={this.props.tournament.teams}
                                          isAdmin={this.props.tournament.isAdmin}/>
 
                     {!this.props.tournament.isAdmin ? null :

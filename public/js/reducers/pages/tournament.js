@@ -1,7 +1,8 @@
 import {
     GET_TOURNAMENT,
     GET_STAGES,
-    GET_TEAMS_BY_TOURNAMENT
+    GET_TEAMS_BY_TOURNAMENT,
+    ADD_MATHES_IN_STAGE
 } from '../../constants';
 
 const initialState = {
@@ -23,6 +24,15 @@ export default function(state = initialState, action) {
       case GET_TEAMS_BY_TOURNAMENT:
           var newState = {...state};
           newState.teams = [...action.payload];
+          return newState;
+      case ADD_MATHES_IN_STAGE:
+          var newState = {...state};
+          for(var stage of newState.stages) {
+              if(stage._id == action.payload.idStage) {
+                  var matches = stage.matches || [];
+                  stage.matches = matches.concat(action.payload.matches);
+              }
+          }
           return newState;
       default:
           return state;

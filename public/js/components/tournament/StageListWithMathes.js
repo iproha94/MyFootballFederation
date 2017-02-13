@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
 import MatchList from '../common/MatchList';
+import CreateMatch from '../tournament/CreateMatch';
 
 export default React.createClass({
     componentDidMount: function(){
@@ -23,8 +23,8 @@ export default React.createClass({
         var isAdmin = this.props.isAdmin;
         var list = this.props.stages.map((stage) => {
             return (
-                <li className="margin-enabled" key={stage._id} onClick={this.triggerCollapsible(stage._id)}>
-                    <div className="collapsible-header">
+                <li className="margin-enabled" key={stage._id}>
+                    <div className="collapsible-header" onClick={this.triggerCollapsible(stage._id)}>
                         <i className={`
                             material-icons
                             icon-time-transition
@@ -35,25 +35,20 @@ export default React.createClass({
                     </div>
 
                     <div className='collapsible-body white'>
-                             {!stage.matches.length ?
-                                 <div className={`empty-collapsible-body_padding
-                                 ${!isAdmin? "empty-collapsible-body_padding-bottom" : ""}`}>
-                                     В этапе ещё нет матчей
-                                 </div>
-                                 :
-                                 <div className="enabled-border-bottom">
-                                    <MatchList matches={stage.matches}/>
-                                 </div>
-                             }
+                         {!stage.matches.length ?
+                             <div className={`empty-collapsible-body_padding
+                             ${!isAdmin? "empty-collapsible-body_padding-bottom" : ""}`}>
+                                 В этапе ещё нет матчей
+                             </div>
+                             :
+                             <div className="enabled-border-bottom">
+                                <MatchList matches={stage.matches}/>
+                             </div>
+                         }
 
-                        {!isAdmin ? null :
-                            <div className="match-create-button">
-                                <a className="right modal-trigger btn-floating btn-large waves-effect waves-light red"
-                                   href="#modal-stage">
-                                    <i className="material-icons">add</i>
-                                </a>
-                            </div>
-                        }
+                        {!isAdmin ? null : <CreateMatch idStage={stage._id}
+                                                        addMatchesInStage={this.props.addMatchesInStage}
+                                                        teams={this.props.tournamentTeams}/>}
                     </div>
                 </li>
             )

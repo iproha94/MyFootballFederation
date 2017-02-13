@@ -1,5 +1,6 @@
 import {
     GET_TOURNAMENT,
+    ADD_MATHES_IN_STAGE,
     ROUTING
 } from '../../constants';
 
@@ -19,6 +20,15 @@ export function getTournament(_id) {
                 type: GET_TOURNAMENT,
                 payload: result//такое наименование - негласное соглашение
             });
+        });
+    };
+}
+
+export function addMatchesInStage(idStage, matches) {
+    return (dispatch, getState) => {
+        dispatch({
+            type: ADD_MATHES_IN_STAGE,
+            payload: {matches: matches, idStage: idStage}
         });
     };
 }
