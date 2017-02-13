@@ -9,7 +9,7 @@ import MatchList from '../components/common/MatchList';
 
 var Component = React.createClass({
     getInitialState: function() {
-        return {srcTeamBanner: '/img/my-teams.jpg'};
+        return {srcTeamBanner: '/img/default-team-banner.png'};
     },
     componentDidMount: function() {
         this.props.teamActions.getTeamInfo(this.props.params.idTeam);
@@ -21,10 +21,10 @@ var Component = React.createClass({
         if(this.props.params.idTeam !== nextProps.params.idTeam) {
             this.props.teamActions.getTeamInfo(nextProps.params.idTeam);
         }
-        this.setState({srcTeamBanner: `/uploaded/team/banner/` + nextProps.team._id + `.png`});
+        this.setState({srcTeamBanner: `/uploaded/team/banner/${nextProps.team._id}.png`});
     },
     teamBannerNotFound: function() {
-        this.setState({srcTeamBanner: '/img/my-teams.jpg'});
+        this.setState({srcTeamBanner: '/img/default-team-banner.png'});
     },
     render: function () {
         let isAdmin = this.props.team.creators.indexOf(this.props.currentUser._id) != -1;

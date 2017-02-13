@@ -3,18 +3,34 @@ import CreateFederationButton from './CreateFederationButton';
 import {Link} from 'react-router';
 
 export default React.createClass({
+    getInitialState: function() {
+        return {nowBanner: '/img/default-federation-banner.png'};
+    },
+    setFederationBanner: function(id) {
+        this.setState({nowBanner: `/uploaded/federation/banner/${id}.png`});
+    },
+    resetFederationBanner: function() {
+        this.setState({nowBanner: '/img/default-federation-banner.png'});
+    },
     render: function () {
         var myFederations = this.props.federations.map((item) => {
+            let boundSetFederationBanner = this.setFederationBanner.bind(this, item._id);
             return (
-                <Link key={item._id} to={"/federation/" + item.name} className="truncate collection-item">
+                <Link key={item._id}
+                      onMouseLeave={this.resetFederationBanner}
+                      onMouseEnter={boundSetFederationBanner}
+                      to={"/federation/" + item.name}
+                      className="truncate collection-item">
                     {item.name}
                 </Link>
             )
         });
         return (
             <div className="card">
-                <div className="card-image">
-                    <img src="/img/my-federations.jpg" />
+                <div className="card-image left-menu_banner">
+                    <img  src={this.state.nowBanner}
+                          onError={this.resetFederationBanner}
+                          className="left-menu_banner" />
                     <span className="card-title tournament_card-title">Мои федерации</span>
                 </div>
 

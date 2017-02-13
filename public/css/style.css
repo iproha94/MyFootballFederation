@@ -312,20 +312,18 @@ body{
 
 .match_logo1 {
     width: 25% !important;
-    position: absolute  !important; /* Абсолютное позиционирование */
+    position: absolute  !important;
     top: 10%  !important;
-    left: 20%  !important;
+    left: 12%  !important;
+    height: 80% !important;
 }
 
 .match_logo2 {
     width: 25% !important;
-    position: absolute  !important; /* Абсолютное позиционирование */
+    position: absolute  !important;
     top: 10%  !important;
-    left: 60%  !important;
-}
-
-.my-teams_banner-team {
-
+    left: 63%  !important;
+    height: 80% !important;
 }
 
 .nav-side-search {
@@ -473,6 +471,6 @@ body{
     border-bottom: 1px solid #e0e0e0;
 }
 
-.left-menu_team-banner {
+.left-menu_banner {
     height: 150px;
 }

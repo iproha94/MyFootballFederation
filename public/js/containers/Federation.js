@@ -10,6 +10,9 @@ import * as userActions from '../actions/user';
 import CreateTournament from '../components/federation/CreateTournament';
 
 var Component = React.createClass({
+    getInitialState: function() {
+        return {srcBanner: '/img/default-federation-banner.png'};
+    },
     fetch: function (federationName) {
         this.props.federationActions
             .getFederationInfo(federationName);
@@ -26,6 +29,10 @@ var Component = React.createClass({
         if(this.props.params.federationName !== nextProps.params.federationName) {
             this.fetch(nextProps.params.federationName)
         }
+        this.setState({srcBanner: `/uploaded/federation/banner/${nextProps.federation._id}.png`});
+    },
+    federationBannerNotFound: function() {
+        this.setState({srcBanner: '/img/default-federation-banner.png'});
     },
     render: function () {
         var federation = this.props.federation;
@@ -35,8 +42,9 @@ var Component = React.createClass({
             <div className="row">
                 <div className="col s12 card padding-disabled">
                     <div className="card-image tournament_card-title">
-                        <img className="banner_limits-size"
-                             src="/img/federation-default-banner.jpg"/>
+                        <img src={this.state.srcBanner}
+                             className="banner_limits-size"
+                             onError={this.federationBannerNotFound}/>
                     </div>
 
                     <div className="card-content">
