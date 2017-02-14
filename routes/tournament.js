@@ -42,7 +42,7 @@ router.post('/create', function(req, res, next) {
                 return next(err);
             }
             res.json({
-                message: "Этап добавлен",
+                message: "Турнир создан",
                 _id: tournament._id
             });
         });

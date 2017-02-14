@@ -27,18 +27,22 @@ export default React.createClass({
         });
         return (
             <div className="card">
-                <div className="card-image left-menu_banner">
+                <div className="card-image">
                     <img  src={this.state.nowBanner}
                           onError={this.resetFederationBanner}
                           className="left-menu_banner" />
-                    <span className="card-title tournament_card-title">Мои федерации</span>
+                    <a id="create-federation-btn"
+                       href="#modal-federation"
+                       className="modal-trigger btn-floating halfway-fab btn-large waves-effect waves-light red">
+                        <i className="material-icons">add</i>
+                    </a>
                 </div>
-
-                <div className="collection left-menu-padding_card">
+                <div className="card-content">
+                    <span className="card-title">Мои федерации</span>
+                </div>
+                <div className="collection left-menu-padding_card enabled-border-top border-none">
                     {myFederations.length ? myFederations : ""}
                 </div>
-
-                <CreateFederationButton/>
             </div>
         )
     }
