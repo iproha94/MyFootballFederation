@@ -509,3 +509,11 @@ body{
     margin-right: -0.75rem; }
 
 /*nav container*/
+
+.match_logo_vs {
+    width: 10% !important;
+    position: absolute  !important;
+    top: 25%  !important;
+    left: 45%  !important;
+    height: auto !important;
+}

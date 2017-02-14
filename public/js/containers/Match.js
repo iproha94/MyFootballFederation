@@ -30,15 +30,19 @@ var Component = React.createClass({
                         <div className="card-image">
                             <div className="match">
                                 <img src="/img/match-default-banner.jpg" className="match_banner"/>
-                                <img src={logo1}  className="match_logo1" />
-                                <img src={logo2}  className="match_logo2" />
+                                <img src={logo1} className="match_logo1" />
+                                <img src="/img/vs.png" className="match_logo_vs" />
+                                <img src={logo2} className="match_logo2" />
                             </div>
-                            <span className="card-title tournament_card-title">
-                                Страница матча {this.props.match.name}
+                        </div>
+
+                        <div className="card-content">
+                            <span className="card-title">
+                               Матч {this.props.match.name}
                             </span>
                         </div>
 
-                        <ul className="tabs tabs-fixed-width">
+                        <ul className="tabs tabs-fixed-width tabs_border-top">
                             <li className="tab col s3"><a href="#tab-id-1" className="active js-link">Инфо</a></li>
                             <li className="tab col s3"><a className="js-link" href="#tab-id-2">Судьи</a></li>
                             <li className="tab col s3"><a href="#tab-id-3" className="js-link">Составы</a></li>

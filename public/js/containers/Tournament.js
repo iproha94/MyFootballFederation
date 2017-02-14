@@ -27,12 +27,15 @@ var TournamentPage = React.createClass({
                 <div className="col s12 card padding-disabled">
                     <div className="card-image">
                         <img src="/img/tournament-default-banner.jpg"/>
-                        <span className="card-title tournament_card-title">
-                            Страница турнира {tournament.name}
+                    </div>
+
+                    <div className="card-content">
+                        <span className="card-title">
+                           Турнир {tournament.name}
                         </span>
                     </div>
 
-                    <ul className="tabs tabs-fixed-width">
+                    <ul className="tabs tabs-fixed-width tabs_border-top">
                         <li className="tab col s4"><a href="#team-request">Заявки команд</a></li>
                         <li className="tab col s4"><a href="#matches">Матчи и Этапы</a></li>
                     </ul>
