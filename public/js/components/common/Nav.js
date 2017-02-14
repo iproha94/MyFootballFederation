@@ -34,13 +34,14 @@ var Component = React.createClass({
         var linkAccountPage = isAuthenticated ? "/account/" + user._id : null;
         return (
             <nav className="light-green darken-2 header-position" role="navigation">
-                <div className="truncate nav-wrapper container">
+                <div className="truncate nav-wrapper container-nav">
                     <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
                         Footman
                     </Link>
 
                     <ul className="right hide-on-med-and-down">
+                        <li><Link to="/applications">Приложения</Link></li>
                         {isAuthenticated ? [
                             <li><Link to={linkAccountPage}>Профиль</Link></li>,
                             <li><a href={`/logout/?redirect=${redirectUrl}`}>Выйти</a></li>
@@ -76,6 +77,7 @@ var Component = React.createClass({
                                            placeholder="Поиск федераций"/>
                         </li>
 
+                        <li><Link to="/applications">Приложения</Link></li>
                         {isAuthenticated ? (
                             <li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>
                         ) : [

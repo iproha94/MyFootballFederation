@@ -130,7 +130,7 @@ footer {
 
 .federation-search{
     position: relative;
-    right: 20px;
+    right: 15px;
 }
 
 .federation-search-input::-webkit-input-placeholder{
@@ -478,3 +478,34 @@ body{
 .teams-select-header {
     margin-bottom: 8px;
 }
+
+.empty-events_font {
+    font-size: 1.2em;
+}
+
+.application-image {
+    width: 250px !important;
+    height: 100% !important;
+}
+
+/*nav container*/
+
+.container-nav {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%; }
+
+@media only screen and (min-width: 601px) {
+    .container-nav {
+        width: 85%; } }
+
+@media only screen and (min-width: 993px) {
+    .container-nav {
+        width: 80%;
+    } }
+
+.container-nav .row {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem; }
+
+/*nav container*/
