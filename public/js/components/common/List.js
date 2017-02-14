@@ -12,7 +12,7 @@ export default React.createClass({
         });
         
         return list.length ?
-                <div className="collection matchList_margin__disabled card">
+                <div className="collection card">
                     {list}
                 </div>
                 :

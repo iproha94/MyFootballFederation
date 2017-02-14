@@ -210,7 +210,7 @@ router.post('/del-info', function(req, res) {
 
 
 router.get('/add-referee', function(req, res, next) {
-    User.findById(req.query.idSend, function (err, user) {
+    User.findById(req.query.idUser, function (err, user) {
         user.matchesToReferee.push(req.query.idMatch);
         user.save((err) => {
             res.json({status: 200});

@@ -7,7 +7,7 @@ import Events from '../components/match/Events';
 import * as usersActions from '../actions/user';
 import List from '../components/common/List';
 import ListVusers from '../components/common/ListVusers';
-import ModalWindow from '../components/common/ModalWindow';
+import SearchUser from '../components/common/SearchUser';
 import Players from '../components/match/Players';
 
 var Component = React.createClass({
@@ -48,24 +48,23 @@ var Component = React.createClass({
                     <div id="tab-id-1" className="col s12 card">
                         <Events/>
                     </div>
-                    <div id="tab-id-2" className="col s12 card">
+                    <div id="tab-id-2" className="col s12 padding-disabled">
                         <List header="Список судей"
                               url="/account/"
                               defaultMessage="Судья не назначен"
                               list={this.props.match.refereeList}/>
 
                         {!this.props.match.isAdmin ? null :
-                            <div className="container">
-                                <ModalWindow urlSend='/api-referee/add-referee'
-                                             buttonName="Добавить судью"
-                                             header="Список пользователей"
-                                             nameHiddenInput="idMatch"
-                                             valueArray={this.props.usersList}
-                                             valueHiddenInput={this.props.match._id}
-                                             onSuccess={this.onSuccessAddReferee}/>
-                            </div>
+                            <SearchUser sendField={this.props.match._id}
+                                        nameSendField="idMatch"
+                                        isCard={true}
+                                        isAddCurrentUser={true}
+                                        inputLabel="Добавить судью"
+                                        actionSuccess={this.onSuccessAddReferee}
+                                        url="/api-referee/add-referee"/>
                         }
                     </div>
+
                     <div id="tab-id-3" className="col s12 card">
                         <div className="row">
                             <div className="col s6">
