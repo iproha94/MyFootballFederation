@@ -534,3 +534,44 @@ body{
     border: 0;
 }
 
+
+.list_team {
+    padding: 15px;
+}
+
+.list_team_content__padding {
+    padding: 8px;
+}
+
+.team-logo-in-list {
+    height: auto;
+    max-height: none;
+}
+
+.team-logo-in-list_image {
+    max-height: none;
+}
+
+
+@media only screen and (min-width: 601px) {
+    .team-logo-in-list {
+        height: 33.3333333333vw;
+        max-height: 33.3333333333vw;
+    }
+
+    .team-logo-in-list_image {
+        max-height: 33.3333333333vw;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .team-logo-in-list {
+        height: 25vw;
+        max-height: 25vw;
+    }
+
+    .team-logo-in-list_image {
+        max-height: 25vw;
+    }
+}
+
