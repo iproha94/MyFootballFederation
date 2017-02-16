@@ -27,7 +27,7 @@ export default React.createClass({
         });
         return (
             <div className="card">
-                <div className="card-image">
+                <div className="card-image left-menu_banner">
                     <img src={this.state.nowBanner}
                          onError={this.resetTeamBanner}
                          className="left-menu_banner"/>
