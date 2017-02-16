@@ -11,6 +11,22 @@ import SearchUser from '../components/common/SearchUser';
 import Players from '../components/match/Players';
 
 var Component = React.createClass({
+    getInitialState: function() {
+        return {
+            srcLogoTeam1: `/uploaded/team/logo/${this.props.match.team1._id}.png`,
+            srcLogoTeam2: `/uploaded/team/logo/${this.props.match.team2._id}.png`
+        }
+    },
+    resetTeamLogo1: function() {
+        this.setState({srcLogoTeam1: '/img/default-team-logo.png'});
+    },
+    resetTeamLogo2: function() {
+        this.setState({srcLogoTeam2: '/img/default-team-logo.png'});
+    },
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({srcLogoTeam1: `/uploaded/team/logo/${nextProps.match.team1._id}.png`});
+        this.setState({srcLogoTeam2: `/uploaded/team/logo/${nextProps.match.team2._id}.png`});
+    },
     componentDidMount: function() {
         $('ul.tabs').tabs();
         this.props.matchActions.getMatch(this.props.params.idMatch);
@@ -20,9 +36,6 @@ var Component = React.createClass({
         this.props.matchActions.getMatch(this.props.params.idMatch);
     },
     render: function () {
-        let logo1 = `/uploaded/team/logo/${this.props.match.team1._id}.png`;
-        let logo2 = `/uploaded/team/logo/${this.props.match.team2._id}.png`;
-
         return (
             <div>
                 <div className="row">
@@ -30,9 +43,13 @@ var Component = React.createClass({
                         <div className="card-image">
                             <div className="match">
                                 <img src="/img/match-default-banner.jpg" className="match_banner"/>
-                                <img src={logo1} className="match_logo1" />
+                                <img src={this.state.srcLogoTeam1}
+                                     className="match_logo1"
+                                     onError={this.resetTeamLogo1}/>
                                 <img src="/img/vs.png" className="match_logo_vs" />
-                                <img src={logo2} className="match_logo2" />
+                                <img src={this.state.srcLogoTeam2}
+                                     className="match_logo2"
+                                     onError={this.resetTeamLogo2}/>
                             </div>
                         </div>
 
