@@ -51,6 +51,7 @@ router.post('/create', function(req, res, next) {
 });
 
 router.get('/add-team', function(req, res, next) {
+    console.log(req.query);
     Tournament.findById(req.query.idTournament, function (err, tournament) {
         if(!tournament.teams_requests.some((item) => item.toString() == req.query.idSend)){
             tournament.teams_requests.push(req.query.idSend);

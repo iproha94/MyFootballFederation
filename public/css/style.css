@@ -315,7 +315,7 @@ body{
     position: absolute  !important;
     top: 10%  !important;
     left: 12%  !important;
-    height: 80% !important;
+    max-height: 80% !important;
 }
 
 .match_logo2 {
@@ -323,7 +323,7 @@ body{
     position: absolute  !important;
     top: 10%  !important;
     left: 63%  !important;
-    height: 80% !important;
+    max-height: 80% !important;
 }
 
 .nav-side-search {
@@ -555,23 +555,29 @@ body{
 
 @media only screen and (min-width: 601px) {
     .team-logo-in-list {
-        height: 33.3333333333vw;
-        max-height: 33.3333333333vw;
-    }
-
-    .team-logo-in-list_image {
-        max-height: 33.3333333333vw;
-    }
-}
-
-@media only screen and (min-width: 993px) {
-    .team-logo-in-list {
         height: 25vw;
         max-height: 25vw;
     }
 
     .team-logo-in-list_image {
         max-height: 25vw;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .team-logo-in-list {
+        height: 13vw;
+        max-height: 13vw;
+    }
+
+    .team-logo-in-list_image {
+        max-height: 13vw;
+    }
+}
+
+@media only screen and (max-width: 601px) {
+    .banner-button__float {
+        float: none !important;
     }
 }
 

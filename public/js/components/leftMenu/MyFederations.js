@@ -6,6 +6,9 @@ export default React.createClass({
     getInitialState: function() {
         return {nowBanner: '/img/default-federation-banner.png'};
     },
+    componentDidMount: function(){
+        $('.modal-trigger').leanModal();
+    },
     setFederationBanner: function(id) {
         this.setState({nowBanner: `/uploaded/federation/banner/${id}.png`});
     },
