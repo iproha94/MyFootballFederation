@@ -23,7 +23,10 @@ export default React.createClass({
             source (data, done) {
                 $.ajax({
                     url: '/api/get-user-list-by-regexp',
-                    data: {term: data.input},
+                    data: {
+                        term: data.input,
+                        isAddCurrentUser: self.props.isAddCurrentUser
+                    },
                     success: (dataServer) => {
                         console.log(dataServer);
                         done(null, [{
@@ -64,11 +67,18 @@ export default React.createClass({
                 url: this.props.url,
                 success: (data) => {
                     $(ReactDOM.findDOMNode(this.refs.form))[0].reset();
+                    Materialize.updateTextFields();
                     Materialize.toast(data.message || "Операция прошла успешно", 2000);
+                    if(this.props.actionSuccess){
+                        this.props.actionSuccess();
+                    }
                 },
                 error: (jqXHR, textStatus, errorThrown) => {
                     console.log(jqXHR, textStatus, errorThrown);
                     Materialize.toast("Что то не так", 2000);
+                    if(this.props.actionError){
+                        this.props.actionError();
+                    }
                 }
             });
         }

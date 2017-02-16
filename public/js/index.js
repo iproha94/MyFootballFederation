@@ -15,6 +15,7 @@ import UsersList from './containers/UsersList';
 import Federation from './containers/Federation';
 import Match from './containers/Match';
 import Forbidden from './containers/Forbidden';
+import Applications from './containers/Applications';
 
 const store = configureStore();
 
@@ -25,6 +26,7 @@ ReactDOM.render(
                 <IndexRoute component={Main} />
                 <Route path='users' component={UsersList} />
                 <Route path='forbidden' component={Forbidden} />
+                <Route path='applications' component={Applications} />
                 <Route path='team/:idTeam' component={Team} />
                 <Route path='match/:idMatch' component={Match} />
                 <Route path='account/:idUser' component={Account} />

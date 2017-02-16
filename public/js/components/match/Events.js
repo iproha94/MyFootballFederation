@@ -112,7 +112,7 @@ var Component = React.createClass({
                         {events.reverse()}
                     </ul>
                     :
-                    <h5>Событий в матче пока нет</h5>
+                    <p className="empty-events_font center">Событий в матче пока нет</p>
                 }
             </div>
         )

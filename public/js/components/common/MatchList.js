@@ -18,7 +18,8 @@ export default React.createClass({
             return (
                 <Link to={`/match/${match._id}`}
                       className="collection-item">
-                    <span className={`${match.status == "RUNNING" ? "red" : "" } new badge`}
+                    <span className={`${match.status == "RUNNING" ? "red"
+                    : match.status == "FINISHED" ? "green" : "" } new badge`}
                           data-badge-caption="">
                         {match.status != "CREATED" ? getScoreTeam(match.events, match.team1) + ":" + getScoreTeam(match.events, match.team2) : "не начался"} &nbsp;
                         {match.status == "FINISHED" ? "окончен" : "" }

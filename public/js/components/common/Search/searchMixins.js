@@ -24,7 +24,7 @@ export default {
                     .width($(input).width() + padding);
             },
             renderItem: function (li, suggestion) {
-                li.innerHTML = `<a class="collection-item ui-menu-item-wrapper green-text text-darken-1">
+                li.innerHTML = `<a class="collection-item ui-menu-item-wrapper green-text text-darken-1 truncate">
                                 ${suggestion}
                                 </a>`;
                 $(li).click(function (e) {

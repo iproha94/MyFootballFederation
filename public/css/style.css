@@ -130,7 +130,7 @@ footer {
 
 .federation-search{
     position: relative;
-    right: 20px;
+    right: 15px;
 }
 
 .federation-search-input::-webkit-input-placeholder{
@@ -471,6 +471,10 @@ body{
     border-bottom: 1px solid #e0e0e0;
 }
 
+.enabled-border-top .collection-item:first-child {
+    border-top: 1px solid #e0e0e0;
+}
+
 .left-menu_banner {
     height: 150px;
 }
@@ -478,3 +482,96 @@ body{
 .teams-select-header {
     margin-bottom: 8px;
 }
+
+.empty-events_font {
+    font-size: 1.2em;
+}
+
+.application-image {
+    width: 250px !important;
+    height: 100% !important;
+}
+
+/*nav container*/
+
+.container-nav {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%; }
+
+@media only screen and (min-width: 601px) {
+    .container-nav {
+        width: 85%; } }
+
+@media only screen and (min-width: 993px) {
+    .container-nav {
+        width: 80%;
+    } }
+
+.container-nav .row {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem; }
+
+/*nav container*/
+
+.match_logo_vs {
+    width: 10% !important;
+    position: absolute  !important;
+    top: 25%  !important;
+    left: 45%  !important;
+    height: auto !important;
+}
+
+.halfway-fab {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
+}
+
+.border-none {
+    border: 0;
+}
+
+
+.list_team {
+    padding: 15px;
+}
+
+.list_team_content__padding {
+    padding: 8px;
+}
+
+.team-logo-in-list {
+    height: auto;
+    max-height: none;
+}
+
+.team-logo-in-list_image {
+    max-height: none;
+}
+
+
+@media only screen and (min-width: 601px) {
+    .team-logo-in-list {
+        height: 33.3333333333vw;
+        max-height: 33.3333333333vw;
+    }
+
+    .team-logo-in-list_image {
+        max-height: 33.3333333333vw;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .team-logo-in-list {
+        height: 25vw;
+        max-height: 25vw;
+    }
+
+    .team-logo-in-list_image {
+        max-height: 25vw;
+    }
+}
+

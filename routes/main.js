@@ -31,21 +31,25 @@ router.get('/get-user-list-by-regexp', function(req, res, next) {
     }
 
     var reg = new RegExp(req.query.term, 'i');
+    var isAddCurrentUser = req.query.isAddCurrentUser;
 
     var searchByName = {$and: [
-        {name: reg},
-        {_id: {$ne: req.user._id}}
+        {name: reg}
     ]};
 
     var searchByVk = {$and: [
-        {authId: reg},
-        {_id: {$ne: req.user._id}}
+        {authId: reg}
     ]};
 
     var searchByEmail = {$and: [
-        {email: reg},
-        {_id: {$ne: req.user._id}}
+        {email: reg}
     ]};
+
+    if(!isAddCurrentUser) {
+        [searchByName, searchByVk, searchByEmail].forEach((search) => {
+            search.$and.push({_id: {$ne: req.user._id}});
+        });
+    }
 
     User.find({$or:[
         searchByName,

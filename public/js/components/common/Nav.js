@@ -34,13 +34,14 @@ var Component = React.createClass({
         var linkAccountPage = isAuthenticated ? "/account/" + user._id : null;
         return (
             <nav className="light-green darken-2 header-position" role="navigation">
-                <div className="truncate nav-wrapper container">
+                <div className="truncate nav-wrapper container-nav">
                     <Link id="logo-container" to="/" className="brand-logo">
                         <img src="/img/logo.png" className="logo-image"/>
                         Footman
                     </Link>
 
                     <ul className="right hide-on-med-and-down">
+                        <li><Link to="/applications">Приложения</Link></li>
                         {isAuthenticated ? [
                             <li><Link to={linkAccountPage}>Профиль</Link></li>,
                             <li><a href={`/logout/?redirect=${redirectUrl}`}>Выйти</a></li>
@@ -76,17 +77,15 @@ var Component = React.createClass({
                                            placeholder="Поиск федераций"/>
                         </li>
 
+                        <li><Link className="waves-effect"
+                               to="/applications">
+                                <i className="fa fa-mobile fa-3x" aria-hidden="true"></i>
+                                Приложения
+                            </Link>
+                        </li>
                         {isAuthenticated ? (
                             <li><Link className="waves-effect" to={linkAccountPage}><i className="fa fa-futbol-o fa-lg" aria-hidden="true"></i>Профиль</Link></li>
-                        ) : [
-                            <li><a className="subheader">Войти через:</a></li>,
-                            <li><a className="waves-effect"
-                                   href={`/auth/vkontakte/?redirect=${redirectUrl}`}>
-                                    <i className="fa fa-vk fa-lg" aria-hidden="true"></i>
-                                    Вконтакте
-                                </a>
-                            </li>
-                        ]}
+                        ) : null}
 
                         {!isAuthenticated ? null : [
                             <li><div className="divider"></div></li>,
@@ -112,9 +111,9 @@ var Component = React.createClass({
                             </li>
                         ] : (
                             <li><a className="waves-effect"
-                                   href="#!">
-                                    <i className="fa fa-coffee fa-lg" aria-hidden="true"></i>
-                                    Для соблюдения material
+                                   href={`/auth/vkontakte/?redirect=${redirectUrl}`}>
+                                    <i className="fa fa-vk fa-lg" aria-hidden="true"></i>
+                                    Войти через вконтакте
                                 </a>
                             </li>
                         )}
