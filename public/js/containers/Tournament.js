@@ -7,6 +7,7 @@ import * as teamActions from '../actions/team';
 import TeamsList from '../components/tournament/TeamsList';
 import CreateStage from '../components/tournament/CreateStage';
 import TeamsWindow from '../components/tournament/TeamsWindow';
+import TeamRequestButton from '../components/tournament/TeamRequestButton';
 import StageListWithMathes from '../components/tournament/StageListWithMathes';
 
 var TournamentPage = React.createClass({
@@ -33,6 +34,15 @@ var TournamentPage = React.createClass({
                         <span className="card-title">
                            Турнир {tournament.name}
                         </span>
+
+                        {isAuth ? null :[
+                            <TeamRequestButton/>
+                            ,
+                            <TeamsWindow teams={this.props.currentUser.teams}
+                                         tournamentId={tournament._id}
+                                         teamActions={this.props.teamActions}/>
+                            ]
+                        }
                     </div>
 
                     <ul className="tabs tabs-fixed-width tabs_border-top">
@@ -41,15 +51,8 @@ var TournamentPage = React.createClass({
                     </ul>
                 </div>
 
-                <div id="team-request" className="col s12 card">
+                <div id="team-request" className="col s12 padding-disabled">
                     <TeamsList list={this.props.teams}/>
-
-                    {isAuth ? null :
-                        <TeamsWindow teams={this.props.currentUser.teams}
-                                     tournamentId={tournament._id}
-                                     teamActions={this.props.teamActions}/>
-                    }
-
                 </div>
 
                 <div id="matches" className="col s12 padding-disabled">

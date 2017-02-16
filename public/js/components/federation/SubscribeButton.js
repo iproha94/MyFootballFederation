@@ -33,8 +33,8 @@ export default React.createClass({
         var federation = this.props.federation;
         return !this.props.currentUser._id ? null: (
                     this.props.federation.members.includes(this.props.currentUser._id) ?
-                        <a className="waves-effect waves-light btn right" onClick={this.unsubscribeFederation}>Отписаться</a>:
-                        <a className="waves-effect waves-light btn right" onClick={this.subscribeFederation}>Подписаться</a>
+                        <a className="waves-effect waves-light btn right banner-button__float" onClick={this.unsubscribeFederation}>Отписаться</a>:
+                        <a className="waves-effect waves-light btn right banner-button__float" onClick={this.subscribeFederation}>Подписаться</a>
                 );
     }
 });
