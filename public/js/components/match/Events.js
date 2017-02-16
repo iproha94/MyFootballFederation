@@ -28,7 +28,7 @@ var Component = React.createClass({
                 setTimeout(() => {
                     this.createWS();
                     //TODO надо запросить у сервера только список комментов(пока соединение было разорвано могло наприходить сообщений)
-                    this.props.matchActions.getMatch(this.props.match.id);
+                    this.props.matchActions.getMatch(this.props.match._id);
                 }, 5000);//5 секунд
             }
             console.log('Код: ' + event.code + ' причина: ' + event.reason);
