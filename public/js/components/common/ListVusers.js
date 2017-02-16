@@ -12,9 +12,9 @@ export default React.createClass({
             )
         });
         return (
-            <div className="content-margin-top content-flex">
+            <div className="content-margin-top">
                 <h5 className="center">{this.props.header}</h5>
-                <div className="collection">
+                <div className="collection match-list-players__border">
                     {list.length ? list : this.props.defaultMessage}
                 </div>
             </div>

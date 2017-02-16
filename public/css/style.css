@@ -585,3 +585,26 @@ body{
     /*padding: 10px;*/
 /*}*/
 
+.match-team {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 1px;
+}
+
+.match-team-left {
+    padding-left: 0px !important;
+}
+
+.match-team-right {
+    padding-right: 0px !important;
+}
+
+.match-list-players_button {
+    margin-top: 14px;
+}
+
+.match-list-players__border {
+    border-left: none;
+    border-right: none;
+}

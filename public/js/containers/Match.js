@@ -70,8 +70,8 @@ var Component = React.createClass({
                     </div>
 
                     <div id="tab-id-3" >
-                        <div className="col s6 ">
-                            <div className="card">
+                        <div className="col s6 match-team-left">
+                            <div className="card match-team">
                                 <ListVusers header={this.props.match.team1.name}
                                             defaultMessage="Нет игроков"
                                             list={this.props.match.players1}/>
@@ -80,8 +80,8 @@ var Component = React.createClass({
                                          team={this.props.match.currentUserTeam1}/>
                             </div>
                         </div>
-                        <div className="col s6 ">
-                            <div className="card">
+                        <div className="col s6 match-team-right">
+                            <div className="card match-team">
                                 <ListVusers header={this.props.match.team2.name}
                                             defaultMessage="Нет игроков"
                                             list={this.props.match.players2}/>

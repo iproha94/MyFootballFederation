@@ -73,6 +73,10 @@ router.get('/:idMatch', function(req, res, next) {
 
 router.get('/set-players', function(req, res, next) {
     var idMatch = req.query.idMatch;
+    if(!req.query.players) {
+        return res.status(500).json(null);
+    }
+
     Match.findById(idMatch, function (err, match) {
         switch(req.query.idTeam) {
             case match.team1.toString():

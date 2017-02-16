@@ -40,7 +40,7 @@ var Component = React.createClass({
                 {players}
                 <input type="hidden" name="idMatch" value={this.props.idMatch}/>
                 <input type="hidden" name="idTeam" value={this.props.team._id}/>
-                <button className="btn waves-effect waves-light" type="submit">Заявить список игроков
+                <button className="btn waves-effect waves-light match-list-players_button" type="submit">Заявить список игроков
                     <i className="material-icons right">send</i>
                 </button>
             </form>

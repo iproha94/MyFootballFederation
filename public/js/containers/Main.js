@@ -25,7 +25,7 @@ var Component = React.createClass({
             var tournaments = federation.tournaments.map(function(tournament) {
                 var matches = tournament.matches.map(function(match){
                     return (
-                    <p>
+                    <p key={match._id}>
                         <Link to={`/match/${match._id}`}>
                             {match.name} &nbsp;
                         </Link>
