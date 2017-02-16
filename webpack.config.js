@@ -15,7 +15,25 @@ module.exports = {
             }
         }]
     },
-    plugins: process.env.PROD_ENV ? [
-        new webpack.optimize.UglifyJsPlugin()
-    ] : []
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+
+            // Eliminate comments
+            comments: false,
+
+            // Compression specific options
+            compress: {
+                // remove warnings
+                warnings: false,
+
+                // Drop console statements
+                drop_console: true
+            },
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify("production")
+            }
+        })
+    ]
 };
