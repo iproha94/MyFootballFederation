@@ -43,7 +43,7 @@ var Component = React.createClass({
                         </div>
 
                         <ul className="tabs tabs-fixed-width tabs_border-top">
-                            <li className="tab col s3"><a href="#tab-id-1" className="active js-link">Инфо</a></li>
+                            <li className="tab col s3"><a href="#tab-id-1" className="active js-link">События</a></li>
                             <li className="tab col s3"><a className="js-link" href="#tab-id-2">Судьи</a></li>
                             <li className="tab col s3"><a href="#tab-id-3" className="js-link">Составы</a></li>
                         </ul>
@@ -69,18 +69,20 @@ var Component = React.createClass({
                         }
                     </div>
 
-                    <div id="tab-id-3" className="col s12 card">
-                        <div className="row">
-                            <div className="col s6">
-                                <ListVusers header="Список игроков команды 1"
+                    <div id="tab-id-3" >
+                        <div className="col s6 ">
+                            <div className="card">
+                                <ListVusers header={this.props.match.team1.name}
                                             defaultMessage="Нет игроков"
                                             list={this.props.match.players1}/>
 
                                 <Players idMatch={this.props.params.idMatch}
                                          team={this.props.match.currentUserTeam1}/>
                             </div>
-                            <div className="col s6">
-                                <ListVusers header="Список игроков команды 2"
+                        </div>
+                        <div className="col s6 ">
+                            <div className="card">
+                                <ListVusers header={this.props.match.team2.name}
                                             defaultMessage="Нет игроков"
                                             list={this.props.match.players2}/>
 
