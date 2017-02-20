@@ -13,6 +13,10 @@ var Component = React.createClass({
         // обработчик входящих сообщений
         this.ws.onmessage = (event) => {
             var incomingMessage = JSON.parse(event.data);
+            if (incomingMessage.idMatch != this.props.match._id) {
+                return
+            }
+
             if (incomingMessage.idAction < 0) {
                 this.props.matchActions.delEventInLog(incomingMessage);
             } else {
